@@ -1140,7 +1140,7 @@ jPanel2Layout.setHorizontalGroup(
 
     jLabelTitile.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelTitile.setForeground(new java.awt.Color(255, 255, 255));
-    jLabelTitile.setIcon(new javax.swing.ImageIcon("D:\\Project\\AppDRL\\src\\main\\java\\icons\\person.png")); // NOI18N
+    jLabelTitile.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("person.png")));
     jLabelTitile.setText("THÔNG TIN CÁ NHÂN");
     jLabelTitile.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
@@ -1175,7 +1175,7 @@ jPanel2Layout.setHorizontalGroup(
 
     jLabelTitile1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelTitile1.setForeground(new java.awt.Color(255, 255, 255));
-    jLabelTitile1.setIcon(new javax.swing.ImageIcon("D:\\Project\\AppDRL\\src\\main\\java\\icons\\whiteacc.png")); // NOI18N
+    jLabelTitile1.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whiteacc.png")));
     jLabelTitile1.setText("THÔNG TIN TÀI KHOẢN");
     jLabelTitile1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
     jLabelTitile1.setPreferredSize(new java.awt.Dimension(219, 32));
@@ -1244,7 +1244,7 @@ jPanel2Layout.setHorizontalGroup(
     jLabelSuaThongTin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelSuaThongTin.setForeground(new java.awt.Color(255, 255, 255));
     jLabelSuaThongTin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    jLabelSuaThongTin.setIcon(new javax.swing.ImageIcon("D:\\Project\\AppDRL\\src\\main\\java\\icons\\changepersonal.png")); // NOI18N
+    jLabelSuaThongTin.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("changepersonal.png")));
     jLabelSuaThongTin.setText("SỬA THÔNG TIN CÁ NHÂN");
     jLabelSuaThongTin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelSuaThongTin.setOpaque(true);
@@ -1303,7 +1303,7 @@ jPanel2Layout.setHorizontalGroup(
     jLabelDoiMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelDoiMatKhau.setForeground(new java.awt.Color(255, 255, 255));
     jLabelDoiMatKhau.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    jLabelDoiMatKhau.setIcon(new javax.swing.ImageIcon("D:\\Project\\AppDRL\\src\\main\\java\\icons\\changepass.png")); // NOI18N
+    jLabelDoiMatKhau.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("changepass.png")));
     jLabelDoiMatKhau.setText("ĐỔI MẬT KHẨU");
     jLabelDoiMatKhau.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelDoiMatKhau.setOpaque(true);
@@ -1381,30 +1381,31 @@ jPanel2Layout.setHorizontalGroup(
                 .addComponent(jLabelNoiDungNoiO, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanelTaiKhoanMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelTaiKhoanMainLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanelTaiKhoanMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelTaiKhoanMainLayout.createSequentialGroup()
-                                .addComponent(jLabelTieuDeTenDN, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabelTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelTaiKhoanMainLayout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(jLabelTieuDeMK, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanelTaiKhoanMainLayout.createSequentialGroup()
                         .addGap(272, 272, 272)
                         .addComponent(jLabelSuaThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelTaiKhoanMainLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanelTitle2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelTaiKhoanMainLayout.createSequentialGroup()
-                        .addGap(309, 309, 309)
-                        .addComponent(jLabelDoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelTaiKhoanMainLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanelTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGap(0, 196, Short.MAX_VALUE))
+                        .addComponent(jPanelTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelTaiKhoanMainLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanelTaiKhoanMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelDoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanelTaiKhoanMainLayout.createSequentialGroup()
+                                .addGroup(jPanelTaiKhoanMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelTaiKhoanMainLayout.createSequentialGroup()
+                                        .addComponent(jLabelTieuDeTenDN, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabelTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanelTaiKhoanMainLayout.createSequentialGroup()
+                                        .addGap(2, 2, 2)
+                                        .addComponent(jLabelTieuDeMK, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(11, 11, 11))))))
+            .addGap(0, 0, Short.MAX_VALUE))
     );
     jPanelTaiKhoanMainLayout.setVerticalGroup(
         jPanelTaiKhoanMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1465,7 +1466,7 @@ jPanel2Layout.setHorizontalGroup(
                 .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(18, 18, 18)
             .addComponent(jLabelDoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(30, Short.MAX_VALUE))
+            .addContainerGap(42, Short.MAX_VALUE))
     );
 
     jPanelXemDiemMain.setBackground(new java.awt.Color(204, 0, 0));
@@ -1549,7 +1550,7 @@ jPanel2Layout.setHorizontalGroup(
         .addGroup(jPanelViewLayout.createSequentialGroup()
             .addComponent(jPanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jLayeredPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+            .addComponent(jLayeredPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
     );
     jPanelViewLayout.setVerticalGroup(
         jPanelViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

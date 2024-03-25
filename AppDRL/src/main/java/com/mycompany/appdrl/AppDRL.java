@@ -4,8 +4,6 @@
 
 package com.mycompany.appdrl;
 import icons.Icon;
-import java.util.ArrayList;
-import views.FormSinhVien;
 import views.FormQuanLy;
 /**
  *
