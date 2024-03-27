@@ -3,7 +3,7 @@
  */
 
 package com.mycompany.appdrl;
-import icons.Icon;
+import views.FormDangNhap;
 import views.FormQuanLy;
 /**
  *
@@ -13,8 +13,8 @@ public class AppDRL {
 
     public static void main(String[] args) {
 
-        new FormQuanLy().setVisible(true);
+        //new FormQuanLy().setVisible(true);
         // In ra đường dẫn
-        System.out.println("La: " + Icon.getUrlIcon("a.png"));
+        new FormDangNhap().setVisible(true);
     }
 }
