@@ -150,6 +150,9 @@ public final class FormQuanLy extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         
+        buttonMenuHoverEvent(jLabelHelp, jPanelHelp, jLabelLeft8);
+        buttonMenuHoverEvent(jLabelLogOut, jPanelLogOut, jLabelLeft9);
+        
         //Kích vào menu nào thì đó hiện màu vàng đậm
        ClickEvent(jPanelTaiKhoan, jLabelTaiKhoan, jLabelLeft1, jPanelKhoa, jPanelHocKy, jPanelLop, jPanelCoVan, jPanelTieuChi, jPanelSinhVien);
        ClickEvent(jPanelKhoa, jLabelKhoa, jLabelLeft2, jPanelTaiKhoan, jPanelHocKy, jPanelLop, jPanelCoVan, jPanelTieuChi, jPanelSinhVien);
@@ -383,6 +386,57 @@ public final class FormQuanLy extends javax.swing.JFrame {
         });
     }
    
+    public void buttonMenuHoverEvent(JLabel label, JPanel panel, JLabel icon){
+        label.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                panel.setBackground(hoveColor2);
+                panel.revalidate(); // Cập nhật giao diện
+                panel.repaint();    // Vẽ lại giao diện
+            }
+        });
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                panel.setBackground(hoveColor2);
+                panel.revalidate(); // Cập nhật giao diện
+                panel.repaint();    // Vẽ lại giao diện
+            }
+        });
+        icon.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                panel.setBackground(hoveColor2);
+                panel.revalidate(); // Cập nhật giao diện
+                panel.repaint();    // Vẽ lại giao diện
+            }
+        });
+        label.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                panel.setBackground(white);
+                panel.revalidate(); // Cập nhật giao diện
+                panel.repaint();    // Vẽ lại giao diện
+            }
+        });
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                panel.setBackground(white);
+                panel.revalidate(); // Cập nhật giao diện
+                panel.repaint();    // Vẽ lại giao diện
+            }
+        });
+        icon.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                panel.setBackground(white);
+                panel.revalidate(); // Cập nhật giao diện
+                panel.repaint();    // Vẽ lại giao diện
+            }
+        });
+    }
+    
     public void hienManHinhCanMo(JPanel main, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7){
         main.setVisible(true);
         p2.setVisible(false);
@@ -2066,7 +2120,7 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
     jLabelNutTieuDe2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutTieuDe2.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutTieuDe2.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whiteclass.png")));
-    jLabelNutTieuDe2.setText("Danh sách lớp");
+    jLabelNutTieuDe2.setText("Danh sách sinh viên");
     jLabelNutTieuDe2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
     jLabelNutTieuDe2.setPreferredSize(new java.awt.Dimension(32, 16));
 
@@ -2074,10 +2128,9 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
     jPanelNutTieuDe2.setLayout(jPanelNutTieuDe2Layout);
     jPanelNutTieuDe2Layout.setHorizontalGroup(
         jPanelNutTieuDe2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanelNutTieuDe2Layout.createSequentialGroup()
-            .addGap(15, 15, 15)
-            .addComponent(jLabelNutTieuDe2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(28, Short.MAX_VALUE))
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNutTieuDe2Layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(jLabelNutTieuDe2, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
     );
     jPanelNutTieuDe2Layout.setVerticalGroup(
         jPanelNutTieuDe2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2158,7 +2211,7 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
 
     jLabelNutXem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutXem.setForeground(new java.awt.Color(255, 255, 255));
-    jLabelNutXem.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whiteplus.png")));
+    jLabelNutXem.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whiteview.png")));
     jLabelNutXem.setText("Xem điểm");
     jLabelNutXem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelNutXem.setPreferredSize(new java.awt.Dimension(32, 16));
@@ -2182,7 +2235,7 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
         jPanelThanhTieuDe2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanelThanhTieuDe2Layout.createSequentialGroup()
             .addComponent(jPanelNutTieuDe2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
             .addComponent(jPanelNutXem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jPanelNutThem6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2338,8 +2391,6 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
     private javax.swing.JLabel jLabelNoiDungSdt;
     private javax.swing.JLabel jLabelNoiDungTen;
     private javax.swing.JLabel jLabelNutLienHe;
-    private javax.swing.JLabel jLabelNutLienHe1;
-    private javax.swing.JLabel jLabelNutLienHe2;
     private javax.swing.JLabel jLabelNutSua;
     private javax.swing.JLabel jLabelNutSua1;
     private javax.swing.JLabel jLabelNutSua2;
@@ -2411,8 +2462,6 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
     private javax.swing.JPanel jPanelNull2;
     private javax.swing.JPanel jPanelNull3;
     private javax.swing.JPanel jPanelNutLienHe;
-    private javax.swing.JPanel jPanelNutLienHe1;
-    private javax.swing.JPanel jPanelNutLienHe2;
     private javax.swing.JPanel jPanelNutSua;
     private javax.swing.JPanel jPanelNutSua1;
     private javax.swing.JPanel jPanelNutSua2;

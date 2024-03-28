@@ -107,7 +107,7 @@ public class FormDangNhap extends javax.swing.JFrame {
         jPanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelLogo.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("logo-ptit.png")));
+        jLabelLogo.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("logo_ptit.png")));
         jPanelMain.add(jLabelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 21, 390, 119));
 
         jLabelTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N

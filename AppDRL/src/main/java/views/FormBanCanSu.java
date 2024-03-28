@@ -156,6 +156,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         buttonHoverEvent(jLabelNutSua, jPanelNutSua);
         buttonHoverEvent(jLabelNutXoa, jPanelNutXoa);
         buttonHoverEvent(jLabelNutTieuDe, jPanelNutTieuDe);
+        buttonHoverEvent(jLabelNutLienHe, jPanelNutLienHe);
 
         //nút sửa
         
@@ -332,8 +333,8 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         jPanelContact = new javax.swing.JPanel();
         jPanelPtit = new javax.swing.JPanel();
         jLabelpanelPtit = new javax.swing.JLabel();
-        jPanelNutLienHe1 = RoundedPanel.createRoundedPanel();
-        jLabelNutLienHe1 = new javax.swing.JLabel();
+        jPanelNutLienHe = RoundedPanel.createRoundedPanel();
+        jLabelNutLienHe = new javax.swing.JLabel();
         jLabelCloud = new javax.swing.JLabel();
         jLabelFb = new javax.swing.JLabel();
         jLayeredPaneMain = new javax.swing.JLayeredPane();
@@ -443,28 +444,28 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         jLabelpanelPtit.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("logoptithcm.png")));
         jLabelpanelPtit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jPanelNutLienHe1.setBackground(new java.awt.Color(221, 51, 51));
-        jPanelNutLienHe1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanelNutLienHe.setBackground(new java.awt.Color(221, 51, 51));
+        jPanelNutLienHe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jLabelNutLienHe1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabelNutLienHe1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelNutLienHe1.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("mail2.png")));
-        jLabelNutLienHe1.setText("Liên hệ với chúng tôi");
-        jLabelNutLienHe1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabelNutLienHe1.setPreferredSize(new java.awt.Dimension(32, 16));
+        jLabelNutLienHe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelNutLienHe.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelNutLienHe.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("mail2.png")));
+        jLabelNutLienHe.setText("Liên hệ với chúng tôi");
+        jLabelNutLienHe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelNutLienHe.setPreferredSize(new java.awt.Dimension(32, 16));
 
-        javax.swing.GroupLayout jPanelNutLienHe1Layout = new javax.swing.GroupLayout(jPanelNutLienHe1);
-        jPanelNutLienHe1.setLayout(jPanelNutLienHe1Layout);
-        jPanelNutLienHe1Layout.setHorizontalGroup(
-            jPanelNutLienHe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelNutLienHe1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelNutLienHeLayout = new javax.swing.GroupLayout(jPanelNutLienHe);
+        jPanelNutLienHe.setLayout(jPanelNutLienHeLayout);
+        jPanelNutLienHeLayout.setHorizontalGroup(
+            jPanelNutLienHeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelNutLienHeLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabelNutLienHe1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                .addComponent(jLabelNutLienHe, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanelNutLienHe1Layout.setVerticalGroup(
-            jPanelNutLienHe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelNutLienHe1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+        jPanelNutLienHeLayout.setVerticalGroup(
+            jPanelNutLienHeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabelNutLienHe, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanelPtitLayout = new javax.swing.GroupLayout(jPanelPtit);
@@ -475,7 +476,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(jLabelpanelPtit, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
-                .addComponent(jPanelNutLienHe1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelNutLienHe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(77, Short.MAX_VALUE))
         );
         jPanelPtitLayout.setVerticalGroup(
@@ -485,7 +486,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
                 .addGap(0, 18, Short.MAX_VALUE))
             .addGroup(jPanelPtitLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jPanelNutLienHe1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelNutLienHe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -912,10 +913,9 @@ jPanelChoiceHKLayout.setHorizontalGroup(
     jPanelNutTieuDe2.setLayout(jPanelNutTieuDe2Layout);
     jPanelNutTieuDe2Layout.setHorizontalGroup(
         jPanelNutTieuDe2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanelNutTieuDe2Layout.createSequentialGroup()
-            .addGap(15, 15, 15)
-            .addComponent(jLabelNutTieuDe2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(28, Short.MAX_VALUE))
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNutTieuDe2Layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(jLabelNutTieuDe2, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
     );
     jPanelNutTieuDe2Layout.setVerticalGroup(
         jPanelNutTieuDe2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -996,7 +996,7 @@ jPanelChoiceHKLayout.setHorizontalGroup(
 
     jLabelNutXem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutXem.setForeground(new java.awt.Color(255, 255, 255));
-    jLabelNutXem.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whiteplus.png")));
+    jLabelNutXem.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whitewrite.png")));
     jLabelNutXem.setText("Chấm điểm");
     jLabelNutXem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelNutXem.setPreferredSize(new java.awt.Dimension(32, 16));
@@ -1020,7 +1020,7 @@ jPanelChoiceHKLayout.setHorizontalGroup(
         jPanelThanhTieuDe2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanelThanhTieuDe2Layout.createSequentialGroup()
             .addComponent(jPanelNutTieuDe2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
             .addComponent(jPanelNutXem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jPanelNutThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1471,7 +1471,7 @@ jPanelChoiceHKLayout.setHorizontalGroup(
     private javax.swing.JLabel jLabelNoiDungSdt;
     private javax.swing.JLabel jLabelNoiDungTen;
     private javax.swing.JLabel jLabelNutChamDiem;
-    private javax.swing.JLabel jLabelNutLienHe1;
+    private javax.swing.JLabel jLabelNutLienHe;
     private javax.swing.JLabel jLabelNutSua;
     private javax.swing.JLabel jLabelNutThem;
     private javax.swing.JLabel jLabelNutTieuDe;
@@ -1518,7 +1518,7 @@ jPanelChoiceHKLayout.setHorizontalGroup(
     private javax.swing.JPanel jPanelNull6;
     private javax.swing.JPanel jPanelNull9;
     private javax.swing.JPanel jPanelNutChamDiem;
-    private javax.swing.JPanel jPanelNutLienHe1;
+    private javax.swing.JPanel jPanelNutLienHe;
     private javax.swing.JPanel jPanelNutSua;
     private javax.swing.JPanel jPanelNutThem;
     private javax.swing.JPanel jPanelNutTieuDe;

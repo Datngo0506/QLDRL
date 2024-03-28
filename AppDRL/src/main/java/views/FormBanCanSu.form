@@ -95,7 +95,7 @@
                               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                               <Component id="jLabelpanelPtit" min="-2" pref="657" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                              <Component id="jPanelNutLienHe1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jPanelNutLienHe" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="77" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -108,7 +108,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="jPanelNutLienHe1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jPanelNutLienHe" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -125,7 +125,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Container class="javax.swing.JPanel" name="jPanelNutLienHe1">
+                    <Container class="javax.swing.JPanel" name="jPanelNutLienHe">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="33" green="33" red="dd" type="rgb"/>
@@ -143,19 +143,19 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                  <Component id="jLabelNutLienHe1" pref="167" max="32767" attributes="0"/>
+                                  <Component id="jLabelNutLienHe" pref="167" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabelNutLienHe1" alignment="0" pref="45" max="32767" attributes="0"/>
+                              <Component id="jLabelNutLienHe" alignment="0" pref="45" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JLabel" name="jLabelNutLienHe1">
+                        <Component class="javax.swing.JLabel" name="jLabelNutLienHe">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
@@ -1171,7 +1171,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jPanelNutTieuDe2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="196" max="32767" attributes="0"/>
+                              <EmptySpace pref="211" max="32767" attributes="0"/>
                               <Component id="jPanelNutXem" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jPanelNutThem" min="-2" max="-2" attributes="0"/>
@@ -1206,10 +1206,9 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                  <Component id="jLabelNutTieuDe2" min="-2" pref="124" max="-2" attributes="0"/>
-                                  <EmptySpace pref="28" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabelNutTieuDe2" pref="146" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1433,7 +1432,7 @@
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
                             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                              <Connection code="new javax.swing.ImageIcon(Icon.getUrlIcon(&quot;whiteplus.png&quot;))" type="code"/>
+                              <Connection code="new javax.swing.ImageIcon(Icon.getUrlIcon(&quot;whitewrite.png&quot;))" type="code"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Ch&#x1ea5;m &#x111;i&#x1ec3;m"/>
                             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">

@@ -495,10 +495,9 @@ javax.swing.GroupLayout jPanelNutTieuDe2Layout = new javax.swing.GroupLayout(jPa
 jPanelNutTieuDe2.setLayout(jPanelNutTieuDe2Layout);
 jPanelNutTieuDe2Layout.setHorizontalGroup(
     jPanelNutTieuDe2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-    .addGroup(jPanelNutTieuDe2Layout.createSequentialGroup()
-        .addGap(15, 15, 15)
-        .addComponent(jLabelNutTieuDe2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(28, Short.MAX_VALUE))
+    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNutTieuDe2Layout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(jLabelNutTieuDe2, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
     );
     jPanelNutTieuDe2Layout.setVerticalGroup(
         jPanelNutTieuDe2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -579,7 +578,7 @@ jPanelNutTieuDe2Layout.setHorizontalGroup(
 
     jLabelNutXem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutXem.setForeground(new java.awt.Color(255, 255, 255));
-    jLabelNutXem.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whiteplus.png")));
+    jLabelNutXem.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whitewrite.png")));
     jLabelNutXem.setText("Chấm điểm");
     jLabelNutXem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelNutXem.setPreferredSize(new java.awt.Dimension(32, 16));
@@ -603,7 +602,7 @@ jPanelNutTieuDe2Layout.setHorizontalGroup(
         jPanelThanhTieuDe2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanelThanhTieuDe2Layout.createSequentialGroup()
             .addComponent(jPanelNutTieuDe2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
             .addComponent(jPanelNutXem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jPanelNutThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
