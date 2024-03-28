@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package views;
-
+import icons.Icon;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -107,7 +107,7 @@ public class FormDangNhap extends javax.swing.JFrame {
         jPanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dat\\Documents\\GitHub\\QLDRL\\AppDRL\\src\\main\\java\\icons\\logo_ptit.png")); // NOI18N
+        jLabelLogo.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("logo-ptit.png")));
         jPanelMain.add(jLabelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 21, 390, 119));
 
         jLabelTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
