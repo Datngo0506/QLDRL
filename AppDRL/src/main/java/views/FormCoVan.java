@@ -387,8 +387,8 @@ public final class FormCoVan extends javax.swing.JFrame {
         jLabelLogOut = new javax.swing.JLabel();
         jLabelLeft4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Điểm rèn luyện sinh viên");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cố vấn học tập");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelView.setBackground(new java.awt.Color(189, 56, 27));
@@ -415,6 +415,11 @@ public final class FormCoVan extends javax.swing.JFrame {
 
         jPanelLienHe.setBackground(new java.awt.Color(221, 51, 51));
         jPanelLienHe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanelLienHe.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jPanelLienHeMouseMoved(evt);
+            }
+        });
         jPanelLienHe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanelLienHeMouseEntered(evt);
@@ -428,6 +433,12 @@ public final class FormCoVan extends javax.swing.JFrame {
         jLabelLienHe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelLienHe.setForeground(new java.awt.Color(255, 255, 255));
         jLabelLienHe.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("mail2.png")));
+        jLabelLienHe.setText("Liên hệ hỗ trợ");
+        jLabelLienHe.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabelLienHeMouseMoved(evt);
+            }
+        });
         jLabelLienHe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabelLienHeMouseEntered(evt);
@@ -529,7 +540,6 @@ jPanelNutTieuDeLayout.setHorizontalGroup(
 
     jPanelNutSua.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutSua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
     jLabelNutSua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutSua.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutSua.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whitewrite.png")));
@@ -576,13 +586,11 @@ jPanelNutTieuDeLayout.setHorizontalGroup(
 
     jPanelNutThem.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
     jLabelNutThem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutThem.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutThem.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whiteplus.png")));
     jLabelNutThem.setText("Thêm");
     jLabelNutThem.setPreferredSize(new java.awt.Dimension(32, 16));
-
     javax.swing.GroupLayout jPanelNutThemLayout = new javax.swing.GroupLayout(jPanelNutThem);
     jPanelNutThem.setLayout(jPanelNutThemLayout);
     jPanelNutThemLayout.setHorizontalGroup(
@@ -598,7 +606,6 @@ jPanelNutTieuDeLayout.setHorizontalGroup(
 
     jPanelNutXem.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutXem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    
 
     jLabelNutXem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutXem.setForeground(new java.awt.Color(255, 255, 255));
@@ -927,9 +934,7 @@ jPanelNutTieuDeLayout.setHorizontalGroup(
     jPanelTaiKhoan.setBackground(new java.awt.Color(255, 255, 255));
     jPanelTaiKhoan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jPanelTaiKhoan.setPreferredSize(new java.awt.Dimension(160, 48));
-    
-
-    jLabelTaiKhoan.setBackground(new java.awt.Color(255, 255, 255));
+     jLabelTaiKhoan.setBackground(new java.awt.Color(255, 255, 255));
     jLabelTaiKhoan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelTaiKhoan.setForeground(new java.awt.Color(227, 70, 34));
     jLabelTaiKhoan.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("acc.png")));
@@ -1296,36 +1301,6 @@ jPanelNutTieuDeLayout.setHorizontalGroup(
         jPanelSuaTT.repaint();    // Vẽ lại giao diện
     }//GEN-LAST:event_jLabelSuaThongTinMouseEntered
 
-    private void jPanelLienHeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelLienHeMouseExited
-        // TODO add your handling code here:
-        jPanelLienHe.setBackground(buttonHoverColor);
-        jPanelLienHe.revalidate(); // Cập nhật giao diện
-        jPanelLienHe.repaint();    // Vẽ lại giao diện
-    }//GEN-LAST:event_jPanelLienHeMouseExited
-
-    private void jPanelLienHeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelLienHeMouseEntered
-        // TODO add your handling code here:
-        // TODO add your handling code here:
-        jPanelLienHe.setBackground(buttonHoverColor);
-        jPanelLienHe.revalidate(); // Cập nhật giao diện
-        jPanelLienHe.repaint();    // Vẽ lại giao diện
-    }//GEN-LAST:event_jPanelLienHeMouseEntered
-
-
-    private void jLabelLienHeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLienHeMouseExited
-        // TODO add your handling code here:
-        jPanelLienHe.setBackground(buttonColor);
-        jPanelLienHe.revalidate(); // Cập nhật giao diện
-        jPanelLienHe.repaint();    // Vẽ lại giao diện
-    }//GEN-LAST:event_jLabelLienHeMouseExited
-
-    private void jLabelLienHeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLienHeMouseEntered
-        // TODO add your handling code here:
-        // TODO add your handling code here:
-        jPanelLienHe.setBackground(buttonHoverColor);
-        jPanelLienHe.revalidate(); // Cập nhật giao diện
-        jPanelLienHe.repaint();    // Vẽ lại giao diện
-    }//GEN-LAST:event_jLabelLienHeMouseEntered
 
     private void jLabelHelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelHelpMouseClicked
         // TODO add your handling code here:
@@ -1445,6 +1420,44 @@ jPanelNutTieuDeLayout.setHorizontalGroup(
         jPanelLogOut.revalidate(); // Cập nhật giao diện
         jPanelLogOut.repaint();    // Vẽ lại giao diện
     }//GEN-LAST:event_jPanelLogOutMouseExited
+
+    private void jPanelLienHeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelLienHeMouseExited
+        // TODO add your handling code here:
+        jPanelLienHe.setBackground(buttonHoverColor);
+        jPanelLienHe.revalidate(); // Cập nhật giao diện
+        jPanelLienHe.repaint();    // Vẽ lại giao diện
+    }//GEN-LAST:event_jPanelLienHeMouseExited
+
+    private void jPanelLienHeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelLienHeMouseEntered
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        jPanelLienHe.setBackground(buttonHoverColor);
+        jPanelLienHe.revalidate(); // Cập nhật giao diện
+        jPanelLienHe.repaint();    // Vẽ lại giao diện
+    }//GEN-LAST:event_jPanelLienHeMouseEntered
+
+    private void jPanelLienHeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelLienHeMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanelLienHeMouseMoved
+
+    private void jLabelLienHeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLienHeMouseExited
+        // TODO add your handling code here:
+        jPanelLienHe.setBackground(buttonColor);
+        jPanelLienHe.revalidate(); // Cập nhật giao diện
+        jPanelLienHe.repaint();    // Vẽ lại giao diện
+    }//GEN-LAST:event_jLabelLienHeMouseExited
+
+    private void jLabelLienHeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLienHeMouseEntered
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        jPanelLienHe.setBackground(buttonHoverColor);
+        jPanelLienHe.revalidate(); // Cập nhật giao diện
+        jPanelLienHe.repaint();    // Vẽ lại giao diện
+    }//GEN-LAST:event_jLabelLienHeMouseEntered
+
+    private void jLabelLienHeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLienHeMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelLienHeMouseMoved
 
     
     /**

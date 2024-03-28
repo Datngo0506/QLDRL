@@ -2,8 +2,8 @@
 
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="&#x110;i&#x1ec3;m r&#xe8;n luy&#x1ec7;n sinh vi&#xea;n"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="title" type="java.lang.String" value="Ban qu&#x1ea3;n l&#xfd; h&#x1ecd;c vi&#x1ec7;n"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>

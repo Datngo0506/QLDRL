@@ -388,8 +388,8 @@ public final class FormSinhVien extends javax.swing.JFrame {
         jLabelLogOut = new javax.swing.JLabel();
         jLabelLeft4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Điểm rèn luyện sinh viên");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Sinh Viên");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelView.setBackground(new java.awt.Color(189, 56, 27));
@@ -562,13 +562,12 @@ jPanelChoiceHKLayout.setHorizontalGroup(
 
     jPanelNutChamDiem.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutChamDiem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    jLabelNutChamDiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+     jLabelNutChamDiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutChamDiem.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutChamDiem.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whitewrite.png")));
     jLabelNutChamDiem.setText("Chấm điểm");
     jLabelNutChamDiem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelNutChamDiem.setPreferredSize(new java.awt.Dimension(32, 16));
-
     javax.swing.GroupLayout jPanelNutChamDiemLayout = new javax.swing.GroupLayout(jPanelNutChamDiem);
     jPanelNutChamDiem.setLayout(jPanelNutChamDiemLayout);
     jPanelNutChamDiemLayout.setHorizontalGroup(
@@ -882,8 +881,6 @@ jPanelChoiceHKLayout.setHorizontalGroup(
     jPanelTaiKhoan.setBackground(new java.awt.Color(255, 255, 255));
     jPanelTaiKhoan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jPanelTaiKhoan.setPreferredSize(new java.awt.Dimension(160, 48));
-    
-
     jLabelTaiKhoan.setBackground(new java.awt.Color(255, 255, 255));
     jLabelTaiKhoan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelTaiKhoan.setForeground(new java.awt.Color(227, 70, 34));

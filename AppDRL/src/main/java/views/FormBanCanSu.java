@@ -150,8 +150,9 @@ public final class FormBanCanSu extends javax.swing.JFrame {
  
         
         //nút xóa
-        buttonHoverEvent(jLabelNutChamDiem, jPanelNutChamDiem);
+        buttonHoverEvent(jLabelNutXem, jPanelNutXem);
         buttonHoverEvent(jLabelNutThem, jPanelNutThem);
+        buttonHoverEvent(jLabelNutChamDiem, jPanelNutChamDiem);
         buttonHoverEvent(jLabelNutSua, jPanelNutSua);
         buttonHoverEvent(jLabelNutXoa, jPanelNutXoa);
 
@@ -425,8 +426,8 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         jLabelLogOut = new javax.swing.JLabel();
         jLabelLeft4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Điểm rèn luyện sinh viên");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Ban cán sự lớp");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelView.setBackground(new java.awt.Color(189, 56, 27));
@@ -609,6 +610,7 @@ jPanelChoiceHKLayout.setHorizontalGroup(
 
     jPanelNutChamDiem.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutChamDiem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
     jLabelNutChamDiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutChamDiem.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutChamDiem.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whitewrite.png")));
@@ -982,12 +984,14 @@ jPanelChoiceHKLayout.setHorizontalGroup(
 
     jPanelNutXoa.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutXoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
     jLabelNutXoa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutXoa.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutXoa.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whitedelete.png")));
     jLabelNutXoa.setText("Xóa");
     jLabelNutXoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelNutXoa.setPreferredSize(new java.awt.Dimension(32, 16));
+
     javax.swing.GroupLayout jPanelNutXoaLayout = new javax.swing.GroupLayout(jPanelNutXoa);
     jPanelNutXoa.setLayout(jPanelNutXoaLayout);
     jPanelNutXoaLayout.setHorizontalGroup(
@@ -1009,7 +1013,6 @@ jPanelChoiceHKLayout.setHorizontalGroup(
     jLabelNutThem.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whiteplus.png")));
     jLabelNutThem.setText("Thêm");
     jLabelNutThem.setPreferredSize(new java.awt.Dimension(32, 16));
-
     javax.swing.GroupLayout jPanelNutThemLayout = new javax.swing.GroupLayout(jPanelNutThem);
     jPanelNutThem.setLayout(jPanelNutThemLayout);
     jPanelNutThemLayout.setHorizontalGroup(
@@ -1030,7 +1033,6 @@ jPanelChoiceHKLayout.setHorizontalGroup(
     jLabelNutXem.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whiteview.png")));
     jLabelNutXem.setText("Chấm điểm");
     jLabelNutXem.setPreferredSize(new java.awt.Dimension(32, 16));
-
     javax.swing.GroupLayout jPanelNutXemLayout = new javax.swing.GroupLayout(jPanelNutXem);
     jPanelNutXem.setLayout(jPanelNutXemLayout);
     jPanelNutXemLayout.setHorizontalGroup(
@@ -1082,7 +1084,6 @@ jPanelChoiceHKLayout.setHorizontalGroup(
     jPanelTaiKhoan.setBackground(new java.awt.Color(255, 255, 255));
     jPanelTaiKhoan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jPanelTaiKhoan.setPreferredSize(new java.awt.Dimension(160, 48));
-    
 
     jLabelTaiKhoan.setBackground(new java.awt.Color(255, 255, 255));
     jLabelTaiKhoan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

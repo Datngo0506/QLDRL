@@ -574,8 +574,8 @@ public final class FormQuanLy extends javax.swing.JFrame {
         choiceKhoa5 = new java.awt.Choice();
         jLabel8 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Điểm rèn luyện sinh viên");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("ABC");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelView.setBackground(new java.awt.Color(189, 56, 27));
@@ -590,8 +590,6 @@ public final class FormQuanLy extends javax.swing.JFrame {
         jPanelTaiKhoan.setBackground(new java.awt.Color(255, 255, 255));
         jPanelTaiKhoan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanelTaiKhoan.setPreferredSize(new java.awt.Dimension(160, 48));
-        
-        
 
         jLabelTaiKhoan.setBackground(new java.awt.Color(255, 255, 255));
         jLabelTaiKhoan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -631,11 +629,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         jLabelKhoa.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabelKhoa.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("khoa.png")));
         jLabelKhoa.setText(" KHOA");
-
-
         jLabelLeft2.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("redleft.png")));
-
-
         javax.swing.GroupLayout jPanelKhoaLayout = new javax.swing.GroupLayout(jPanelKhoa);
         jPanelKhoa.setLayout(jPanelKhoaLayout);
         jPanelKhoaLayout.setHorizontalGroup(
@@ -1024,7 +1018,6 @@ public final class FormQuanLy extends javax.swing.JFrame {
 
         jPanelLienHe.setBackground(new java.awt.Color(221, 51, 51));
         jPanelLienHe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         jPanelLienHe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanelLienHeMouseEntered(evt);
@@ -1039,7 +1032,6 @@ public final class FormQuanLy extends javax.swing.JFrame {
         jLabelLienHe.setForeground(new java.awt.Color(255, 255, 255));
         jLabelLienHe.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("mail2.png")));
         jLabelLienHe.setText("Liên hệ hỗ trợ");
-
         jLabelLienHe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabelLienHeMouseEntered(evt);
@@ -1137,13 +1129,12 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
 
     jPanelNutSua4.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutSua4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    jLabelNutSua4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+     jLabelNutSua4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutSua4.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutSua4.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whitewrite.png")));
     jLabelNutSua4.setText("Sửa");
     jLabelNutSua4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelNutSua4.setPreferredSize(new java.awt.Dimension(32, 16));
-
     javax.swing.GroupLayout jPanelNutSua4Layout = new javax.swing.GroupLayout(jPanelNutSua4);
     jPanelNutSua4.setLayout(jPanelNutSua4Layout);
     jPanelNutSua4Layout.setHorizontalGroup(
@@ -1159,14 +1150,12 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
 
     jPanelNutXoa4.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutXoa4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
     jLabelNutXoa4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutXoa4.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutXoa4.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whitedelete.png")));
     jLabelNutXoa4.setText("Xóa");
     jLabelNutXoa4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelNutXoa4.setPreferredSize(new java.awt.Dimension(32, 16));
-
     javax.swing.GroupLayout jPanelNutXoa4Layout = new javax.swing.GroupLayout(jPanelNutXoa4);
     jPanelNutXoa4.setLayout(jPanelNutXoa4Layout);
     jPanelNutXoa4Layout.setHorizontalGroup(
@@ -1183,13 +1172,11 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
 
     jPanelNutThem4.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutThem4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
     jLabelNutThem4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutThem4.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutThem4.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whiteplus.png")));
     jLabelNutThem4.setText("Thêm");
     jLabelNutThem4.setPreferredSize(new java.awt.Dimension(32, 16));
-
     javax.swing.GroupLayout jPanelNutThem4Layout = new javax.swing.GroupLayout(jPanelNutThem4);
     jPanelNutThem4.setLayout(jPanelNutThem4Layout);
     jPanelNutThem4Layout.setHorizontalGroup(
@@ -1267,14 +1254,12 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
 
     jPanelNutSua2.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutSua2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
     jLabelNutSua2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutSua2.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutSua2.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whitewrite.png")));
     jLabelNutSua2.setText("Sửa");
     jLabelNutSua2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelNutSua2.setPreferredSize(new java.awt.Dimension(32, 16));
-
     javax.swing.GroupLayout jPanelNutSua2Layout = new javax.swing.GroupLayout(jPanelNutSua2);
     jPanelNutSua2.setLayout(jPanelNutSua2Layout);
     jPanelNutSua2Layout.setHorizontalGroup(
@@ -1290,14 +1275,12 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
 
     jPanelNutXoa2.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutXoa2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
     jLabelNutXoa2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutXoa2.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutXoa2.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whitedelete.png")));
     jLabelNutXoa2.setText("Xóa");
     jLabelNutXoa2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelNutXoa2.setPreferredSize(new java.awt.Dimension(32, 16));
-
     javax.swing.GroupLayout jPanelNutXoa2Layout = new javax.swing.GroupLayout(jPanelNutXoa2);
     jPanelNutXoa2.setLayout(jPanelNutXoa2Layout);
     jPanelNutXoa2Layout.setHorizontalGroup(
@@ -1314,13 +1297,11 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
 
     jPanelNutThem2.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutThem2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
     jLabelNutThem2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutThem2.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutThem2.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whiteplus.png")));
     jLabelNutThem2.setText("Thêm");
     jLabelNutThem2.setPreferredSize(new java.awt.Dimension(32, 16));
-
     javax.swing.GroupLayout jPanelNutThem2Layout = new javax.swing.GroupLayout(jPanelNutThem2);
     jPanelNutThem2.setLayout(jPanelNutThem2Layout);
     jPanelNutThem2Layout.setHorizontalGroup(
@@ -1392,15 +1373,12 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
 
     jPanelNutSua3.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutSua3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
     jLabelNutSua3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutSua3.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutSua3.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whitewrite.png")));
     jLabelNutSua3.setText("Sửa");
     jLabelNutSua3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelNutSua3.setPreferredSize(new java.awt.Dimension(32, 16));
-    
-
     javax.swing.GroupLayout jPanelNutSua3Layout = new javax.swing.GroupLayout(jPanelNutSua3);
     jPanelNutSua3.setLayout(jPanelNutSua3Layout);
     jPanelNutSua3Layout.setHorizontalGroup(
@@ -1416,14 +1394,12 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
 
     jPanelNutXoa3.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutXoa3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    
     jLabelNutXoa3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutXoa3.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutXoa3.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whitedelete.png")));
     jLabelNutXoa3.setText("Xóa");
     jLabelNutXoa3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelNutXoa3.setPreferredSize(new java.awt.Dimension(32, 16));
-    
     javax.swing.GroupLayout jPanelNutXoa3Layout = new javax.swing.GroupLayout(jPanelNutXoa3);
     jPanelNutXoa3.setLayout(jPanelNutXoa3Layout);
     jPanelNutXoa3Layout.setHorizontalGroup(
@@ -1440,13 +1416,11 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
 
     jPanelNutThem3.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutThem3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
     jLabelNutThem3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutThem3.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutThem3.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whiteplus.png")));
     jLabelNutThem3.setText("Thêm");
     jLabelNutThem3.setPreferredSize(new java.awt.Dimension(32, 16));
-
     javax.swing.GroupLayout jPanelNutThem3Layout = new javax.swing.GroupLayout(jPanelNutThem3);
     jPanelNutThem3.setLayout(jPanelNutThem3Layout);
     jPanelNutThem3Layout.setHorizontalGroup(
@@ -1553,14 +1527,12 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
 
     jPanelNutSua1.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutSua1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
     jLabelNutSua1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutSua1.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutSua1.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whitewrite.png")));
     jLabelNutSua1.setText("Sửa");
     jLabelNutSua1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelNutSua1.setPreferredSize(new java.awt.Dimension(32, 16));
-
     javax.swing.GroupLayout jPanelNutSua1Layout = new javax.swing.GroupLayout(jPanelNutSua1);
     jPanelNutSua1.setLayout(jPanelNutSua1Layout);
     jPanelNutSua1Layout.setHorizontalGroup(
@@ -1576,14 +1548,12 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
 
     jPanelNutXoa1.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutXoa1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
     jLabelNutXoa1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutXoa1.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutXoa1.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whitedelete.png")));
     jLabelNutXoa1.setText("Xóa");
     jLabelNutXoa1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelNutXoa1.setPreferredSize(new java.awt.Dimension(32, 16));
-
     javax.swing.GroupLayout jPanelNutXoa1Layout = new javax.swing.GroupLayout(jPanelNutXoa1);
     jPanelNutXoa1.setLayout(jPanelNutXoa1Layout);
     jPanelNutXoa1Layout.setHorizontalGroup(
@@ -1600,13 +1570,11 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
 
     jPanelNutThem1.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutThem1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
     jLabelNutThem1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutThem1.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutThem1.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whiteplus.png")));
     jLabelNutThem1.setText("Thêm");
     jLabelNutThem1.setPreferredSize(new java.awt.Dimension(32, 16));
-
     javax.swing.GroupLayout jPanelNutThem1Layout = new javax.swing.GroupLayout(jPanelNutThem1);
     jPanelNutThem1.setLayout(jPanelNutThem1Layout);
     jPanelNutThem1Layout.setHorizontalGroup(
@@ -1745,7 +1713,6 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
 
     jPanelNutSua5.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutSua5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
     jLabelNutSua5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutSua5.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutSua5.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whitewrite.png")));
@@ -1767,14 +1734,12 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
 
     jPanelNutXoa5.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutXoa5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
     jLabelNutXoa5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutXoa5.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutXoa5.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whitedelete.png")));
     jLabelNutXoa5.setText("Xóa");
     jLabelNutXoa5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelNutXoa5.setPreferredSize(new java.awt.Dimension(32, 16));
-
     javax.swing.GroupLayout jPanelNutXoa5Layout = new javax.swing.GroupLayout(jPanelNutXoa5);
     jPanelNutXoa5.setLayout(jPanelNutXoa5Layout);
     jPanelNutXoa5Layout.setHorizontalGroup(
@@ -1796,7 +1761,6 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
     jLabelNutThem5.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whiteplus.png")));
     jLabelNutThem5.setText("Thêm");
     jLabelNutThem5.setPreferredSize(new java.awt.Dimension(32, 16));
-
     javax.swing.GroupLayout jPanelNutThem5Layout = new javax.swing.GroupLayout(jPanelNutThem5);
     jPanelNutThem5.setLayout(jPanelNutThem5Layout);
     jPanelNutThem5Layout.setHorizontalGroup(
@@ -2142,14 +2106,12 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
 
     jPanelNutSua6.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutSua6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
     jLabelNutSua6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutSua6.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutSua6.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whitewrite.png")));
     jLabelNutSua6.setText("Sửa");
     jLabelNutSua6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelNutSua6.setPreferredSize(new java.awt.Dimension(32, 16));
-
     javax.swing.GroupLayout jPanelNutSua6Layout = new javax.swing.GroupLayout(jPanelNutSua6);
     jPanelNutSua6.setLayout(jPanelNutSua6Layout);
     jPanelNutSua6Layout.setHorizontalGroup(
@@ -2165,7 +2127,6 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
 
     jPanelNutXoa6.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutXoa6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    
 
     jLabelNutXoa6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutXoa6.setForeground(new java.awt.Color(255, 255, 255));
@@ -2173,8 +2134,6 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
     jLabelNutXoa6.setText("Xóa");
     jLabelNutXoa6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelNutXoa6.setPreferredSize(new java.awt.Dimension(32, 16));
-
-
     javax.swing.GroupLayout jPanelNutXoa6Layout = new javax.swing.GroupLayout(jPanelNutXoa6);
     jPanelNutXoa6.setLayout(jPanelNutXoa6Layout);
     jPanelNutXoa6Layout.setHorizontalGroup(
@@ -2191,15 +2150,11 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
 
     jPanelNutThem6.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutThem6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    
-
     jLabelNutThem6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutThem6.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutThem6.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whiteplus.png")));
     jLabelNutThem6.setText("Thêm");
     jLabelNutThem6.setPreferredSize(new java.awt.Dimension(32, 16));
-
-
     javax.swing.GroupLayout jPanelNutThem6Layout = new javax.swing.GroupLayout(jPanelNutThem6);
     jPanelNutThem6.setLayout(jPanelNutThem6Layout);
     jPanelNutThem6Layout.setHorizontalGroup(
@@ -2215,14 +2170,12 @@ jPanelNutTieuDe4Layout.setHorizontalGroup(
 
     jPanelNutXem.setBackground(new java.awt.Color(221, 51, 51));
     jPanelNutXem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    
 
     jLabelNutXem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     jLabelNutXem.setForeground(new java.awt.Color(255, 255, 255));
     jLabelNutXem.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("whiteview.png")));
     jLabelNutXem.setText("Xem điểm");
     jLabelNutXem.setPreferredSize(new java.awt.Dimension(32, 16));
-    
 
     javax.swing.GroupLayout jPanelNutXemLayout = new javax.swing.GroupLayout(jPanelNutXem);
     jPanelNutXem.setLayout(jPanelNutXemLayout);
