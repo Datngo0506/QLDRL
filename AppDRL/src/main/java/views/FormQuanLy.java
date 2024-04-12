@@ -1149,7 +1149,7 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
         jPanelNutThem2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNutThem2Layout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jLabelNutThem2, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
+            .addComponent(jLabelNutThem2, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
     );
     jPanelNutThem2Layout.setVerticalGroup(
         jPanelNutThem2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1162,7 +1162,7 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
         jPanelThanhTieuDeKhoa1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanelThanhTieuDeKhoa1Layout.createSequentialGroup()
             .addComponent(jPanelNutTieuDeKhoa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 326, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 322, Short.MAX_VALUE)
             .addComponent(jPanelNutThem2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jPanelNutSua2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1276,7 +1276,7 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
         jPanelNutThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNutThemLayout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jLabelNutThem, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
+            .addComponent(jLabelNutThem, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
     );
     jPanelNutThemLayout.setVerticalGroup(
         jPanelNutThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1289,7 +1289,7 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
         jPanelThanhTieuDeKhoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanelThanhTieuDeKhoaLayout.createSequentialGroup()
             .addComponent(jPanelNutTieuDeKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 326, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 322, Short.MAX_VALUE)
             .addComponent(jPanelNutThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jPanelNutSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1436,7 +1436,7 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
         jPanelNutThem1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNutThem1Layout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jLabelNutThem1, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
+            .addComponent(jLabelNutThem1, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
     );
     jPanelNutThem1Layout.setVerticalGroup(
         jPanelNutThem1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1449,7 +1449,7 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
         jPanelThanhTieuDeKhoa4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanelThanhTieuDeKhoa4Layout.createSequentialGroup()
             .addComponent(jPanelNutTieuDeKhoa4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 326, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 322, Short.MAX_VALUE)
             .addComponent(jPanelNutThem1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jPanelNutSua1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1596,7 +1596,7 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
         jPanelNutThem5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNutThem5Layout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jLabelNutThem5, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
+            .addComponent(jLabelNutThem5, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
     );
     jPanelNutThem5Layout.setVerticalGroup(
         jPanelNutThem5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1609,7 +1609,7 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
         jPanelThanhTieuDeKhoa3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanelThanhTieuDeKhoa3Layout.createSequentialGroup()
             .addComponent(jPanelNutTieuDeKhoa3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 326, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 322, Short.MAX_VALUE)
             .addComponent(jPanelNutThem5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jPanelNutSua5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1757,7 +1757,7 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
         jPanelNutThem4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNutThem4Layout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jLabelNutThem4, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
+            .addComponent(jLabelNutThem4, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
     );
     jPanelNutThem4Layout.setVerticalGroup(
         jPanelNutThem4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1770,7 +1770,7 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
         jPanelThanhTieuDeKhoa2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanelThanhTieuDeKhoa2Layout.createSequentialGroup()
             .addComponent(jPanelNutTieuDeKhoa2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 326, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 322, Short.MAX_VALUE)
             .addComponent(jPanelNutThem4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jPanelNutSua4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2199,7 +2199,7 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
         jPanelNutThem6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNutThem6Layout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jLabelNutThem6, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
+            .addComponent(jLabelNutThem6, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
     );
     jPanelNutThem6Layout.setVerticalGroup(
         jPanelNutThem6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2235,7 +2235,7 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
         jPanelThanhTieuDe2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanelThanhTieuDe2Layout.createSequentialGroup()
             .addComponent(jPanelNutTieuDe2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
             .addComponent(jPanelNutXem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jPanelNutThem6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

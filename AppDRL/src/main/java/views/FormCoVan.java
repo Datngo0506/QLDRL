@@ -566,7 +566,7 @@ jPanelNutTieuDe2Layout.setHorizontalGroup(
         jPanelNutThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNutThemLayout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jLabelNutThem, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
+            .addComponent(jLabelNutThem, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
     );
     jPanelNutThemLayout.setVerticalGroup(
         jPanelNutThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -589,7 +589,7 @@ jPanelNutTieuDe2Layout.setHorizontalGroup(
         jPanelNutXemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNutXemLayout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jLabelNutXem, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))
+            .addComponent(jLabelNutXem, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
     );
     jPanelNutXemLayout.setVerticalGroup(
         jPanelNutXemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -602,7 +602,7 @@ jPanelNutTieuDe2Layout.setHorizontalGroup(
         jPanelThanhTieuDe2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanelThanhTieuDe2Layout.createSequentialGroup()
             .addComponent(jPanelNutTieuDe2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
             .addComponent(jPanelNutXem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jPanelNutThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

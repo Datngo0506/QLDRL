@@ -277,7 +277,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jPanelNutTieuDe2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="211" max="32767" attributes="0"/>
+                              <EmptySpace pref="197" max="32767" attributes="0"/>
                               <Component id="jPanelNutXem" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jPanelNutThem" min="-2" max="-2" attributes="0"/>
@@ -467,7 +467,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabelNutThem" pref="82" max="32767" attributes="0"/>
+                                  <Component id="jLabelNutThem" pref="91" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -518,7 +518,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabelNutXem" pref="118" max="32767" attributes="0"/>
+                                  <Component id="jLabelNutXem" pref="123" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>

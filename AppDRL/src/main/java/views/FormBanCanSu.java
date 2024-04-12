@@ -590,9 +590,8 @@ jPanelChoiceHKLayout.setHorizontalGroup(
     jPanelNutChamDiemLayout.setHorizontalGroup(
         jPanelNutChamDiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanelNutChamDiemLayout.createSequentialGroup()
-            .addContainerGap()
-            .addComponent(jLabelNutChamDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelNutChamDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
     jPanelNutChamDiemLayout.setVerticalGroup(
         jPanelNutChamDiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -605,7 +604,7 @@ jPanelChoiceHKLayout.setHorizontalGroup(
         jPanelThanhTieuDeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanelThanhTieuDeLayout.createSequentialGroup()
             .addComponent(jPanelNutTieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 461, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 467, Short.MAX_VALUE)
             .addComponent(jPanelNutChamDiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
     jPanelThanhTieuDeLayout.setVerticalGroup(
@@ -984,7 +983,7 @@ jPanelChoiceHKLayout.setHorizontalGroup(
         jPanelNutThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNutThemLayout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jLabelNutThem, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
+            .addComponent(jLabelNutThem, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
     );
     jPanelNutThemLayout.setVerticalGroup(
         jPanelNutThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1007,7 +1006,7 @@ jPanelChoiceHKLayout.setHorizontalGroup(
         jPanelNutXemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNutXemLayout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jLabelNutXem, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))
+            .addComponent(jLabelNutXem, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
     );
     jPanelNutXemLayout.setVerticalGroup(
         jPanelNutXemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1020,7 +1019,7 @@ jPanelChoiceHKLayout.setHorizontalGroup(
         jPanelThanhTieuDe2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanelThanhTieuDe2Layout.createSequentialGroup()
             .addComponent(jPanelNutTieuDe2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
             .addComponent(jPanelNutXem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jPanelNutThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
