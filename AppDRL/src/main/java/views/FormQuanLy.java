@@ -42,7 +42,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         main.setBackground(hoveColor);
         main.revalidate(); // Cập nhật giao diện
         main.repaint();    // Vẽ lại giao diện
-        
+        //muahahahahah
         p2.setBackground(white);
         p2.revalidate(); // Cập nhật giao diện
         p2.repaint();    // Vẽ lại giao diện
