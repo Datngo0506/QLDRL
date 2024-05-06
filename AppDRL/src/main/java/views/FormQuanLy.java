@@ -1651,6 +1651,11 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
     jLabelNutXoa5.setText("Xóa");
     jLabelNutXoa5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelNutXoa5.setPreferredSize(new java.awt.Dimension(32, 16));
+    jLabelNutXoa5.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            jLabelNutXoa5MouseClicked(evt);
+        }
+    });
 
     javax.swing.GroupLayout jPanelNutXoa5Layout = new javax.swing.GroupLayout(jPanelNutXoa5);
     jPanelNutXoa5.setLayout(jPanelNutXoa5Layout);
@@ -1702,6 +1707,11 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
     jLabelNutThem5.setText("Thêm");
     jLabelNutThem5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelNutThem5.setPreferredSize(new java.awt.Dimension(32, 16));
+    jLabelNutThem5.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            jLabelNutThem5MouseClicked(evt);
+        }
+    });
 
     javax.swing.GroupLayout jPanelNutThem5Layout = new javax.swing.GroupLayout(jPanelNutThem5);
     jPanelNutThem5.setLayout(jPanelNutThem5Layout);
@@ -2517,9 +2527,9 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
                     // Xử lý ngoại lệ nếu có lỗi xảy ra khi thực hiện truy vấn SQL
                     //ex.printStackTrace();
                 }
-                    } else {
-                        // Nếu không có hàng nào được chọn, bạn có thể thông báo cho người dùng hoặc xử lý theo cách mong muốn.
-                    }
+                } else {
+                    // Nếu không có hàng nào được chọn, bạn có thể thông báo cho người dùng hoặc xử lý theo cách mong muốn.
+                }
         }
     }//GEN-LAST:event_jLabelNutXoaMouseClicked
 
@@ -2561,6 +2571,64 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
             new SuaCoVan(dsKhoa, jTableCoVan, chon, dsCoVan, choiceKhoa_CoVan).setVisible(true);
         }
     }//GEN-LAST:event_jLabelNutSua5MouseClicked
+
+    private void jLabelNutXoa5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutXoa5MouseClicked
+        int selectedRow = jTableCoVan.getSelectedRow();
+
+        // Kiểm tra xem có hàng nào được chọn không
+        if(selectedRow == -1){
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn hàng cần xóa!");
+        }
+        else {
+            // Xóa hàng được chọn từ bảng
+            int chon = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn xóa không?");
+            if(chon == JOptionPane.YES_OPTION){
+                Object cellValue = jTableCoVan.getValueAt(selectedRow, 0); // Lấy dữ liệu từ cột MaCV
+                String maCoVan = cellValue.toString().trim();
+                System.out.println(maCoVan);
+                int hub = 0;
+                for(int i=0; i<dsCoVan.size(); i++){
+                    if(dsCoVan.get(i).getMaCV().equals(maCoVan)){
+                        hub = i;
+                        break;
+                    }
+                }
+                //System.out.println(hub);
+                // Xóa cố vấn khỏi danh sách dsCoVan
+                dsCoVan.remove(hub);
+
+                // Xóa hàng từ bảng
+                DefaultTableModel model = (DefaultTableModel) jTableCoVan.getModel();
+                model.removeRow(selectedRow);
+
+                // Cập nhật dữ liệu trong cơ sở dữ liệu (nếu cần)
+                try {
+                    // Tạo kết nối tới cơ sở dữ liệu và thực hiện các thao tác cần thiết để xóa dữ liệu từ cơ sở dữ liệu.
+                    // Ví dụ: Xóa dữ liệu từ bảng SQL.
+                    try (Connection con = Controller.getConnection()) {
+                        PreparedStatement pstmt = con.prepareStatement("DELETE FROM CoVan WHERE MaCoVan = ?");
+                        pstmt.setString(1, maCoVan);
+                        //System.out.println(maCoVan);
+                        pstmt.executeUpdate();
+                        PreparedStatement pstmt2 = con.prepareStatement("DELETE FROM TaiKhoan WHERE TenTK = ?");
+                        pstmt2.setString(1, maCoVan);
+                        //System.out.println(maCoVan);
+                        pstmt2.executeUpdate();
+                    }
+                } catch (SQLException ex) {
+                    // Xử lý ngoại lệ nếu có lỗi xảy ra khi thực hiện truy vấn SQL
+                    //ex.printStackTrace();
+                }
+            } else {
+                // Nếu không xác nhận xóa, bạn có thể xử lý tùy ý ở đây
+            }
+        }
+    }//GEN-LAST:event_jLabelNutXoa5MouseClicked
+
+    private void jLabelNutThem5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutThem5MouseClicked
+        // TODO add your handling code here:
+        new ThemCoVan(dsKhoa, jTableCoVan,  dsCoVan, choiceKhoa_CoVan).setVisible(true);
+    }//GEN-LAST:event_jLabelNutThem5MouseClicked
 
     
 

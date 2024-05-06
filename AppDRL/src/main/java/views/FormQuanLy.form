@@ -1995,6 +1995,9 @@
                               <Dimension value="[32, 16]"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelNutXoa5MouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -2100,6 +2103,9 @@
                               <Dimension value="[32, 16]"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelNutThem5MouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>

@@ -48,6 +48,7 @@ public final class SuaKhoa extends javax.swing.JFrame {
         int d = Integer.parseInt(day);
         day = Integer.toString(d);
         choiceDate.select(day);
+        jPasswordFieldPass.setText(khoa.getMk());
         jTextFieldTenDangNhap.setText(khoa.getMaKhoa());
         //jPasswordFieldPass.set
     }

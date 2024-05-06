@@ -34,7 +34,16 @@ public final class SuaCoVan extends javax.swing.JFrame {
     
     public void edit(){
         setLocationRelativeTo(null);
-        CoVan cv = dsCoVan.get(chon);
+        Object cellValue = table.getValueAt(chon, 0);
+        System.out.println(cellValue);
+        int hub = 0;
+        for(int i=0; i<dsCoVan.size(); i++){
+            if(dsCoVan.get(i).getMaCV().equals(cellValue.toString())){
+                hub = i;
+                //xoa = i;
+            }
+        }
+        CoVan cv = dsCoVan.get(hub);
         //jTextFieldMaCoVan.setText(cv.getMaCV());
         jTextFieldTenCoVan.setText(cv.getTenCV());
         jTextFieldSdt.setText(cv.getSdt());
@@ -52,7 +61,7 @@ public final class SuaCoVan extends javax.swing.JFrame {
         choiceGioiTinh_Sua.add("Nam");
         choiceGioiTinh_Sua.add("Nữ");
         choiceGioiTinh_Sua.select(Controller.doiBoolToGioiTinh(cv.getGioiTinh()));
-        String[] parts = "1997-02-03".split("-");
+        String[] parts = cv.getNgaySinh().split("-");
         String year = parts[0];
         String month = parts[1];
         String day = parts[2];
@@ -65,8 +74,8 @@ public final class SuaCoVan extends javax.swing.JFrame {
         int d = Integer.parseInt(day);
         day = Integer.toString(d);
         choiceDate.select(day);
-        System.out.println(day);
-        System.out.println(month);
+        jPasswordFieldPass.setText(cv.getMk());
+        
     }
     public SuaCoVan() {
         //this.khoa = dsKhoa.get(chon);
@@ -438,7 +447,7 @@ public final class SuaCoVan extends javax.swing.JFrame {
         // Lấy mật khẩu từ JPasswordField
         char[] passwordChars = jPasswordFieldPass.getPassword();
         String password = new String(passwordChars);
-
+        //System.out.println(password);
         // Kiểm tra xem các trường thông tin đã được nhập đầy đủ chưa
         if(jTextFieldTenCoVan.getText().equals("") || jTextFieldSdt.getText().equals("") || jTextFieldQueQuan.getText().equals("") || jTextFieldDiaChi.getText().equals("") || password.equals("")){
             JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập đầy đủ thông tin!");
@@ -451,11 +460,12 @@ public final class SuaCoVan extends javax.swing.JFrame {
                 // Cập nhật thông tin trong dsCoVan
                         //CoVan cv = dsCoVan.get(chon);
                         int hub=0;
-                        String thang1 = choiceMonth.getSelectedItem();
-                        String ngay1 = choiceDate.getSelectedItem();
-                        String nam1 = jTextFieldYear.getText();
-                        String ngaySinh1 = nam1 + "-" + ngay1 + "-" + thang1; // Ngày sinh
-                        Object cellValue = table.getValueAt(chon, 1);
+                        String thang = choiceMonth.getSelectedItem();
+                        if(thang.length()<2) thang = "0" + thang;
+                        String ngay = choiceDate.getSelectedItem();
+                        if(ngay.length()<2) ngay = "0" + ngay;
+                        String ngaySinh = jTextFieldYear.getText() + "-" + thang + "-" + ngay; // Ngày sinh
+                        Object cellValue = table.getValueAt(chon, 0);
                         
                         for(int i=0; i<dsCoVan.size(); i++){
                             if(dsCoVan.get(i).getMaCV().equals(cellValue.toString())){
@@ -466,7 +476,7 @@ public final class SuaCoVan extends javax.swing.JFrame {
                         dsCoVan.get(hub).setTenCV(jTextFieldTenCoVan.getText());
                         dsCoVan.get(hub).setKhoa(Controller.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa));
                         dsCoVan.get(hub).setGioiTinh(Controller.doiGioiTinhToBool(choiceGioiTinh_Sua.getSelectedItem()));
-                        dsCoVan.get(hub).setNgaySinh(ngaySinh1);
+                        dsCoVan.get(hub).setNgaySinh(ngaySinh);
                         dsCoVan.get(hub).setSdt(jTextFieldSdt.getText());
                         dsCoVan.get(hub).setQueQuan(jTextFieldQueQuan.getText());
                         dsCoVan.get(hub).setDiaChi(jTextFieldDiaChi.getText());
@@ -483,21 +493,18 @@ public final class SuaCoVan extends javax.swing.JFrame {
                     try ( // Tạo kết nối tới cơ sở dữ liệu
                             Connection con = Controller.getConnection()) {
                         // Cập nhật thông tin trong bảng CoVan
-                        String updateQuery = "UPDATE CoVan SET tenCoVan=?, khoa=?, gioiTinh=?, ngaySinh=?, sdt=?, queQuan=?, diaChi=? WHERE maCoVan=?";
+                        String updateQuery = "UPDATE CoVan SET TenCoVan=?, khoa=?, gioiTinh=?, ngaySinh=?, sdt=?, queQuan=?, diaChi=? WHERE MaCoVan=?";
                         PreparedStatement pstmt = con.prepareStatement(updateQuery);
                         pstmt.setString(1, jTextFieldTenCoVan.getText()); // Tên cố vấn
                         pstmt.setString(2, Controller.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa)); // Mã khoa
                         pstmt.setString(3, Controller.doiGioiTinhToBool(choiceGioiTinh_Sua.getSelectedItem())); // Giới tính
-                        String thang = choiceMonth.getSelectedItem();
-                        String ngay = choiceDate.getSelectedItem();
-                        String nam = jTextFieldYear.getText();
-                        String ngaySinh = nam + "-" + ngay + "-" + thang; // Ngày sinh
+
                         pstmt.setString(4, ngaySinh);
                         pstmt.setString(5, jTextFieldSdt.getText()); // Số điện thoại
                         //pstmt.setString(6, ""); // Email (bạn chưa có trường này trong giao diện)
                         pstmt.setString(6, jTextFieldQueQuan.getText()); // Quê quán
                         pstmt.setString(7, jTextFieldDiaChi.getText()); // Địa chỉ
-                        pstmt.setString(8, dsCoVan.get(chon).getMaCV()); // Mã cố vấn
+                        pstmt.setString(8, dsCoVan.get(hub).getMaCV()); // Mã cố vấn
                         pstmt.executeUpdate();
                         
                         
@@ -506,7 +513,7 @@ public final class SuaCoVan extends javax.swing.JFrame {
                         String updatePassQuery = "UPDATE TaiKhoan SET MatKhau=? WHERE TenTK=?";
                         PreparedStatement pstmtPass = con.prepareStatement(updatePassQuery);
                         pstmtPass.setString(1, password); // Mật khẩu
-                        pstmtPass.setString(2, dsCoVan.get(chon).getMaCV()); // Tên tài khoản (Mã cố vấn)
+                        pstmtPass.setString(2, dsCoVan.get(hub).getMaCV()); // Tên tài khoản (Mã cố vấn)
                         pstmtPass.executeUpdate();
                         
                     }

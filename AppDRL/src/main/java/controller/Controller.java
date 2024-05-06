@@ -69,7 +69,7 @@ public class Controller {
                     }
                 }
                 
-                mk = changePass(mk);
+                //mk = changePass(mk);
 
                 // Tạo đối tượng Khoa và thêm vào ArrayList
                 khoa.add(new Khoa(maKhoa, tenKhoa, ngayThanhLap, mk));
@@ -125,7 +125,7 @@ public class Controller {
                     }
                 }
                 
-                mk = changePass(mk);
+                
 
                 // Tạo đối tượng Khoa và thêm vào ArrayList
                 coVan.add(new CoVan(maCV, tenCV, khoa, gioiTinh, ngaySinh, sdt, email, queQuan, diaChi, mk));
