@@ -308,6 +308,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         suKienMenu();
     }
     
+    //covan
     public FormQuanLy(ArrayList dsKhoa) {
         this.dsKhoa = dsKhoa;
         initComponents();
