@@ -32,8 +32,7 @@ public final class SuaKhoa extends javax.swing.JFrame {
     
     public void edit(){
         setLocationRelativeTo(null);
-       
-        
+      
         khoa = dsKhoa.get(chon);
          String[] parts = khoa.getNgayThanhLap().split("-");
         String year = parts[0];
