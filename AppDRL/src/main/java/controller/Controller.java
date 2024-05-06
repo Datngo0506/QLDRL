@@ -4,6 +4,7 @@
  */
 package controller;
 
+import java.awt.Choice;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import models.CoVan;
 import models.Khoa;
 
 /**
@@ -74,26 +76,160 @@ public class Controller {
             }
         } catch (SQLException e) {
             // Xử lý lỗi nếu có
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
     
-        public static void addListKhoaToTable(ArrayList<Khoa> dsKhoa, JTable tableKhoa) {
-            DefaultTableModel model = (DefaultTableModel) tableKhoa.getModel();
+    public static void addListKhoaToTable(ArrayList<Khoa> dsKhoa, JTable tableKhoa) {
+        DefaultTableModel model = (DefaultTableModel) tableKhoa.getModel();
 
-            // Xóa dữ liệu cũ trong bảng
-            model.setRowCount(0);
+        // Xóa dữ liệu cũ trong bảng
+        model.setRowCount(0);
 
-            // Duyệt qua danh sách các khoa và thêm vào bảng
-            for (int i = 0; i < dsKhoa.size(); i++) {
-                Khoa khoa = dsKhoa.get(i);
-                Object[] row = {khoa.getMaKhoa(), khoa.getTenKhoa(), khoa.getNgayThanhLap(), khoa.getMaKhoa() ,khoa.getMk()};
-                model.addRow(row);
+        // Duyệt qua danh sách các khoa và thêm vào bảng
+        for (int i = 0; i < dsKhoa.size(); i++) {
+            Khoa khoa = dsKhoa.get(i);
+            Object[] row = {khoa.getMaKhoa(), khoa.getTenKhoa(), khoa.getNgayThanhLap(), khoa.getMaKhoa() ,Controller.changePass(khoa.getMk())};
+            model.addRow(row);
+        }
+    }
+    
+    
+    public static void addCoVanToList(ArrayList<CoVan> coVan) {
+        if (!coVan.isEmpty()) {
+            coVan.clear();
+        }
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM CoVan")) {
+
+            // Lặp qua kết quả từ câu truy vấn
+            while (resultSet.next()) {
+                // Đọc dữ liệu từ ResultSet
+                String maCV = resultSet.getString("MaCoVan");
+                String tenCV = resultSet.getString("TenCoVan");
+                String khoa = resultSet.getString("Khoa");
+                String gioiTinh = resultSet.getBoolean("GioiTinh") ? "true" : "false";
+                String ngaySinh = resultSet.getDate("NgaySinh").toString(); // Chuyển ngày thành lập về dạng String
+                String sdt = resultSet.getString("Sdt");
+                String email = resultSet.getString("Email");
+                String queQuan = resultSet.getString("QueQuan");
+                String diaChi = resultSet.getString("DiaCHi");
+                String mk = ""; // Mật khẩu mặc định nếu không tìm thấy
+                try (PreparedStatement ps = connection.prepareStatement("SELECT MatKhau FROM TaiKhoan WHERE TenTK = ?")) {
+                    ps.setString(1, maCV);
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            mk = rs.getString("MatKhau");
+                        }
+                    }
+                }
+                
+                mk = changePass(mk);
+
+                // Tạo đối tượng Khoa và thêm vào ArrayList
+                coVan.add(new CoVan(maCV, tenCV, khoa, gioiTinh, ngaySinh, sdt, email, queQuan, diaChi, mk));
+            }
+        } catch (SQLException e) {
+            // Xử lý lỗi nếu có
+            //e.printStackTrace();
+        }
+    }
+    
+    public static String doiBoolToGioiTinh(String text){
+        if(text.equals("true")){
+            return "Nam";
+        }
+        else{
+            return "Nữ";
+        }
+    }
+    
+    public static String doiGioiTinhToBool(String text){
+        if(text.equals("Nam")){
+            return "true";
+        }
+        else{
+            return "false";
+        }
+    }
+    
+    public static String doiMaKhoaThanhTenKhoa(String ma, ArrayList<Khoa> dsKhoa){
+        for(int i=0; i<dsKhoa.size(); i++){
+            if(dsKhoa.get(i).getMaKhoa().equals(ma)){
+                return dsKhoa.get(i).getTenKhoa();
             }
         }
+        return "";
+    }
+    
+    public static String doiTenKhoaThanhMaKhoa(String ten, ArrayList<Khoa> dsKhoa){
+        for(int i=0; i<dsKhoa.size(); i++){
+            if(dsKhoa.get(i).getTenKhoa().equals(ten)){
+                return dsKhoa.get(i).getMaKhoa();
+            }
+        }
+        return "";
+    }
+    
+    public static void addChoiceMonths(Choice ch){
+        for(int i=1; i<=12; i++){
+            ch.add(""+i);
+        }
+    }
+    
+    public static void addChoiceDay(Choice ch, int day){
+        for(int i=1; i<=day; i++){
+            ch.add(""+i);
+        }
+    }
+    
+    
 
+    public static void addListCoVanToTable(ArrayList<CoVan> dsCoVan, JTable tableCoVan, ArrayList<Khoa> dsKhoa) {
+        DefaultTableModel model = (DefaultTableModel) tableCoVan.getModel();
 
+        // Xóa dữ liệu cũ trong bảng
+        model.setRowCount(0);
+        
 
+        // Duyệt qua danh sách các khoa và thêm vào bảng
+        for (int i = 0; i < dsCoVan.size(); i++) {
+            CoVan cv = dsCoVan.get(i);
+
+            Object[] row = {cv.getMaCV(), cv.getTenCV(), cv.getEmail(), doiMaKhoaThanhTenKhoa(cv.getKhoa(), dsKhoa) ,changePass(cv.getMk())};
+            model.addRow(row);
+        }
+    }
+    
+    public static void addListCoVanToTable_MaKhoa(ArrayList<CoVan> dsCoVan, JTable tableCoVan, ArrayList<Khoa> dsKhoa, String maKhoa) {
+        DefaultTableModel model = (DefaultTableModel) tableCoVan.getModel();
+
+        // Xóa dữ liệu cũ trong bảng
+        model.setRowCount(0);
+        
+
+        // Duyệt qua danh sách các khoa và thêm vào bảng
+        for (int i = 0; i < dsCoVan.size(); i++) {
+            if(dsCoVan.get(i).getKhoa().equals(maKhoa)){
+                CoVan cv = dsCoVan.get(i);
+
+                Object[] row = {cv.getMaCV(), cv.getTenCV(), cv.getEmail(), doiMaKhoaThanhTenKhoa(cv.getKhoa(), dsKhoa) ,changePass(cv.getMk())};
+                model.addRow(row);
+            }            
+        }
+    }
+    
+    public static void addChoiceKhoa(Choice choice, ArrayList <Khoa> dsKhoa){
+        
+        choice.removeAll();
+        choice.add("Tất cả");
+        for(int i=0; i<dsKhoa.size(); i++){
+            choice.add(dsKhoa.get(i).getTenKhoa());
+        }
+
+        
+    }
     
     public static boolean kiemTraDangNhap(String user, String pass){
         boolean isValid = false;

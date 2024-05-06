@@ -30,10 +30,24 @@ public final class SuaKhoa extends javax.swing.JFrame {
     
     public void edit(){
         setLocationRelativeTo(null);
+       
+        
         khoa = dsKhoa.get(chon);
+         String[] parts = khoa.getNgayThanhLap().split("-");
+        String year = parts[0];
+        String month = parts[1];
+        String day = parts[2];
         jTextFieldMaKhoa.setText(khoa.getMaKhoa());
         jTextFieldTenKhoa.setText(khoa.getTenKhoa());
-        jTextFieldNgay.setText(khoa.getNgayThanhLap());
+        jTextFieldYear.setText(year);
+        Controller.addChoiceMonths(choiceMonth);
+        Controller.addChoiceDay(choiceDate, 31);
+        int m = Integer.parseInt(month);
+        month = Integer.toString(m);
+        choiceMonth.select(month);
+        int d = Integer.parseInt(day);
+        day = Integer.toString(d);
+        choiceDate.select(day);
         jTextFieldTenDangNhap.setText(khoa.getMaKhoa());
         //jPasswordFieldPass.set
     }
@@ -63,7 +77,6 @@ public final class SuaKhoa extends javax.swing.JFrame {
         jLabelTitle = new javax.swing.JLabel();
         jTextFieldMaKhoa = new javax.swing.JTextField();
         jTextFieldTenKhoa = new javax.swing.JTextField();
-        jTextFieldNgay = new javax.swing.JTextField();
         jTextFieldTenDangNhap = new javax.swing.JTextField();
         jPasswordFieldPass = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
@@ -72,6 +85,12 @@ public final class SuaKhoa extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabelSubmit = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldYear = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        choiceMonth = new java.awt.Choice();
+        jLabel8 = new javax.swing.JLabel();
+        choiceDate = new java.awt.Choice();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -85,12 +104,6 @@ public final class SuaKhoa extends javax.swing.JFrame {
         jTextFieldMaKhoa.setEditable(false);
         jTextFieldMaKhoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextFieldMaKhoa.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        jTextFieldNgay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNgayActionPerformed(evt);
-            }
-        });
 
         jTextFieldTenDangNhap.setEditable(false);
 
@@ -119,25 +132,83 @@ public final class SuaKhoa extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel1.setText("Nhập năm ( 4 chữ số )");
+
+        jTextFieldYear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jTextFieldYearMouseExited(evt);
+            }
+        });
+
+        jLabel7.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel7.setText("Chọn tháng");
+
+        choiceMonth.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        choiceMonth.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        choiceMonth.setPreferredSize(new java.awt.Dimension(28, 50));
+        choiceMonth.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                choiceMonthMouseExited(evt);
+            }
+        });
+        choiceMonth.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                choiceMonthItemStateChanged(evt);
+            }
+        });
+
+        jLabel8.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel8.setText("Chọn ngày");
+
+        choiceDate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        choiceDate.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        choiceDate.setPreferredSize(new java.awt.Dimension(28, 50));
+        choiceDate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                choiceDateMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                choiceDateMouseEntered(evt);
+            }
+        });
+        choiceDate.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                choiceDateItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
         jPanelMain.setLayout(jPanelMainLayout);
         jPanelMainLayout.setHorizontalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createSequentialGroup()
+            .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPasswordFieldPass)
-                    .addComponent(jTextFieldNgay)
-                    .addComponent(jTextFieldTenKhoa)
-                    .addComponent(jTextFieldMaKhoa)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextFieldTenDangNhap, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelSubmit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPasswordFieldPass, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldTenKhoa, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldMaKhoa, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextFieldTenDangNhap)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanelMainLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldYear, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanelMainLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(choiceMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(choiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanelMainLayout.setVerticalGroup(
@@ -155,19 +226,27 @@ public final class SuaKhoa extends javax.swing.JFrame {
                 .addComponent(jTextFieldTenKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addGap(14, 14, 14)
-                .addComponent(jTextFieldNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldYear, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(choiceMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(choiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPasswordFieldPass, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabelSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -180,65 +259,158 @@ public final class SuaKhoa extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextFieldNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNgayActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNgayActionPerformed
 
     private void jLabelSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSubmitMouseClicked
         // TODO add your handling code here:
         char[] passwordChars = jPasswordFieldPass.getPassword();
             // Chuyển mật khẩu thành chuỗi String
             String password = new String(passwordChars);
-        if(jTextFieldTenKhoa.getText().equals("") || jTextFieldNgay.getText().equals("") || password.equals("")){
+        if((((jTextFieldTenKhoa.getText().equals("") || jTextFieldYear.getText().equals("")) || password.equals("")) || choiceDate.getSelectedItem().equals(""))||choiceMonth.getSelectedItem().equals("")){
             JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập đầy đủ thông tin!");
         }
         else{
             int sua = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn sửa thông tin không?");
             if(sua == JOptionPane.YES_OPTION){
+                String thang = choiceMonth.getSelectedItem();
+                if(thang.length()<2) thang = "0" + thang;
+                String ngay = choiceDate.getSelectedItem();
+                if(ngay.length()<2) ngay = "0" + ngay;
+                String rs = jTextFieldYear.getText()+"-"+ngay+"-"+thang;
                 dsKhoa.get(chon).setTenKhoa(jTextFieldTenKhoa.getText());
-                dsKhoa.get(chon).setNgayThanhLap(jTextFieldNgay.getText());
+                dsKhoa.get(chon).setNgayThanhLap(rs);
                 dsKhoa.get(chon).setMk(password);
                 table.setValueAt(jTextFieldTenKhoa.getText(), chon , 1);
-                table.setValueAt(jTextFieldNgay.getText(), chon , 2);
+                table.setValueAt(rs, chon , 2);
                 table.setValueAt(Controller.changePass(password), chon, 4);
                 try {
-                // Tạo kết nối tới cơ sở dữ liệu
-                    Connection con = Controller.getConnection();
-
-                // Cập nhật thông tin trong bảng Khoa
-                String updateQuery = "UPDATE Khoa SET TenKhoa=?, NgayThanhLap=? WHERE MaKhoa=?";
-                PreparedStatement pstmt = con.prepareStatement(updateQuery);
-                pstmt.setString(1, jTextFieldTenKhoa.getText());
-                pstmt.setString(2, jTextFieldNgay.getText());
-                pstmt.setString(3, dsKhoa.get(chon).getMaKhoa());
-                pstmt.executeUpdate();
-
-                // Cập nhật mật khẩu trong bảng TaiKhoan
-                String updatePassQuery = "UPDATE TaiKhoan SET MatKhau=? WHERE TenTK=?";
-                PreparedStatement pstmtPass = con.prepareStatement(updatePassQuery);
-                pstmtPass.setString(1, password);
-                pstmtPass.setString(2, dsKhoa.get(chon).getMaKhoa());
-                pstmtPass.executeUpdate();
-
-                con.close();
-            } catch (SQLException ex) {
-                // Xử lý ngoại lệ nếu có lỗi xảy ra khi thực hiện truy vấn SQL
-                ex.printStackTrace();
-            }
-
+                    // Cập nhật thông tin trong bảng Khoa
+                    try ( // Tạo kết nối tới cơ sở dữ liệu
+                            Connection con = Controller.getConnection()) {
+                        // Cập nhật thông tin trong bảng Khoa
+                        String updateQuery = "UPDATE Khoa SET TenKhoa=?, NgayThanhLap=? WHERE MaKhoa=?";
+                        PreparedStatement pstmt = con.prepareStatement(updateQuery);
+                        pstmt.setString(1, jTextFieldTenKhoa.getText());
+                        pstmt.setString(2, rs);
+                        pstmt.setString(3, dsKhoa.get(chon).getMaKhoa());
+                        pstmt.executeUpdate();
+                        
+                        // Cập nhật mật khẩu trong bảng TaiKhoan
+                        String updatePassQuery = "UPDATE TaiKhoan SET MatKhau=? WHERE TenTK=?";
+                        PreparedStatement pstmtPass = con.prepareStatement(updatePassQuery);
+                        pstmtPass.setString(1, password);
+                        pstmtPass.setString(2, dsKhoa.get(chon).getMaKhoa());
+                        pstmtPass.executeUpdate();
+                    }
+                } catch (SQLException ex) {
+                    // Xử lý ngoại lệ nếu có lỗi xảy ra khi thực hiện truy vấn SQL
+                    // ex.printStackTrace();
+                }
+                
                 this.setVisible(false);
             }
             else if(sua == JOptionPane.NO_OPTION){
                 this.setVisible(false);
             }
         }
+        System.out.println(dsKhoa.get(chon).getTenKhoa());
     }//GEN-LAST:event_jLabelSubmitMouseClicked
+
+    private void jTextFieldYearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldYearMouseExited
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jTextFieldYearMouseExited
+
+    private void choiceMonthMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_choiceMonthMouseExited
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_choiceMonthMouseExited
+
+    private void choiceMonthItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceMonthItemStateChanged
+        String year = jTextFieldYear.getText();
+
+        //choiceDate.removeAll();
+        if(year.equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập năm!");
+            choiceMonth.select("1");
+            choiceDate.select("1");
+        }
+        else if(year.length()!=4 || Integer.parseInt(year) <= 0){
+            JOptionPane.showMessageDialog(rootPane, "Năm không đúng định dạng!");
+            choiceMonth.select("1");
+            choiceDate.select("1");
+        }
+        else{
+            String thang = choiceMonth.getSelectedItem();
+            choiceDate.removeAll();
+            switch (thang) {
+
+                case "1", "3", "5", "7", "8", "10", "12" -> Controller.addChoiceDay(choiceDate, 31);
+                case "4", "6", "9", "11" -> Controller.addChoiceDay(choiceDate, 30);
+                default -> {
+                    if(Integer.parseInt(year)%2024==0){
+                        Controller.addChoiceDay(choiceDate, 29);
+                    }
+                    else{
+                        Controller.addChoiceDay(choiceDate, 28);
+                    }
+                }
+            }
+        }
+
+    }//GEN-LAST:event_choiceMonthItemStateChanged
+
+    private void choiceDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_choiceDateMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_choiceDateMouseClicked
+
+    private void choiceDateMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_choiceDateMouseEntered
+
+    }//GEN-LAST:event_choiceDateMouseEntered
+
+    private void choiceDateItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceDateItemStateChanged
+        // TODO add your handling code here:
+        //        String year = jTextFieldYear.getSelectedText();
+        //        if(year.equals("")){
+            //            JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập năm!");
+            //        }
+        //        else if(year.length()!=4 || Integer.parseInt(year) <= 0){
+            //            JOptionPane.showMessageDialog(rootPane, "Năm không đúng định dạng!");
+            //        }
+        //        else{
+            //            String thang = choiceMonth.getSelectedItem();
+            //            switch (thang) {
+                //                case "Tháng 1", "Tháng 3", "Tháng 5", "Tháng 7", "Tháng 8", "Tháng 10", "Tháng 12" -> Controller.addChoiceDay(choiceDate, 31);
+                //                case "Tháng 4", "Tháng 6", "Tháng 9", "Tháng 11" -> Controller.addChoiceDay(choiceDate, 30);
+                //                default -> {
+                    //                    if(Integer.parseInt(year)%2024==0){
+                        //                        Controller.addChoiceDay(choiceDate, 29);
+                        //                    }
+                    //                    else{
+                        //                        Controller.addChoiceDay(choiceDate, 28);
+                        //                    }
+                    //                }
+                //            }
+            //        }
+        String year = jTextFieldYear.getText();
+
+        //choiceDate.removeAll();
+        if(year.equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập năm!");
+            choiceMonth.select("1");
+            choiceDate.select("1");
+        }
+        else if(year.length()!=4 || Integer.parseInt(year) <= 0){
+            JOptionPane.showMessageDialog(rootPane, "Năm không đúng định dạng!");
+            choiceMonth.select("1");
+            choiceDate.select("1");
+        }
+    }//GEN-LAST:event_choiceDateItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -276,18 +448,23 @@ public final class SuaKhoa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Choice choiceDate;
+    private java.awt.Choice choiceMonth;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelSubmit;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPasswordField jPasswordFieldPass;
     private javax.swing.JTextField jTextFieldMaKhoa;
-    private javax.swing.JTextField jTextFieldNgay;
     private javax.swing.JTextField jTextFieldTenDangNhap;
     private javax.swing.JTextField jTextFieldTenKhoa;
+    private javax.swing.JTextField jTextFieldYear;
     // End of variables declaration//GEN-END:variables
 }

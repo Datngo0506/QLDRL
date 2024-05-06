@@ -97,11 +97,11 @@ public class Table extends JTable {
             column = columnModel.getColumn(0);
             column.setPreferredWidth((int) (getWidth() * (1.0 / totalWeight))); // Cột 1
             column = columnModel.getColumn(1);
-            column.setPreferredWidth((int) (getWidth() * (3.0 / totalWeight))); // Cột 2
+            column.setPreferredWidth((int) (getWidth() * (2.5 / totalWeight))); // Cột 2
             column = columnModel.getColumn(2);
-            column.setPreferredWidth((int) (getWidth() * (3.0 / totalWeight))); // Cột 3
+            column.setPreferredWidth((int) (getWidth() * (4.0 / totalWeight))); // Cột 3
             column = columnModel.getColumn(3);
-            column.setPreferredWidth((int) (getWidth() * (1.5 / totalWeight))); // Cột 4
+            column.setPreferredWidth((int) (getWidth() * (2.5 / totalWeight))); // Cột 4
             column = columnModel.getColumn(4);
             column.setPreferredWidth((int) (getWidth() * (1.5 / totalWeight))); // Cột 5
         }

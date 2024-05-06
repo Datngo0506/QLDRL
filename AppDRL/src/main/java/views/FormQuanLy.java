@@ -24,6 +24,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import models.CoVan;
 import models.Khoa;
 
 /**
@@ -41,6 +42,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
 /**
      * Creates new form FormSinhVien
      */ private ArrayList <Khoa> dsKhoa = null;
+        private ArrayList <CoVan> dsCoVan = null;
         private final static Color textColor = new Color(0, 0, 139);
         private final static Color white = Color.WHITE;
         private final static Color hoveColor = new Color(255,204,102);//màu đậm
@@ -245,11 +247,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         ClickMenuEvent(jPanelTieuChi, jLabelTieuChi, jLabelLeft6, jPanelTieuChiMain, jPanelKhoaMain, jPanelHocKyMain, jPanelLopMain, jPanelCoVanMain, jPanelTaiKhoanMain, jPanelSinhVienMain);
         ClickMenuEvent(jPanelSinhVien, jLabelSinhVien, jLabelLeft7, jPanelSinhVienMain, jPanelKhoaMain, jPanelHocKyMain, jPanelLopMain, jPanelCoVanMain, jPanelTieuChiMain, jPanelTaiKhoanMain);
         
-        //thêm vào các choice
-        choiceKhoa1.add("CNTT2");
-        choiceKhoa1.add("Viễn Thông");
-        choiceKhoa1.add("Đa phương tiện");
-        choiceKhoa1.add("Marketing");
+        
         
         choiceKhoa2.add("CNTT2");
         choiceKhoa2.add("Viễn Thông");
@@ -309,13 +307,14 @@ public final class FormQuanLy extends javax.swing.JFrame {
     }
     
     //covan
-    public FormQuanLy(ArrayList dsKhoa) {
+    public FormQuanLy(ArrayList <Khoa>dsKhoa, ArrayList <CoVan>dsCoVan) {
         this.dsKhoa = dsKhoa;
+        this.dsCoVan = dsCoVan;
         initComponents();
         suKienMenu();
     }
     
-    //Xử lý các sự kiện clic
+    //Xử lý các sự kiện click
     public void ClickEvent(JPanel main1, JLabel main2, JLabel main3, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7){
         
         main1.addMouseListener(new MouseAdapter() {
@@ -349,6 +348,10 @@ public final class FormQuanLy extends javax.swing.JFrame {
     public void addTable(String text){
         if(text.contains("KHOA")){
             Controller.addListKhoaToTable(dsKhoa, jTableKhoa);
+        }
+        else if (text.contains("CỐ VẤN")){
+            Controller.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa);
+            Controller.addChoiceKhoa(choiceKhoa_CoVan, dsKhoa);
         }
     }
     
@@ -582,7 +585,6 @@ public final class FormQuanLy extends javax.swing.JFrame {
         jLabelFb = new javax.swing.JLabel();
         jLayeredPaneMain = new javax.swing.JLayeredPane();
         jPanelHocKyMain = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         jPanelThanhTieuDeKhoa1 = new javax.swing.JPanel();
         jPanelNutTieuDeKhoa1 = RoundedPanel.createRoundedPanel();
         jLabelNutTieuDeKhoa1 = new javax.swing.JLabel();
@@ -621,10 +623,6 @@ public final class FormQuanLy extends javax.swing.JFrame {
         jPanelNutThem1 = RoundedPanel.createRoundedPanel();
         jLabelNutThem1 = new javax.swing.JLabel();
         jPanelCoVanMain = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jPanelChoice1 = new javax.swing.JPanel();
-        jLabelChon1 = new javax.swing.JLabel();
-        choiceKhoa1 = new java.awt.Choice();
         jPanelThanhTieuDeKhoa3 = new javax.swing.JPanel();
         jPanelNutTieuDeKhoa3 = RoundedPanel.createRoundedPanel();
         jLabelNutTieuDeKhoa3 = new javax.swing.JLabel();
@@ -634,6 +632,12 @@ public final class FormQuanLy extends javax.swing.JFrame {
         jLabelNutSua5 = new javax.swing.JLabel();
         jPanelNutThem5 = RoundedPanel.createRoundedPanel();
         jLabelNutThem5 = new javax.swing.JLabel();
+        jPanelTableCoVan = new com.raven.swing.PanelBorder();
+        jLabelTableTitleCoVan = new javax.swing.JLabel();
+        jScrollPaneCoVan = new javax.swing.JScrollPane();
+        jTableCoVan = new com.raven.swing.Table();
+        choiceKhoa_CoVan = new java.awt.Choice();
+        jLabelChon1 = new javax.swing.JLabel();
         jPanelLopMain = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jPanelChoice2 = new javax.swing.JPanel();
@@ -1142,10 +1146,6 @@ jPanelHocKyMain.setRequestFocusEnabled(false);
 jPanelHocKyMain.setVerifyInputWhenFocusTarget(false);
 jPanelHocKyMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-jLabel7.setText("(Bảng danh sách các học kỳ)");
-jPanelHocKyMain.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 54, 772, 560));
-
 jPanelThanhTieuDeKhoa1.setPreferredSize(new java.awt.Dimension(770, 34));
 
 jPanelNutTieuDeKhoa1.setBackground(new java.awt.Color(221, 51, 51));
@@ -1612,46 +1612,10 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
 
     jLayeredPaneMain.add(jPanelTieuChiMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 804, 612));
 
-    jPanelCoVanMain.setBackground(new java.awt.Color(255, 255, 255));
     jPanelCoVanMain.setPreferredSize(new java.awt.Dimension(645, 461));
     jPanelCoVanMain.setRequestFocusEnabled(false);
     jPanelCoVanMain.setVerifyInputWhenFocusTarget(false);
     jPanelCoVanMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-    jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    jLabel4.setText("(Bảng danh sách các cố vấn thuộc khoa được chọn)");
-    jPanelCoVanMain.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 85, 764, 370));
-
-    jPanelChoice1.setBackground(new java.awt.Color(255, 255, 255));
-
-    jLabelChon1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-    jLabelChon1.setText("Chọn khoa:");
-
-    choiceKhoa1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    choiceKhoa1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-    choiceKhoa1.setPreferredSize(new java.awt.Dimension(28, 50));
-
-    javax.swing.GroupLayout jPanelChoice1Layout = new javax.swing.GroupLayout(jPanelChoice1);
-    jPanelChoice1.setLayout(jPanelChoice1Layout);
-    jPanelChoice1Layout.setHorizontalGroup(
-        jPanelChoice1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanelChoice1Layout.createSequentialGroup()
-            .addGap(39, 39, 39)
-            .addComponent(jLabelChon1)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(choiceKhoa1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-    );
-    jPanelChoice1Layout.setVerticalGroup(
-        jPanelChoice1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanelChoice1Layout.createSequentialGroup()
-            .addGroup(jPanelChoice1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(choiceKhoa1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jLabelChon1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(0, 14, Short.MAX_VALUE))
-    );
-
-    jPanelCoVanMain.add(jPanelChoice1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 52, 764, -1));
 
     jPanelThanhTieuDeKhoa3.setPreferredSize(new java.awt.Dimension(770, 34));
 
@@ -1710,6 +1674,11 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
     jLabelNutSua5.setText("Sửa");
     jLabelNutSua5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     jLabelNutSua5.setPreferredSize(new java.awt.Dimension(32, 16));
+    jLabelNutSua5.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            jLabelNutSua5MouseClicked(evt);
+        }
+    });
 
     javax.swing.GroupLayout jPanelNutSua5Layout = new javax.swing.GroupLayout(jPanelNutSua5);
     jPanelNutSua5.setLayout(jPanelNutSua5Layout);
@@ -1769,6 +1738,77 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
     );
 
     jPanelCoVanMain.add(jPanelThanhTieuDeKhoa3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 764, 40));
+
+    jPanelTableCoVan.setBackground(new java.awt.Color(255, 255, 255));
+
+    jLabelTableTitleCoVan.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+    jLabelTableTitleCoVan.setForeground(new java.awt.Color(127, 127, 127));
+    jLabelTableTitleCoVan.setText("Danh sách các cố vấn");
+
+    jScrollPaneCoVan.setBorder(null);
+
+    jTableCoVan.setModel(new javax.swing.table.DefaultTableModel(
+        new Object [][] {
+
+        },
+        new String [] {
+            "Mã cố vấn", "Tên cố vấn", "Email", "Khoa", "Mật khẩu"
+        }
+    ) {
+        boolean[] canEdit = new boolean [] {
+            false, false, false, false, false
+        };
+
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return canEdit [columnIndex];
+        }
+    });
+    jTableCoVan.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+    jTableCoVan.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    jScrollPaneCoVan.setViewportView(jTableCoVan);
+
+    choiceKhoa_CoVan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    choiceKhoa_CoVan.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+    choiceKhoa_CoVan.setPreferredSize(new java.awt.Dimension(28, 50));
+    choiceKhoa_CoVan.addItemListener(new java.awt.event.ItemListener() {
+        public void itemStateChanged(java.awt.event.ItemEvent evt) {
+            choiceKhoa_CoVanItemStateChanged(evt);
+        }
+    });
+
+    jLabelChon1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+    jLabelChon1.setText("Chọn khoa:");
+
+    javax.swing.GroupLayout jPanelTableCoVanLayout = new javax.swing.GroupLayout(jPanelTableCoVan);
+    jPanelTableCoVan.setLayout(jPanelTableCoVanLayout);
+    jPanelTableCoVanLayout.setHorizontalGroup(
+        jPanelTableCoVanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanelTableCoVanLayout.createSequentialGroup()
+            .addGap(20, 20, 20)
+            .addGroup(jPanelTableCoVanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(jScrollPaneCoVan, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelTableCoVanLayout.createSequentialGroup()
+                    .addComponent(jLabelTableTitleCoVan)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelChon1)
+                    .addGap(2, 2, 2)
+                    .addComponent(choiceKhoa_CoVan, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addContainerGap(17, Short.MAX_VALUE))
+    );
+    jPanelTableCoVanLayout.setVerticalGroup(
+        jPanelTableCoVanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanelTableCoVanLayout.createSequentialGroup()
+            .addGap(15, 15, 15)
+            .addGroup(jPanelTableCoVanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jLabelTableTitleCoVan)
+                .addComponent(choiceKhoa_CoVan, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelChon1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jScrollPaneCoVan, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
+
+    jPanelCoVanMain.add(jPanelTableCoVan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 760, 540));
 
     jLayeredPaneMain.add(jPanelCoVanMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 804, 612));
 
@@ -2499,6 +2539,29 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
         new ThemKhoa(dsKhoa, jTableKhoa).setVisible(true);
     }//GEN-LAST:event_jLabelNutThemMouseClicked
 
+    private void choiceKhoa_CoVanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceKhoa_CoVanItemStateChanged
+        // TODO add your handling code here:
+        String maKhoa = Controller.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa);
+        if(maKhoa.equals("")){
+            Controller.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa);
+        }
+        else{
+            Controller.addListCoVanToTable_MaKhoa(dsCoVan, jTableCoVan, dsKhoa, maKhoa);
+        }
+        
+    }//GEN-LAST:event_choiceKhoa_CoVanItemStateChanged
+
+    private void jLabelNutSua5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutSua5MouseClicked
+        // TODO add your handling code here:
+        int chon = jTableCoVan.getSelectedRow();
+        if(chon == -1){
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn hàng cần sửa!");
+        }
+        else{
+            new SuaCoVan(dsKhoa, jTableCoVan, chon, dsCoVan, choiceKhoa_CoVan).setVisible(true);
+        }
+    }//GEN-LAST:event_jLabelNutSua5MouseClicked
+
     
 
     /**
@@ -2538,15 +2601,13 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Choice choiceKhoa1;
     private java.awt.Choice choiceKhoa2;
     private java.awt.Choice choiceKhoa3;
     private java.awt.Choice choiceKhoa4;
     private java.awt.Choice choiceKhoa5;
-    private javax.swing.JLabel jLabel4;
+    private java.awt.Choice choiceKhoa_CoVan;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelChon1;
@@ -2612,6 +2673,7 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
     private javax.swing.JLabel jLabelNutXoa6;
     private javax.swing.JLabel jLabelSinhVien;
     private javax.swing.JLabel jLabelSuaThongTin;
+    private javax.swing.JLabel jLabelTableTitleCoVan;
     private javax.swing.JLabel jLabelTableTitleKhoa;
     private javax.swing.JLabel jLabelTaiKhoan;
     private javax.swing.JLabel jLabelTenDangNhap;
@@ -2636,7 +2698,6 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
     private javax.swing.JLabel jLabelTitile1;
     private javax.swing.JLabel jLabelpanelPtit;
     private javax.swing.JLayeredPane jLayeredPaneMain;
-    private javax.swing.JPanel jPanelChoice1;
     private javax.swing.JPanel jPanelChoice2;
     private javax.swing.JPanel jPanelChoice3;
     private javax.swing.JPanel jPanelChoice4;
@@ -2687,6 +2748,7 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
     private javax.swing.JPanel jPanelSinhVien;
     private javax.swing.JPanel jPanelSinhVienMain;
     private javax.swing.JPanel jPanelSuaTT;
+    private com.raven.swing.PanelBorder jPanelTableCoVan;
     private javax.swing.JPanel jPanelTaiKhoan;
     private javax.swing.JPanel jPanelTaiKhoanMain;
     private javax.swing.JPanel jPanelThanhTieuDe;
@@ -2703,7 +2765,9 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
     private javax.swing.JPanel jPanelTitleColor1;
     private javax.swing.JPanel jPanelView;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JScrollPane jScrollPaneCoVan;
     private javax.swing.JScrollPane jScrollPaneKhoa;
+    private com.raven.swing.Table jTableCoVan;
     private com.raven.swing.Table jTableKhoa;
     private com.raven.swing.PanelBorder panelBorderTableKhoa;
     // End of variables declaration//GEN-END:variables
