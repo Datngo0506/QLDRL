@@ -16,6 +16,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -103,7 +105,17 @@ public final class FormSinhVien extends javax.swing.JFrame {
     public void suKienMenu(){
         setLocationRelativeTo(null);
         
+        DefaultTableModel model = new DefaultTableModel(
+                new Object[][]{{"Họ"}, {"Tên"}, {"MSSV"}, {"Học Kỳ"}, {"Niên Khóa"}, {"Só điểm"}},
+                new Object[]{"Column 1"}) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Chỉ định rằng cột 1 không thể chỉnh sửa
+                return column != 0; // Cột 1 không thể chỉnh sửa
+            }
+        };
         
+        //tblChiTietPhieu = new JTable(model);
         //Kích vào menu nào thì đó hiện màu vàng đậm
        ClickEvent(jPanelTaiKhoan, jLabelTaiKhoan, jLabelLeft1, jPanelChamDiem);
        ClickEvent(jPanelChamDiem, jLabelChamDiem, jLabelLeft2, jPanelTaiKhoan);
@@ -324,6 +336,8 @@ public final class FormSinhVien extends javax.swing.JFrame {
         jLabelNutTieuDe = new javax.swing.JLabel();
         jPanelNutChamDiem = RoundedPanel.createRoundedPanel();
         jLabelNutChamDiem = new javax.swing.JLabel();
+        panelBorder1 = new com.raven.swing.PanelBorder();
+        jLabel1 = new javax.swing.JLabel();
         jPanelTaiKhoanMain = new javax.swing.JPanel();
         jPanelTitle1 = RoundedPanel.createRoundedPanel();
         jPanelTitleColor = RoundedPanel.createRoundedPanel();
@@ -502,11 +516,12 @@ jPanelChoiceHKLayout.setHorizontalGroup(
             .addGroup(jPanelChoiceHKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(choiceHK, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jLabelChon, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(0, 14, Short.MAX_VALUE))
+            .addContainerGap(529, Short.MAX_VALUE))
     );
 
     jPanelDRLMain.add(jPanelChoiceHK, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 764, -1));
 
+    jPanelThanhTieuDe.setBackground(new java.awt.Color(255, 255, 255));
     jPanelThanhTieuDe.setPreferredSize(new java.awt.Dimension(770, 34));
 
     jPanelNutTieuDe.setBackground(new java.awt.Color(221, 51, 51));
@@ -572,6 +587,31 @@ jPanelChoiceHKLayout.setHorizontalGroup(
     );
 
     jPanelDRLMain.add(jPanelThanhTieuDe, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 764, 40));
+
+    panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+
+    jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+    jLabel1.setForeground(new java.awt.Color(127, 127, 127));
+    jLabel1.setText("Standard Table Design");
+
+    javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
+    panelBorder1.setLayout(panelBorder1Layout);
+    panelBorder1Layout.setHorizontalGroup(
+        panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(panelBorder1Layout.createSequentialGroup()
+            .addGap(20, 20, 20)
+            .addComponent(jLabel1)
+            .addContainerGap(263, Short.MAX_VALUE))
+    );
+    panelBorder1Layout.setVerticalGroup(
+        panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(panelBorder1Layout.createSequentialGroup()
+            .addGap(20, 20, 20)
+            .addComponent(jLabel1)
+            .addContainerGap(305, Short.MAX_VALUE))
+    );
+
+    jPanelDRLMain.add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
     jLayeredPaneMain.add(jPanelDRLMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 804, 612));
 
@@ -1213,6 +1253,7 @@ jPanelChoiceHKLayout.setHorizontalGroup(
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Choice choiceHK;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelChamDiem;
     private javax.swing.JLabel jLabelChon;
@@ -1293,5 +1334,6 @@ jPanelChoiceHKLayout.setHorizontalGroup(
     private javax.swing.JPanel jPanelTitleColor1;
     private javax.swing.JPanel jPanelView;
     private javax.swing.JPasswordField jPasswordField1;
+    private com.raven.swing.PanelBorder panelBorder1;
     // End of variables declaration//GEN-END:variables
 }

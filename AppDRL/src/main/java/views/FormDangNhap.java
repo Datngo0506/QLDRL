@@ -4,12 +4,14 @@
  */
 package views;
 import icons.Icon;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import controller.Controller;
 
 class RoundedPanel extends JPanel {
     @Override
@@ -61,11 +63,14 @@ class RoundedPanel2 extends JPanel {
  *
  * @author Dat
  */
-public class FormDangNhap extends javax.swing.JFrame {
+public final class FormDangNhap extends javax.swing.JFrame {
 
     /**
      * Creates new form FormDangNhap
      */
+    
+    
+    
     public void suKienMenu(){
         setLocationRelativeTo(null);
         
@@ -76,6 +81,8 @@ public class FormDangNhap extends javax.swing.JFrame {
         initComponents();
         suKienMenu();
     }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -96,8 +103,6 @@ public class FormDangNhap extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         jPanelDangNhap = new javax.swing.JPanel();
         jLabelDangNhap = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng nhập");
@@ -111,7 +116,7 @@ public class FormDangNhap extends javax.swing.JFrame {
         jPanelMain.add(jLabelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 21, 390, 119));
 
         jLabelTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabelTitle.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelTitle.setForeground(new java.awt.Color(51, 51, 51));
         jLabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitle.setText("Đăng nhập");
         jPanelMain.add(jLabelTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 390, -1));
@@ -166,14 +171,6 @@ public class FormDangNhap extends javax.swing.JFrame {
 
         jPanelMain.add(jPanelDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 370, 40));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ban quản lý học viện", "Cố vấn học tập", "Ban cán sự lớp", "Sinh viên" }));
-        jComboBox1.setToolTipText("");
-        jPanelMain.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 370, 40));
-
-        jLabel1.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel1.setText("Bạn là??? (demo trước khi có tài khoản và mật khẩu)");
-        jPanelMain.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, -1, -1));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -182,7 +179,9 @@ public class FormDangNhap extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         pack();
@@ -190,24 +189,28 @@ public class FormDangNhap extends javax.swing.JFrame {
 
     private void jLabelDangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDangNhapMouseClicked
         // TODO add your handling code here:
-        if(jComboBox1.getSelectedItem().equals("Ban quản lý học viện")){
-            new FormQuanLy().setVisible(true);
-            
-        }
-        else if(jComboBox1.getSelectedItem().equals("Cố vấn học tập")){
-            new FormCoVan().setVisible(true);
-            
-        }
-        else if(jComboBox1.getSelectedItem().equals("Sinh viên")){
-            new FormSinhVien().setVisible(true);
-            
-        }
-        else if(jComboBox1.getSelectedItem().equals("Ban cán sự lớp")){
-            new FormBanCanSu().setVisible(true);
-            
+        
+        if(jTextFieldTenDN.getText().isEmpty() || jPasswordField1.getPassword().length == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập tên đăng nhập và mật khẩu!");
         }
         else{
-            JOptionPane.showMessageDialog(rootPane, "Tên đăng nhập, mật khẩu không đúng!");
+            String username = jTextFieldTenDN.getText();
+            // Lấy mật khẩu từ JPasswordField
+            char[] passwordChars = jPasswordField1.getPassword();
+            // Chuyển mật khẩu thành chuỗi String
+            String password = new String(passwordChars);
+
+            boolean isValid = Controller.kiemTraDangNhap(username, password);
+            if(isValid == true){
+                String role = Controller.getRole(username);
+                if(role.equals("admin")){
+                    new FormQuanLy().setVisible(true);
+                }
+                this.setVisible(false);
+            }
+            else{
+                JOptionPane.showMessageDialog(rootPane, "Tên đăng nhập hoặc mật khẩu không đúng!");
+            }
         }
         
     }//GEN-LAST:event_jLabelDangNhapMouseClicked
@@ -241,16 +244,12 @@ public class FormDangNhap extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FormDangNhap().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new FormDangNhap().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelDangNhap;
     private javax.swing.JLabel jLabelLogo;
     private javax.swing.JLabel jLabelMatKhau;
