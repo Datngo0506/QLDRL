@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import models.Khoa;
 import controller.Controller;
 import models.CoVan;
+import models.HocKy;
+import models.KhoaHoc;
 import views.FormDangNhap;
 import views.FormQuanLy;
 import views.FormSinhVien;
@@ -30,9 +32,16 @@ public class AppDRL {
         ArrayList<CoVan> dsCoVan = new ArrayList<>();
         // Thêm dữ liệu vào dsKhoa từ cơ sở dữ liệu
         Controller.addCoVanToList(dsCoVan);
+        
+        ArrayList<HocKy> dsHocKy = new ArrayList<>();
+        Controller.addHocKyToList(dsHocKy);
+        
+        ArrayList<KhoaHoc> dsKhoaHoc = new ArrayList<>();
+        Controller.addKhoaHocToList(dsKhoaHoc);
+        //System.out.println(dsKhoaHoc.get(1).getMaKhoaHoc());
 
         // Hiển thị giao diện người dùng với dữ liệu từ dsKhoa
-        new FormQuanLy(dsKhoa, dsCoVan).setVisible(true);
+        new FormQuanLy(dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc).setVisible(true);
     }
 
 

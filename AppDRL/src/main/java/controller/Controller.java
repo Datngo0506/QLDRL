@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import models.CoVan;
+import models.HocKy;
 import models.Khoa;
+import models.KhoaHoc;
 
 /**
  *
@@ -91,6 +93,25 @@ public class Controller {
             Khoa khoa = dsKhoa.get(i);
             Object[] row = {khoa.getMaKhoa(), khoa.getTenKhoa(), khoa.getNgayThanhLap(), khoa.getMaKhoa() ,Controller.changePass(khoa.getMk())};
             model.addRow(row);
+        }
+    }
+    
+    public static void addListHocKyToTable(ArrayList<HocKy> dsHocKy, JTable tableHocKy) {
+        DefaultTableModel model = (DefaultTableModel) tableHocKy.getModel();
+
+        // Xóa dữ liệu cũ trong bảng
+        model.setRowCount(0);
+
+        // Duyệt qua danh sách các học kỳ và thêm vào bảng
+        for (int i = 0; i < dsHocKy.size(); i++) {
+            HocKy hk = dsHocKy.get(i);
+            if (hk != null) { // Kiểm tra hk có null không
+                String parts[] = hk.getNienKhoa().split("-");
+                String x = "";
+                
+                Object[] row = {Integer.toString(i + 1), hk.getHocKy(), parts[0], parts[1], hk.getXet()};
+                model.addRow(row);
+            }
         }
     }
     
@@ -282,5 +303,94 @@ public class Controller {
         // Trả về role
         return role;
     }
+    
+    public static void addHocKyToList(ArrayList <HocKy> dsHocKy){
+        try {
+            try ( // Tạo kết nối tới cơ sở dữ liệu và thực hiện truy vấn
+                Connection con = Controller.getConnection()) {
+                String query = "SELECT * FROM HK_NK";
+                PreparedStatement pstmt = con.prepareStatement(query);
+                ResultSet rs = pstmt.executeQuery();
+                // Duyệt qua kết quả trả về và thêm vào dsHocKy
+                while (rs.next()) {
+                    String maHK_NK = rs.getString("MaHK_NK");
+                    String hocKy = rs.getString("HocKy");
+                    String nienKhoa = rs.getString("NienKhoa");
+                    boolean xet = rs.getBoolean("Xet"); // Sử dụng boolean để lưu giá trị Xet
+                    // Tạo đối tượng HocKy và thêm vào dsHocKy
+                    HocKy hk = new HocKy(maHK_NK, hocKy, nienKhoa, xet ? "Đang diễn ra" : "x");
+                    dsHocKy.add(hk);
+                }
+                // Đóng kết nối
+            }
+        } catch (SQLException ex) {
+            // Xử lý ngoại lệ nếu có lỗi xảy ra khi thực hiện truy vấn SQL
+            //ex.printStackTrace();
+        }
+    }
+    
+    public static String tangHocKy(String input) {
+        // Tách chuỗi thành các phần tử
+        String[] parts = input.split("-");
+        
+        // Lấy năm và số kỳ học
+        int year1 = Integer.parseInt(parts[0]);
+        int year2 = Integer.parseInt(parts[1]);
+        int term = Integer.parseInt(parts[2]);
+        
+        // Kiểm tra nếu kỳ học là 1 thì tăng năm thứ 2, nếu không thì tăng kỳ học
+        if (term == 1) {
+            term++;
+        } else {
+            term--;
+            year1++;
+            year2++;
+        }
+        
+        // Tạo chuỗi kết quả và trả về
+        return year1 + "-" + year2 + "-" + term;
+    }
+    
+    public static void addKhoaHocToList(ArrayList <KhoaHoc> dsKhoaHoc){
+        try {
+            try ( // Tạo kết nối tới cơ sở dữ liệu và thực hiện truy vấn
+                Connection con = Controller.getConnection()) {
+                String query = "SELECT * FROM KhoaHoc";
+                PreparedStatement pstmt = con.prepareStatement(query);
+                ResultSet rs = pstmt.executeQuery();
+                // Duyệt qua kết quả trả về và thêm vào dsHocKy
+                while (rs.next()) {
+                    String maKhoaHoc = rs.getString("MaKhoaHoc");
+                    String namBD = rs.getString("NamBD");
+                    String namKT = rs.getString("MamKT");
+                    float thoiGian = rs.getFloat("TGHoc"); 
+                    // Tạo đối tượng HocKy và thêm vào dsHocKy
+                    KhoaHoc kh = new KhoaHoc(maKhoaHoc, namBD, namKT, thoiGian);
+                    dsKhoaHoc.add(kh);
+                }
+                // Đóng kết nối
+            }
+        } catch (SQLException ex) {
+            // Xử lý ngoại lệ nếu có lỗi xảy ra khi thực hiện truy vấn SQL
+            //ex.printStackTrace();
+        }
+    }
+    
+    public static void addListKhoaHocToTable(ArrayList<KhoaHoc> dsKhoaHoc, JTable tableKhoaHoc) {
+        DefaultTableModel model = (DefaultTableModel) tableKhoaHoc.getModel();
 
+        // Xóa dữ liệu cũ trong bảng
+        model.setRowCount(0);
+
+        // Duyệt qua danh sách các học kỳ và thêm vào bảng
+        for (int i = 0; i < dsKhoaHoc.size(); i++) {
+            KhoaHoc kh = dsKhoaHoc.get(i);
+            if (kh != null) { // Kiểm tra hk có null không
+
+                Object[] row = {Integer.toString(i + 1),Float.toString(kh.getTGHoc()*2), kh.getNamBD(), kh.getMamKT(), Float.toString(kh.getTGHoc())};
+                model.addRow(row);
+            }
+        }
+    }
+    
 }
