@@ -25,7 +25,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import models.CoVan;
+import models.HocKy;
 import models.Khoa;
+import models.KhoaHoc;
 
 /**
  *
@@ -43,6 +45,8 @@ public final class FormQuanLy extends javax.swing.JFrame {
      * Creates new form FormSinhVien
      */ private ArrayList <Khoa> dsKhoa = null;
         private ArrayList <CoVan> dsCoVan = null;
+        private ArrayList <HocKy> dsHocKy = null;
+        private ArrayList <KhoaHoc> dsKhoaHoc = null;
         private final static Color textColor = new Color(0, 0, 139);
         private final static Color white = Color.WHITE;
         private final static Color hoveColor = new Color(255,204,102);//màu đậm
@@ -307,9 +311,11 @@ public final class FormQuanLy extends javax.swing.JFrame {
     }
     
     //covan
-    public FormQuanLy(ArrayList <Khoa>dsKhoa, ArrayList <CoVan>dsCoVan) {
+    public FormQuanLy(ArrayList <Khoa>dsKhoa, ArrayList <CoVan>dsCoVan, ArrayList<HocKy>dsHocKy, ArrayList<KhoaHoc>dsKhoaHoc) {
         this.dsKhoa = dsKhoa;
         this.dsCoVan = dsCoVan;
+        this.dsHocKy = dsHocKy;
+        this.dsKhoaHoc = dsKhoaHoc;
         initComponents();
         suKienMenu();
     }
