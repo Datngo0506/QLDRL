@@ -1452,12 +1452,13 @@
                         </Property>
                       </Properties>
                       <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jScrollPaneKhoa.setVerticalScrollBar(new ScrollBar());&#xa;jScrollPaneKhoa.getVerticalScrollBar().setBackground(Color.WHITE);&#xa;jScrollPaneKhoa.getViewport().setBackground(Color.WHITE);&#xa;JPanel p1 = new JPanel();&#xa;p1.setBackground(Color.WHITE);&#xa;jScrollPaneKhoa.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p1);"/>
                         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                       </AuxValues>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="com.raven.swing.Table" name="jTableKhoa">
+                        <Component class="com.raven.swing.TableCo5Cot" name="jTableKhoa">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="5" rowCount="0">
@@ -1499,10 +1500,15 @@
                               </TableColumnModel>
                             </Property>
                             <Property name="selectionMode" type="int" value="0"/>
+                            <Property name="showGrid" type="boolean" value="true"/>
+                            <Property name="showVerticalLines" type="boolean" value="false"/>
                             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
                           </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.raven.swing.TableKhoa()"/>
+                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -2177,20 +2183,21 @@
                         </Property>
                       </Properties>
                       <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jScrollPaneCoVan.setVerticalScrollBar(new ScrollBar());&#xa;jScrollPaneCoVan.getVerticalScrollBar().setBackground(Color.WHITE);&#xa;jScrollPaneCoVan.getViewport().setBackground(Color.WHITE);&#xa;JPanel p2 = new JPanel();&#xa;p2.setBackground(Color.WHITE);&#xa;jScrollPaneCoVan.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p2);"/>
                         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                       </AuxValues>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="com.raven.swing.Table" name="jTableCoVan">
+                        <Component class="com.raven.swing.TableCo5Cot" name="jTableCoVan">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="5" rowCount="0">
+                                <Column editable="false" title="STT" type="java.lang.Object"/>
                                 <Column editable="false" title="M&#xe3; c&#x1ed1; v&#x1ea5;n" type="java.lang.Object"/>
                                 <Column editable="false" title="T&#xea;n c&#x1ed1; v&#x1ea5;n" type="java.lang.Object"/>
-                                <Column editable="false" title="Email" type="java.lang.Object"/>
+                                <Column editable="false" title="Email tr&#x1b0;&#x1edd;ng c&#x1ea5;p" type="java.lang.Object"/>
                                 <Column editable="false" title="Khoa" type="java.lang.Object"/>
-                                <Column editable="false" title="M&#x1ead;t kh&#x1ea9;u" type="java.lang.Object"/>
                               </Table>
                             </Property>
                             <Property name="autoResizeMode" type="int" value="1"/>
@@ -2224,10 +2231,15 @@
                               </TableColumnModel>
                             </Property>
                             <Property name="selectionMode" type="int" value="0"/>
+                            <Property name="showGrid" type="boolean" value="true"/>
+                            <Property name="showVerticalLines" type="boolean" value="false"/>
                             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
                           </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.raven.swing.TableCoVan()"/>
+                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>

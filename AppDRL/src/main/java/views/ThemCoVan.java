@@ -434,7 +434,7 @@ public final class ThemCoVan extends javax.swing.JFrame {
                     pstmtPass.setString(2, newCoVan.getMk());
                    
                     pstmtPass.setString(4, "TK"+newCoVan.getMaCV());
-                    pstmtPass.setString(3, "CoVan"); // Đây là tài khoản của cố vấn
+                    pstmtPass.setString(3, "covan"); // Đây là tài khoản của cố vấn
                     pstmtPass.executeUpdate();
 
                     con.close(); // Đóng kết nối sau khi thêm xong

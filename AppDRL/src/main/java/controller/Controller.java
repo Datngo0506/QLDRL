@@ -218,7 +218,7 @@ public class Controller {
         for (int i = 0; i < dsCoVan.size(); i++) {
             CoVan cv = dsCoVan.get(i);
 
-            Object[] row = {cv.getMaCV(), cv.getTenCV(), cv.getEmail(), doiMaKhoaThanhTenKhoa(cv.getKhoa(), dsKhoa) ,changePass(cv.getMk())};
+            Object[] row = {Integer.toString(i+1), cv.getMaCV(), cv.getTenCV(), cv.getEmail(), doiMaKhoaThanhTenKhoa(cv.getKhoa(), dsKhoa)};
             model.addRow(row);
         }
     }
@@ -229,13 +229,13 @@ public class Controller {
         // Xóa dữ liệu cũ trong bảng
         model.setRowCount(0);
         
-
+        int k = 0;
         // Duyệt qua danh sách các khoa và thêm vào bảng
         for (int i = 0; i < dsCoVan.size(); i++) {
             if(dsCoVan.get(i).getKhoa().equals(maKhoa)){
                 CoVan cv = dsCoVan.get(i);
-
-                Object[] row = {cv.getMaCV(), cv.getTenCV(), cv.getEmail(), doiMaKhoaThanhTenKhoa(cv.getKhoa(), dsKhoa) ,changePass(cv.getMk())};
+                k++;
+                Object[] row = {Integer.toString(k), cv.getMaCV(), cv.getTenCV(), cv.getEmail(), doiMaKhoaThanhTenKhoa(cv.getKhoa(), dsKhoa)};
                 model.addRow(row);
             }            
         }

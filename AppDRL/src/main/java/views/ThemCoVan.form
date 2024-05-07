@@ -178,10 +178,8 @@
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jLabel8" pref="44" max="32767" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jTextFieldYear" alignment="0" pref="41" max="32767" attributes="0"/>
-                          <Component id="jTextFieldEmail" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jTextFieldYear" alignment="0" pref="41" max="32767" attributes="0"/>
+                      <Component id="jTextFieldEmail" alignment="0" max="32767" attributes="0"/>
                       <Component id="choiceMonth" alignment="0" pref="0" max="32767" attributes="0"/>
                       <Component id="choiceDate" alignment="1" pref="0" max="32767" attributes="0"/>
                       <Component id="jLabel9" alignment="1" max="32767" attributes="0"/>

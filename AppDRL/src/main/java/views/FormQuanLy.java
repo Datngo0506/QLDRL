@@ -14,12 +14,13 @@ import javax.swing.JFrame;
 import controller.Controller;
 import java.awt.Component;
 import java.sql.Connection;
-import java.sql.DriverManager;
+import com.raven.swing.ScrollBar;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -381,7 +382,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
                 addTable(main2.getText());
             }
         });
-
+        
         // Bắt sự kiện khi rê chuột vào jLabelLeft
         main3.addMouseListener(new MouseAdapter() {
             @Override
@@ -613,7 +614,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         panelBorderTableKhoa = new com.raven.swing.PanelBorder();
         jLabelTableTitleKhoa = new javax.swing.JLabel();
         jScrollPaneKhoa = new javax.swing.JScrollPane();
-        jTableKhoa = new com.raven.swing.Table();
+        jTableKhoa = new com.raven.swing.TableKhoa();
         jPanelTieuChiMain = new javax.swing.JPanel();
         jPanelChoice3 = new javax.swing.JPanel();
         jLabelChon3 = new javax.swing.JLabel();
@@ -641,7 +642,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         jPanelTableCoVan = new com.raven.swing.PanelBorder();
         jLabelTableTitleCoVan = new javax.swing.JLabel();
         jScrollPaneCoVan = new javax.swing.JScrollPane();
-        jTableCoVan = new com.raven.swing.Table();
+        jTableCoVan = new com.raven.swing.TableCoVan();
         choiceKhoa_CoVan = new java.awt.Choice();
         jLabelChon1 = new javax.swing.JLabel();
         jPanelLopMain = new javax.swing.JPanel();
@@ -1412,6 +1413,12 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
     jLabelTableTitleKhoa.setText("Danh sách các khoa");
 
     jScrollPaneKhoa.setBorder(null);
+    jScrollPaneKhoa.setVerticalScrollBar(new ScrollBar());
+    jScrollPaneKhoa.getVerticalScrollBar().setBackground(Color.WHITE);
+    jScrollPaneKhoa.getViewport().setBackground(Color.WHITE);
+    JPanel p1 = new JPanel();
+    p1.setBackground(Color.WHITE);
+    jScrollPaneKhoa.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p1);
 
     jTableKhoa.setModel(new javax.swing.table.DefaultTableModel(
         new Object [][] {
@@ -1431,6 +1438,8 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
     });
     jTableKhoa.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
     jTableKhoa.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    jTableKhoa.setShowGrid(true);
+    jTableKhoa.setShowVerticalLines(false);
     jScrollPaneKhoa.setViewportView(jTableKhoa);
 
     javax.swing.GroupLayout panelBorderTableKhoaLayout = new javax.swing.GroupLayout(panelBorderTableKhoa);
@@ -1762,13 +1771,19 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
     jLabelTableTitleCoVan.setText("Danh sách các cố vấn");
 
     jScrollPaneCoVan.setBorder(null);
+    jScrollPaneCoVan.setVerticalScrollBar(new ScrollBar());
+    jScrollPaneCoVan.getVerticalScrollBar().setBackground(Color.WHITE);
+    jScrollPaneCoVan.getViewport().setBackground(Color.WHITE);
+    JPanel p2 = new JPanel();
+    p2.setBackground(Color.WHITE);
+    jScrollPaneCoVan.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p2);
 
     jTableCoVan.setModel(new javax.swing.table.DefaultTableModel(
         new Object [][] {
 
         },
         new String [] {
-            "Mã cố vấn", "Tên cố vấn", "Email", "Khoa", "Mật khẩu"
+            "STT", "Mã cố vấn", "Tên cố vấn", "Email trường cấp", "Khoa"
         }
     ) {
         boolean[] canEdit = new boolean [] {
@@ -1781,6 +1796,8 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
     });
     jTableCoVan.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
     jTableCoVan.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    jTableCoVan.setShowGrid(true);
+    jTableCoVan.setShowVerticalLines(false);
     jScrollPaneCoVan.setViewportView(jTableCoVan);
 
     choiceKhoa_CoVan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -2841,8 +2858,8 @@ jPanelNutTieuDeKhoa1Layout.setHorizontalGroup(
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPaneCoVan;
     private javax.swing.JScrollPane jScrollPaneKhoa;
-    private com.raven.swing.Table jTableCoVan;
-    private com.raven.swing.Table jTableKhoa;
+    private com.raven.swing.TableCo5Cot jTableCoVan;
+    private com.raven.swing.TableCo5Cot jTableKhoa;
     private com.raven.swing.PanelBorder panelBorderTableKhoa;
     // End of variables declaration//GEN-END:variables
 
