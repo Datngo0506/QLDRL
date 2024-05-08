@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import models.Khoa;
+import models.TaiKhoan;
 
 /**
  *
@@ -25,6 +26,7 @@ public final class ThemKhoa extends javax.swing.JFrame {
      * Creates new form SuaKhoa
      */
     private ArrayList <Khoa> dsKhoa;
+    private ArrayList <TaiKhoan> dsTaiKhoan;
     
     private JTable table;
     
@@ -47,10 +49,11 @@ public final class ThemKhoa extends javax.swing.JFrame {
         initComponents();
     }
     
-    public ThemKhoa(ArrayList<Khoa> khoa, JTable table){
+    public ThemKhoa(ArrayList<TaiKhoan> dsTaiKhoan, ArrayList<Khoa> khoa, JTable table){
         initComponents();
         this.table = table;
         this.dsKhoa = khoa;
+        this.dsTaiKhoan = dsTaiKhoan;
         edit();
     }
 
@@ -89,8 +92,10 @@ public final class ThemKhoa extends javax.swing.JFrame {
         jLabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitle.setText("THÊM KHOA");
 
-        jTextFieldMaKhoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextFieldMaKhoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jTextFieldMaKhoa.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jTextFieldTenKhoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jPasswordFieldPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,6 +138,7 @@ public final class ThemKhoa extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldYear.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextFieldYear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jTextFieldYearMouseExited(evt);
@@ -254,61 +260,40 @@ public final class ThemKhoa extends javax.swing.JFrame {
         else{
             int them = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn thêm không?");
             if(them == JOptionPane.YES_OPTION){
-                Khoa kh = new Khoa();
-                kh.setMaKhoa(jTextFieldMaKhoa.getText());
-                kh.setTenKhoa(jTextFieldTenKhoa.getText());
-                String thang = choiceMonth.getSelectedItem();
-                if(thang.length()<2) thang = "0" + thang;
-                String ngay = choiceDate.getSelectedItem();
-                if(ngay.length()<2) ngay = "0" + ngay;
-                String rs = jTextFieldYear.getText()+"-"+ngay+"-"+thang;
-                kh.setNgayThanhLap(rs);
-                kh.setMk(password);
-                DefaultTableModel model = (DefaultTableModel) table.getModel();
-                Object[] row = {kh.getMaKhoa(), kh.getTenKhoa(), kh.getNgayThanhLap(), kh.getMaKhoa() ,Controller.changePass(kh.getMk())};
-                model.addRow(row);
-                dsKhoa.add(kh);
-                try {
-                    // Tạo kết nối tới cơ sở dữ liệu
-                    Connection conn;
-                    conn = Controller.getConnection();
+                String maKhoa = jTextFieldMaKhoa.getText().toUpperCase();
+                if(!Controller.isRepeatMaKhoa(dsKhoa, maKhoa) ){
+                    Khoa kh = new Khoa();
 
-                    // Thêm dữ liệu vào bảng Khoa
-                    String insertKhoaQuery = "INSERT INTO Khoa (MaKhoa, TenKhoa, NgayThanhLap) VALUES (?, ?, ?)";
-                    PreparedStatement pstmtKhoa = conn.prepareStatement(insertKhoaQuery);
-                    pstmtKhoa.setString(1, jTextFieldMaKhoa.getText());
-                    pstmtKhoa.setString(2, jTextFieldTenKhoa.getText());
-                    pstmtKhoa.setString(3, rs);
-                    pstmtKhoa.executeUpdate();
-                    
-                    
-                    
-                    // Thêm dữ liệu vào bảng TaiKhoan
-                    String insertTaiKhoanQuery = "INSERT INTO TaiKhoan (TenTK, MatKhau, LoaiTK, MATK) VALUES (?, ?, ?, ?)";
-                    PreparedStatement pstmtTaiKhoan = conn.prepareStatement(insertTaiKhoanQuery);
-                    pstmtTaiKhoan.setString(1, jTextFieldMaKhoa.getText());
-                    pstmtTaiKhoan.setString(2, password);
-                    pstmtTaiKhoan.setString(3, "khoa");
-                    // Tạo giá trị ngẫu nhiên cho MATK
-                    
-                    String matk = "";
-                    
-                    if(dsKhoa.size()<10){
-                        matk = "TKKH" + "0" +dsKhoa.size();
-                    }
-                    else{
-                        matk = "TKKH"  +dsKhoa.size();
-                    }
+                    String tenKhoa = Controller.chuanHoaTen(jTextFieldTenKhoa.getText());
+                    kh.setMaKhoa(maKhoa);
+                    kh.setTenKhoa(tenKhoa);
+                    String thang = choiceMonth.getSelectedItem();
 
-                    pstmtTaiKhoan.setString(4, matk);
-                    pstmtTaiKhoan.executeUpdate();
+                    if(thang.length()<2) thang = "0" + thang;
+                    String ngay = choiceDate.getSelectedItem();
+                    if(ngay.length()<2) ngay = "0" + ngay;
+                    String rs = jTextFieldYear.getText()+"-"+ngay+"-"+thang;
 
-                    conn.close();
-                } catch (SQLException ex) {
-                    // Xử lý ngoại lệ nếu có lỗi xảy ra khi thực hiện truy vấn SQL
-                    //ex.printStackTrace();
+                    kh.setNgayThanhLap(rs);
+
+
+                    dsKhoa.add(kh);
+                    TaiKhoan tk = new TaiKhoan();
+                    tk.setMaTK("TK"+maKhoa);
+                    tk.setLoaiTK("khoa");
+                    tk.setTenTK(maKhoa);
+                    tk.setMatKhau(password);
+                    dsTaiKhoan.add(tk);
+                    Controller.addListKhoaToTable(dsKhoa, table, dsTaiKhoan);
+                    Controller.addListToKhoa(dsKhoa);
+
+
+                    Controller.addListToTaiKhoan(dsTaiKhoan);
+                    this.setVisible(false);
+                }else{
+                    JOptionPane.showMessageDialog(rootPane, "Mã khoa đã tồn tại trên hệ thống!");
                 }
-                this.setVisible(false);
+                
             }
             else if(them == JOptionPane.NO_OPTION){
                 this.setVisible(false);

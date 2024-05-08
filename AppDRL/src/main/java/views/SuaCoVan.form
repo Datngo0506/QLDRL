@@ -26,7 +26,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanelMain" min="-2" max="-2" attributes="0"/>
+          <Component id="jPanelMain" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -46,21 +46,22 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel11" min="-2" pref="187" max="-2" attributes="0"/>
+                      <Component id="jTextFieldMaCoVan" alignment="0" min="-2" pref="186" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel3" min="-2" pref="187" max="-2" attributes="0"/>
+                      <Component id="jTextFieldTenCoVan" min="-2" pref="176" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <Component id="jLabelTitle" min="-2" pref="396" max="-2" attributes="0"/>
               <Group type="102" attributes="0">
                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel3" min="-2" pref="380" max="-2" attributes="0"/>
-                      <Component id="jTextFieldTenCoVan" min="-2" pref="380" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Component id="jLabel7" min="-2" pref="68" max="-2" attributes="0"/>
-                          <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                          <Component id="choiceGioiTinh_Sua" min="-2" pref="59" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" pref="43" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          <Component id="choiceKhoa_CoVan" min="-2" pref="195" max="-2" attributes="0"/>
-                      </Group>
                       <Component id="jLabel4" min="-2" pref="380" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="jLabel1" min="-2" pref="40" max="-2" attributes="0"/>
@@ -84,6 +85,15 @@
                       <Component id="jLabel6" min="-2" pref="380" max="-2" attributes="0"/>
                       <Component id="jPasswordFieldPass" min="-2" pref="380" max="-2" attributes="0"/>
                       <Component id="jLabelSubmit" min="-2" pref="380" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="jLabel7" min="-2" pref="68" max="-2" attributes="0"/>
+                          <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
+                          <Component id="choiceGioiTinh_Sua" min="-2" pref="59" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel5" min="-2" pref="43" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                          <Component id="choiceKhoa_CoVan" min="-2" pref="195" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
           </Group>
@@ -94,10 +104,16 @@
                   <EmptySpace min="17" pref="17" max="-2" attributes="0"/>
                   <Component id="jLabelTitle" min="-2" pref="38" max="-2" attributes="0"/>
                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                  <Component id="jTextFieldTenCoVan" min="-2" pref="41" max="-2" attributes="0"/>
-                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jTextFieldTenCoVan" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="jTextFieldMaCoVan" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="choiceKhoa_CoVan" min="-2" pref="40" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
@@ -332,6 +348,13 @@
           <Events>
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="choiceKhoa_CoVanItemStateChanged"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel11">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="M&#xe3; c&#x1ed1; v&#x1ea5;n"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextFieldMaCoVan">
         </Component>
       </SubComponents>
     </Container>

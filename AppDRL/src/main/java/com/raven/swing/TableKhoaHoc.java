@@ -10,9 +10,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-public class Table extends JTable {
+public class TableKhoaHoc extends Table {
 
-    public Table() {
+    public TableKhoaHoc() {
         setShowHorizontalLines(true);
         setGridColor(new Color(230, 230, 230));
         setRowHeight(40);

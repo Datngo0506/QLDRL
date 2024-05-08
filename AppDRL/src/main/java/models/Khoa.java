@@ -9,28 +9,17 @@ package models;
  * @author Dat
  */
 public class Khoa {
-    private String maKhoa, tenKhoa, ngayThanhLap, mk;
+    private String maKhoa, tenKhoa, ngayThanhLap;
 
     public Khoa() {
     }
 
 
-    public Khoa(String maKhoa, String tenKhoa, String ngayThanhLap, String mk) {
+    public Khoa(String maKhoa, String tenKhoa, String ngayThanhLap) {
         this.maKhoa = maKhoa;
         this.tenKhoa = tenKhoa;
         this.ngayThanhLap = ngayThanhLap;
-        this.mk = mk;
-    }
-
-    public String getMk() {
-        return mk;
-    }
-
-    public void setMk(String mk) {
-        this.mk = mk;
-    }
-
-    
+    }    
     
     public String getMaKhoa() {
         return maKhoa;

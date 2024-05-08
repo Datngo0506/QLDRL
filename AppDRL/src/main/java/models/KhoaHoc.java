@@ -52,7 +52,7 @@ public class KhoaHoc {
         this.MamKT = MamKT;
     }
 
-    public void setTGHoc(int TGHoc) {
+    public void setTGHoc(float TGHoc) {
         this.TGHoc = TGHoc;
     }
 

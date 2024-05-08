@@ -6,15 +6,12 @@ package views;
 
 import controller.Controller;
 import java.awt.Choice;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import models.CoVan;
 import models.Khoa;
+import models.TaiKhoan;
 
 /**
  *
@@ -27,6 +24,7 @@ public final class SuaCoVan extends javax.swing.JFrame {
      */
     private ArrayList <Khoa> dsKhoa;
     private ArrayList <CoVan> dsCoVan;
+    private ArrayList <TaiKhoan> dsTaiKhoan;
     private Choice ch;
     private JTable table;
     private int chon;
@@ -34,8 +32,8 @@ public final class SuaCoVan extends javax.swing.JFrame {
     
     public void edit(){
         setLocationRelativeTo(null);
-        Object cellValue = table.getValueAt(chon, 0);
-        System.out.println(cellValue);
+        Object cellValue = table.getValueAt(chon, 1);
+        //System.out.println(cellValue);
         int hub = 0;
         for(int i=0; i<dsCoVan.size(); i++){
             if(dsCoVan.get(i).getMaCV().equals(cellValue.toString())){
@@ -44,6 +42,7 @@ public final class SuaCoVan extends javax.swing.JFrame {
             }
         }
         CoVan cv = dsCoVan.get(hub);
+        jTextFieldMaCoVan.setText(cv.getMaCV());
         //jTextFieldMaCoVan.setText(cv.getMaCV());
         jTextFieldTenCoVan.setText(cv.getTenCV());
         jTextFieldSdt.setText(cv.getSdt());
@@ -74,7 +73,7 @@ public final class SuaCoVan extends javax.swing.JFrame {
         int d = Integer.parseInt(day);
         day = Integer.toString(d);
         choiceDate.select(day);
-        jPasswordFieldPass.setText(cv.getMk());
+        jPasswordFieldPass.setText(Controller.getMatKhau(dsTaiKhoan, cellValue.toString()));
         
     }
     public SuaCoVan() {
@@ -82,13 +81,14 @@ public final class SuaCoVan extends javax.swing.JFrame {
         initComponents();
     }
     
-    public SuaCoVan(ArrayList<Khoa> khoa, JTable table, int chon, ArrayList<CoVan> coVan, Choice ch){
+    public SuaCoVan(ArrayList<TaiKhoan> dsTaiKhoan, ArrayList<Khoa> khoa, JTable table, int chon, ArrayList<CoVan> coVan, Choice ch){
         initComponents();
         this.table = table;
         this.dsKhoa = khoa;
         this.chon = chon;
         this.ch = ch;
         this.dsCoVan = coVan;
+        this.dsTaiKhoan = dsTaiKhoan;
         edit();
     }
 
@@ -125,6 +125,8 @@ public final class SuaCoVan extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jTextFieldQueQuan = new javax.swing.JTextField();
         choiceKhoa_CoVan = new java.awt.Choice();
+        jLabel11 = new javax.swing.JLabel();
+        jTextFieldMaCoVan = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -230,24 +232,25 @@ public final class SuaCoVan extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setText("Mã cố vấn");
+
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
         jPanelMain.setLayout(jPanelMainLayout);
         jPanelMainLayout.setHorizontalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldMaCoVan, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldTenCoVan, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldTenCoVan, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelMainLayout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(choiceGioiTinh_Sua, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(choiceKhoa_CoVan, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -269,7 +272,15 @@ public final class SuaCoVan extends javax.swing.JFrame {
                     .addComponent(jTextFieldDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPasswordFieldPass, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabelSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelMainLayout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(choiceGioiTinh_Sua, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(choiceKhoa_CoVan, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,9 +288,13 @@ public final class SuaCoVan extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
-                .addComponent(jLabel3)
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel11))
                 .addGap(6, 6, 6)
-                .addComponent(jTextFieldTenCoVan, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldTenCoVan, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldMaCoVan, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(choiceKhoa_CoVan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -330,7 +345,7 @@ public final class SuaCoVan extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,29 +360,7 @@ public final class SuaCoVan extends javax.swing.JFrame {
     }//GEN-LAST:event_choiceKhoa_CoVanItemStateChanged
 
     private void choiceDateItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceDateItemStateChanged
-        // TODO add your handling code here:
-        //        String year = jTextFieldYear.getSelectedText();
-        //        if(year.equals("")){
-            //            JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập năm!");
-            //        }
-        //        else if(year.length()!=4 || Integer.parseInt(year) <= 0){
-            //            JOptionPane.showMessageDialog(rootPane, "Năm không đúng định dạng!");
-            //        }
-        //        else{
-            //            String thang = choiceMonth.getSelectedItem();
-            //            switch (thang) {
-                //                case "Tháng 1", "Tháng 3", "Tháng 5", "Tháng 7", "Tháng 8", "Tháng 10", "Tháng 12" -> Controller.addChoiceDay(choiceDate, 31);
-                //                case "Tháng 4", "Tháng 6", "Tháng 9", "Tháng 11" -> Controller.addChoiceDay(choiceDate, 30);
-                //                default -> {
-                    //                    if(Integer.parseInt(year)%2024==0){
-                        //                        Controller.addChoiceDay(choiceDate, 29);
-                        //                    }
-                    //                    else{
-                        //                        Controller.addChoiceDay(choiceDate, 28);
-                        //                    }
-                    //                }
-                //            }
-            //        }
+
         String year = jTextFieldYear.getText();
 
         //choiceDate.removeAll();
@@ -433,14 +426,7 @@ public final class SuaCoVan extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldYearMouseExited
 
     private void choiceGioiTinh_SuaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceGioiTinh_SuaItemStateChanged
-        // TODO add your handling code here:
-        //        String maKhoa = Controller.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa);
-        //        if(maKhoa.equals("")){
-            //            Controller.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa);
-            //        }
-        //        else{
-            //            Controller.addListCoVanToTable_MaKhoa(dsCoVan, jTableCoVan, dsKhoa, maKhoa);
-            //        }
+
     }//GEN-LAST:event_choiceGioiTinh_SuaItemStateChanged
 
     private void jLabelSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSubmitMouseClicked
@@ -449,78 +435,50 @@ public final class SuaCoVan extends javax.swing.JFrame {
         String password = new String(passwordChars);
         //System.out.println(password);
         // Kiểm tra xem các trường thông tin đã được nhập đầy đủ chưa
-        if(jTextFieldTenCoVan.getText().equals("") || jTextFieldSdt.getText().equals("") || jTextFieldQueQuan.getText().equals("") || jTextFieldDiaChi.getText().equals("") || password.equals("")){
+        if(jTextFieldMaCoVan.getText().equals("")||jTextFieldTenCoVan.getText().equals("") || jTextFieldSdt.getText().equals("") || jTextFieldQueQuan.getText().equals("") || jTextFieldDiaChi.getText().equals("") || password.equals("")){
             JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập đầy đủ thông tin!");
         } else {
             // Hiển thị hộp thoại xác nhận trước khi sửa
             //int xoa = 0;
             int sua = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn sửa thông tin không?");
             if(sua == JOptionPane.YES_OPTION){
-                
-                // Cập nhật thông tin trong dsCoVan
-                        //CoVan cv = dsCoVan.get(chon);
-                        int hub=0;
-                        String thang = choiceMonth.getSelectedItem();
-                        if(thang.length()<2) thang = "0" + thang;
-                        String ngay = choiceDate.getSelectedItem();
-                        if(ngay.length()<2) ngay = "0" + ngay;
-                        String ngaySinh = jTextFieldYear.getText() + "-" + thang + "-" + ngay; // Ngày sinh
-                        Object cellValue = table.getValueAt(chon, 0);
-                        
-                        for(int i=0; i<dsCoVan.size(); i++){
-                            if(dsCoVan.get(i).getMaCV().equals(cellValue.toString())){
-                                hub = i;
-                                //xoa = i;
-                            }
-                        }
-                        dsCoVan.get(hub).setTenCV(jTextFieldTenCoVan.getText());
-                        dsCoVan.get(hub).setKhoa(Controller.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa));
-                        dsCoVan.get(hub).setGioiTinh(Controller.doiGioiTinhToBool(choiceGioiTinh_Sua.getSelectedItem()));
-                        dsCoVan.get(hub).setNgaySinh(ngaySinh);
-                        dsCoVan.get(hub).setSdt(jTextFieldSdt.getText());
-                        dsCoVan.get(hub).setQueQuan(jTextFieldQueQuan.getText());
-                        dsCoVan.get(hub).setDiaChi(jTextFieldDiaChi.getText());
-                        dsCoVan.get(hub).setMk(password);
-                        if(ch.getSelectedItem().equals("Tất cả")){
-                            Controller.addListCoVanToTable(dsCoVan, table, dsKhoa);
-                        }
-                        else{
-                            Controller.addListCoVanToTable_MaKhoa(dsCoVan, table, dsKhoa, Controller.doiTenKhoaThanhMaKhoa(ch.getSelectedItem(), dsKhoa));
-                        }
-
-                try {
-                    // Cập nhật thông tin trong bảng CoVan
-                    try ( // Tạo kết nối tới cơ sở dữ liệu
-                            Connection con = Controller.getConnection()) {
-                        // Cập nhật thông tin trong bảng CoVan
-                        String updateQuery = "UPDATE CoVan SET TenCoVan=?, khoa=?, gioiTinh=?, ngaySinh=?, sdt=?, queQuan=?, diaChi=? WHERE MaCoVan=?";
-                        PreparedStatement pstmt = con.prepareStatement(updateQuery);
-                        pstmt.setString(1, jTextFieldTenCoVan.getText()); // Tên cố vấn
-                        pstmt.setString(2, Controller.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa)); // Mã khoa
-                        pstmt.setString(3, Controller.doiGioiTinhToBool(choiceGioiTinh_Sua.getSelectedItem())); // Giới tính
-
-                        pstmt.setString(4, ngaySinh);
-                        pstmt.setString(5, jTextFieldSdt.getText()); // Số điện thoại
-                        //pstmt.setString(6, ""); // Email (bạn chưa có trường này trong giao diện)
-                        pstmt.setString(6, jTextFieldQueQuan.getText()); // Quê quán
-                        pstmt.setString(7, jTextFieldDiaChi.getText()); // Địa chỉ
-                        pstmt.setString(8, dsCoVan.get(hub).getMaCV()); // Mã cố vấn
-                        pstmt.executeUpdate();
-                        
-                        
-                        
-                        // Cập nhật mật khẩu trong bảng TaiKhoan
-                        String updatePassQuery = "UPDATE TaiKhoan SET MatKhau=? WHERE TenTK=?";
-                        PreparedStatement pstmtPass = con.prepareStatement(updatePassQuery);
-                        pstmtPass.setString(1, password); // Mật khẩu
-                        pstmtPass.setString(2, dsCoVan.get(hub).getMaCV()); // Tên tài khoản (Mã cố vấn)
-                        pstmtPass.executeUpdate();
-                        
+                Object cellValue = table.getValueAt(chon, 1);
+                int hub = 0;
+                for(int i=0; i<dsCoVan.size(); i++){
+                    if(dsCoVan.get(i).getMaCV().equals(cellValue.toString())){
+                        hub = i;
+                        //xoa = i;
                     }
-                } catch (SQLException ex) {
-                    // Xử lý ngoại lệ nếu có lỗi xảy ra khi thực hiện truy vấn SQL
-                    //ex.printStackTrace();
                 }
+                String maCV = jTextFieldMaCoVan.getText().toUpperCase();
+                if(!maCV.equals(dsCoVan.get(hub).getMaCV())){
+                    if(Controller.isRepeatMaCoVan(dsCoVan, maCV)){
+                        JOptionPane.showMessageDialog(rootPane, "Mã cố vấn đã tồn tại trên hệ thống!");
+                        return;
+                    }
+                }
+                String thang = choiceMonth.getSelectedItem();
+                if(thang.length()<2) thang = "0" + thang;
+                String ngay = choiceDate.getSelectedItem();
+                if(ngay.length()<2) ngay = "0" + ngay;
+                String ngaySinh = jTextFieldYear.getText() + "-" + thang + "-" + ngay; // Ngày sinh
+
+                dsCoVan.get(hub).setTenCV(jTextFieldTenCoVan.getText());
+                dsCoVan.get(hub).setKhoa(Controller.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa));
+                dsCoVan.get(hub).setGioiTinh(Controller.doiGioiTinhToBool(choiceGioiTinh_Sua.getSelectedItem()));
+                dsCoVan.get(hub).setNgaySinh(ngaySinh);
+                dsCoVan.get(hub).setSdt(jTextFieldSdt.getText());
+                dsCoVan.get(hub).setQueQuan(jTextFieldQueQuan.getText());
+                dsCoVan.get(hub).setDiaChi(jTextFieldDiaChi.getText());
+                if(ch.getSelectedItem().equals("Tất cả")){
+                    Controller.addListCoVanToTable(dsCoVan, table, dsKhoa);
+                }
+                else{
+                    Controller.addListCoVanToTable_MaKhoa(dsCoVan, table, dsKhoa, Controller.doiTenKhoaThanhMaKhoa(ch.getSelectedItem(), dsKhoa));
+                }
+                Controller.addListToCoVan(dsCoVan);
+                
+                
                 this.setVisible(false);
 
             } else if(sua == JOptionPane.NO_OPTION){
@@ -573,6 +531,7 @@ public final class SuaCoVan extends javax.swing.JFrame {
     private java.awt.Choice choiceMonth;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel3;
@@ -587,6 +546,7 @@ public final class SuaCoVan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPasswordField jPasswordFieldPass;
     private javax.swing.JTextField jTextFieldDiaChi;
+    private javax.swing.JTextField jTextFieldMaCoVan;
     private javax.swing.JTextField jTextFieldQueQuan;
     private javax.swing.JTextField jTextFieldSdt;
     private javax.swing.JTextField jTextFieldTenCoVan;

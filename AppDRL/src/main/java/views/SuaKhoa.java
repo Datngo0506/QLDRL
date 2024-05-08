@@ -5,13 +5,13 @@
 package views;
 
 import controller.Controller;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import models.CoVan;
 import models.Khoa;
+import models.Lop;
+import models.TaiKhoan;
 
 
 ///đâyỷ
@@ -25,7 +25,9 @@ public final class SuaKhoa extends javax.swing.JFrame {
      * Creates new form SuaKhoa
      */
     private ArrayList <Khoa> dsKhoa;
-    
+    private ArrayList <TaiKhoan> TaiKhoan;
+    private ArrayList <CoVan> dsCoVan;
+    private ArrayList <Lop> dsLop;
     private JTable table;
     private int chon;
     private Khoa khoa;
@@ -49,8 +51,8 @@ public final class SuaKhoa extends javax.swing.JFrame {
         int d = Integer.parseInt(day);
         day = Integer.toString(d);
         choiceDate.select(day);
-        jPasswordFieldPass.setText(khoa.getMk());
-        jTextFieldTenDangNhap.setText(khoa.getMaKhoa());
+        jPasswordFieldPass.setText(Controller.getMatKhau(TaiKhoan,khoa.getMaKhoa()));
+        //jTextFieldTenDangNhap.setText(khoa.getMaKhoa());
         //jPasswordFieldPass.set
     }
     public SuaKhoa() {
@@ -58,11 +60,14 @@ public final class SuaKhoa extends javax.swing.JFrame {
         initComponents();
     }
     
-    public SuaKhoa(ArrayList<Khoa> khoa, JTable table, int chon){
+    public SuaKhoa(ArrayList<Khoa> khoa, JTable table, int chon, ArrayList<TaiKhoan> TaiKhoan, ArrayList<CoVan> dsCoVan, ArrayList<Lop> dsLop){
         initComponents();
         this.table = table;
         this.dsKhoa = khoa;
         this.chon = chon;
+        this.TaiKhoan = TaiKhoan;
+        this.dsCoVan = dsCoVan;
+        this.dsLop = dsLop;
         edit();
     }
 
@@ -79,12 +84,10 @@ public final class SuaKhoa extends javax.swing.JFrame {
         jLabelTitle = new javax.swing.JLabel();
         jTextFieldMaKhoa = new javax.swing.JTextField();
         jTextFieldTenKhoa = new javax.swing.JTextField();
-        jTextFieldTenDangNhap = new javax.swing.JTextField();
         jPasswordFieldPass = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabelSubmit = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -103,11 +106,10 @@ public final class SuaKhoa extends javax.swing.JFrame {
         jLabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitle.setText("SỬA THÔNG TIN KHOA");
 
-        jTextFieldMaKhoa.setEditable(false);
-        jTextFieldMaKhoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextFieldMaKhoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jTextFieldMaKhoa.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jTextFieldTenDangNhap.setEditable(false);
+        jTextFieldTenKhoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jPasswordFieldPass.setText("jPasswordField1");
 
@@ -116,8 +118,6 @@ public final class SuaKhoa extends javax.swing.JFrame {
         jLabel3.setText("Tên khoa");
 
         jLabel4.setText("Ngày thành lập");
-
-        jLabel5.setText("Tên đăng nhập");
 
         jLabel6.setText("Mật khẩu");
 
@@ -137,6 +137,7 @@ public final class SuaKhoa extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setText("Nhập năm ( 4 chữ số )");
 
+        jTextFieldYear.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jTextFieldYear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jTextFieldYearMouseExited(evt);
@@ -195,8 +196,6 @@ public final class SuaKhoa extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextFieldTenDangNhap)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -238,17 +237,13 @@ public final class SuaKhoa extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(choiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPasswordFieldPass, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabelSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -259,9 +254,7 @@ public final class SuaKhoa extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -272,54 +265,58 @@ public final class SuaKhoa extends javax.swing.JFrame {
         char[] passwordChars = jPasswordFieldPass.getPassword();
             // Chuyển mật khẩu thành chuỗi String
             String password = new String(passwordChars);
-        if((((jTextFieldTenKhoa.getText().equals("") || jTextFieldYear.getText().equals("")) || password.equals("")) || choiceDate.getSelectedItem().equals(""))||choiceMonth.getSelectedItem().equals("")){
+        if((((jTextFieldMaKhoa.getText().equals("") || jTextFieldTenKhoa.getText().equals("") || jTextFieldYear.getText().equals("")) || password.equals("")) || choiceDate.getSelectedItem().equals(""))||choiceMonth.getSelectedItem().equals("")){
             JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập đầy đủ thông tin!");
         }
         else{
             int sua = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn sửa thông tin không?");
             if(sua == JOptionPane.YES_OPTION){
+                String maKhoa = jTextFieldMaKhoa.getText().toUpperCase();
+                if(!maKhoa.equals(dsKhoa.get(chon).getMaKhoa())){
+                    if(Controller.isRepeatMaKhoa(dsKhoa, maKhoa)){
+                        JOptionPane.showMessageDialog(rootPane, "Mã khoa đã tồn tại trên hệ thống!");
+                        return;
+                    }
+                }
                 String thang = choiceMonth.getSelectedItem();
                 if(thang.length()<2) thang = "0" + thang;
                 String ngay = choiceDate.getSelectedItem();
                 if(ngay.length()<2) ngay = "0" + ngay;
                 String rs = jTextFieldYear.getText()+"-"+ngay+"-"+thang;
-                dsKhoa.get(chon).setTenKhoa(jTextFieldTenKhoa.getText());
-                dsKhoa.get(chon).setNgayThanhLap(rs);
-                dsKhoa.get(chon).setMk(password);
-                table.setValueAt(jTextFieldTenKhoa.getText(), chon , 1);
+
+                String tenKhoa = Controller.chuanHoaTen(jTextFieldTenKhoa.getText());
+                //Thêm vào bảng
+                table.setValueAt(maKhoa, chon , 0);
+                table.setValueAt(tenKhoa, chon , 1);
                 table.setValueAt(rs, chon , 2);
+                table.setValueAt(maKhoa, chon , 3);
                 table.setValueAt(Controller.changePass(password), chon, 4);
-                try {
-                    // Cập nhật thông tin trong bảng Khoa
-                    try ( // Tạo kết nối tới cơ sở dữ liệu
-                            Connection con = Controller.getConnection()) {
-                        // Cập nhật thông tin trong bảng Khoa
-                        String updateQuery = "UPDATE Khoa SET TenKhoa=?, NgayThanhLap=? WHERE MaKhoa=?";
-                        PreparedStatement pstmt = con.prepareStatement(updateQuery);
-                        pstmt.setString(1, jTextFieldTenKhoa.getText());
-                        pstmt.setString(2, rs);
-                        pstmt.setString(3, dsKhoa.get(chon).getMaKhoa());
-                        pstmt.executeUpdate();
-                        
-                        // Cập nhật mật khẩu trong bảng TaiKhoan
-                        String updatePassQuery = "UPDATE TaiKhoan SET MatKhau=? WHERE TenTK=?";
-                        PreparedStatement pstmtPass = con.prepareStatement(updatePassQuery);
-                        pstmtPass.setString(1, password);
-                        pstmtPass.setString(2, dsKhoa.get(chon).getMaKhoa());
-                        pstmtPass.executeUpdate();
+                Controller.suaKhoaTrongCoVan(dsCoVan, dsKhoa.get(chon).getMaKhoa(), maKhoa);
+                Controller.suaKhoaTrongLop(dsLop, dsKhoa.get(chon).getMaKhoa(), maKhoa);
+                for(TaiKhoan tk: TaiKhoan){
+                    if(tk.getTenTK().equals(dsKhoa.get(chon).getMaKhoa())){
+                        tk.setTenTK(maKhoa);
+                        tk.setMaTK("TK"+maKhoa);
+                        tk.setMatKhau(password);
                     }
-                } catch (SQLException ex) {
-                    // Xử lý ngoại lệ nếu có lỗi xảy ra khi thực hiện truy vấn SQL
-                    // ex.printStackTrace();
                 }
-                
+
+                dsKhoa.get(chon).setMaKhoa(maKhoa);
+                dsKhoa.get(chon).setTenKhoa(tenKhoa);
+                dsKhoa.get(chon).setNgayThanhLap(rs);
+                Controller.addListToLop(dsLop);
+                Controller.addListToCoVan(dsCoVan);
+                Controller.addListToKhoa(dsKhoa);
+                //Controller.doiMatKhau(TaiKhoan, dsKhoa.get(chon).getMaKhoa(), password);
+                Controller.addListToTaiKhoan(TaiKhoan);
                 this.setVisible(false);
+                
             }
             else if(sua == JOptionPane.NO_OPTION){
                 this.setVisible(false);
             }
         }
-        System.out.println(dsKhoa.get(chon).getTenKhoa());
+        //System.out.println(dsKhoa.get(chon).getTenKhoa());
     }//GEN-LAST:event_jLabelSubmitMouseClicked
 
     private void jTextFieldYearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldYearMouseExited
@@ -456,7 +453,6 @@ public final class SuaKhoa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -465,7 +461,6 @@ public final class SuaKhoa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPasswordField jPasswordFieldPass;
     private javax.swing.JTextField jTextFieldMaKhoa;
-    private javax.swing.JTextField jTextFieldTenDangNhap;
     private javax.swing.JTextField jTextFieldTenKhoa;
     private javax.swing.JTextField jTextFieldYear;
     // End of variables declaration//GEN-END:variables

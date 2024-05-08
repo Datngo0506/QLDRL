@@ -7,14 +7,12 @@ package views;
 import controller.Controller;
 import java.awt.Choice;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import models.CoVan;
 import models.Khoa;
+import models.TaiKhoan;
 
 /**
  *
@@ -27,6 +25,7 @@ public final class ThemCoVan extends javax.swing.JFrame {
      */
     private ArrayList <Khoa> dsKhoa;
     private ArrayList <CoVan> dsCoVan;
+    private ArrayList <TaiKhoan> dsTaiKhoan;
     private Choice ch;
     private JTable table;
     private int chon;
@@ -46,12 +45,13 @@ public final class ThemCoVan extends javax.swing.JFrame {
         initComponents();
     }
     
-    public ThemCoVan(ArrayList<Khoa> khoa, JTable table,  ArrayList<CoVan> coVan, Choice ch){
+    public ThemCoVan(ArrayList<TaiKhoan> dsTaiKhoan, ArrayList<Khoa> khoa, JTable table,  ArrayList<CoVan> coVan, Choice ch){
         initComponents();
         this.table = table;
         this.dsKhoa = khoa;
         this.ch = ch;
         this.dsCoVan = coVan;
+        this.dsTaiKhoan = dsTaiKhoan;
         edit();
     }
 
@@ -381,68 +381,43 @@ public final class ThemCoVan extends javax.swing.JFrame {
             // Hiển thị hộp thoại xác nhận trước khi thêm
             int them = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn thêm cố vấn không?");
             if(them == JOptionPane.YES_OPTION){
+                String maKhoa = jTextFieldMaCoVan.getText().toUpperCase();
+                if(!Controller.isRepeatMaCoVan(dsCoVan, maKhoa)){
+                    // Tạo mới đối tượng CoVan từ thông tin nhập liệu
+                    CoVan newCoVan = new CoVan();
+                    newCoVan.setMaCV(jTextFieldMaCoVan.getText());
+                    newCoVan.setTenCV(jTextFieldTenCoVan.getText());
+                    newCoVan.setKhoa(Controller.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem().trim(), dsKhoa));
+                    newCoVan.setGioiTinh(Controller.doiGioiTinhToBool(choiceGioiTinh_Sua.getSelectedItem()));
+                    String thang = choiceMonth.getSelectedItem();
+                    String ngay = choiceDate.getSelectedItem();
+                    String nam = jTextFieldYear.getText();
+                    String ngaySinh = nam + "-" + thang + "-" + ngay; // Ngày sinh
+                    newCoVan.setNgaySinh(ngaySinh);
+                    newCoVan.setSdt(jTextFieldSdt.getText());
+                    newCoVan.setQueQuan(jTextFieldQueQuan.getText());
+                    newCoVan.setDiaChi(jTextFieldDiaChi.getText());
+                    newCoVan.setEmail(jTextFieldEmail.getText());
 
-                // Tạo mới đối tượng CoVan từ thông tin nhập liệu
-                CoVan newCoVan = new CoVan();
-                newCoVan.setMaCV(jTextFieldMaCoVan.getText());
-                newCoVan.setTenCV(jTextFieldTenCoVan.getText());
-                newCoVan.setKhoa(Controller.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem().trim(), dsKhoa));
-                newCoVan.setGioiTinh(Controller.doiGioiTinhToBool(choiceGioiTinh_Sua.getSelectedItem()));
-                String thang = choiceMonth.getSelectedItem();
-                String ngay = choiceDate.getSelectedItem();
-                String nam = jTextFieldYear.getText();
-                String ngaySinh = nam + "-" + thang + "-" + ngay; // Ngày sinh
-                newCoVan.setNgaySinh(ngaySinh);
-                newCoVan.setSdt(jTextFieldSdt.getText());
-                newCoVan.setQueQuan(jTextFieldQueQuan.getText());
-                newCoVan.setDiaChi(jTextFieldDiaChi.getText());
-                newCoVan.setMk(password);
-                newCoVan.setEmail(jTextFieldEmail.getText());
+                    // Thêm cố vấn mới vào danh sách dsCoVan
+                    dsCoVan.add(newCoVan);
 
-                // Thêm cố vấn mới vào danh sách dsCoVan
-                dsCoVan.add(newCoVan);
+                    // Cập nhật lại bảng để hiển thị cố vấn mới
+                    if(ch.getSelectedItem().equals("Tất cả")){
+                        Controller.addListCoVanToTable(dsCoVan, table, dsKhoa);
+                    } else {
+                        Controller.addListCoVanToTable_MaKhoa(dsCoVan, table, dsKhoa, Controller.doiTenKhoaThanhMaKhoa(ch.getSelectedItem(), dsKhoa));
+                    }
 
-                // Cập nhật lại bảng để hiển thị cố vấn mới
-                if(ch.getSelectedItem().equals("Tất cả")){
-                    Controller.addListCoVanToTable(dsCoVan, table, dsKhoa);
-                } else {
-                    Controller.addListCoVanToTable_MaKhoa(dsCoVan, table, dsKhoa, Controller.doiTenKhoaThanhMaKhoa(ch.getSelectedItem(), dsKhoa));
+                    Controller.addListToCoVan(dsCoVan);
+                }
+                else{
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Mã cố vấn đã tồn tại trên hệ thống!");
+                
                 }
 
-                try {
-                    // Tạo kết nối tới cơ sở dữ liệu
-                    Connection con = Controller.getConnection();
-
-                    // Thêm cố vấn mới vào bảng CoVan
-                    String insertQuery = "INSERT INTO CoVan (MaCoVan, tenCoVan, khoa, gioiTinh, ngaySinh, sdt, queQuan, diaChi, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                    PreparedStatement pstmt = con.prepareStatement(insertQuery);
-                    pstmt.setString(1, newCoVan.getMaCV());
-                    pstmt.setString(2, newCoVan.getTenCV());
-                    pstmt.setString(3, newCoVan.getKhoa());
-                    pstmt.setString(4, newCoVan.getGioiTinh());
-                    pstmt.setString(5, newCoVan.getNgaySinh());
-                    pstmt.setString(6, newCoVan.getSdt());
-                    pstmt.setString(7, newCoVan.getQueQuan());
-                    pstmt.setString(8, newCoVan.getDiaChi());
-                    pstmt.setString(9, newCoVan.getEmail());
-                    pstmt.executeUpdate();
-
-                    // Thêm thông tin tài khoản cố vấn vào bảng TaiKhoan
-                    String insertPassQuery = "INSERT INTO TaiKhoan (TenTK, MatKhau, LoaiTK, MATK) VALUES (?, ?, ?, ?)";
-                    PreparedStatement pstmtPass = con.prepareStatement(insertPassQuery);
-                    pstmtPass.setString(1, newCoVan.getMaCV());
-                    pstmtPass.setString(2, newCoVan.getMk());
-                   
-                    pstmtPass.setString(4, "TK"+newCoVan.getMaCV());
-                    pstmtPass.setString(3, "covan"); // Đây là tài khoản của cố vấn
-                    pstmtPass.executeUpdate();
-
-                    con.close(); // Đóng kết nối sau khi thêm xong
-
-                } catch (SQLException ex) {
-                    // Xử lý ngoại lệ nếu có lỗi xảy ra khi thực hiện truy vấn SQL
-                    //ex.printStackTrace();
-                }
+                
 
                 this.setVisible(false); // Đóng cửa sổ sau khi thêm thành công
             } else if(them == JOptionPane.NO_OPTION){

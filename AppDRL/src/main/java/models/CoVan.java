@@ -9,7 +9,7 @@ package models;
  * @author Dat
  */
 public class CoVan {
-    private String maCV, tenCV, khoa, gioiTinh, ngaySinh, sdt, email, queQuan, diaChi, mk;
+    private String maCV, tenCV, khoa, gioiTinh, ngaySinh, sdt, email, queQuan, diaChi;
 
     public CoVan() {
     }
@@ -24,7 +24,6 @@ public class CoVan {
         this.email = email;
         this.queQuan = queQuan;
         this.diaChi = diaChi;
-        this.mk = mk;
     }
 
     public String getMaCV() {
@@ -63,9 +62,6 @@ public class CoVan {
         return diaChi;
     }
 
-    public String getMk() {
-        return mk;
-    }
 
     public void setMaCV(String maCV) {
         this.maCV = maCV;
@@ -103,10 +99,5 @@ public class CoVan {
         this.diaChi = diaChi;
     }
 
-    public void setMk(String mk) {
-        this.mk = mk;
-    }
-    
-    
     
 }
