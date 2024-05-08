@@ -14,6 +14,8 @@ public class TaiKhoan {
     public TaiKhoan() {
     }
 
+    //abcc
+
     public TaiKhoan(String maTK, String tenTK, String matKhau, String loaiTK) {
         this.maTK = maTK;
         this.tenTK = tenTK;
