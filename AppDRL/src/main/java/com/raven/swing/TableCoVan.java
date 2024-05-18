@@ -1,6 +1,5 @@
 package com.raven.swing;
 
-import com.raven.model.StatusType;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;

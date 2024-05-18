@@ -7,9 +7,12 @@ package views;
 import java.awt.Color;
 //import javax.swing.BorderFactory;
 import icons.Icon;
+import java.awt.Image;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 //import java.util.ArrayList;
 
@@ -123,7 +126,10 @@ public final class FormBanCanSu extends javax.swing.JFrame {
        ClickEvent(jPanelChamDiem, jLabelChamDiem, jLabelLeft2, jPanelTaiKhoan, jPanelLop);
        ClickEvent(jPanelLop, jLabelLop, jLabelLeft5, jPanelTaiKhoan, jPanelChamDiem);
 
-       
+       JFrame.setDefaultLookAndFeelDecorated(true);
+        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
+        Image logo = icon.getImage();
+        this.setIconImage(logo);
        //rê vào menu nào thì menu đó màu vàng nhạt
        EnterEvent(jPanelTaiKhoan, jLabelTaiKhoan, jLabelLeft1, jPanelChamDiem, jPanelLogOut, jPanelHelp, jPanelLop);
        EnterEvent(jPanelLop, jLabelLop, jLabelLeft5, jPanelChamDiem, jPanelLogOut, jPanelHelp, jPanelTaiKhoan);

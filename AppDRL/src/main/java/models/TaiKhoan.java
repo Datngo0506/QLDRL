@@ -9,23 +9,30 @@ package models;
  * @author Dat
  */
 public class TaiKhoan {
-    private String maTK, tenTK, matKhau, loaiTK;
+    private String tenTK, matKhau, loaiTK;
+    private boolean trangThai;
 
     public TaiKhoan() {
     }
 
     //abcc
 
-    public TaiKhoan(String maTK, String tenTK, String matKhau, String loaiTK) {
-        this.maTK = maTK;
+    public TaiKhoan( String tenTK, String matKhau, String loaiTK, boolean TrangThai) {
         this.tenTK = tenTK;
         this.matKhau = matKhau;
         this.loaiTK = loaiTK;
+        this.trangThai = trangThai;
     }
 
-    public String getMaTK() {
-        return maTK;
+    public boolean isTrangThai() {
+        return trangThai;
     }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
+    }
+    
+    
 
     public String getTenTK() {
         return tenTK;
@@ -39,9 +46,6 @@ public class TaiKhoan {
         return loaiTK;
     }
 
-    public void setMaTK(String maTK) {
-        this.maTK = maTK;
-    }
 
     public void setTenTK(String tenTK) {
         this.tenTK = tenTK;

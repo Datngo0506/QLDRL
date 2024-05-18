@@ -9,17 +9,18 @@ package models;
  * @author Dat
  */
 public class HocKy {
-    private String MaHK_NK, HocKy, NienKhoa, xet;
+    private String MaHK_NK, HocKy, NienKhoa;
+    private boolean xet;
 
-    public void setXet(String xet) {
+    public void setXet(boolean xet) {
         this.xet = xet;
     }
 
-    public String getXet() {
+    public boolean getXet() {
         return xet;
     }
 
-    public HocKy(String MaHK_NK, String HocKy, String NienKhoa, String xet) {
+    public HocKy(String MaHK_NK, String HocKy, String NienKhoa, boolean xet) {
         this.MaHK_NK = MaHK_NK;
         this.HocKy = HocKy;
         this.NienKhoa = NienKhoa;

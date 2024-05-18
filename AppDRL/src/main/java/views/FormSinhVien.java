@@ -7,9 +7,12 @@ package views;
 import java.awt.Color;
 //import javax.swing.BorderFactory;
 import icons.Icon;
+import java.awt.Image;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 //import java.util.ArrayList;
 
@@ -114,7 +117,10 @@ public final class FormSinhVien extends javax.swing.JFrame {
                 return column != 0; // Cột 1 không thể chỉnh sửa
             }
         };
-        
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
+        Image logo = icon.getImage();
+        this.setIconImage(logo);
         //tblChiTietPhieu = new JTable(model);
         //Kích vào menu nào thì đó hiện màu vàng đậm
        ClickEvent(jPanelTaiKhoan, jLabelTaiKhoan, jLabelLeft1, jPanelChamDiem);

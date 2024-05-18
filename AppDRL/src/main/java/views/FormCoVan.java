@@ -7,14 +7,16 @@ package views;
 import java.awt.Color;
 //import javax.swing.BorderFactory;
 import icons.Icon;
+import java.awt.Image;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 //import java.util.ArrayList;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -103,7 +105,10 @@ public final class FormCoVan extends javax.swing.JFrame {
     public void suKienMenu(){
         setLocationRelativeTo(null);
         
-        
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
+        Image logo = icon.getImage();
+        this.setIconImage(logo);
         //Kích vào menu nào thì đó hiện màu vàng đậm
        ClickEvent(jPanelTaiKhoan, jLabelTaiKhoan, jLabelLeft1, jPanelLop);
        ClickEvent(jPanelLop, jLabelLop, jLabelLeft2, jPanelTaiKhoan);

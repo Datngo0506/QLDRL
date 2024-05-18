@@ -4,12 +4,15 @@ import com.raven.model.StatusType;
 
 public class CellStatus extends javax.swing.JPanel {
 
-    public CellStatus(StatusType type) {
+    private static final long serialVersionUID = 1L;
+
+
+	public CellStatus(StatusType type) {
         initComponents();
         status.setType(type);
     }
 
-    @SuppressWarnings("unchecked")
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
