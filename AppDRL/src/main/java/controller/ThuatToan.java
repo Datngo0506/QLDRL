@@ -75,6 +75,17 @@ public class ThuatToan {
         return "";
     }
     
+    public static String getTrangThai(ArrayList<TaiKhoan> dsTaiKhoan, String tenDn){
+        for(TaiKhoan tk: dsTaiKhoan){
+            if(tk.getTenTK().equals(tenDn)){
+                if(tk.isTrangThai() == true){
+                    return "Hoạt động";
+                }
+            }
+        }
+        return "Đã khóa";
+    }
+    
     //Đổi từ danh sách sinh viên mã lớp cũ thành mã lớp mới
     public static void doiLopDsSV(ArrayList<SinhVien> dsSinhVien, String lopCu, String lopMoi){
         for(SinhVien ds: dsSinhVien){
@@ -273,6 +284,15 @@ public class ThuatToan {
         for(ChucVu cv: dsChucVu){
             if(cv.getTenChucVu().trim().equals(ten.trim())){
                 return cv.getMaChucVu();
+            }
+        }
+        return "";
+    }
+    
+    public static String doiMaChucVuThanhTen(String ten, ArrayList<ChucVu> dsChucVu){
+        for(ChucVu cv: dsChucVu){
+            if(cv.getMaChucVu().trim().equals(ten.trim())){
+                return cv.getTenChucVu();
             }
         }
         return "";
@@ -611,25 +631,37 @@ public class ThuatToan {
         return tb;
     }
     
-    public static void addDRLSV1HocKy(ArrayList<SinhVien>dsSinhVien, ArrayList<Lop>dsLop, ArrayList<KhoaHoc>dsKhoaHoc, String maHocKy, ArrayList<DRL>dsDRL){
+    public static void addDRLSV1HocKy(ArrayList<TaiKhoan>dsTaiKhoan, ArrayList<SinhVien>dsSinhVien, ArrayList<Lop>dsLop, ArrayList<KhoaHoc>dsKhoaHoc, String maHocKy, ArrayList<DRL>dsDRL){
         
         
         for(SinhVien sv: dsSinhVien){
-            String khoaHoc = getKhoaHocFromSV(dsLop, sv.getLop());
-            float soNamHoc = getSoNamHoc(dsKhoaHoc, khoaHoc);
-            String hkCuoi = doiKhoaHocSangHKCuoi(khoaHoc, soNamHoc);
-            int soSanh = soSanhHocKy(maHocKy, hkCuoi);
-            if(soSanh<=0){
-                DRL drl = new DRL();
-                drl.setMSSV(sv.getMaSV());
-                drl.setMaHK(maHocKy);
-                drl.setTrangThai(false);
-                drl.setDiem1(0);
-                drl.setDiem2(0);
-                drl.setDiem3(0);
-                dsDRL.add(drl);
-                //Database.saveOneDRLToDB(drl);
+            boolean flag = false;
+            for(TaiKhoan tk: dsTaiKhoan){
+                if(tk.getTenTK().equals(sv.getMaSV())){
+                    if(tk.isTrangThai() == false){
+                        flag = true;
+                        break;
+                    }
+                }
             }
+            if(flag == false){
+                String khoaHoc = getKhoaHocFromSV(dsLop, sv.getLop());
+                float soNamHoc = getSoNamHoc(dsKhoaHoc, khoaHoc);
+                String hkCuoi = doiKhoaHocSangHKCuoi(khoaHoc, soNamHoc);
+                int soSanh = soSanhHocKy(maHocKy, hkCuoi);
+                if(soSanh<=0){
+                    DRL drl = new DRL();
+                    drl.setMSSV(sv.getMaSV());
+                    drl.setMaHK(maHocKy);
+                    drl.setTrangThai(false);
+                    drl.setDiem1(0);
+                    drl.setDiem2(0);
+                    drl.setDiem3(0);
+                    dsDRL.add(drl);
+                    //Database.saveOneDRLToDB(drl);
+                }
+            }
+            
         }
         Database.saveListDRLToDB(dsDRL);
     }

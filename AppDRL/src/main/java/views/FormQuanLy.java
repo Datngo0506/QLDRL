@@ -26,7 +26,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import models.ChucVu;
 import models.CoVan;
@@ -103,7 +102,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
             Database.addListKhoaToTable(dsKhoa, jTableKhoa, dsTaiKhoan);
         }
         else if (text.contains("CỐ VẤN")){
-            Database.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa);
+            Database.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa, dsTaiKhoan);
             ThuatToan.addChoiceKhoa(choiceKhoa_CoVan, dsKhoa);
         }
         else if(text.contains("THỜI GIAN BIỂU")){
@@ -349,6 +348,10 @@ public final class FormQuanLy extends javax.swing.JFrame {
         buttonHoverEvent(jLabelNutDuyet, jPanelNutDuyet);
         buttonHoverEvent(jLabelNutCapNhat, jPanelNutCapNhat);
         buttonHoverEvent(jLabelNutThemKhoaHoc, jPanelNutThemKhoaHoc);
+        
+        buttonHoverEvent(jLabelNutKhoaKhoa, jPanelNutKhoaKhoa);
+        buttonHoverEvent(jLabelNutKhoaCV, jPanelNutKhoaCV);
+        buttonHoverEvent(jLabelNutKhoaSV, jPanelNutKhoaSV);
         
         buttonHoverEvent(jLabelNutChiTietTC, jPanelNutChiTietTC);
         buttonHoverEvent(jLabelNutThemTieuChi, jPanelNutThemTieuChi);
@@ -726,6 +729,8 @@ public final class FormQuanLy extends javax.swing.JFrame {
         jLabelNutXoaKhoa = new javax.swing.JLabel();
         jPanelNutSuaKhoa = RoundedPanel.createRoundedPanel();
         jLabelNutSuaKhoa = new javax.swing.JLabel();
+        jPanelNutKhoaKhoa = RoundedPanel.createRoundedPanel();
+        jLabelNutKhoaKhoa = new javax.swing.JLabel();
         jPanelNutThemKhoa = RoundedPanel.createRoundedPanel();
         jLabelNutThemKhoa = new javax.swing.JLabel();
         panelBorderTableKhoa = new com.raven.swing.PanelBorder();
@@ -756,6 +761,8 @@ public final class FormQuanLy extends javax.swing.JFrame {
         jLabelNutSuaCoVan = new javax.swing.JLabel();
         jPanelNutThemCoVan = RoundedPanel.createRoundedPanel();
         jLabelNutThemCoVan = new javax.swing.JLabel();
+        jPanelNutKhoaCV = RoundedPanel.createRoundedPanel();
+        jLabelNutKhoaCV = new javax.swing.JLabel();
         jPanelTableCoVan = new com.raven.swing.PanelBorder();
         jLabelTableTitleCoVan = new javax.swing.JLabel();
         jScrollPaneCoVan = new javax.swing.JScrollPane();
@@ -805,6 +812,8 @@ public final class FormQuanLy extends javax.swing.JFrame {
         jLabelSuaSV = new javax.swing.JLabel();
         jPanelThemSV = RoundedPanel.createRoundedPanel();
         jLabelThemSV = new javax.swing.JLabel();
+        jPanelNutKhoaSV = RoundedPanel.createRoundedPanel();
+        jLabelNutKhoaSV = new javax.swing.JLabel();
         jPanelBorderSV = new com.raven.swing.PanelBorder();
         jLabelTitleSV = new javax.swing.JLabel();
         jScrollPaneSV = new javax.swing.JScrollPane();
@@ -1964,6 +1973,34 @@ public final class FormQuanLy extends javax.swing.JFrame {
             .addComponent(jLabelNutSuaKhoa, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
+        jPanelNutKhoaKhoa.setBackground(new java.awt.Color(221, 51, 51));
+        jPanelNutKhoaKhoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabelNutKhoaKhoa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelNutKhoaKhoa.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelNutKhoaKhoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/whiteclose.png"))); // NOI18N
+        jLabelNutKhoaKhoa.setText("Mở /Khóa TK");
+        jLabelNutKhoaKhoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelNutKhoaKhoa.setPreferredSize(new java.awt.Dimension(32, 16));
+        jLabelNutKhoaKhoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelNutKhoaKhoaMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelNutKhoaKhoaLayout = new javax.swing.GroupLayout(jPanelNutKhoaKhoa);
+        jPanelNutKhoaKhoa.setLayout(jPanelNutKhoaKhoaLayout);
+        jPanelNutKhoaKhoaLayout.setHorizontalGroup(
+            jPanelNutKhoaKhoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelNutKhoaKhoaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelNutKhoaKhoa, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
+        );
+        jPanelNutKhoaKhoaLayout.setVerticalGroup(
+            jPanelNutKhoaKhoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabelNutKhoaKhoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         jPanelNutThemKhoa.setBackground(new java.awt.Color(221, 51, 51));
         jPanelNutThemKhoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
@@ -1998,7 +2035,9 @@ public final class FormQuanLy extends javax.swing.JFrame {
             jPanelThanhTieuDeKhoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelThanhTieuDeKhoaLayout.createSequentialGroup()
                 .addComponent(jPanelNutTieuDeKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 314, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
+                .addComponent(jPanelNutKhoaKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelNutThemKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelNutSuaKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2011,6 +2050,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
             .addComponent(jPanelNutXoaKhoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanelNutSuaKhoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanelNutThemKhoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelNutKhoaKhoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanelKhoaMain.add(jPanelThanhTieuDeKhoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 764, 40));
@@ -2034,7 +2074,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã khoa", "Tên khoa", "Ngày thành lập", "Tên đăng nhập", "Mật khẩu"
+                "Mã khoa", "Tên khoa", "Ngày thành lập", "Tên đăng nhập", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -2391,13 +2431,43 @@ public final class FormQuanLy extends javax.swing.JFrame {
             .addComponent(jLabelNutThemCoVan, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
+        jPanelNutKhoaCV.setBackground(new java.awt.Color(221, 51, 51));
+        jPanelNutKhoaCV.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabelNutKhoaCV.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelNutKhoaCV.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelNutKhoaCV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/whiteclose.png"))); // NOI18N
+        jLabelNutKhoaCV.setText("Mở /Khóa TK");
+        jLabelNutKhoaCV.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelNutKhoaCV.setPreferredSize(new java.awt.Dimension(32, 16));
+        jLabelNutKhoaCV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelNutKhoaCVMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelNutKhoaCVLayout = new javax.swing.GroupLayout(jPanelNutKhoaCV);
+        jPanelNutKhoaCV.setLayout(jPanelNutKhoaCVLayout);
+        jPanelNutKhoaCVLayout.setHorizontalGroup(
+            jPanelNutKhoaCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelNutKhoaCVLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelNutKhoaCV, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
+        );
+        jPanelNutKhoaCVLayout.setVerticalGroup(
+            jPanelNutKhoaCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabelNutKhoaCV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanelThanhTieuDeCoVanLayout = new javax.swing.GroupLayout(jPanelThanhTieuDeCoVan);
         jPanelThanhTieuDeCoVan.setLayout(jPanelThanhTieuDeCoVanLayout);
         jPanelThanhTieuDeCoVanLayout.setHorizontalGroup(
             jPanelThanhTieuDeCoVanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelThanhTieuDeCoVanLayout.createSequentialGroup()
                 .addComponent(jPanelNutTieuDeCoVan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 326, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                .addComponent(jPanelNutKhoaCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelNutThemCoVan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelNutSuaCoVan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2410,6 +2480,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
             .addComponent(jPanelNutXoaCoVan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanelNutSuaCoVan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanelNutThemCoVan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelNutKhoaCV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanelCoVanMain.add(jPanelThanhTieuDeCoVan, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 764, 40));
@@ -2433,11 +2504,11 @@ public final class FormQuanLy extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Mã cố vấn", "  Tên cố vấn", "  Email trường cấp", "  Khoa"
+                "STT", "Mã cố vấn", "  Tên cố vấn", "  Email trường cấp", "  Khoa", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -3050,6 +3121,34 @@ public final class FormQuanLy extends javax.swing.JFrame {
             .addComponent(jLabelThemSV, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
+        jPanelNutKhoaSV.setBackground(new java.awt.Color(221, 51, 51));
+        jPanelNutKhoaSV.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabelNutKhoaSV.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelNutKhoaSV.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelNutKhoaSV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/whiteclose.png"))); // NOI18N
+        jLabelNutKhoaSV.setText("Mở /Khóa TK");
+        jLabelNutKhoaSV.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelNutKhoaSV.setPreferredSize(new java.awt.Dimension(32, 16));
+        jLabelNutKhoaSV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelNutKhoaSVMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelNutKhoaSVLayout = new javax.swing.GroupLayout(jPanelNutKhoaSV);
+        jPanelNutKhoaSV.setLayout(jPanelNutKhoaSVLayout);
+        jPanelNutKhoaSVLayout.setHorizontalGroup(
+            jPanelNutKhoaSVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNutKhoaSVLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelNutKhoaSV, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
+        );
+        jPanelNutKhoaSVLayout.setVerticalGroup(
+            jPanelNutKhoaSVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabelNutKhoaSV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanelTitleSVLayout = new javax.swing.GroupLayout(jPanelTitleSV);
         jPanelTitleSV.setLayout(jPanelTitleSVLayout);
         jPanelTitleSVLayout.setHorizontalGroup(
@@ -3062,6 +3161,11 @@ public final class FormQuanLy extends javax.swing.JFrame {
                 .addComponent(jPanelSuaSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelXoaSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelTitleSVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelTitleSVLayout.createSequentialGroup()
+                    .addGap(333, 333, 333)
+                    .addComponent(jPanelNutKhoaSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(288, Short.MAX_VALUE)))
         );
         jPanelTitleSVLayout.setVerticalGroup(
             jPanelTitleSVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3069,6 +3173,8 @@ public final class FormQuanLy extends javax.swing.JFrame {
             .addComponent(jPanelXoaSV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanelSuaSV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanelThemSV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanelTitleSVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanelNutKhoaSV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanelSinhVienMain.add(jPanelTitleSV, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 764, 40));
@@ -3086,7 +3192,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "   MSSV", "   Họ và tên", "   Lớp", "   Chức vụ", "Mật khẩu"
+                "STT", "   MSSV", "   Họ và tên", "   Lớp", "   Chức vụ", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -3263,10 +3369,10 @@ public final class FormQuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         String maKhoa = ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa);
         if(maKhoa.equals("")){
-            Database.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa);
+            Database.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa, dsTaiKhoan);
         }
         else{
-            Database.addListCoVanToTable_MaKhoa(dsCoVan, jTableCoVan, dsKhoa, maKhoa);
+            Database.addListCoVanToTable_MaKhoa(dsCoVan, jTableCoVan, dsKhoa, maKhoa, dsTaiKhoan);
         }
         
     }//GEN-LAST:event_choiceKhoa_CoVanItemStateChanged
@@ -3322,11 +3428,11 @@ public final class FormQuanLy extends javax.swing.JFrame {
                         i++;
                     }
                     if(choiceKhoa_CoVan.getSelectedItem().equals("Tất cả")){
-                        Database.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa);
+                        Database.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa, dsTaiKhoan);
                     }
                     else{
                         Database.addListCoVanToTable_MaKhoa(dsCoVan, jTableCoVan, dsKhoa, 
-                        ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa));
+                        ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa), dsTaiKhoan);
                     }
                     ThuatToan.suaCoVanTrongLop(dsLop, maCoVan, " ");
                     Database.saveListLopToDB(dsLop);
@@ -3394,38 +3500,35 @@ public final class FormQuanLy extends javax.swing.JFrame {
 
             // Lấy năm từ ngày hiện tại
             int currentYear = currentDate.getYear();
-            String nienKhoa = Integer.toString(currentYear)+ "-" +Integer.toString(currentYear+1);
-            String hocKy1 = nienKhoa + "-1";
-            String hocKy2 = nienKhoa + "-2";
-            if( dsHocKy.getLast().getMaHK_NK().equals(hocKy2)){
-                JOptionPane.showMessageDialog(rootPane, "2 học kỳ mới của năm nay đã được thêm!");
+            String hkMoi = ThuatToan.tangHocKy(dsHocKy.getLast().getMaHK_NK());
+            String parts[] = hkMoi.split("-");
+            String nienKhoa = parts[0] + "-" +parts[1];
+            int namMoi = Integer.parseInt(parts[0]);
+            if( currentYear < namMoi){
+                JOptionPane.showMessageDialog(rootPane, "Không được thêm quá nhiều học kỳ trong 1 năm!");
             }
             else{
-                int chon = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn thêm 2 học kỳ mới của năm nay?");
+                int chon = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn thêm học kỳ mới?");
                 if(chon ==  JOptionPane.YES_OPTION){
                     HocKy hk1 = new HocKy();
-                    hk1.setMaHK_NK(hocKy1);
+                    hk1.setMaHK_NK(hkMoi);
                     hk1.setNienKhoa(nienKhoa);
-                    hk1.setHocKy("1");
+                    hk1.setHocKy(parts[2]);
                     hk1.setXet(false);
                     dsHocKy.add(hk1);
-
-                    HocKy hk2 = new HocKy();
-                    hk2.setMaHK_NK(hocKy2);
-                    hk2.setNienKhoa(nienKhoa);
-                    hk2.setHocKy("2");
-                    hk2.setXet(false);
-                    dsHocKy.add(hk2);
-                    ThongBao tb1 = ThuatToan.addNewThongBaoHK1(hocKy1, Integer.toString(currentYear+1));
-                    ThongBao tb2 = ThuatToan.addNewThongBaoHK2(hocKy2, Integer.toString(currentYear+1));
+                    ThongBao tb1;
+                    if(Integer.parseInt(parts[2]) == 1){
+                        tb1 = ThuatToan.addNewThongBaoHK1(hkMoi, Integer.toString(currentYear+1));
+                    }
+                    else{
+                        tb1 = ThuatToan.addNewThongBaoHK2(hkMoi, Integer.toString(currentYear+1));
+                    }
                     dsThongBao.add(tb1);
-                    dsThongBao.add(tb2);
                     Database.saveListThongBaoToDB(dsThongBao);
                     Database.addListThongBaoToTable(dsThongBao, jTableHanNop);
                     Database.addListHocKyToTable(dsHocKy, jTableHocKy);
                     Database.saveListHocKyToDB(dsHocKy);
-                    ThuatToan.addDRLSV1HocKy(dsSinhVien, dsLop, dsKhoaHoc, hocKy1, dsDRL);
-                    ThuatToan.addDRLSV1HocKy(dsSinhVien, dsLop, dsKhoaHoc, hocKy2, dsDRL);
+                    ThuatToan.addDRLSV1HocKy(dsTaiKhoan, dsSinhVien, dsLop, dsKhoaHoc, hkMoi, dsDRL);
 
                 }
             }
@@ -3912,37 +4015,49 @@ public final class FormQuanLy extends javax.swing.JFrame {
            if(JOptionPane.showConfirmDialog(jPanelNutCapNhat, "Bạn có chắc chắn xóa không?") == JOptionPane.YES_OPTION){
                Object cellValue = jTableSV.getValueAt(chon, 1);
                 String maSV = cellValue.toString().trim();
+                
+                for(DRL drl: dsDRL){
+                    if(drl.getMSSV().equals(maSV) && drl.isTrangThai() == true){
+                        JOptionPane.showMessageDialog(jPanelNutCapNhat, "Không thể xóa sinh viên đã từng có kết quả xét điểm!");
+                        return;
+                    }
+                }
+                 
+                    new Thread(() -> {
+                        int k=0;
+                        for(SinhVien sv: dsSinhVien){
+                            if(sv.getMaSV().equals(maSV)){
+                                dsSinhVien.remove(k);
+                                break;
+                            }
+                            k++;
+                        }
+                        k=0;
+                        for(TaiKhoan tk: dsTaiKhoan){
+                            if(tk.getTenTK().equals(maSV)){
+                                dsTaiKhoan.remove(k);
+                                break;
+                            }
+                            k++;
+                        }
+                        k=0;
+                        for(DRL drl: dsDRL){
+                            if(drl.getMSSV().equals(maSV)){
+                                dsDRL.remove(k);
+                            }
+                            k++;
+                        }
+                        Database.saveListDRLToDB(dsDRL);
+                        Database.saveListTaiKhoanToDB(dsTaiKhoan);
+                        Database.saveListSinhVienToDB(dsSinhVien);
 
-                new Thread(() -> {
-                    for(DRL drl: dsDRL){
-                     if(drl.getMSSV().equals(maSV) && drl.isTrangThai() == true){
-                         JOptionPane.showMessageDialog(jPanelNutCapNhat, "Không thể xóa sinh viên đã từng có kết quả xét điểm!");
-                         return;
-                     }
-                 }
-                 }).start();
-                 new Thread(() -> {
-                     int k=0;
-                     for(SinhVien sv: dsSinhVien){
-                         if(sv.getMaSV().equals(maSV)){
-                             dsSinhVien.remove(k);
-                             break;
-                         }
-                         k++;
-                     }
-                     k=0;
-                     for(TaiKhoan tk: dsTaiKhoan){
-                         if(tk.getTenTK().equals(maSV)){
-                             dsTaiKhoan.remove(k);
-                             break;
-                         }
-                         k++;
-                     }
-                     Database.saveListTaiKhoanToDB(dsTaiKhoan);
-                     Database.saveListSinhVienToDB(dsSinhVien);
-
-                 }).start();
-                 Database.deleteOneRow(jTableSV, chon);
+                    }).start();
+                    Database.deleteOneRow(jTableSV, chon);
+                    for(int i=0; i<jTableSV.getRowCount(); i++){
+                        jTableSV.setValueAt(i, i, 0);
+                    }
+                
+                 
            }
            
            //jTableSV.remove(chon);
@@ -3955,6 +4070,91 @@ public final class FormQuanLy extends javax.swing.JFrame {
             this.setVisible(false);
         }
     }//GEN-LAST:event_jLabelLogOutMouseClicked
+
+    private void jLabelNutKhoaKhoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutKhoaKhoaMouseClicked
+        // TODO add your handling code here:
+        int chon = jTableKhoa.getSelectedRow();
+        if(chon == -1){
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn khoa cần khóa/mở tài khoản!");
+        }
+        else{
+            if(JOptionPane.showConfirmDialog(jPanelNutCapNhat, "Bạn có chắc chắn khóa/mở tài khoản này?") == JOptionPane.YES_OPTION){
+                new Thread(() -> {
+                    Object cellValue = jTableKhoa.getValueAt(chon, 0);
+                    for(TaiKhoan tk: dsTaiKhoan){
+                        if(tk.getTenTK().equals(cellValue.toString())){
+                            tk.setTrangThai(!tk.isTrangThai());
+                            break;
+                        }
+                    }
+                    Database.saveListTaiKhoanToDB(dsTaiKhoan);
+                }).start();
+                new Thread(() -> {
+                    Database.addListKhoaToTable(dsKhoa, jTableKhoa, dsTaiKhoan);
+                }).start();
+            }
+        }
+    }//GEN-LAST:event_jLabelNutKhoaKhoaMouseClicked
+
+    private void jLabelNutKhoaCVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutKhoaCVMouseClicked
+        // TODO add your handling code here:
+        int chon = jTableCoVan.getSelectedRow();
+        if(chon == -1){
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn khoa cần khóa/mở tài khoản!");
+        }
+        else{
+            if(JOptionPane.showConfirmDialog(jPanelNutCapNhat, "Bạn có chắc chắn khóa/mở tài khoản này?") == JOptionPane.YES_OPTION){
+                new Thread(() -> {
+                    Object cellValue = jTableCoVan.getValueAt(chon, 1);
+                    for(TaiKhoan tk: dsTaiKhoan){
+                        if(tk.getTenTK().equals(cellValue.toString())){
+                            tk.setTrangThai(!tk.isTrangThai());
+                            break;
+                        }
+                    }
+                    Database.saveListTaiKhoanToDB(dsTaiKhoan);
+                }).start();
+                new Thread(() -> {
+                    if(choiceKhoa_CoVan.getSelectedItem().equals("Tất cả")){
+                        Database.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa, dsTaiKhoan);
+                    }
+                    else{
+                        Database.addListCoVanToTable_MaKhoa(dsCoVan,  jTableCoVan, dsKhoa, ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa), dsTaiKhoan);
+                    }
+                }).start();
+            }
+        }
+    }//GEN-LAST:event_jLabelNutKhoaCVMouseClicked
+
+    private void jLabelNutKhoaSVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutKhoaSVMouseClicked
+        // TODO add your handling code here:
+        int chon = jTableSV.getSelectedRow();
+        if(chon == -1){
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn khoa cần khóa/mở tài khoản!");
+        }
+        else{
+            if(JOptionPane.showConfirmDialog(jPanelNutCapNhat, "Bạn có chắc chắn khóa/mở tài khoản này?") == JOptionPane.YES_OPTION){
+                new Thread(() -> {
+                    Object cellValue = jTableSV.getValueAt(chon, 1);
+                    for(TaiKhoan tk: dsTaiKhoan){
+                        if(tk.getTenTK().equals(cellValue.toString())){
+                            tk.setTrangThai(!tk.isTrangThai());
+                            break;
+                        }
+                    }
+                    Database.saveListTaiKhoanToDB(dsTaiKhoan);
+                }).start();
+                new Thread(() -> {
+                    Object cellValue = jTableSV.getValueAt(chon, 5);
+                    String set;
+                    if(cellValue.toString().equals("Hoạt động")){
+                        set = "Đã khóa";
+                    }else set = "Hoạt động";
+                    jTableSV.setValueAt(set, chon, 5);
+                }).start();
+            }
+        }
+    }//GEN-LAST:event_jLabelNutKhoaSVMouseClicked
 
     
 
@@ -3974,15 +4174,14 @@ public final class FormQuanLy extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FormQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+         //</editor-fold>
+         //</editor-fold>
+         //</editor-fold>
+         //</editor-fold>
+         
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -4032,6 +4231,11 @@ public final class FormQuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNutDoiHanNop;
     private javax.swing.JLabel jLabelNutDoiTT;
     private javax.swing.JLabel jLabelNutDuyet;
+    private javax.swing.JLabel jLabelNutKhoaCV;
+    private javax.swing.JLabel jLabelNutKhoaKhoa;
+    private javax.swing.JLabel jLabelNutKhoaKhoa1;
+    private javax.swing.JLabel jLabelNutKhoaKhoa2;
+    private javax.swing.JLabel jLabelNutKhoaSV;
     private javax.swing.JLabel jLabelNutLienHe;
     private javax.swing.JLabel jLabelNutSV;
     private javax.swing.JLabel jLabelNutSuaCoVan;
@@ -4109,6 +4313,11 @@ public final class FormQuanLy extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelNutDoiHanNop;
     private javax.swing.JPanel jPanelNutDoiTT;
     private javax.swing.JPanel jPanelNutDuyet;
+    private javax.swing.JPanel jPanelNutKhoaCV;
+    private javax.swing.JPanel jPanelNutKhoaKhoa;
+    private javax.swing.JPanel jPanelNutKhoaKhoa1;
+    private javax.swing.JPanel jPanelNutKhoaKhoa2;
+    private javax.swing.JPanel jPanelNutKhoaSV;
     private javax.swing.JPanel jPanelNutLienHe;
     private javax.swing.JPanel jPanelNutSuaCoVan;
     private javax.swing.JPanel jPanelNutSuaKhoa;

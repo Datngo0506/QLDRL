@@ -37,7 +37,9 @@ public class TableCoVan extends TableCo5Cot {
                 if (i1 == 4 ) {
                     header.setHorizontalAlignment(JLabel.LEFT);
                 }
-                
+                if (i1 == 5 ) {
+                    header.setHorizontalAlignment(JLabel.LEFT);
+                }
                 return header;
             }
         });
@@ -61,6 +63,9 @@ public class TableCoVan extends TableCo5Cot {
                 setHorizontalAlignment(JLabel.LEFT);
             }
             if(i1 == 3 ){
+                setHorizontalAlignment(JLabel.LEFT);
+            }
+            if(i1==4){
                 setHorizontalAlignment(JLabel.LEFT);
             }
             if(i1==4){
@@ -98,11 +103,13 @@ public class TableCoVan extends TableCo5Cot {
             column = columnModel.getColumn(1);
             column.setPreferredWidth((int) (getWidth() * (1.5 / totalWeight))); // Cột 2
             column = columnModel.getColumn(2);
-            column.setPreferredWidth((int) (getWidth() * (3.0 / totalWeight))); // Cột 3
+            column.setPreferredWidth((int) (getWidth() * (2.5 / totalWeight))); // Cột 3
             column = columnModel.getColumn(3);
-            column.setPreferredWidth((int) (getWidth() * (4.0 / totalWeight))); // Cột 4
+            column.setPreferredWidth((int) (getWidth() * (3.0 / totalWeight))); // Cột 4
             column = columnModel.getColumn(4);
             column.setPreferredWidth((int) (getWidth() * (3.0 / totalWeight))); // Cột 5
+            column = columnModel.getColumn(5);
+            column.setPreferredWidth((int) (getWidth() * (1.5 / totalWeight))); // Cột 5
         }
 
 

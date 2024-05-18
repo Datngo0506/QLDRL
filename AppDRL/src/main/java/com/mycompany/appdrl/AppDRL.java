@@ -77,13 +77,18 @@ public class AppDRL {
 
         // Sau khi tất cả các tác vụ đã hoàn thành, bạn có thể thực hiện xử lý tiếp theo
         ThuatToan.sapXepTheoMSSV(dsDRL);
-        Khoa khoa = null;
-        if (!dsKhoa.isEmpty()) {
-            khoa = dsKhoa.get(1);
-        }
+        Khoa khoa = dsKhoa.get(1);
+//        for(DRL drl: dsDRL){
+//            System.out.println(drl.isTrangThai());
+//        }
+        
+//        for(TaiKhoan tk: dsTaiKhoan){
+//            System.out.println(tk.isTrangThai());
+//        }
 
         // Hiển thị form với dữ liệu đã tải
-        new FormHoiDongKhoa(khoa, dsTaiKhoan, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop, dsChucVu, dsSinhVien, dsThongBao, dsDRL).setVisible(true);
+        new FormQuanLy(dsTaiKhoan, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop, dsTieuChi, dsChucVu, dsSinhVien, dsThongBao, dsDRL).setVisible(true);
+        //new FormHoiDongKhoa(khoa, dsTaiKhoan, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop, dsChucVu, dsSinhVien, dsThongBao, dsDRL).setVisible(true);
     }
 
 

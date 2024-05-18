@@ -98,7 +98,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
     //Xử lý khi click vào menu nào thì bảng của menu đó có dữ liệu
     public void addTable(String text){
         if (text.contains("CỐ VẤN")){
-            Database.addListCoVanToTable_1Khoa(dsCoVan, jTableCoVan, khoa.getMaKhoa(), khoa.getTenKhoa());
+            Database.addListCoVanToTable_1Khoa(dsCoVan, jTableCoVan, khoa.getMaKhoa(), khoa.getTenKhoa(), dsTaiKhoan);
             choiceKhoa_CoVan.removeAll();
             choiceKhoa_CoVan.add(khoa.getTenKhoa());
         }
@@ -697,7 +697,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
         choiceLop_SV = new java.awt.Choice();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Quản lý điểm rèn luyện học viện cơ sở");
+        setTitle("Hội đồng khoa");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1543,11 +1543,11 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Mã cố vấn", "  Tên cố vấn", "  Email trường cấp", "  Khoa"
+                "STT", "Mã cố vấn", "  Tên cố vấn", "  Email trường cấp", "  Khoa", "Tình trạng"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -2303,10 +2303,10 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
         // TODO add your handling code here:
         String maKhoa = ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa);
         if(maKhoa.equals("")){
-            Database.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa);
+            Database.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa, dsTaiKhoan);
         }
         else{
-            Database.addListCoVanToTable_MaKhoa(dsCoVan, jTableCoVan, dsKhoa, maKhoa);
+            Database.addListCoVanToTable_MaKhoa(dsCoVan, jTableCoVan, dsKhoa, maKhoa, dsTaiKhoan);
         }
         
     }//GEN-LAST:event_choiceKhoa_CoVanItemStateChanged
@@ -2362,11 +2362,11 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
                         i++;
                     }
                     if(choiceKhoa_CoVan.getSelectedItem().equals("Tất cả")){
-                        Database.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa);
+                        Database.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa, dsTaiKhoan);
                     }
                     else{
                         Database.addListCoVanToTable_MaKhoa(dsCoVan, jTableCoVan, dsKhoa, 
-                        ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa));
+                        ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa), dsTaiKhoan);
                     }
                     ThuatToan.suaCoVanTrongLop(dsLop, maCoVan, " ");
                     Database.saveListLopToDB(dsLop);

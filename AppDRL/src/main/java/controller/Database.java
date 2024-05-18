@@ -62,9 +62,17 @@ public class Database {
                     String matKhau = resultSet.getString("MatKhau").trim();
                     String loaiTK = resultSet.getString("LoaiTK").trim();
                     boolean trangThai = resultSet.getBoolean("TrangThai");
-
+                    //System.out.println(trangThai);
+                    
+                    TaiKhoan tk = new TaiKhoan();
+                    tk.setMatKhau(matKhau);
+                    tk.setTenTK(tenTK);
+                    tk.setLoaiTK(loaiTK);
+                    tk.setTrangThai(trangThai);
+                    //System.out.println(tk.isTrangThai());
+                    
                     // Tạo đối tượng TaiKhoan và thêm vào ArrayList
-                    dsTaiKhoan.add(new TaiKhoan( tenTK, matKhau, loaiTK, trangThai));
+                    dsTaiKhoan.add(tk);
                 }
             }
         } catch (SQLException e) {
@@ -177,7 +185,7 @@ public class Database {
 
         // Duyệt qua danh sách các khoa và thêm vào bảng
         for (Khoa khoa: dsKhoa) {
-            Object[] row = {khoa.getMaKhoa(), khoa.getTenKhoa(), khoa.getNgayThanhLap(), khoa.getMaKhoa() ,ThuatToan.anMatKhau(ThuatToan.getMatKhau(dsTaiKhoan, khoa.getMaKhoa()))};
+            Object[] row = {khoa.getMaKhoa(), khoa.getTenKhoa(), khoa.getNgayThanhLap(), khoa.getMaKhoa() ,ThuatToan.getTrangThai(dsTaiKhoan, khoa.getMaKhoa())};
             model.addRow(row);
         }
     }
@@ -263,7 +271,7 @@ public class Database {
     
     
 
-    public static void addListCoVanToTable(ArrayList<CoVan> dsCoVan, JTable tableCoVan, ArrayList<Khoa> dsKhoa) {
+    public static void addListCoVanToTable(ArrayList<CoVan> dsCoVan, JTable tableCoVan, ArrayList<Khoa> dsKhoa, ArrayList<TaiKhoan> dsTaiKhoan) {
         DefaultTableModel model = (DefaultTableModel) tableCoVan.getModel();
 
         // Xóa dữ liệu cũ trong bảng
@@ -274,12 +282,13 @@ public class Database {
         for (int i = 0; i < dsCoVan.size(); i++) {
             CoVan cv = dsCoVan.get(i);
 
-            Object[] row = {Integer.toString(i+1), cv.getMaCV(), cv.getTenCV(), cv.getEmail().toLowerCase(), ThuatToan.doiMaKhoaThanhTenKhoa(cv.getKhoa(), dsKhoa)};
+            Object[] row = {Integer.toString(i+1), cv.getMaCV(), cv.getTenCV(), cv.getEmail().toLowerCase(), 
+                ThuatToan.doiMaKhoaThanhTenKhoa(cv.getKhoa(), dsKhoa), ThuatToan.getTrangThai(dsTaiKhoan, cv.getMaCV())};
             model.addRow(row);
         }
     }
     
-    public static void addListCoVanToTable_1Khoa(ArrayList<CoVan> dsCoVan, JTable tableCoVan, String maKhoa, String tenKhoa) {
+    public static void addListCoVanToTable_1Khoa(ArrayList<CoVan> dsCoVan, JTable tableCoVan, String maKhoa, String tenKhoa, ArrayList<TaiKhoan> dsTaiKhoan) {
         DefaultTableModel model = (DefaultTableModel) tableCoVan.getModel();
 
         // Xóa dữ liệu cũ trong bảng
@@ -291,13 +300,13 @@ public class Database {
             if(dsCoVan.get(i).getKhoa().equals(maKhoa)){
                 CoVan cv = dsCoVan.get(i);
                 k++;
-                Object[] row = {Integer.toString(k), cv.getMaCV(), cv.getTenCV(), cv.getEmail().toLowerCase(), tenKhoa};
+                Object[] row = {Integer.toString(k), cv.getMaCV(), cv.getTenCV(), cv.getEmail().toLowerCase(), tenKhoa, ThuatToan.getTrangThai(dsTaiKhoan, cv.getMaCV())};
                 model.addRow(row);
             }            
         }
     }
     
-    public static void addListCoVanToTable_MaKhoa(ArrayList<CoVan> dsCoVan, JTable tableCoVan, ArrayList<Khoa> dsKhoa, String maKhoa) {
+    public static void addListCoVanToTable_MaKhoa(ArrayList<CoVan> dsCoVan, JTable tableCoVan, ArrayList<Khoa> dsKhoa, String maKhoa, ArrayList<TaiKhoan> dsTaiKhoan) {
         DefaultTableModel model = (DefaultTableModel) tableCoVan.getModel();
 
         // Xóa dữ liệu cũ trong bảng
@@ -309,7 +318,8 @@ public class Database {
             if(dsCoVan.get(i).getKhoa().equals(maKhoa)){
                 CoVan cv = dsCoVan.get(i);
                 k++;
-                Object[] row = {Integer.toString(k), cv.getMaCV(), cv.getTenCV(), cv.getEmail(), ThuatToan.doiMaKhoaThanhTenKhoa(cv.getKhoa(), dsKhoa)};
+                Object[] row = {Integer.toString(k), cv.getMaCV(), cv.getTenCV(), cv.getEmail(), 
+                    ThuatToan.doiMaKhoaThanhTenKhoa(cv.getKhoa(), dsKhoa), ThuatToan.getTrangThai(dsTaiKhoan, cv.getMaCV())};
                 model.addRow(row);
             }            
         }
@@ -904,7 +914,7 @@ public class Database {
             if (sinhVien != null) { // Kiểm tra sinh viên có null không
                 Object[] row = {Integer.toString(i + 1), sinhVien.getMaSV(), sinhVien.getHoTen(), 
                 sinhVien.getLop(), ThuatToan.getTenChucVu(dsChucVu, sinhVien.getChucVu()), 
-                ThuatToan.anMatKhau(ThuatToan.getMatKhau(dsTaiKhoan, sinhVien.getMaSV()))};
+                ThuatToan.getTrangThai(dsTaiKhoan, sinhVien.getMaSV())};
                 i++;
                 model.addRow(row);
             }
@@ -923,7 +933,7 @@ public class Database {
                 if(sinhVien.getLop().equals(tenLop)){
                     Object[] row = {Integer.toString(i + 1), sinhVien.getMaSV(), sinhVien.getHoTen(), 
                     sinhVien.getLop(), ThuatToan.getTenChucVu(dsChucVu, sinhVien.getChucVu()), 
-                    ThuatToan.anMatKhau(ThuatToan.getMatKhau(dsTaiKhoan, sinhVien.getMaSV()))};
+                    ThuatToan.getTrangThai(dsTaiKhoan, sinhVien.getMaSV())};
                     i++;
                     model.addRow(row);
                 }
@@ -944,7 +954,7 @@ public class Database {
                 if(ThuatToan.getKhoaFromSinhVien(dsLop, sinhVien.getLop()).equals(ThuatToan.doiTenKhoaThanhMaKhoa(tenKhoa, dsKhoa))){
                     Object[] row = {Integer.toString(i + 1), sinhVien.getMaSV(), sinhVien.getHoTen(), sinhVien.getLop(), 
                     ThuatToan.getTenChucVu(dsChucVu, sinhVien.getChucVu()), 
-                    ThuatToan.anMatKhau(ThuatToan.getMatKhau(dsTaiKhoan, sinhVien.getMaSV()))};
+                    ThuatToan.getTrangThai(dsTaiKhoan, sinhVien.getMaSV())};
                     i++;
                     model.addRow(row);
                 }
@@ -965,13 +975,24 @@ public class Database {
                 if(ThuatToan.getKhoaFromSinhVien(dsLop, sinhVien.getLop()).equals(maKhoa)){
                     Object[] row = {Integer.toString(i + 1), sinhVien.getMaSV(), sinhVien.getHoTen(), sinhVien.getLop(), 
                     ThuatToan.getTenChucVu(dsChucVu, sinhVien.getChucVu()), 
-                    ThuatToan.anMatKhau(ThuatToan.getMatKhau(dsTaiKhoan, sinhVien.getMaSV()))};
+                    ThuatToan.getTrangThai(dsTaiKhoan, sinhVien.getMaSV())};
                     i++;
                     model.addRow(row);
                 }
                 
             }
         }
+    }
+    
+    public static void addOneSinhVienToTable( JTable tableSinhVien, SinhVien sinhVien, ArrayList<ChucVu> dsChucVu, ArrayList<TaiKhoan> dsTaiKhoan) {
+        DefaultTableModel model = (DefaultTableModel) tableSinhVien.getModel();
+        int thuTu = tableSinhVien.getRowCount();
+        String thu = Integer.toString(thuTu+1);
+        Object[] row = {thu, sinhVien.getMaSV(), sinhVien.getHoTen(), sinhVien.getLop(), 
+        ThuatToan.getTenChucVu(dsChucVu, sinhVien.getChucVu()), 
+        ThuatToan.getTrangThai(dsTaiKhoan, sinhVien.getMaSV())};
+        model.addRow(row);
+
     }
     
     public static void addListSinhVienToTable_Lop(ArrayList<SinhVien> dsSinhVien,  JTable tableSinhVien, ArrayList<ChucVu> dsChucVu, ArrayList<TaiKhoan> dsTaiKhoan, String lop) {
@@ -986,7 +1007,7 @@ public class Database {
                 if(sinhVien.getLop().equals(lop)){
                     Object[] row = {Integer.toString(i + 1), sinhVien.getMaSV(), sinhVien.getHoTen(), 
                     sinhVien.getLop(), ThuatToan.getTenChucVu(dsChucVu, sinhVien.getChucVu()), 
-                    ThuatToan.anMatKhau(ThuatToan.getMatKhau(dsTaiKhoan, sinhVien.getMaSV()))};
+                    ThuatToan.getTrangThai(dsTaiKhoan, sinhVien.getMaSV())};
                     i++;
                     model.addRow(row);
                 }

@@ -590,10 +590,10 @@ public final class FormThem_SuaCoVan extends javax.swing.JFrame {
                         dsCoVan.get(hub).setQueQuan(ThuatToan.chuanHoaDiaDanh(jTextFieldQueQuan.getText()));
                         dsCoVan.get(hub).setDiaChi(ThuatToan.chuanHoaDiaDanh(jTextFieldDiaChi.getText()));
                         if(ch.getSelectedItem().equals("Tất cả")){
-                            Database.addListCoVanToTable(dsCoVan, table, dsKhoa);
+                            Database.addListCoVanToTable(dsCoVan, table, dsKhoa, dsTaiKhoan);
                         }
                         else{
-                            Database.addListCoVanToTable_MaKhoa(dsCoVan, table, dsKhoa, ThuatToan.doiTenKhoaThanhMaKhoa(ch.getSelectedItem(), dsKhoa));
+                            Database.addListCoVanToTable_MaKhoa(dsCoVan, table, dsKhoa, ThuatToan.doiTenKhoaThanhMaKhoa(ch.getSelectedItem(), dsKhoa), dsTaiKhoan);
                         }
                         ThuatToan.suaCoVanTrongLop(dsLop, cellValue.toString(), maCV);
                         Database.saveListCoVanToDB(dsCoVan);
@@ -633,12 +633,7 @@ public final class FormThem_SuaCoVan extends javax.swing.JFrame {
                             // Thêm cố vấn mới vào danh sách dsCoVan
                             dsCoVan.add(newCoVan);
 
-                            // Cập nhật lại bảng để hiển thị cố vấn mới
-                            if(ch.getSelectedItem().equals("Tất cả")){
-                                Database.addListCoVanToTable(dsCoVan, table, dsKhoa);
-                            } else {
-                                Database.addListCoVanToTable_MaKhoa(dsCoVan, table, dsKhoa, ThuatToan.doiTenKhoaThanhMaKhoa(ch.getSelectedItem(), dsKhoa));
-                            }
+                            
 
                             Database.saveListCoVanToDB(dsCoVan);
                             TaiKhoan tk = new TaiKhoan();
@@ -648,6 +643,12 @@ public final class FormThem_SuaCoVan extends javax.swing.JFrame {
                             tk.setTrangThai(true);
                             dsTaiKhoan.add(tk);
                             Database.saveListTaiKhoanToDB(dsTaiKhoan);
+                            // Cập nhật lại bảng để hiển thị cố vấn mới
+                            if(ch.getSelectedItem().equals("Tất cả")){
+                                Database.addListCoVanToTable(dsCoVan, table, dsKhoa, dsTaiKhoan);
+                            } else {
+                                Database.addListCoVanToTable_MaKhoa(dsCoVan, table, dsKhoa, ThuatToan.doiTenKhoaThanhMaKhoa(ch.getSelectedItem(), dsKhoa), dsTaiKhoan);
+                            }
                         }
                         else{
 
