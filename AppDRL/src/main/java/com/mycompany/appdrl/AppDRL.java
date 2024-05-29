@@ -129,8 +129,8 @@ public class AppDRL {
         // Hiển thị form với dữ liệu đã tải
 //        new FormSinhVien(khoa, sv, lop, tk, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop, 
 //                dsChucVu, dsTaiKhoan, dsSinhVien, dsThongBao, dsDRL, dsTieuChi).setVisible(true);
-//        new FormBanCanSu(khoa, sv, lop, tk, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop, dsChucVu, 
-//                dsTaiKhoan, dsSinhVien, dsThongBao, dsDRL, dsTieuChi).setVisible(true);
+        new FormBanCanSu(khoa, sv, lop, tk, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop, dsChucVu, 
+                dsTaiKhoan, dsSinhVien, dsThongBao, dsDRL, dsTieuChi).setVisible(true);
 //        new FormCoVanHT(khoa, cv, tk2, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop, 
 //                dsChucVu, dsTaiKhoan, dsSinhVien, dsThongBao, dsDRL, dsTieuChi).setVisible(true);
 //        new FormQuanLy(dsTaiKhoan, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop, 

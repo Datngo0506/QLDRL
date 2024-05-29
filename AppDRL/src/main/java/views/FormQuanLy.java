@@ -138,9 +138,25 @@ public final class FormQuanLy extends javax.swing.JFrame {
             jLabelNutChamLai.setVisible(false);
         }
         else {
-            
+            moTrangChu();
         }
     }    
+    
+    public void moTrangChu(){
+        ThuatToan.addChoiceKhoa(choiceKhoa_LopXet, dsKhoa);
+        String hkxet = ThuatToan.getHKXet(dsHocKy);
+        jLabelHKXet.setText(Database.chuyenMaHocKy(hkxet));
+        ThongBao tb = ThuatToan.getThongBao(dsThongBao, hkxet);
+        jLabelNgayBD.setText(ThuatToan.doiNgay(tb.getNgayBD()));
+        jLabelHanSV.setText(ThuatToan.doiNgay(tb.getNgayKTSV()));
+        jLabelHanCS.setText(ThuatToan.doiNgay(tb.getNgayKTCS()));
+        jLabelHanCV.setText(ThuatToan.doiNgay(tb.getNgayKTCV()));
+        jLabelHanKhoa.setText(ThuatToan.doiNgay(tb.getNgayKTKhoa()));
+        choiceKhoa_LopXet.removeAll();
+        ThuatToan.addChoiceKhoa(choiceKhoa_LopXet, dsKhoa);
+        
+        Database.addListLopToTable_HKXet(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy);
+    }
         
         // Sử dụng màu này trong ứng dụng của bạn
     
@@ -404,7 +420,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         //Mặc định khi mở sẽ hiện màn hình tài khoản khi kích vào nút nào thì nút đó hiện ra phần màn hình đó
         jPanelTrangChu.setBackground(hoveColor);
         hienManHinhCanMo(jPanelTrangChu, jPanelKhoaMain, jPanelTieuChiMain, jPanelCoVanMain, jPanelLopMain, jPanelHocKyMain, jPanelSinhVienMain, jPanelDuyetDiem);
-
+        moTrangChu();
         
     }
     
@@ -679,22 +695,25 @@ public final class FormQuanLy extends javax.swing.JFrame {
         jPanelThanhTieuDeTrangChu1 = RoundedPanel.createRoundedPanel();
         jPanelNutTieuDeTrangChu1 = RoundedPanel.createRoundedPanel();
         jLabelNutTieuDeTrangChu1 = new javax.swing.JLabel();
-        jPanelThongBao1 = RoundedPanel.createRoundedPanel();
-        jLabelThongBao1 = new javax.swing.JLabel();
-        jScrollPaneThongBao1 = new javax.swing.JScrollPane();
-        jTextAreaThongBao1 = new javax.swing.JTextArea();
-        jLabelTitleThongBao1 = new javax.swing.JLabel();
-        jPanelThongBao2 = RoundedPanel.createRoundedPanel();
-        jLabelThongBao2 = new javax.swing.JLabel();
-        jLabelTitleThongBao2 = new javax.swing.JLabel();
-        jScrollPaneThongBao2 = new javax.swing.JScrollPane();
-        jTextAreaThongBao2 = new javax.swing.JTextArea();
-        jPanelThongBao3 = RoundedPanel.createRoundedPanel();
-        jLabelThongBao3 = new javax.swing.JLabel();
-        jLabelTitleThongBao3 = new javax.swing.JLabel();
-        jScrollPaneThongBao3 = new javax.swing.JScrollPane();
-        jTextAreaThongBao3 = new javax.swing.JTextArea();
-        jLabel9 = new javax.swing.JLabel();
+        jPanel1 = RoundedPanel.createRoundedPanel();
+        jLabelChonKhoa_Lop4 = new javax.swing.JLabel();
+        jLabelHKXet = new javax.swing.JLabel();
+        jLabelChonKhoa_Lop3 = new javax.swing.JLabel();
+        jLabelNgayBD = new javax.swing.JLabel();
+        jLabelChonKhoa_Lop7 = new javax.swing.JLabel();
+        jLabelChonKhoa_Lop5 = new javax.swing.JLabel();
+        jLabelHanCV = new javax.swing.JLabel();
+        jLabelChonKhoa_Lop8 = new javax.swing.JLabel();
+        jLabelHanKhoa = new javax.swing.JLabel();
+        jLabelChonKhoa_Lop6 = new javax.swing.JLabel();
+        jLabelHanSV = new javax.swing.JLabel();
+        jLabelHanCS = new javax.swing.JLabel();
+        jPanelTableLop_Xet = new com.raven.swing.PanelBorder();
+        jLabelTableTitleLop1 = new javax.swing.JLabel();
+        jScrollPaneLopXet = new javax.swing.JScrollPane();
+        jTableLopXet = new com.raven.swing.TableLop();
+        choiceKhoa_LopXet = new java.awt.Choice();
+        jLabelChonKhoa_Lop1 = new javax.swing.JLabel();
         jPanelHocKyMain = new javax.swing.JPanel();
         jPanelThanhTieuDeHK = RoundedPanel.createRoundedPanel();
         jPanelNutTieuDeHK = RoundedPanel.createRoundedPanel();
@@ -1334,226 +1353,202 @@ public final class FormQuanLy extends javax.swing.JFrame {
 
         jPanelTrangChuMain.add(jPanelThanhTieuDeTrangChu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 770, 40));
 
-        jPanelThongBao1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
 
-        jLabelThongBao1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/tuyensinh.png"))); // NOI18N
-        jLabelThongBao1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabelThongBao1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelThongBao1MouseClicked(evt);
-            }
-        });
+        jLabelChonKhoa_Lop4.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabelChonKhoa_Lop4.setText("Học kỳ đang xét:");
 
-        jScrollPaneThongBao1.setVerticalScrollBar(new ScrollBar());
-        jScrollPaneThongBao1.getVerticalScrollBar().setBackground(Color.WHITE);
-        jScrollPaneThongBao1.getViewport().setBackground(Color.WHITE);
-        JPanel p9 = new JPanel();
-        p9.setBackground(Color.WHITE);
-        jScrollPaneThongBao1.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p9);
-        jScrollPaneThongBao1.setBorder(null);
-        jScrollPaneThongBao1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        jScrollPaneThongBao1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        jLabelHKXet.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelHKXet.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabelHKXet.setForeground(new java.awt.Color(221, 51, 51));
+        jLabelHKXet.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelHKXet.setText("2025-2026 I");
+        jLabelHKXet.setOpaque(true);
 
-        jTextAreaThongBao1.setEditable(false);
-        jTextAreaThongBao1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextAreaThongBao1.setLineWrap(true);
-        jTextAreaThongBao1.setWrapStyleWord(true);
-        jTextAreaThongBao1.setColumns(20);
-        jTextAreaThongBao1.setRows(5);
-        jTextAreaThongBao1.setText("Căn cứ Thông tư số 08/2022/TT-BGDĐT  ngày 06 tháng 6 năm 2022 của Bộ trưởng Bộ Giáo dục và Đào tạo về việc ban hành Quy chế tuyển sinh trình độ đại học; tuyển sinh trình độ cao đẳng ngành Giáo dục Mầm non; Căn cứ Quyết định số 37/QĐ-HV ngày...");
-        jTextAreaThongBao1.setAutoscrolls(false);
-        jTextAreaThongBao1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jTextAreaThongBao1.setDisabledTextColor(new java.awt.Color(102, 102, 102));
-        jTextAreaThongBao1.setOpaque(false);
-        jTextAreaThongBao1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jTextAreaThongBao1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jTextAreaThongBao1MouseExited(evt);
-            }
-        });
-        jScrollPaneThongBao1.setViewportView(jTextAreaThongBao1);
+        jLabelChonKhoa_Lop3.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabelChonKhoa_Lop3.setText(", hạn nộp của sinh viên:");
 
-        jLabelTitleThongBao1.setFont(new java.awt.Font("Segoe UI Variable", 1, 13)); // NOI18N
-        jLabelTitleThongBao1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabelTitleThongBao1.setText("Thông Báo Tuyển Sinh Đại Học Chính Quy Năm 2024");
-        jLabelTitleThongBao1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabelTitleThongBao1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelTitleThongBao1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelTitleThongBao1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelTitleThongBao1MouseExited(evt);
-            }
-        });
+        jLabelNgayBD.setBackground(new java.awt.Color(221, 51, 51));
+        jLabelNgayBD.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabelNgayBD.setForeground(new java.awt.Color(221, 51, 51));
+        jLabelNgayBD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelNgayBD.setText("22-06-2023");
 
-        javax.swing.GroupLayout jPanelThongBao1Layout = new javax.swing.GroupLayout(jPanelThongBao1);
-        jPanelThongBao1.setLayout(jPanelThongBao1Layout);
-        jPanelThongBao1Layout.setHorizontalGroup(
-            jPanelThongBao1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelThongBao1Layout.createSequentialGroup()
-                .addComponent(jLabelThongBao1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jLabelChonKhoa_Lop7.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabelChonKhoa_Lop7.setText("Hạn nộp của cán sự lớp:");
+
+        jLabelChonKhoa_Lop5.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabelChonKhoa_Lop5.setText("Hạn nộp của CVHT:");
+
+        jLabelHanCV.setBackground(new java.awt.Color(221, 51, 51));
+        jLabelHanCV.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabelHanCV.setForeground(new java.awt.Color(221, 51, 51));
+        jLabelHanCV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelHanCV.setText("22-06-2023");
+
+        jLabelChonKhoa_Lop8.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabelChonKhoa_Lop8.setText(", hạn nộp của khoa:");
+
+        jLabelHanKhoa.setBackground(new java.awt.Color(221, 51, 51));
+        jLabelHanKhoa.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabelHanKhoa.setForeground(new java.awt.Color(221, 51, 51));
+        jLabelHanKhoa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelHanKhoa.setText("2025-2026 I");
+
+        jLabelChonKhoa_Lop6.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabelChonKhoa_Lop6.setText(", ngày bắt đầu xét:");
+
+        jLabelHanSV.setBackground(new java.awt.Color(221, 51, 51));
+        jLabelHanSV.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabelHanSV.setForeground(new java.awt.Color(221, 51, 51));
+        jLabelHanSV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelHanSV.setText("22-06-2023");
+
+        jLabelHanCS.setBackground(new java.awt.Color(221, 51, 51));
+        jLabelHanCS.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabelHanCS.setForeground(new java.awt.Color(221, 51, 51));
+        jLabelHanCS.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelHanCS.setText("2025-2026 I");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabelChonKhoa_Lop7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelHanCS, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelChonKhoa_Lop5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelHanCV, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelChonKhoa_Lop8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelHanKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 16, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabelChonKhoa_Lop4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelHKXet, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelChonKhoa_Lop6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelNgayBD, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelChonKhoa_Lop3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelHanSV, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelChonKhoa_Lop4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelHKXet, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelChonKhoa_Lop3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNgayBD, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelChonKhoa_Lop6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelHanSV, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneThongBao1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanelThongBao1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanelThongBao1Layout.createSequentialGroup()
-                    .addGap(357, 357, 357)
-                    .addComponent(jLabelTitleThongBao1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(76, Short.MAX_VALUE)))
-        );
-        jPanelThongBao1Layout.setVerticalGroup(
-            jPanelThongBao1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelThongBao1Layout.createSequentialGroup()
-                .addComponent(jLabelThongBao1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 4, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelThongBao1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPaneThongBao1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanelThongBao1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanelThongBao1Layout.createSequentialGroup()
-                    .addComponent(jLabelTitleThongBao1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 119, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelChonKhoa_Lop5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelHanCV, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelChonKhoa_Lop8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelHanKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelChonKhoa_Lop7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelHanCS, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4))
         );
 
-        jPanelTrangChuMain.add(jPanelThongBao1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 760, 160));
+        jPanelTrangChuMain.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 760, 70));
 
-        jPanelThongBao2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelThongBao2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelTableLop_Xet.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelTableLop_Xet.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
 
-        jLabelThongBao2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/xetThangr.png"))); // NOI18N
-        jLabelThongBao2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabelThongBao2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelThongBao2MouseClicked(evt);
+        jLabelTableTitleLop1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabelTableTitleLop1.setForeground(new java.awt.Color(127, 127, 127));
+        jLabelTableTitleLop1.setText("DS lớp thuộc khoa đang trong thời gian xét");
+
+        jScrollPaneLopXet.setBorder(null);
+        jScrollPaneLopXet.setVerticalScrollBar(new ScrollBar());
+        jScrollPaneLopXet.getVerticalScrollBar().setBackground(Color.WHITE);
+        jScrollPaneLopXet.getViewport().setBackground(Color.WHITE);
+        JPanel p24 = new JPanel();
+        p24.setBackground(Color.WHITE);
+        jScrollPaneLop.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p24);
+
+        jTableLopXet.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "STT", "   Lớp", "  Khoa", "  Cố vấn", "  Khóa học"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        jPanelThongBao2.add(jLabelThongBao2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 167));
+        jTableLopXet.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+        jTableLopXet.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableLopXet.setShowGrid(true);
+        jTableLopXet.setShowVerticalLines(false);
+        jScrollPaneLopXet.setViewportView(jTableLopXet);
 
-        jLabelTitleThongBao2.setFont(new java.awt.Font("Segoe UI Variable", 1, 13)); // NOI18N
-        jLabelTitleThongBao2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabelTitleThongBao2.setText("Thông Báo Xét Thẳng Và Ưu Tiên Xét Tuyển ĐHCQ Năm 2024");
-        jLabelTitleThongBao2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabelTitleThongBao2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelTitleThongBao2MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelTitleThongBao2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelTitleThongBao2MouseExited(evt);
+        choiceKhoa_LopXet.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        choiceKhoa_LopXet.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
+        choiceKhoa_LopXet.setPreferredSize(new java.awt.Dimension(28, 50));
+        choiceKhoa_LopXet.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                choiceKhoa_LopXetItemStateChanged(evt);
             }
         });
-        jPanelThongBao2.add(jLabelTitleThongBao2, new org.netbeans.lib.awtextra.AbsoluteConstraints(356, 0, 380, 40));
 
-        jScrollPaneThongBao2.setVerticalScrollBar(new ScrollBar());
-        jScrollPaneThongBao2.getVerticalScrollBar().setBackground(Color.WHITE);
-        jScrollPaneThongBao2.getViewport().setBackground(Color.WHITE);
-        JPanel p12 = new JPanel();
-        p12.setBackground(Color.WHITE);
-        jScrollPaneThongBao2.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p12);
-        jScrollPaneThongBao2.setBorder(null);
-        jScrollPaneThongBao2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        jScrollPaneThongBao2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        jLabelChonKhoa_Lop1.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jLabelChonKhoa_Lop1.setText("Chọn khoa:");
 
-        jTextAreaThongBao2.setEditable(false);
-        jTextAreaThongBao2.setBackground(new java.awt.Color(255, 255, 255));
-        jTextAreaThongBao2.setColumns(20);
-        jTextAreaThongBao2.setLineWrap(true);
-        jTextAreaThongBao2.setWrapStyleWord(true);
-        jTextAreaThongBao2.setRows(5);
-        jTextAreaThongBao2.setText("Học viện Công nghệ Bưu chính Viễn thông thông báo về việc xét tuyển thẳng và ưu tiên xét tuyển vào đại học chính quy năm 2024, cụ thể như sau: I. XÉT TUYỂN THẲNG VÀO ĐẠI HỌC 1. Đối tượng và điều kiện xét tuyển thẳng: Học viện xét tuyển...");
-        jTextAreaThongBao2.setAutoscrolls(false);
-        jTextAreaThongBao2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jTextAreaThongBao2.setDisabledTextColor(new java.awt.Color(102, 102, 102));
-        jTextAreaThongBao2.setOpaque(false);
-        jTextAreaThongBao2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jTextAreaThongBao2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jTextAreaThongBao2MouseExited(evt);
-            }
-        });
-        jScrollPaneThongBao2.setViewportView(jTextAreaThongBao2);
+        javax.swing.GroupLayout jPanelTableLop_XetLayout = new javax.swing.GroupLayout(jPanelTableLop_Xet);
+        jPanelTableLop_Xet.setLayout(jPanelTableLop_XetLayout);
+        jPanelTableLop_XetLayout.setHorizontalGroup(
+            jPanelTableLop_XetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTableLop_XetLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanelTableLop_XetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPaneLopXet, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelTableLop_XetLayout.createSequentialGroup()
+                        .addComponent(jLabelTableTitleLop1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelChonKhoa_Lop1)
+                        .addGap(2, 2, 2)
+                        .addComponent(choiceKhoa_LopXet, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+        jPanelTableLop_XetLayout.setVerticalGroup(
+            jPanelTableLop_XetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTableLop_XetLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanelTableLop_XetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelTableTitleLop1)
+                    .addComponent(choiceKhoa_LopXet, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelChonKhoa_Lop1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPaneLopXet, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
 
-        jPanelThongBao2.add(jScrollPaneThongBao2, new org.netbeans.lib.awtextra.AbsoluteConstraints(357, 37, 390, 90));
-
-        jPanelTrangChuMain.add(jPanelThongBao2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 760, 170));
-
-        jPanelThongBao3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelThongBao3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabelThongBao3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/dangky.png"))); // NOI18N
-        jLabelThongBao3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabelThongBao3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelThongBao3MouseClicked(evt);
-            }
-        });
-        jPanelThongBao3.add(jLabelThongBao3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 160));
-
-        jLabelTitleThongBao3.setFont(new java.awt.Font("Segoe UI Variable", 1, 13)); // NOI18N
-        jLabelTitleThongBao3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabelTitleThongBao3.setText("Hướng Dẫn Đăng Ký Xét Tuyển Trực Tuyến Vào ĐHCQ Năm 2024");
-        jLabelTitleThongBao3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabelTitleThongBao3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelTitleThongBao3MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelTitleThongBao3MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelTitleThongBao3MouseExited(evt);
-            }
-        });
-        jPanelThongBao3.add(jLabelTitleThongBao3, new org.netbeans.lib.awtextra.AbsoluteConstraints(356, 0, 396, 43));
-
-        jScrollPaneThongBao3.setVerticalScrollBar(new ScrollBar());
-        jScrollPaneThongBao3.getVerticalScrollBar().setBackground(Color.WHITE);
-        jScrollPaneThongBao3.getViewport().setBackground(Color.WHITE);
-        JPanel p14 = new JPanel();
-        p14.setBackground(Color.WHITE);
-        jScrollPaneThongBao3.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p14);
-        jScrollPaneThongBao3.setBorder(null);
-        jScrollPaneThongBao3.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        jScrollPaneThongBao3.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
-        jTextAreaThongBao3.setEditable(false);
-        jTextAreaThongBao3.setBackground(new java.awt.Color(255, 255, 255));
-        jTextAreaThongBao3.setColumns(20);
-        jTextAreaThongBao3.setLineWrap(true);
-        jTextAreaThongBao3.setWrapStyleWord(true);
-        jTextAreaThongBao3.setRows(5);
-        jTextAreaThongBao3.setText("Thông báo Về việc mở hệ thống đăng ký xét tuyển trực tuyến cho thí sinh đăng ký xét tuyển vào đại học chính quy năm 2024 Học viện Công nghệ Bưu chính Viễn thông chính thức thông báo mở Hệ thống đăng ký xét tuyển trực tuyến cho thí sinh...");
-        jTextAreaThongBao3.setAutoscrolls(false);
-        jTextAreaThongBao3.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jTextAreaThongBao3.setDisabledTextColor(new java.awt.Color(102, 102, 102));
-        jTextAreaThongBao3.setOpaque(false);
-        jTextAreaThongBao3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jTextAreaThongBao3MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jTextAreaThongBao3MouseExited(evt);
-            }
-        });
-        jScrollPaneThongBao3.setViewportView(jTextAreaThongBao3);
-
-        jPanelThongBao3.add(jScrollPaneThongBao3, new org.netbeans.lib.awtextra.AbsoluteConstraints(356, 41, 390, 90));
-
-        jPanelTrangChuMain.add(jPanelThongBao3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 760, 160));
-
-        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel9.setOpaque(true);
-        jPanelTrangChuMain.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 584, 760, 28));
+        jPanelTrangChuMain.add(jPanelTableLop_Xet, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 760, 440));
 
         jLayeredPaneMain.add(jPanelTrangChuMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 600));
 
@@ -3302,43 +3297,47 @@ public final class FormQuanLy extends javax.swing.JFrame {
         // Kiểm tra xem có hàng nào được chọn không
         if(selectedRow == -1){
             JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn hàng cần xóa!");
+            return;
         }
-        else {
-            // Xóa hàng được chọn từ bảng
-            int chon = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn xóa không?");
-            if(chon == JOptionPane.YES_OPTION){
-                new Thread(() -> {
-                    
-                    String maKhoa = dsKhoa.get(selectedRow).getMaKhoa().trim();
-                    DefaultTableModel model = (DefaultTableModel) jTableKhoa.getModel();
-                    model.removeRow(selectedRow);
-                    for(int i=0; i<dsTaiKhoan.size(); i++){
-                        TaiKhoan tk = dsTaiKhoan.get(i);
-                        if(tk.getTenTK().equals(maKhoa)){
-                            dsTaiKhoan.remove(i);
-                        }
-                    }
-                    dsKhoa.remove(selectedRow);
-                    int k=0;
-                    for(TaiKhoan tk: dsTaiKhoan){
-                        if(tk.getTenTK().equals(maKhoa)){
-                            dsTaiKhoan.remove(k);
-                            break;
-                        }
-                        k++;
-                    }
-                    //dsTaiKhoan.remove(1);
-                    ThuatToan.suaKhoaTrongCoVan(dsCoVan, maKhoa, " ");
-                    ThuatToan.suaKhoaTrongLop(dsLop, maKhoa, " ");
-                    Database.saveListLopToDB(dsLop);
-                    Database.saveListCoVanToDB(dsCoVan);
-                    Database.saveListKhoaToDB(dsKhoa);
-                    Database.saveListTaiKhoanToDB(dsTaiKhoan);
-            
-                }).start();
-                
+        String mk = jTableKhoa.getValueAt(selectedRow, 0).toString();
+        for(Lop lop:dsLop){
+            if(lop.getMaKhoa().equals(mk)){
+                JOptionPane.showMessageDialog(rootPane, "Không thể xóa khoa có lớp theo học!");
+                return;
             }
         }
+        for(CoVan cv: dsCoVan){
+            if(cv.getKhoa().equals(mk)){
+                JOptionPane.showMessageDialog(rootPane, "Không thể xóa khoa có cố vấn công tác!");
+                return;
+            }
+        }
+        // Xóa hàng được chọn từ bảng
+        int chon = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn xóa không?");
+        if(chon == JOptionPane.YES_OPTION){
+            new Thread(() -> {
+
+                String maKhoa = dsKhoa.get(selectedRow).getMaKhoa().trim();
+                DefaultTableModel model = (DefaultTableModel) jTableKhoa.getModel();
+                model.removeRow(selectedRow);
+                for(int i=0; i<dsTaiKhoan.size(); i++){
+                    TaiKhoan tk = dsTaiKhoan.get(i);
+                    if(tk.getTenTK().equals(maKhoa)){
+                        dsTaiKhoan.remove(i);
+                        break;
+                    }
+                }
+                dsKhoa.remove(selectedRow);
+                //dsTaiKhoan.remove(1);
+                new Thread(() -> {
+                    Database.saveListKhoaToDB(dsKhoa);
+                    Database.saveListTaiKhoanToDB(dsTaiKhoan);
+                }).start();
+
+            }).start();
+
+        }
+        
     }//GEN-LAST:event_jLabelNutXoaKhoaMouseClicked
 
     private void jLabelNutSuaKhoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutSuaKhoaMouseClicked
@@ -3398,53 +3397,56 @@ public final class FormQuanLy extends javax.swing.JFrame {
         // Kiểm tra xem có hàng nào được chọn không
         if(selectedRow == -1){
             JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn hàng cần xóa!");
+            return;
         }
-        else {
-            // Xóa hàng được chọn từ bảng
-            int chon = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn xóa không?");
-            if(chon == JOptionPane.YES_OPTION){
-                Object cellValue = jTableCoVan.getValueAt(selectedRow, 1); // Lấy dữ liệu từ cột MaCV
-                new Thread(() -> {
-                    
-                    String maCoVan = cellValue.toString().trim();
-                    System.out.println(maCoVan);
-                    int hub = 0;
-                    for(int i=0; i<dsCoVan.size(); i++){
-                        if(dsCoVan.get(i).getMaCV().equals(maCoVan)){
-                            hub = i;
-                            break;
-                        }
-                    }
-                    //System.out.println(hub);
-                    // Xóa cố vấn khỏi danh sách dsCoVan
-                    int i=0;
-                    dsCoVan.remove(hub);
-                    for(TaiKhoan tk: dsTaiKhoan){
-
-                        if(tk.getTenTK().equals(maCoVan)){
-                            dsTaiKhoan.remove(i);
-                            break;
-                        }
-                        i++;
-                    }
-                    if(choiceKhoa_CoVan.getSelectedItem().equals("Tất cả")){
-                        Database.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa, dsTaiKhoan);
-                    }
-                    else{
-                        Database.addListCoVanToTable_MaKhoa(dsCoVan, jTableCoVan, dsKhoa, 
-                        ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa), dsTaiKhoan);
-                    }
-                    ThuatToan.suaCoVanTrongLop(dsLop, maCoVan, " ");
-                    Database.saveListLopToDB(dsLop);
-                    Database.saveListCoVanToDB(dsCoVan);
-                    Database.saveListTaiKhoanToDB(dsTaiKhoan);
-                    
-                }).start();
-                
-            } else {
-                // Nếu không xác nhận xóa, bạn có thể xử lý tùy ý ở đây
+        String mcv = jTableCoVan.getValueAt(selectedRow, 1).toString();
+        for(Lop lop:dsLop){
+            if(lop.getMaCoVan().equals(mcv)){
+                JOptionPane.showMessageDialog(rootPane, "Không thể xóa cố vấn đang cố vấn cho 1 lớp!");
+                return;
             }
         }
+        // Xóa hàng được chọn từ bảng
+        int chon = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn xóa không?");
+        if(chon == JOptionPane.YES_OPTION){
+            Object cellValue = jTableCoVan.getValueAt(selectedRow, 1); // Lấy dữ liệu từ cột MaCV
+            new Thread(() -> {
+
+                String maCoVan = cellValue.toString().trim();
+                int hub = 0;
+                for(int i=0; i<dsCoVan.size(); i++){
+                    if(dsCoVan.get(i).getMaCV().equals(maCoVan)){
+                        hub = i;
+                        break;
+                    }
+                }
+                //System.out.println(hub);
+                // Xóa cố vấn khỏi danh sách dsCoVan
+
+                dsCoVan.remove(hub);
+                for(int i=0; i<dsTaiKhoan.size(); i++){
+                    TaiKhoan tk = dsTaiKhoan.get(i);
+                    if(tk.getTenTK().equals(maCoVan)){
+                        dsTaiKhoan.remove(i);
+                        break;
+                    }
+                }
+                if(choiceKhoa_CoVan.getSelectedItem().equals("Tất cả")){
+                    Database.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa, dsTaiKhoan);
+                }
+                else{
+                    Database.addListCoVanToTable_MaKhoa(dsCoVan, jTableCoVan, dsKhoa, 
+                    ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa), dsTaiKhoan);
+                }
+                Database.saveListCoVanToDB(dsCoVan);
+                Database.saveListTaiKhoanToDB(dsTaiKhoan);
+
+            }).start();
+
+        } else {
+            // Nếu không xác nhận xóa, bạn có thể xử lý tùy ý ở đây
+        }
+        
     }//GEN-LAST:event_jLabelNutXoaCoVanMouseClicked
 
     private void jLabelNutThemCoVanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutThemCoVanMouseClicked
@@ -3597,29 +3599,36 @@ public final class FormQuanLy extends javax.swing.JFrame {
         int choose = jTableLop.getSelectedRow();
         if(choose == -1){
             JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn hàng cần xóa!");
+            return;
         }
-        else{
-            if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn xóa không?") == JOptionPane.YES_OPTION){
-                Object cellValue = jTableLop.getValueAt(choose , 1);
-                int temp = 0;
-                for(int i=0; i<dsLop.size(); i++){
-                    if(dsLop.get(i).getLop().equals(cellValue.toString())){
-                        temp = i; break;
-                    }
-                }
-                dsLop.remove(temp);
-                if(choiceKhoa_Lop.getSelectedItem().equals("Tất cả")){
-                    Database.addListLopToTable(dsLop, jTableLop, dsKhoa, dsCoVan);
-                    
-                }
-                else{
-                    Database.addListLopToTable_Khoa(dsLop, jTableLop, dsKhoa, dsCoVan, choiceKhoa_Lop.getSelectedItem());
-                }
-                ThuatToan.doiLopDsSV(dsSinhVien, cellValue.toString(), "");
-                Database.saveSinhVienToList(dsSinhVien);
-                Database.saveListLopToDB(dsLop);
+        Object cellValue = jTableLop.getValueAt(choose , 1);
+        for(SinhVien sv: dsSinhVien){
+            if(sv.getLop().equals(cellValue.toString())){
+                JOptionPane.showMessageDialog(rootPane, "Không thể xóa lớp có sinh viên theo học!");
+                return;
             }
         }
+        
+        if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn xóa không?") == JOptionPane.YES_OPTION){
+            int temp = 0;
+            for(int i=0; i<dsLop.size(); i++){
+                if(dsLop.get(i).getLop().equals(cellValue.toString())){
+                    temp = i; break;
+                }
+            }
+            dsLop.remove(temp);
+            if(choiceKhoa_Lop.getSelectedItem().equals("Tất cả")){
+                Database.addListLopToTable(dsLop, jTableLop, dsKhoa, dsCoVan);
+
+            }
+            else{
+                Database.addListLopToTable_Khoa(dsLop, jTableLop, dsKhoa, dsCoVan, choiceKhoa_Lop.getSelectedItem());
+            }
+            new Thread(() -> {
+                Database.saveListLopToDB(dsLop);
+            }).start();
+        }
+        
     }//GEN-LAST:event_jLabelNutXoaLopMouseClicked
 
     private void jLabelNutThemLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutThemLopMouseClicked
@@ -3815,97 +3824,6 @@ public final class FormQuanLy extends javax.swing.JFrame {
         Link.openLink("https://www.facebook.com/ptithochiminh");
     }//GEN-LAST:event_jLabelFbMouseClicked
 
-    private void jLabelTitleThongBao1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTitleThongBao1MouseEntered
-        // TODO add your handling code here:
-        jLabelTitleThongBao1.setForeground(new Color(62, 106, 142));
-        
-    }//GEN-LAST:event_jLabelTitleThongBao1MouseEntered
-
-    private void jLabelTitleThongBao2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTitleThongBao2MouseEntered
-        // TODO add your handling code here:
-        jLabelTitleThongBao2.setForeground(new Color(62, 106, 142));
-    }//GEN-LAST:event_jLabelTitleThongBao2MouseEntered
-
-    private void jLabelTitleThongBao3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTitleThongBao3MouseEntered
-        // TODO add your handling code here:
-        jLabelTitleThongBao3.setForeground(new Color(62, 106, 142));
-    }//GEN-LAST:event_jLabelTitleThongBao3MouseEntered
-
-    private void jLabelTitleThongBao1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTitleThongBao1MouseExited
-        // TODO add your handling code here:
-        jLabelTitleThongBao1.setForeground(new Color(51, 51, 51));
-    }//GEN-LAST:event_jLabelTitleThongBao1MouseExited
-
-    private void jLabelTitleThongBao2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTitleThongBao2MouseExited
-        // TODO add your handling code here:
-        jLabelTitleThongBao2.setForeground(new Color(51, 51, 51));
-    }//GEN-LAST:event_jLabelTitleThongBao2MouseExited
-
-    private void jLabelTitleThongBao3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTitleThongBao3MouseExited
-        // TODO add your handling code here:
-        jLabelTitleThongBao3.setForeground(new Color(51, 51, 51));
-    }//GEN-LAST:event_jLabelTitleThongBao3MouseExited
-
-    private void jLabelTitleThongBao1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTitleThongBao1MouseClicked
-        // TODO add your handling code here:
-        Link.openLink("https://ptithcm.edu.vn/tuyen-sinh/thong-bao-tuyen-sinh-dai-hoc-chinh-quy-nam-2024.html");
-    }//GEN-LAST:event_jLabelTitleThongBao1MouseClicked
-
-    private void jLabelThongBao1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelThongBao1MouseClicked
-        // TODO add your handling code here:
-        Link.openLink("https://ptithcm.edu.vn/tuyen-sinh/thong-bao-tuyen-sinh-dai-hoc-chinh-quy-nam-2024.html");
-    }//GEN-LAST:event_jLabelThongBao1MouseClicked
-
-    private void jLabelTitleThongBao2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTitleThongBao2MouseClicked
-        // TODO add your handling code here:
-        Link.openLink("https://ptithcm.edu.vn/tuyen-sinh/thong-bao-xet-tuyen-thang-va-uu-tien-xet-tuyen-vao-dai-hoc-he-chinh-quy-nam-2024.html");
-    }//GEN-LAST:event_jLabelTitleThongBao2MouseClicked
-
-    private void jLabelThongBao2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelThongBao2MouseClicked
-        // TODO add your handling code here:
-        Link.openLink("https://ptithcm.edu.vn/tuyen-sinh/thong-bao-xet-tuyen-thang-va-uu-tien-xet-tuyen-vao-dai-hoc-he-chinh-quy-nam-2024.html");
-    }//GEN-LAST:event_jLabelThongBao2MouseClicked
-
-    private void jLabelTitleThongBao3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTitleThongBao3MouseClicked
-        // TODO add your handling code here:
-        Link.openLink("https://ptithcm.edu.vn/tuyen-sinh/thong-bao-ve-viec-mo-he-thong-dang-ky-xet-tuyen-truc-tuyen-cho-thi-sinh-dang-ky-xet-tuyen-vao-dai-hoc-chinh-quy-nam-2024.html");
-    }//GEN-LAST:event_jLabelTitleThongBao3MouseClicked
-
-    private void jLabelThongBao3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelThongBao3MouseClicked
-        // TODO add your handling code here:
-        Link.openLink("https://ptithcm.edu.vn/tuyen-sinh/thong-bao-ve-viec-mo-he-thong-dang-ky-xet-tuyen-truc-tuyen-cho-thi-sinh-dang-ky-xet-tuyen-vao-dai-hoc-chinh-quy-nam-2024.html");
-    }//GEN-LAST:event_jLabelThongBao3MouseClicked
-
-    private void jTextAreaThongBao1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaThongBao1MouseEntered
-        // TODO add your handling code here:
-        jTextAreaThongBao1.setForeground(new Color(62, 106, 142));
-    }//GEN-LAST:event_jTextAreaThongBao1MouseEntered
-
-    private void jTextAreaThongBao2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaThongBao2MouseEntered
-        // TODO add your handling code here:
-        jTextAreaThongBao2.setForeground(new Color(62, 106, 142));
-    }//GEN-LAST:event_jTextAreaThongBao2MouseEntered
-
-    private void jTextAreaThongBao3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaThongBao3MouseEntered
-        // TODO add your handling code here:
-        jTextAreaThongBao3.setForeground(new Color(62, 106, 142));
-    }//GEN-LAST:event_jTextAreaThongBao3MouseEntered
-
-    private void jTextAreaThongBao1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaThongBao1MouseExited
-        // TODO add your handling code here:
-        jTextAreaThongBao1.setForeground(new Color(102, 102, 102));
-    }//GEN-LAST:event_jTextAreaThongBao1MouseExited
-
-    private void jTextAreaThongBao2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaThongBao2MouseExited
-        // TODO add your handling code here:
-        jTextAreaThongBao2.setForeground(new Color(102, 102, 102));
-    }//GEN-LAST:event_jTextAreaThongBao2MouseExited
-
-    private void jTextAreaThongBao3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaThongBao3MouseExited
-        // TODO add your handling code here:
-        jTextAreaThongBao3.setForeground(new Color(102, 102, 102));
-    }//GEN-LAST:event_jTextAreaThongBao3MouseExited
-
     private void jLabelNutXoaTieuChiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutXoaTieuChiMouseClicked
         // TODO add your handling code here:
         int select = jTableTieuChi.getSelectedRow();
@@ -4007,61 +3925,52 @@ public final class FormQuanLy extends javax.swing.JFrame {
     private void jLabelXoaSVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelXoaSVMouseClicked
         // TODO add your handling code here:
         
-       int chon = jTableSV.getSelectedRow();
-       if(chon == -1){
-           JOptionPane.showMessageDialog(jPanelNutCapNhat, "Vui lòng chọn sinh viên cần xóa!");
-       }
-       else{
-           if(JOptionPane.showConfirmDialog(jPanelNutCapNhat, "Bạn có chắc chắn xóa không?") == JOptionPane.YES_OPTION){
-               Object cellValue = jTableSV.getValueAt(chon, 1);
-                String maSV = cellValue.toString().trim();
-                
-                for(DRL drl: dsDRL){
-                    if(drl.getMSSV().equals(maSV) && drl.isTrangThai() == true){
-                        JOptionPane.showMessageDialog(jPanelNutCapNhat, "Không thể xóa sinh viên đã từng có kết quả xét điểm!");
-                        return;
+        int chon = jTableSV.getSelectedRow();
+        if(chon == -1){
+            JOptionPane.showMessageDialog(jPanelNutCapNhat, "Vui lòng chọn sinh viên cần xóa!");
+        }
+        Object cellValue = jTableSV.getValueAt(chon, 1);
+        String maSV = cellValue.toString().trim();
+        for(DRL drl: dsDRL){
+            if(drl.getMSSV().equals(maSV) && drl.isTrangThai() == true){
+                JOptionPane.showMessageDialog(jPanelNutCapNhat, "Không thể xóa sinh viên đã từng có kết quả xét điểm!");
+                return;
+            }
+        }
+       
+        if(JOptionPane.showConfirmDialog(jPanelNutCapNhat, "Bạn có chắc chắn xóa không?") == JOptionPane.YES_OPTION){
+            new Thread(() -> {
+                for(int i=0; i<dsSinhVien.size(); i++){
+                    SinhVien sv = dsSinhVien.get(i);
+                    if(sv.getMaSV().equals(maSV)){
+                        dsSinhVien.remove(i);
+                        break;
                     }
                 }
-                 
-                    new Thread(() -> {
-                        int k=0;
-                        for(SinhVien sv: dsSinhVien){
-                            if(sv.getMaSV().equals(maSV)){
-                                dsSinhVien.remove(k);
-                                break;
-                            }
-                            k++;
-                        }
-                        k=0;
-                        for(TaiKhoan tk: dsTaiKhoan){
-                            if(tk.getTenTK().equals(maSV)){
-                                dsTaiKhoan.remove(k);
-                                break;
-                            }
-                            k++;
-                        }
-                        k=0;
-                        for(DRL drl: dsDRL){
-                            if(drl.getMSSV().equals(maSV)){
-                                dsDRL.remove(k);
-                            }
-                            k++;
-                        }
-                        Database.saveListDRLToDB(dsDRL);
-                        Database.saveListTaiKhoanToDB(dsTaiKhoan);
-                        Database.saveListSinhVienToDB(dsSinhVien);
-
-                    }).start();
-                    Database.deleteOneRow(jTableSV, chon);
-                    for(int i=0; i<jTableSV.getRowCount(); i++){
-                        jTableSV.setValueAt(i, i, 0);
+                for(int i=0; i<dsTaiKhoan.size(); i++){
+                    TaiKhoan tk = dsTaiKhoan.get(i);
+                    if(tk.getTenTK().equals(maSV)){
+                        dsTaiKhoan.remove(i);
+                        break;
                     }
-                
-                 
-           }
-           
-           //jTableSV.remove(chon);
-       }
+                }
+                for(int i=0; i<dsDRL.size(); i++){
+                    DRL drl = dsDRL.get(i);
+                    if(drl.getMSSV().equals(maSV)){
+                        dsDRL.remove(i);
+                    }
+                }
+                new Thread(() -> {
+                    Database.saveListTaiKhoanToDB(dsTaiKhoan);
+                    Database.saveListSinhVienToDB(dsSinhVien);
+                }).start();
+
+            }).start();
+            Database.deleteOneRow(jTableSV, chon);
+            for(int i=0; i<jTableSV.getRowCount(); i++){
+                jTableSV.setValueAt(i, i, 0);
+            }
+        }
     }//GEN-LAST:event_jLabelXoaSVMouseClicked
 
     private void jLabelLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLogOutMouseClicked
@@ -4156,6 +4065,16 @@ public final class FormQuanLy extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabelNutKhoaSVMouseClicked
 
+    private void choiceKhoa_LopXetItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceKhoa_LopXetItemStateChanged
+        // TODO add your handling code here:
+        if(choiceKhoa_LopXet.getSelectedItem().equals("Tất cả")){
+            Database.addListLopToTable_HKXet(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy);
+        }
+        else{
+            Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, choiceKhoa_LopXet.getSelectedItem());
+        }
+    }//GEN-LAST:event_choiceKhoa_LopXetItemStateChanged
+
     
 
     /**
@@ -4198,14 +4117,21 @@ public final class FormQuanLy extends javax.swing.JFrame {
     private java.awt.Choice choiceKhoa_CoVan;
     private java.awt.Choice choiceKhoa_DRL;
     private java.awt.Choice choiceKhoa_Lop;
+    private java.awt.Choice choiceKhoa_LopXet;
     private java.awt.Choice choiceKhoa_SV;
     private java.awt.Choice choiceLop_DRL;
     private java.awt.Choice choiceLop_SV;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelChon1;
     private javax.swing.JLabel jLabelChon2;
     private javax.swing.JLabel jLabelChon3;
     private javax.swing.JLabel jLabelChonKhoa_Lop;
+    private javax.swing.JLabel jLabelChonKhoa_Lop1;
+    private javax.swing.JLabel jLabelChonKhoa_Lop3;
+    private javax.swing.JLabel jLabelChonKhoa_Lop4;
+    private javax.swing.JLabel jLabelChonKhoa_Lop5;
+    private javax.swing.JLabel jLabelChonKhoa_Lop6;
+    private javax.swing.JLabel jLabelChonKhoa_Lop7;
+    private javax.swing.JLabel jLabelChonKhoa_Lop8;
     private javax.swing.JLabel jLabelChonLop_SV;
     private javax.swing.JLabel jLabelChonLop_SV1;
     private javax.swing.JLabel jLabelChon_SV;
@@ -4215,6 +4141,11 @@ public final class FormQuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDRL;
     private javax.swing.JLabel jLabelDRLLeft;
     private javax.swing.JLabel jLabelFb;
+    private javax.swing.JLabel jLabelHKXet;
+    private javax.swing.JLabel jLabelHanCS;
+    private javax.swing.JLabel jLabelHanCV;
+    private javax.swing.JLabel jLabelHanKhoa;
+    private javax.swing.JLabel jLabelHanSV;
     private javax.swing.JLabel jLabelHelp;
     private javax.swing.JLabel jLabelHocKy;
     private javax.swing.JLabel jLabelHocKyLeft;
@@ -4225,6 +4156,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelLogOut;
     private javax.swing.JLabel jLabelLop;
     private javax.swing.JLabel jLabelLopLeft;
+    private javax.swing.JLabel jLabelNgayBD;
     private javax.swing.JLabel jLabelNutCapNhat;
     private javax.swing.JLabel jLabelNutChamLai;
     private javax.swing.JLabel jLabelNutChiTietTC;
@@ -4233,8 +4165,6 @@ public final class FormQuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNutDuyet;
     private javax.swing.JLabel jLabelNutKhoaCV;
     private javax.swing.JLabel jLabelNutKhoaKhoa;
-    private javax.swing.JLabel jLabelNutKhoaKhoa1;
-    private javax.swing.JLabel jLabelNutKhoaKhoa2;
     private javax.swing.JLabel jLabelNutKhoaSV;
     private javax.swing.JLabel jLabelNutLienHe;
     private javax.swing.JLabel jLabelNutSV;
@@ -4264,10 +4194,8 @@ public final class FormQuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTableTitleCoVan;
     private javax.swing.JLabel jLabelTableTitleKhoa;
     private javax.swing.JLabel jLabelTableTitleLop;
+    private javax.swing.JLabel jLabelTableTitleLop1;
     private javax.swing.JLabel jLabelThemSV;
-    private javax.swing.JLabel jLabelThongBao1;
-    private javax.swing.JLabel jLabelThongBao2;
-    private javax.swing.JLabel jLabelThongBao3;
     private javax.swing.JLabel jLabelThreeDots;
     private javax.swing.JLabel jLabelThreedots;
     private javax.swing.JLabel jLabelThuongHieu;
@@ -4277,15 +4205,13 @@ public final class FormQuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTitleHocKy;
     private javax.swing.JLabel jLabelTitleKhoaHoc;
     private javax.swing.JLabel jLabelTitleSV;
-    private javax.swing.JLabel jLabelTitleThongBao1;
-    private javax.swing.JLabel jLabelTitleThongBao2;
-    private javax.swing.JLabel jLabelTitleThongBao3;
     private javax.swing.JLabel jLabelTitleTieuChi;
     private javax.swing.JLabel jLabelTrangChu;
     private javax.swing.JLabel jLabelTrangChuLeft;
     private javax.swing.JLabel jLabelXoaSV;
     private javax.swing.JLabel jLabelpanelPtit;
     private javax.swing.JLayeredPane jLayeredPaneMain;
+    private javax.swing.JPanel jPanel1;
     private com.raven.swing.PanelBorder jPanelBorderHanNop;
     private com.raven.swing.PanelBorder jPanelBorderHocKy;
     private com.raven.swing.PanelBorder jPanelBorderKhoaHoc;
@@ -4315,8 +4241,6 @@ public final class FormQuanLy extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelNutDuyet;
     private javax.swing.JPanel jPanelNutKhoaCV;
     private javax.swing.JPanel jPanelNutKhoaKhoa;
-    private javax.swing.JPanel jPanelNutKhoaKhoa1;
-    private javax.swing.JPanel jPanelNutKhoaKhoa2;
     private javax.swing.JPanel jPanelNutKhoaSV;
     private javax.swing.JPanel jPanelNutLienHe;
     private javax.swing.JPanel jPanelNutSuaCoVan;
@@ -4348,6 +4272,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
     private com.raven.swing.PanelBorder jPanelTabeDRL;
     private com.raven.swing.PanelBorder jPanelTableCoVan;
     private com.raven.swing.PanelBorder jPanelTableLop;
+    private com.raven.swing.PanelBorder jPanelTableLop_Xet;
     private javax.swing.JPanel jPanelThanhTieuDeCoVan;
     private javax.swing.JPanel jPanelThanhTieuDeHK;
     private javax.swing.JPanel jPanelThanhTieuDeKhoa;
@@ -4356,9 +4281,6 @@ public final class FormQuanLy extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelThanhTieuDeTrangChu;
     private javax.swing.JPanel jPanelThanhTieuDeTrangChu1;
     private javax.swing.JPanel jPanelThemSV;
-    private javax.swing.JPanel jPanelThongBao1;
-    private javax.swing.JPanel jPanelThongBao2;
-    private javax.swing.JPanel jPanelThongBao3;
     private javax.swing.JPanel jPanelTieuChi;
     private javax.swing.JPanel jPanelTieuChiMain;
     private javax.swing.JPanel jPanelTitleSV;
@@ -4373,10 +4295,8 @@ public final class FormQuanLy extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPaneKhoa;
     private javax.swing.JScrollPane jScrollPaneKhoaHoc;
     private javax.swing.JScrollPane jScrollPaneLop;
+    private javax.swing.JScrollPane jScrollPaneLopXet;
     private javax.swing.JScrollPane jScrollPaneSV;
-    private javax.swing.JScrollPane jScrollPaneThongBao1;
-    private javax.swing.JScrollPane jScrollPaneThongBao2;
-    private javax.swing.JScrollPane jScrollPaneThongBao3;
     private javax.swing.JScrollPane jScrollPaneTieuChi;
     private com.raven.swing.TableCo5Cot jTableCoVan;
     private com.raven.swing.TableCo5Cot jTableDRL;
@@ -4385,11 +4305,9 @@ public final class FormQuanLy extends javax.swing.JFrame {
     private com.raven.swing.TableCo5Cot jTableKhoa;
     private com.raven.swing.Table jTableKhoaHoc;
     private com.raven.swing.TableCo5Cot jTableLop;
+    private com.raven.swing.TableCo5Cot jTableLopXet;
     private com.raven.swing.Table jTableSV;
     private com.raven.swing.Table jTableTieuChi;
-    private javax.swing.JTextArea jTextAreaThongBao1;
-    private javax.swing.JTextArea jTextAreaThongBao2;
-    private javax.swing.JTextArea jTextAreaThongBao3;
     private com.raven.swing.PanelBorder panelBorderTableKhoa;
     // End of variables declaration//GEN-END:variables
 

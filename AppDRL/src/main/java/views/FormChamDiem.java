@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import models.DRL;
-import models.SinhVien;
 import models.TieuChi;
 
 /**

@@ -45,14 +45,17 @@ public final class FormNoiDungTieuChi extends javax.swing.JFrame {
         buttonHoverEvent(jLabelNutThemTieuChi, jPanelNutThemTieuChi);
         buttonHoverEvent(jLabelNutSuaTieuChi, jPanelNutSuaTieuChi);
         buttonHoverEvent(jLabelNutXoaTieuChi, jPanelNutXoaTieuChi);
-        if(chucNang.equals("AnND")){
-            jLabelNutSuaTieuChi.setVisible(false);
-            jLabelNutThemTieuChi.setVisible(false);
-            jLabelNutXoaTieuChi.setVisible(false);
-            jPanelNutSuaTieuChi.setVisible(false);
-            jPanelNutXoaTieuChi.setVisible(false);
-            jPanelNutThemTieuChi.setVisible(false);
+        if(chucNang != null){
+            if(chucNang.equals("AnND")){
+                jLabelNutSuaTieuChi.setVisible(false);
+                jLabelNutThemTieuChi.setVisible(false);
+                jLabelNutXoaTieuChi.setVisible(false);
+                jPanelNutSuaTieuChi.setVisible(false);
+                jPanelNutXoaTieuChi.setVisible(false);
+                jPanelNutThemTieuChi.setVisible(false);
+            }
         }
+        
 
     }
     public FormNoiDungTieuChi() {
@@ -178,7 +181,7 @@ public final class FormNoiDungTieuChi extends javax.swing.JFrame {
         jLabelNutTieuDeTieuChi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelNutTieuDeTieuChi.setForeground(new java.awt.Color(255, 255, 255));
         jLabelNutTieuDeTieuChi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/whitetieuchi.png"))); // NOI18N
-        jLabelNutTieuDeTieuChi.setText("Tiêu chí");
+        jLabelNutTieuDeTieuChi.setText("Nội dung tiêu chí");
         jLabelNutTieuDeTieuChi.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jLabelNutTieuDeTieuChi.setPreferredSize(new java.awt.Dimension(32, 16));
 
@@ -188,7 +191,7 @@ public final class FormNoiDungTieuChi extends javax.swing.JFrame {
             jPanelNutTieuDeTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelNutTieuDeTieuChiLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabelNutTieuDeTieuChi, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelNutTieuDeTieuChi, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelNutTieuDeTieuChiLayout.setVerticalGroup(
@@ -286,7 +289,7 @@ public final class FormNoiDungTieuChi extends javax.swing.JFrame {
             jPanelThanhTieuDeTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelThanhTieuDeTieuChiLayout.createSequentialGroup()
                 .addComponent(jPanelNutTieuDeTieuChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 325, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 276, Short.MAX_VALUE)
                 .addComponent(jPanelNutThemTieuChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelNutSuaTieuChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

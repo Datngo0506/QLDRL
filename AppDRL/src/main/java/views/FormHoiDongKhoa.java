@@ -2371,7 +2371,6 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
                     Database.addListCoVanToTable_MaKhoa(dsCoVan, jTableCoVan, dsKhoa, 
                     ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa), dsTaiKhoan);
                 }
-                ThuatToan.suaCoVanTrongLop(dsLop, maCoVan, " ");
                 new Thread(() -> {
                     Database.saveListLopToDB(dsLop);
                     Database.saveListCoVanToDB(dsCoVan);
