@@ -179,7 +179,7 @@ public class Database {
     
     public static void addListKhoaToTable(ArrayList<Khoa> dsKhoa, JTable tableKhoa, ArrayList<TaiKhoan> dsTaiKhoan) {
         DefaultTableModel model = (DefaultTableModel) tableKhoa.getModel();
-
+        ThuatToan.sapXepTheoMaKhoa(dsKhoa);
         // Xóa dữ liệu cũ trong bảng
         model.setRowCount(0);
 
@@ -205,7 +205,7 @@ public class Database {
                 String khoa = resultSet.getString("Khoa").trim();
                 String gioiTinh = resultSet.getBoolean("GioiTinh") ? "true" : "false";
                 String ngaySinh = resultSet.getDate("NgaySinh").toString().trim(); // Chuyển ngày thành lập về dạng String
-                String sdt = resultSet.getString("Sdt");
+                String sdt = resultSet.getString("Sdt").trim();
                 String email = resultSet.getString("Email");
                 String queQuan = resultSet.getString("QueQuan");
                 String diaChi = resultSet.getString("DiaChi");
@@ -273,7 +273,7 @@ public class Database {
 
     public static void addListCoVanToTable(ArrayList<CoVan> dsCoVan, JTable tableCoVan, ArrayList<Khoa> dsKhoa, ArrayList<TaiKhoan> dsTaiKhoan) {
         DefaultTableModel model = (DefaultTableModel) tableCoVan.getModel();
-
+        ThuatToan.sapXepTheoCoVan(dsCoVan);
         // Xóa dữ liệu cũ trong bảng
         model.setRowCount(0);
         
@@ -290,7 +290,7 @@ public class Database {
     
     public static void addListCoVanToTable_1Khoa(ArrayList<CoVan> dsCoVan, JTable tableCoVan, String maKhoa, String tenKhoa, ArrayList<TaiKhoan> dsTaiKhoan) {
         DefaultTableModel model = (DefaultTableModel) tableCoVan.getModel();
-
+        ThuatToan.sapXepTheoCoVan(dsCoVan);
         // Xóa dữ liệu cũ trong bảng
         model.setRowCount(0);
         
@@ -308,7 +308,7 @@ public class Database {
     
     public static void addListCoVanToTable_MaKhoa(ArrayList<CoVan> dsCoVan, JTable tableCoVan, ArrayList<Khoa> dsKhoa, String maKhoa, ArrayList<TaiKhoan> dsTaiKhoan) {
         DefaultTableModel model = (DefaultTableModel) tableCoVan.getModel();
-
+        ThuatToan.sapXepTheoCoVan(dsCoVan);
         // Xóa dữ liệu cũ trong bảng
         model.setRowCount(0);
         
@@ -590,6 +590,64 @@ public class Database {
         }
     }
     
+    public static void addListLopToTable_HKXet(ArrayList<Lop> dsLop, JTable tableLop, ArrayList<Khoa> dsKhoa, ArrayList<CoVan> dsCoVan, ArrayList<HocKy> dsHocKy) {
+        DefaultTableModel model = (DefaultTableModel) tableLop.getModel();
+
+        // Xóa dữ liệu cũ trong bảng
+        model.setRowCount(0);
+        int i=0;
+        // Duyệt qua danh sách các học kỳ và thêm vào bảng
+        
+        for (Lop kh :dsLop) {
+            if (kh != null) { // Kiểm tra hk có null không
+                String khoaHoc = kh.getMaKhoaHoc();
+                String parts[] = khoaHoc.split("-");
+                String hkDau = parts[0]+"-"+(Integer.parseInt(parts[0])+1)+"-1";
+                String hkCuoi = ThuatToan.doiKhoaHocSangHKCuoi(khoaHoc, 4.5);
+                String hkHienTai = ThuatToan.getHKXet(dsHocKy);
+                if(ThuatToan.soSanhHocKy(hkHienTai, hkDau) >=0 && ThuatToan.soSanhHocKy(hkHienTai, hkCuoi) <=0){
+                    String khoa = ThuatToan.doiMaKhoaThanhTenKhoa(kh.getMaKhoa(), dsKhoa);
+                
+                    String coVan = ThuatToan.doiMaCVThanhTen(kh.getMaCoVan(), dsCoVan) + " (" + kh.getMaCoVan() + ") ";
+                    if(kh.getMaCoVan().equals(" ") || kh.getMaCoVan().equals("") ) coVan = " ";
+                    Object[] row = {Integer.toString(i + 1), kh.getLop(), khoa, coVan, kh.getMaKhoaHoc()};
+                    i++;
+                    model.addRow(row);
+                }
+                
+            }
+        }
+    }
+    
+    public static void addListLopToTable_HKXet_Khoa(ArrayList<Lop> dsLop, JTable tableLop, ArrayList<Khoa> dsKhoa, ArrayList<CoVan> dsCoVan, ArrayList<HocKy> dsHocKy, String tenKhoa) {
+        DefaultTableModel model = (DefaultTableModel) tableLop.getModel();
+
+        // Xóa dữ liệu cũ trong bảng
+        model.setRowCount(0);
+        int i=0;
+        // Duyệt qua danh sách các học kỳ và thêm vào bảng
+        
+        for (Lop kh :dsLop) {
+            if (kh != null) { // Kiểm tra hk có null không
+                String khoaHoc = kh.getMaKhoaHoc();
+                String parts[] = khoaHoc.split("-");
+                String hkDau = parts[0]+"-"+(Integer.parseInt(parts[0])+1)+"-1";
+                String hkCuoi = ThuatToan.doiKhoaHocSangHKCuoi(khoaHoc, 4.5);
+                String hkHienTai = ThuatToan.getHKXet(dsHocKy);
+                if(ThuatToan.soSanhHocKy(hkHienTai, hkDau) >=0 && ThuatToan.soSanhHocKy(hkHienTai, hkCuoi) <=0 && kh.getMaKhoa().equals(ThuatToan.doiTenKhoaThanhMaKhoa(tenKhoa, dsKhoa))){
+                    String khoa = ThuatToan.doiMaKhoaThanhTenKhoa(kh.getMaKhoa(), dsKhoa);
+                
+                    String coVan = ThuatToan.doiMaCVThanhTen(kh.getMaCoVan(), dsCoVan) + " (" + kh.getMaCoVan() + ") ";
+                    if(kh.getMaCoVan().equals(" ") || kh.getMaCoVan().equals("") ) coVan = " ";
+                    Object[] row = {Integer.toString(i + 1), kh.getLop(), khoa, coVan, kh.getMaKhoaHoc()};
+                    i++;
+                    model.addRow(row);
+                }
+                
+            }
+        }
+    }
+    
     public static void addListLopToTable(ArrayList<Lop> dsLop, JTable tableLop, ArrayList<Khoa> dsKhoa, ArrayList<CoVan> dsCoVan) {
         DefaultTableModel model = (DefaultTableModel) tableLop.getModel();
 
@@ -614,7 +672,7 @@ public class Database {
     
     public static void addListLopToTable_1Khoa(ArrayList<Lop> dsLop, JTable tableLop, String maKhoa, String tenKhoa, ArrayList<CoVan> dsCoVan) {
         DefaultTableModel model = (DefaultTableModel) tableLop.getModel();
-
+        ThuatToan.sapXepTheoLop(dsLop);
         // Xóa dữ liệu cũ trong bảng
         model.setRowCount(0);
         int i=0;
@@ -637,7 +695,7 @@ public class Database {
     
     public static void addListLopToTable_Khoa(ArrayList<Lop> dsLop, JTable tableLop, ArrayList<Khoa> dsKhoa, ArrayList<CoVan> dsCoVan, String ten) {
         DefaultTableModel model = (DefaultTableModel) tableLop.getModel();
-
+        ThuatToan.sapXepTheoLop(dsLop);
         // Xóa dữ liệu cũ trong bảng
         model.setRowCount(0);
         int i=0;
@@ -764,6 +822,29 @@ public class Database {
         }
     }
     
+    public static void addListTieuChiToTable_Cham(ArrayList<TieuChi> dsTieuChi, JTable tableTieuChi) {
+        DefaultTableModel model = (DefaultTableModel) tableTieuChi.getModel();
+
+        // Xóa dữ liệu cũ trong bảng
+        model.setRowCount(0);
+        int i = 0;
+        // Duyệt qua danh sách các tiêu chí và thêm vào bảng
+        for (TieuChi tieuChi : dsTieuChi) {
+            String s ;
+            if (tieuChi != null) { // Kiểm tra tiêu chí có null không
+                if(tieuChi.getDiem() == -50){
+                    s = "";
+                }
+                else{
+                    s = Integer.toString(tieuChi.getDiem());
+                }
+                Object[] row = {Integer.toString(i + 1), tieuChi.getNoiDung(), s, ""};
+                i++;
+                model.addRow(row);
+            }
+        }
+    }
+    
     public static void addListGiaiThichToTable(ArrayList<NoiDungTieuChi> dsNoiDung, JTable tableND) {
         DefaultTableModel model = (DefaultTableModel) tableND.getModel();
 
@@ -803,7 +884,7 @@ public class Database {
                 String hoTen = resultSet.getString("HoTen");
                 String lop = resultSet.getString("Lop").trim();
                 String chucVu = resultSet.getString("ChucVu").trim();
-                String sdt = resultSet.getString("Sdt");
+                String sdt = resultSet.getString("Sdt").trim();
                 String email = resultSet.getString("Email");
                 String ngaySinh = resultSet.getString("NgaySinh");
                 String queQuan = resultSet.getString("QueQuan");
@@ -905,7 +986,7 @@ public class Database {
 
     public static void addListSinhVienToTable(ArrayList<SinhVien> dsSinhVien, JTable tableSinhVien, ArrayList<ChucVu> dsChucVu, ArrayList<TaiKhoan> dsTaiKhoan) {
         DefaultTableModel model = (DefaultTableModel) tableSinhVien.getModel();
-
+        ThuatToan.sapXepTheoMSSV(dsSinhVien);
         // Xóa dữ liệu cũ trong bảng
         model.setRowCount(0);
         int i = 0;
@@ -923,7 +1004,7 @@ public class Database {
     
      public static void addListSinhVienToTable_1Lop(ArrayList<SinhVien> dsSinhVien, JTable tableSinhVien, ArrayList<ChucVu> dsChucVu, ArrayList<TaiKhoan> dsTaiKhoan, String tenLop) {
         DefaultTableModel model = (DefaultTableModel) tableSinhVien.getModel();
-
+        ThuatToan.sapXepTheoMSSV(dsSinhVien);
         // Xóa dữ liệu cũ trong bảng
         model.setRowCount(0);
         int i = 0;
@@ -944,7 +1025,7 @@ public class Database {
     
     public static void addListSinhVienToTable_Khoa(ArrayList<SinhVien> dsSinhVien, ArrayList<Khoa> dsKhoa, ArrayList<Lop> dsLop, JTable tableSinhVien, ArrayList<ChucVu> dsChucVu, ArrayList<TaiKhoan> dsTaiKhoan, String tenKhoa) {
         DefaultTableModel model = (DefaultTableModel) tableSinhVien.getModel();
-
+        ThuatToan.sapXepTheoMSSV(dsSinhVien);
         // Xóa dữ liệu cũ trong bảng
         model.setRowCount(0);
         int i = 0;
@@ -965,7 +1046,7 @@ public class Database {
     
     public static void addListSinhVienToTable_1Khoa(ArrayList<SinhVien> dsSinhVien, String maKhoa, ArrayList<Lop> dsLop, JTable tableSinhVien, ArrayList<ChucVu> dsChucVu, ArrayList<TaiKhoan> dsTaiKhoan, String tenKhoa) {
         DefaultTableModel model = (DefaultTableModel) tableSinhVien.getModel();
-
+        ThuatToan.sapXepTheoMSSV(dsSinhVien);
         // Xóa dữ liệu cũ trong bảng
         model.setRowCount(0);
         int i = 0;
@@ -997,7 +1078,7 @@ public class Database {
     
     public static void addListSinhVienToTable_Lop(ArrayList<SinhVien> dsSinhVien,  JTable tableSinhVien, ArrayList<ChucVu> dsChucVu, ArrayList<TaiKhoan> dsTaiKhoan, String lop) {
         DefaultTableModel model = (DefaultTableModel) tableSinhVien.getModel();
-
+        ThuatToan.sapXepTheoMSSV(dsSinhVien);
         // Xóa dữ liệu cũ trong bảng
         model.setRowCount(0);
         int i = 0;
@@ -1195,6 +1276,90 @@ public class Database {
         }
     }
     
+    public static void updateDRLSV_SV(String mssv, String maHK, int diemSV, int diemCS, int diemCV) {
+        try {
+            // Bước 1: Mở kết nối
+            try (Connection conn = getConnection()) {
+                // Bước 2: Tạo truy vấn cập nhật
+                String updateQuery = "UPDATE DRLSV SET DiemSV = ?, DiemCS = ?, DiemCV = ? WHERE MSSV = ? AND MaHK_NK = ?";
+                PreparedStatement updateStmt = conn.prepareStatement(updateQuery);
+
+                // Thiết lập các tham số trong truy vấn
+                updateStmt.setInt(1, diemSV);
+                updateStmt.setInt(2, diemCS);
+                updateStmt.setInt(3, diemCV);
+                updateStmt.setString(4, mssv);
+                updateStmt.setString(5, maHK);
+
+                // Bước 3: Thực thi truy vấn cập nhật
+                updateStmt.executeUpdate();
+
+                // Bước 4: Đóng kết nối (kết nối tự đóng sau khi sử dụng try-with-resources)
+            }
+        } catch (SQLException se) {
+            // Xử lý lỗi của JDBC
+            //se.printStackTrace();
+        } catch (Exception e) {
+            // Xử lý lỗi khác
+            //e.printStackTrace();
+        }
+    }
+    
+    public static void updateDRLSV_CS(String mssv, String maHK, int diemCS, int diemCV) {
+        try {
+            // Bước 1: Mở kết nối
+            try (Connection conn = getConnection()) {
+                // Bước 2: Tạo truy vấn cập nhật
+                String updateQuery = "UPDATE DRLSV SET DiemCS = ?, DiemCV = ? WHERE MSSV = ? AND MaHK_NK = ?";
+                PreparedStatement updateStmt = conn.prepareStatement(updateQuery);
+
+                // Thiết lập các tham số trong truy vấn
+                updateStmt.setInt(1, diemCS);
+                updateStmt.setInt(2, diemCV);
+                updateStmt.setString(3, mssv);
+                updateStmt.setString(4, maHK);
+
+                // Bước 3: Thực thi truy vấn cập nhật
+                updateStmt.executeUpdate();
+
+                // Bước 4: Đóng kết nối (kết nối tự đóng sau khi sử dụng try-with-resources)
+            }
+        } catch (SQLException se) {
+            // Xử lý lỗi của JDBC
+            //se.printStackTrace();
+        } catch (Exception e) {
+            // Xử lý lỗi khác
+            //e.printStackTrace();
+        }
+    }
+    
+    public static void updateDRLSV_CV(String mssv, String maHK, int diemCV) {
+        try {
+            // Bước 1: Mở kết nối
+            try (Connection conn = getConnection()) {
+                // Bước 2: Tạo truy vấn cập nhật
+                String updateQuery = "UPDATE DRLSV SET  DiemCV = ? WHERE MSSV = ? AND MaHK_NK = ?";
+                PreparedStatement updateStmt = conn.prepareStatement(updateQuery);
+
+                // Thiết lập các tham số trong truy vấn
+                updateStmt.setInt(1, diemCV);
+                updateStmt.setString(2, mssv);
+                updateStmt.setString(3, maHK);
+
+                // Bước 3: Thực thi truy vấn cập nhật
+                updateStmt.executeUpdate();
+
+                // Bước 4: Đóng kết nối (kết nối tự đóng sau khi sử dụng try-with-resources)
+            }
+        } catch (SQLException se) {
+            // Xử lý lỗi của JDBC
+            //se.printStackTrace();
+        } catch (Exception e) {
+            // Xử lý lỗi khác
+            //e.printStackTrace();
+        }
+    }
+    
     public static void saveOneDRLToDB(DRL drl) {
     try {
         // Bước 1: Mở kết nối
@@ -1237,7 +1402,7 @@ public class Database {
     
     public static void addListDRLToTable(ArrayList<DRL> dsDRL, ArrayList<SinhVien> dsSV, JTable table, String lop, String hk) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        
+        ThuatToan.sapXepTheoDRL(dsDRL);
         // Xóa tất cả các dòng hiện có trong bảng
         model.setRowCount(0);
 
@@ -1252,6 +1417,31 @@ public class Database {
                     duyet = "Đã duyệt";
                 }else duyet = "Chưa duyệt";
                 Object[] row = {Integer.toString(k+1), drl.getMSSV(), ThuatToan.getTenFromMSV(drl.getMSSV(), dsSV),
+                Integer.toString(drl.getDiem1()), Integer.toString(drl.getDiem2()), Integer.toString(drl.getDiem3()), duyet};
+                k++;
+                model.addRow(row);
+            }
+            
+        }
+    }
+    
+    public static void addListDRLToTable_SV_HK(ArrayList<DRL> dsDRL, SinhVien sv, JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        ThuatToan.sapXepTheoDRL(dsDRL);
+        // Xóa tất cả các dòng hiện có trong bảng
+        model.setRowCount(0);
+
+        // Đảo ngược danh sách để thêm từ cuối danh sách
+        int k = 0;
+        // Duyệt qua danh sách ThongBao từ cuối đến đầu và thêm vào bảng
+        for (DRL drl : dsDRL) {
+            if(drl.getMSSV().equals(sv.getMaSV()) ){
+                //System.out.println(ThuatToan.getLopFromDRL(drl.getMSSV(), dsSV) + " " + lop + " " + hk + " "+drl.getMaHK());
+                String duyet;
+                if(drl.isTrangThai()){
+                    duyet = "Đã duyệt";
+                }else duyet = "Chưa duyệt";
+                Object[] row = {Database.chuyenMaHocKy(drl.getMaHK()), drl.getMSSV(), sv.getHoTen(),
                 Integer.toString(drl.getDiem1()), Integer.toString(drl.getDiem2()), Integer.toString(drl.getDiem3()), duyet};
                 k++;
                 model.addRow(row);

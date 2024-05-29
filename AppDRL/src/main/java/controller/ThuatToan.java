@@ -95,13 +95,28 @@ public class ThuatToan {
         }
     }
     
-    public static void sapXepTheoMSSV(ArrayList<DRL> danhSachDRL) {
-        Collections.sort(danhSachDRL, new Comparator<DRL>() {
-            @Override
-            public int compare(DRL drl1, DRL drl2) {
-                return drl1.getMSSV().compareTo(drl2.getMSSV());
-            }
+    public static void sapXepTheoDRL(ArrayList<DRL> danhSachDRL) {
+        Collections.sort(danhSachDRL, (DRL drl1, DRL drl2) -> drl1.getMSSV().compareTo(drl2.getMSSV()));
+    }
+    
+    public static void sapXepTheoMSSV(ArrayList<SinhVien> dsSV) {
+        Collections.sort(dsSV, (SinhVien sv1, SinhVien sv2) -> {
+            return sv1.getMaSV().compareTo(sv2.getMaSV());
         });
+    }
+    
+    public static void sapXepTheoMaKhoa(ArrayList<Khoa> dsKhoa) {
+        Collections.sort(dsKhoa, (Khoa khoa1, Khoa khoa2) -> khoa1.getMaKhoa().compareTo(khoa2.getMaKhoa()));
+    }
+    
+    public static void sapXepTheoLop(ArrayList<Lop> dsLop) {
+        Collections.sort(dsLop, (Lop lop1, Lop lop2) -> {
+            return lop1.getLop().compareTo(lop2.getLop());
+        });
+    }
+    
+    public static void sapXepTheoCoVan(ArrayList<CoVan> dsCoVan) {
+        Collections.sort(dsCoVan, (CoVan covan1, CoVan covan2) -> covan1.getMaCV().compareTo(covan2.getMaCV()));
     }
     
     //đổi khoa cũ thành khoa mới trong danh sách lớp
@@ -196,6 +211,38 @@ public class ThuatToan {
             }
         }
         return "";
+    }
+    
+    public static boolean isStrongPassword(String password) {
+        // Kiểm tra độ dài mật khẩu, cần ít nhất 8 ký tự
+        if (password.length() < 8) {
+            return false;
+        }
+
+        // Kiểm tra xem mật khẩu có chứa số không
+        if (!password.matches(".*\\d.*")) {
+            return false;
+        }
+
+        // Kiểm tra xem mật khẩu có chứa ký tự viết hoa không
+        if (!password.matches(".*[A-Z].*")) {
+            return false;
+        }
+
+        // Kiểm tra xem mật khẩu có chứa ký tự viết thường không
+        if (!password.matches(".*[a-z].*")) {
+            return false;
+        }
+
+        // Kiểm tra xem mật khẩu có chứa ký tự đặc biệt không
+        Pattern specialCharPattern = Pattern.compile("[^a-zA-Z0-9]");
+        Matcher matcher = specialCharPattern.matcher(password);
+        if (!matcher.find()) {
+            return false;
+        }
+
+        // Nếu mật khẩu thỏa mãn tất cả các điều kiện, trả về true
+        return true;
     }
     
     // đổi mã cố vấn thành tên cố vấn
@@ -362,6 +409,16 @@ public class ThuatToan {
             }
         }
         return "";
+    }
+    
+    public static ThongBao getThongBao(ArrayList<ThongBao>dsTB, String hkxet){
+        for(ThongBao tb: dsTB){
+            if(tb.getMaHocKy().equals(hkxet)){
+                return tb;
+            }
+        }
+        return null;
+        
     }
     //Lấy tên chức vụ từ mã chức vụ
     public static String getTenChucVu(ArrayList<ChucVu> dsChucVu, String ten){
@@ -666,13 +723,52 @@ public class ThuatToan {
         Database.saveListDRLToDB(dsDRL);
     }
     
-    public static boolean kTraTGXet(ArrayList<ThongBao> dsThongBao, ArrayList<HocKy> dsHocKy){
+    public static boolean kTraTGXetKhoa(ArrayList<ThongBao> dsThongBao, ArrayList<HocKy> dsHocKy){
         LocalDate currentDate = LocalDate.now();
         LocalDate date1 = null, date2 = null;
         for(ThongBao tb: dsThongBao){
             if(tb.getMaHocKy().equals(ThuatToan.getHKXet(dsHocKy))){
                 date1 = LocalDate.parse(tb.getNgayBD());
                 date2 = LocalDate.parse(tb.getNgayKTKhoa());
+                break;
+            }
+        }
+        return !(date1.compareTo(currentDate)>0 || date2.compareTo(currentDate) <0);
+    }
+    
+    public static boolean kTraTGXetSV(ArrayList<ThongBao> dsThongBao, ArrayList<HocKy> dsHocKy){
+        LocalDate currentDate = LocalDate.now();
+        LocalDate date1 = null, date2 = null;
+        for(ThongBao tb: dsThongBao){
+            if(tb.getMaHocKy().equals(ThuatToan.getHKXet(dsHocKy))){
+                date1 = LocalDate.parse(tb.getNgayBD());
+                date2 = LocalDate.parse(tb.getNgayKTSV());
+                break;
+            }
+        }
+        return !(date1.compareTo(currentDate)>0 || date2.compareTo(currentDate) <0);
+    }
+    
+    public static boolean kTraTGXetCS(ArrayList<ThongBao> dsThongBao, ArrayList<HocKy> dsHocKy){
+        LocalDate currentDate = LocalDate.now();
+        LocalDate date1 = null, date2 = null;
+        for(ThongBao tb: dsThongBao){
+            if(tb.getMaHocKy().equals(ThuatToan.getHKXet(dsHocKy))){
+                date1 = LocalDate.parse(tb.getNgayBD());
+                date2 = LocalDate.parse(tb.getNgayKTCS());
+                break;
+            }
+        }
+        return !(date1.compareTo(currentDate)>0 || date2.compareTo(currentDate) <0);
+    }
+    
+    public static boolean kTraTGXetCV(ArrayList<ThongBao> dsThongBao, ArrayList<HocKy> dsHocKy){
+        LocalDate currentDate = LocalDate.now();
+        LocalDate date1 = null, date2 = null;
+        for(ThongBao tb: dsThongBao){
+            if(tb.getMaHocKy().equals(ThuatToan.getHKXet(dsHocKy))){
+                date1 = LocalDate.parse(tb.getNgayBD());
+                date2 = LocalDate.parse(tb.getNgayKTCV());
                 break;
             }
         }
@@ -702,6 +798,13 @@ public class ThuatToan {
         int stt1 = Integer.parseInt(parts1[2]);
         int stt2 = Integer.parseInt(parts2[2]);
         return stt1 - stt2;
+    }
+    
+    public static boolean kTraHKTrongKhoaHoc(String khoaHoc,  String hocKy){
+        String parts[] = khoaHoc.split("-");
+        String hkDau = parts[0] + "-" + (Integer.parseInt(parts[0]) + 1) + "-1";
+        String hkCuoi = doiKhoaHocSangHKCuoi(khoaHoc, 4.5);
+        return soSanhHocKy(hkDau, hocKy) <= 0 && soSanhHocKy(hkCuoi, hocKy) >=0;
     }
     
     public static void showWaitMessage(int seconds) {

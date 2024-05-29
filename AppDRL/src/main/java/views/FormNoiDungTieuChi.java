@@ -31,6 +31,7 @@ public final class FormNoiDungTieuChi extends javax.swing.JFrame {
     private static final long serialVersionUID = 1L;
     private String title;
     private int ttTC;
+    private String chucNang;
     private ArrayList<NoiDungTieuChi> dsNoiDung;
     
     public void edit(){
@@ -44,6 +45,14 @@ public final class FormNoiDungTieuChi extends javax.swing.JFrame {
         buttonHoverEvent(jLabelNutThemTieuChi, jPanelNutThemTieuChi);
         buttonHoverEvent(jLabelNutSuaTieuChi, jPanelNutSuaTieuChi);
         buttonHoverEvent(jLabelNutXoaTieuChi, jPanelNutXoaTieuChi);
+        if(chucNang.equals("AnND")){
+            jLabelNutSuaTieuChi.setVisible(false);
+            jLabelNutThemTieuChi.setVisible(false);
+            jLabelNutXoaTieuChi.setVisible(false);
+            jPanelNutSuaTieuChi.setVisible(false);
+            jPanelNutXoaTieuChi.setVisible(false);
+            jPanelNutThemTieuChi.setVisible(false);
+        }
 
     }
     public FormNoiDungTieuChi() {
@@ -57,6 +66,15 @@ public final class FormNoiDungTieuChi extends javax.swing.JFrame {
         this.dsNoiDung = dsNoiDung;
         this.title = title;
         this.ttTC = ttTC;
+        edit();
+    }
+    public FormNoiDungTieuChi(ArrayList <TieuChi> dsTieuChi, ArrayList<NoiDungTieuChi> dsNoiDung, String title, int ttTC, String chucNang) {
+        initComponents();
+        this.dsTieuChi = dsTieuChi;
+        this.dsNoiDung = dsNoiDung;
+        this.title = title;
+        this.ttTC = ttTC;
+        this.chucNang = chucNang;
         edit();
     }
 
@@ -93,6 +111,7 @@ public final class FormNoiDungTieuChi extends javax.swing.JFrame {
         jPanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelBorderTieuChi.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelBorderTieuChi.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
 
         jScrollPaneTieuChi.setBorder(null);
 
@@ -105,7 +124,7 @@ public final class FormNoiDungTieuChi extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -126,7 +145,7 @@ public final class FormNoiDungTieuChi extends javax.swing.JFrame {
         jPanelBorderTieuChiLayout.setHorizontalGroup(
             jPanelBorderTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBorderTieuChiLayout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(jPanelBorderTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelTitleTieuChi)
                     .addComponent(jScrollPaneTieuChi, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -139,7 +158,7 @@ public final class FormNoiDungTieuChi extends javax.swing.JFrame {
                 .addComponent(jLabelTitleTieuChi, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPaneTieuChi, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jScrollPaneTieuChi.setVerticalScrollBar(new ScrollBar());

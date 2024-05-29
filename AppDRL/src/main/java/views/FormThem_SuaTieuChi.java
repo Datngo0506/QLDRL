@@ -69,6 +69,17 @@ public final class FormThem_SuaTieuChi extends javax.swing.JFrame {
                 choiceLoaiTC.setVisible(false);
                 jLabelNutTieuDeTieuChi.setText("Thêm nội dung");
             }
+            case "ChamDiemTC" -> {
+                jTextAreaChiTiet.setText(noiDung);
+                jTextFieldDiem.setText(Integer.toString(diem));
+                jLabelLoaiTC.setVisible(false);
+                choiceLoaiTC.setVisible(false);
+                jLabelNutTieuDeTieuChi.setText("Chi tiết tiêu chí");
+                jPanelNutXoaTieuChi.setVisible(false);
+                jLabelNutLuu.setVisible(false);
+                jTextAreaChiTiet.setEditable(false);
+                jTextFieldDiem.setEditable(false);
+            }
             default -> {
                 jLabelLoaiTC.setVisible(false);
                 choiceLoaiTC.setVisible(false);
@@ -135,6 +146,17 @@ public final class FormThem_SuaTieuChi extends javax.swing.JFrame {
         this.dsTieuChi = dsTieuChi;
         this.noiDung = noiDung;
         chucNang = "ChiTiet";
+        edit();
+    }
+    
+    public FormThem_SuaTieuChi(String noiDung, int diem, int chon, ArrayList<TieuChi> dsTieuChi, JTable tableTieuChi, String a) {
+        initComponents();
+        this.diem = diem;
+        this.tableTieuChi = tableTieuChi;
+        this.chonTC = chon;
+        this.dsTieuChi = dsTieuChi;
+        this.noiDung = noiDung;
+        chucNang = "ChamDiemTC";
         edit();
     }
     

@@ -21,9 +21,12 @@ import models.SinhVien;
 import models.TaiKhoan;
 import models.ThongBao;
 import models.TieuChi;
+import views.FormBanCanSu;
+import views.FormCoVanHT;
 import views.FormDangNhap;
 import views.FormHoiDongKhoa;
 import views.FormQuanLy;
+import views.FormSinhVien;
 /**
  *
  * @author Dat
@@ -76,8 +79,45 @@ public class AppDRL {
         }
 
         // Sau khi tất cả các tác vụ đã hoàn thành, bạn có thể thực hiện xử lý tiếp theo
-        ThuatToan.sapXepTheoMSSV(dsDRL);
+        ThuatToan.sapXepTheoDRL(dsDRL);
         Khoa khoa = dsKhoa.get(1);
+        
+        Lop lop = new Lop();
+        String mcv = "";
+        for(Lop l: dsLop){
+            if(l.getMaKhoa().equals(khoa.getMaKhoa()) & l.getLop().equals("D21CQAT01-N")){
+                lop = l;
+                mcv = l.getMaCoVan();
+            }
+        }
+        SinhVien sv = new SinhVien();
+        for(SinhVien s: dsSinhVien){
+            if(ThuatToan.getKhoaFromSinhVien(dsLop, s.getLop()).equals(khoa.getMaKhoa()) && s.getLop().equals(lop.getLop())){
+                sv = s;
+                break;
+            }
+        }
+        
+        TaiKhoan tk = new TaiKhoan();
+        for(TaiKhoan t: dsTaiKhoan){
+            if(t.getTenTK().equals(sv.getMaSV())){
+                tk = t;
+                break;
+            }
+        }
+        CoVan cv = new CoVan();
+        for(CoVan c: dsCoVan){
+            if(c.getMaCV().equals(mcv)){
+                cv = c;
+            }
+        }
+        TaiKhoan tk2 = new TaiKhoan();
+        for(TaiKhoan t: dsTaiKhoan){
+            if(t.getTenTK().equals(cv.getMaCV())){
+                tk2 = t;
+                break;
+            }
+        }
 //        for(DRL drl: dsDRL){
 //            System.out.println(drl.isTrangThai());
 //        }
@@ -87,8 +127,16 @@ public class AppDRL {
 //        }
 
         // Hiển thị form với dữ liệu đã tải
-        new FormQuanLy(dsTaiKhoan, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop, dsTieuChi, dsChucVu, dsSinhVien, dsThongBao, dsDRL).setVisible(true);
-        //new FormHoiDongKhoa(khoa, dsTaiKhoan, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop, dsChucVu, dsSinhVien, dsThongBao, dsDRL).setVisible(true);
+//        new FormSinhVien(khoa, sv, lop, tk, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop, 
+//                dsChucVu, dsTaiKhoan, dsSinhVien, dsThongBao, dsDRL, dsTieuChi).setVisible(true);
+//        new FormBanCanSu(khoa, sv, lop, tk, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop, dsChucVu, 
+//                dsTaiKhoan, dsSinhVien, dsThongBao, dsDRL, dsTieuChi).setVisible(true);
+//        new FormCoVanHT(khoa, cv, tk2, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop, 
+//                dsChucVu, dsTaiKhoan, dsSinhVien, dsThongBao, dsDRL, dsTieuChi).setVisible(true);
+//        new FormQuanLy(dsTaiKhoan, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop, 
+//                dsTieuChi, dsChucVu, dsSinhVien, dsThongBao, dsDRL).setVisible(true);
+        new FormHoiDongKhoa(khoa, dsTaiKhoan, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop,
+                dsChucVu, dsSinhVien, dsThongBao, dsDRL).setVisible(true);
     }
 
 

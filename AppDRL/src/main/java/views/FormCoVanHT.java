@@ -46,7 +46,7 @@ import models.TieuChi;
 
 
 
-public final class FormBanCanSu extends javax.swing.JFrame {
+public final class FormCoVanHT extends javax.swing.JFrame {
 
 /**
      * Creates new form FormSinhVien
@@ -61,10 +61,10 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         private ArrayList <ThongBao> dsThongBao = null;
         private ArrayList <DRL> dsDRL = null;
         private ArrayList <TieuChi> dsTieuChi = null;
+        private ArrayList <Lop> dsLop_CV = new ArrayList<>();
         private Khoa khoa;
-        private SinhVien sv;
+        private CoVan cv;
         private ArrayList<JLabel> dsLabel = new ArrayList<>();
-        private Lop lop;
         private TaiKhoan tk;
         //private final static Color textColor = new Color(0, 0, 139);
         private final static Color white = Color.WHITE;
@@ -74,13 +74,22 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         private final Color buttonColor = new Color(221,51,51);
     // Màu của viền
         
-    public FormBanCanSu() {
+    public FormCoVanHT() {
         initComponents();
         suKienMenu();
     }
     
+    public void getDsLop_CV(){
+        String hkXet = ThuatToan.getHKXet(dsHocKy);
+        for(Lop lopHoc: dsLop){
+            if(lopHoc.getMaCoVan().equals(cv.getMaCV()) && ThuatToan.kTraHKTrongKhoaHoc(lopHoc.getMaKhoaHoc(), hkXet) == true ){
+                dsLop_CV.add(lopHoc);
+            }
+        }
+    }
+    
     //covan
-    public FormBanCanSu(Khoa khoa,  SinhVien sv, Lop lop, TaiKhoan tk, ArrayList <Khoa>dsKhoa, ArrayList <CoVan>dsCoVan, ArrayList<HocKy>dsHocKy,
+    public FormCoVanHT(Khoa khoa,  CoVan cv, TaiKhoan tk, ArrayList <Khoa>dsKhoa, ArrayList <CoVan>dsCoVan, ArrayList<HocKy>dsHocKy,
             ArrayList<KhoaHoc>dsKhoaHoc, ArrayList<Lop> dsLop,  ArrayList<ChucVu> dsChucVu,  ArrayList<TaiKhoan>dsTaiKhoan,
             ArrayList<SinhVien>dsSinhVien, ArrayList <ThongBao> dsThongBao, ArrayList<DRL> dsDRL, ArrayList<TieuChi> dsTieuChi) {
         this.dsKhoa = dsKhoa;
@@ -88,7 +97,6 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         this.dsHocKy = dsHocKy;
         this.khoa = khoa;
         this.tk = tk;
-        this.lop = lop;
         this.dsKhoaHoc = dsKhoaHoc;
         this.dsLop = dsLop;
         this.dsTieuChi = dsTieuChi;
@@ -97,19 +105,17 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         this.dsChucVu = dsChucVu;
         this.dsThongBao = dsThongBao;
         this.dsDRL = dsDRL;
-        this.sv = sv;
+        this.cv = cv;
         initComponents();
+        getDsLop_CV();
         suKienMenu();
+        
     }
     
     //Xử lý khi click vào menu nào thì bảng của menu đó có dữ liệu
     public void addTable(String text){
 
-        if(text.contains("ĐIỂM CỦA BẠN")){
-            DRLCaNhan();
-        }
-
-        else if(text.contains("TÀI KHOẢN")){
+        if(text.contains("TÀI KHOẢN")){
             TaiKhoan();
         }
         else if(text.contains("ĐÁNH GIÁ ĐIỂM")){
@@ -121,17 +127,21 @@ public final class FormBanCanSu extends javax.swing.JFrame {
     }    
     
     public void TaiKhoan(){
-        jLabelMSV.setText(sv.getMaSV());
-        jLabelHoTen.setText(sv.getHoTen());
-        jLabelLop_TK.setText(sv.getLop());
-        jLabelChucVu.setText(ThuatToan.doiMaChucVuThanhTen(sv.getChucVu(), dsChucVu));
-        jLabelGioiTinh.setText(ThuatToan.doiBoolToGioiTinh(Boolean.toString(sv.isGioiTinh())));
-        jLabelNgaySinh.setText(ThuatToan.doiNgay(sv.getNgaySinh()));
-        jLabelSdt.setText(sv.getSdt());
-        jLabelEmail.setText(sv.getEmail().toLowerCase());
-        jLabelQueQuan.setText(sv.getQueQuan());
-        jLabelDiaChi.setText(sv.getDiaChi());
-        jLabelTenDN.setText(sv.getMaSV());
+        jLabelMSV.setText(cv.getMaCV());
+        jLabelHoTen.setText(cv.getTenCV());
+        jLabelLop_TK.setText(ThuatToan.doiMaKhoaThanhTenKhoa(cv.getKhoa(), dsKhoa));
+        String gt;
+        if(cv.getGioiTinh().equals("true")){
+            gt = "Nam";
+        }
+        else gt = "Nữ";
+        jLabelGioiTinh.setText(gt);
+        jLabelNgaySinh.setText(ThuatToan.doiNgay(cv.getNgaySinh()));
+        jLabelSdt.setText(cv.getSdt());
+        jLabelEmail.setText(cv.getEmail().toLowerCase());
+        jLabelQueQuan.setText(cv.getQueQuan());
+        jLabelDiaChi.setText(cv.getDiaChi());
+        jLabelTenDN.setText(cv.getMaCV());
         jLabelMatKhau.setText(ThuatToan.anMatKhau(tk.getMatKhau()));
     }
     
@@ -139,8 +149,12 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         choiceKhoa_DRL.removeAll();
         choiceKhoa_DRL.add(ThuatToan.doiMaKhoaThanhTenKhoa(khoa.getMaKhoa(), dsKhoa));
         choiceLop_DRL.removeAll();
-        choiceLop_DRL.add(sv.getLop());
+        Lop lop = dsLop_CV.getFirst();
+        for(Lop l: dsLop_CV){
+            choiceLop_DRL.add(l.getLop());
+        }
         String hk = ThuatToan.getHKXet(dsHocKy);
+        choiceHK_DRL.removeAll();
         ThuatToan.addChoiceHocKy(dsHocKy, lop.getMaKhoaHoc(), 4.5, choiceHK_DRL);
         choiceHK_DRL.select(ThuatToan.doiMaHKSangHK(hk));
         Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, lop.getLop(), hk);
@@ -151,12 +165,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         
     }
     
-    public void DRLCaNhan(){
-        String hk = ThuatToan.getHKXet(dsHocKy);
-        hk = Database.chuyenMaHocKy(hk);
-        jLabelHKXet_DRL.setText("Học kỳ đang xét là: "+hk);
-        Database.addListDRLToTable_SV_HK(dsDRL, sv, jTableDRLCaNhan);
-    }
+
     
     public void moTrangChu(){
         ThuatToan.addChoiceKhoa(choiceKhoa_LopXet, dsKhoa);
@@ -176,7 +185,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         // Sử dụng màu này trong ứng dụng của bạn
     
     //Khi chọn vào menu nào thì menu đó có màu vàng còn tất cả còn lại reset màu trắng    
-    public void viewMenuClick(JPanel main, JPanel p2, JPanel p3, JPanel p4){
+    public void viewMenuClick(JPanel main, JPanel p2, JPanel p3){
         main.setBackground(hoveColor);
         main.revalidate(); // Cập nhật giao diện
         main.repaint();    // Vẽ lại giao diện
@@ -189,15 +198,9 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         p3.revalidate(); // Cập nhật giao diện
         p3.repaint();    // Vẽ lại giao diện
         
-        p4.setBackground(white);
-        p4.revalidate(); // Cập nhật giao diện
-        p4.repaint();    // Vẽ lại giao diện
-        
-
-        
     }    
     // rê vào menu nào thì menu đó có màu vàng lợt, trừ menu được chọn
-    public void viewMenuHover(JPanel main, JPanel p2, JPanel p3, JPanel p4){
+    public void viewMenuHover(JPanel main, JPanel p2, JPanel p3){
         if(main.getBackground().equals(white)){
             main.setBackground(hoveColor2);
             main.revalidate(); // Cập nhật giao diện
@@ -213,16 +216,10 @@ public final class FormBanCanSu extends javax.swing.JFrame {
             p3.revalidate(); // Cập nhật giao diện
             p3.repaint();    // Vẽ lại giao diện
         }
-        if(!p4.getBackground().equals(hoveColor)){
-            p4.setBackground(white);
-            p4.revalidate(); // Cập nhật giao diện
-            p4.repaint();    // Vẽ lại giao diện
-        }
-
 
     }
     // rê ra khỏi menu thì menu màu trắng
-    public void viewExit(JPanel main, JPanel p2, JPanel p3, JPanel p4){
+    public void viewExit(JPanel main, JPanel p2, JPanel p3){
         if(!main.getBackground().equals(hoveColor)){
             main.setBackground(white);
             main.revalidate(); // Cập nhật giao diện
@@ -238,12 +235,6 @@ public final class FormBanCanSu extends javax.swing.JFrame {
             p3.revalidate(); // Cập nhật giao diện
             p3.repaint();    // Vẽ lại giao diện
         }
-        if(!p4.getBackground().equals(hoveColor)){
-            p4.setBackground(white);
-            p4.revalidate(); // Cập nhật giao diện
-            p4.repaint();    // Vẽ lại giao diện
-        }
-
 
     }
     //Khi click vào đăng xuất thì thoát    
@@ -292,18 +283,16 @@ public final class FormBanCanSu extends javax.swing.JFrame {
     
     public void hoverMenu(){
         //rê vào menu nào thì menu đó màu vàng nhạt
-        EnterEvent(jPanelTrangChu, jLabelTrangChu, jLabelTrangChuLeft, jPanelSinhVien,  jPanelLop, jPanelDRL);
-        EnterEvent(jPanelDRL, jLabelDRL, jLabelDRLLeft, jPanelLop, jPanelSinhVien, jPanelTrangChu);
-        EnterEvent(jPanelLop, jLabelLop, jLabelLopLeft,  jPanelDRL, jPanelSinhVien, jPanelTrangChu);
-        EnterEvent(jPanelSinhVien, jLabelSinhVien, jLabelSinhVienLeft,  jPanelLop, jPanelDRL, jPanelTrangChu);
+        EnterEvent(jPanelTrangChu, jLabelTrangChu, jLabelTrangChuLeft, jPanelSinhVien, jPanelDRL);
+        EnterEvent(jPanelDRL, jLabelDRL, jLabelDRLLeft, jPanelSinhVien, jPanelTrangChu);
+        EnterEvent(jPanelSinhVien, jLabelSinhVien, jLabelSinhVienLeft, jPanelDRL, jPanelTrangChu);
     }
     
     public void clickMenu(){
         //Kích vào menu nào thì đó hiện màu vàng đậm
-       ClickEvent(jPanelDRL, jLabelDRL, jLabelDRLLeft,  jPanelLop,  jPanelSinhVien, jPanelTrangChu);
-       ClickEvent(jPanelLop, jLabelLop, jLabelLopLeft,  jPanelDRL,  jPanelSinhVien, jPanelTrangChu);
-       ClickEvent(jPanelSinhVien, jLabelSinhVien, jLabelSinhVienLeft, jPanelLop,  jPanelDRL, jPanelTrangChu);
-       ClickEvent(jPanelTrangChu, jLabelTrangChu, jLabelTrangChuLeft,jPanelSinhVien, jPanelLop, jPanelDRL);
+       ClickEvent(jPanelDRL, jLabelDRL, jLabelDRLLeft,  jPanelSinhVien, jPanelTrangChu);
+       ClickEvent(jPanelSinhVien, jLabelSinhVien, jLabelSinhVienLeft,  jPanelDRL, jPanelTrangChu);
+       ClickEvent(jPanelTrangChu, jLabelTrangChu, jLabelTrangChuLeft,jPanelSinhVien, jPanelDRL);
     }
     
     public void hoverUnderMenu(){
@@ -324,18 +313,15 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         //nút xóa
 
         buttonHoverEvent(jLabelDoiTT, jPanelDoiTT);
-        buttonHoverEvent(jLabelNutXoaLop, jPanelNutXoaLop);
-
         //nút sử
         buttonHoverEvent(jLabelDoiMK, jPanelDoiMK);
 
     }
     
     public void openFromMenu(){
-        ClickMenuEvent(jPanelDRL, jLabelDRL, jLabelDRLLeft, jPanelChamDiem,   jPanelDRLCaNhan,  jPanelTTCN, jPanelTrangChuMain);
-        ClickMenuEvent(jPanelLop, jLabelLop, jLabelLopLeft, jPanelDRLCaNhan,   jPanelChamDiem,  jPanelTTCN, jPanelTrangChuMain);
-        ClickMenuEvent(jPanelSinhVien, jLabelSinhVien, jLabelSinhVienLeft, jPanelTTCN,   jPanelDRLCaNhan,  jPanelChamDiem, jPanelTrangChuMain);       
-        ClickMenuEvent(jPanelTrangChu, jLabelTrangChu, jLabelTrangChuLeft,jPanelTrangChuMain, jPanelTTCN,  jPanelDRLCaNhan,  jPanelChamDiem); 
+        ClickMenuEvent(jPanelDRL, jLabelDRL, jLabelDRLLeft, jPanelChamDiem,  jPanelTTCN, jPanelTrangChuMain);
+        ClickMenuEvent(jPanelSinhVien, jLabelSinhVien, jLabelSinhVienLeft, jPanelTTCN,  jPanelChamDiem, jPanelTrangChuMain);       
+        ClickMenuEvent(jPanelTrangChu, jLabelTrangChu, jLabelTrangChuLeft,jPanelTrangChuMain, jPanelTTCN,  jPanelChamDiem); 
     }
     
     public void suKienMenu(){
@@ -351,7 +337,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         this.setIconImage(logo);        
         //Mặc định khi mở sẽ hiện màn hình tài khoản khi kích vào nút nào thì nút đó hiện ra phần màn hình đó
         jPanelTrangChu.setBackground(hoveColor);
-        hienManHinhCanMo(jPanelTrangChu, jPanelDRLCaNhan, jPanelTTCN, jPanelChamDiem);
+        hienManHinhCanMo(jPanelTrangChu, jPanelTTCN, jPanelChamDiem);
         moTrangChu();
         dsLabel.add(jLabelHoTen);
         dsLabel.add(jLabelSdt);
@@ -372,12 +358,12 @@ public final class FormBanCanSu extends javax.swing.JFrame {
     
     
     //Xử lý các sự kiện click
-    public void ClickEvent(JPanel main1, JLabel main2, JLabel main3, JPanel p2, JPanel p3, JPanel p4){
+    public void ClickEvent(JPanel main1, JLabel main2, JLabel main3, JPanel p2, JPanel p3){
         
         main1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                viewMenuClick(main1, p2, p3, p4);
+                viewMenuClick(main1, p2, p3);
                 
             }
         });
@@ -386,7 +372,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         main2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                viewMenuClick(main1, p2, p3, p4);
+                viewMenuClick(main1, p2, p3);
                 
             }
         });
@@ -395,7 +381,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         main3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                viewMenuClick(main1, p2, p3, p4);
+                viewMenuClick(main1, p2, p3);
             }
         });
         
@@ -405,12 +391,12 @@ public final class FormBanCanSu extends javax.swing.JFrame {
     
     //kích vô menu nào hiện màn hình đó
     //jPanelKhoa, jLabelKhoa, jLabelLeft1, jPanelHocKyMain, jPanelKhoaMain, jPanelChamDiemMain, jPanelCoVanMain, jPanelLopMain, jPanelTaiKhoanMain, PanelXemDiemMain
-    public void ClickMenuEvent(JPanel main, JLabel main2, JLabel main3, JPanel main1, JPanel p2, JPanel p3, JPanel p4){
+    public void ClickMenuEvent(JPanel main, JLabel main2, JLabel main3, JPanel main1, JPanel p2, JPanel p3){
         
         main.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                hienManHinhCanMo(main1, p2, p3, p4);
+                hienManHinhCanMo(main1, p2, p3);
                 addTable(main2.getText());
             }
         });
@@ -419,7 +405,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         main2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                hienManHinhCanMo(main1, p2, p3, p4);
+                hienManHinhCanMo(main1, p2, p3);
                 addTable(main2.getText());
             }
         });
@@ -428,19 +414,19 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         main3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                hienManHinhCanMo(main1, p2, p3, p4);
+                hienManHinhCanMo(main1, p2, p3);
                 addTable(main2.getText());
             }
         });
         
     }
     
-    public void EnterEvent(JPanel main1, JLabel main2, JLabel main3, JPanel p2, JPanel p3, JPanel p4){
+    public void EnterEvent(JPanel main1, JLabel main2, JLabel main3, JPanel p2, JPanel p3){
         
             main1.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    viewMenuHover(main1, p2, p3, p4);
+                    viewMenuHover(main1, p2, p3);
                 }
             });
 
@@ -448,7 +434,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
             main2.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    viewMenuHover(main1, p2, p3, p4);
+                    viewMenuHover(main1, p2, p3);
                 }
             });
 
@@ -456,28 +442,28 @@ public final class FormBanCanSu extends javax.swing.JFrame {
             main2.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    viewMenuHover(main1, p2, p3, p4);
+                    viewMenuHover(main1, p2, p3);
                 }
             });
             
             main1.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    viewExit(main1, p2, p3, p4);
+                    viewExit(main1, p2, p3);
                 }
             });
             
             main2.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    viewExit(main1, p2, p3, p4);
+                    viewExit(main1, p2, p3);
                 }
             });
             
             main3.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    viewExit(main1, p2, p3, p4);
+                    viewExit(main1, p2, p3);
                 }
             });
     }
@@ -569,11 +555,10 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         });
     }
     
-    public void hienManHinhCanMo(JPanel main, JPanel p2, JPanel p3, JPanel p4){
+    public void hienManHinhCanMo(JPanel main, JPanel p2, JPanel p3){
         main.setVisible(true);
         p2.setVisible(false);
         p3.setVisible(false);
-        p4.setVisible(false);
     }
     
     
@@ -594,14 +579,12 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         jPanelSinhVien = new javax.swing.JPanel();
         jLabelSinhVien = new javax.swing.JLabel();
         jLabelSinhVienLeft = new javax.swing.JLabel();
-        jPanelLop = new javax.swing.JPanel();
-        jLabelLop = new javax.swing.JLabel();
-        jLabelLopLeft = new javax.swing.JLabel();
         jPanelDRL = new javax.swing.JPanel();
         jLabelDRL = new javax.swing.JLabel();
         jLabelDRLLeft = new javax.swing.JLabel();
         jPanelNullDot1 = new javax.swing.JPanel();
         jLabelThreedots1 = new javax.swing.JLabel();
+        jPanelNullDot6 = new javax.swing.JPanel();
         jPanelNullDot5 = new javax.swing.JPanel();
         jPanelNullDot4 = new javax.swing.JPanel();
         jPanelNullDot3 = new javax.swing.JPanel();
@@ -620,6 +603,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         jLabelpanelPtit = new javax.swing.JLabel();
         jPanelNutLienHe = RoundedPanel.createRoundedPanel();
         jLabelNutLienHe = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jLabelCloud = new javax.swing.JLabel();
         jLabelFb = new javax.swing.JLabel();
         jLabelThuongHieu = new javax.swing.JLabel();
@@ -647,18 +631,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         jTableLopXet = new com.raven.swing.TableLop();
         choiceKhoa_LopXet = new java.awt.Choice();
         jLabelChonKhoa_Lop1 = new javax.swing.JLabel();
-        jPanelDRLCaNhan = new javax.swing.JPanel();
-        jPanelThanhTieuDeLop = new javax.swing.JPanel();
-        jPanelNutTieuDeLop = RoundedPanel.createRoundedPanel();
-        jLabelNutTieuDeKhoa2 = new javax.swing.JLabel();
-        jPanelNutXoaLop = RoundedPanel.createRoundedPanel();
-        jLabelNutXoaLop = new javax.swing.JLabel();
         jScrollPaneLop = new javax.swing.JScrollPane();
-        jPanelTabeDRLCaNhan = new com.raven.swing.PanelBorder();
-        jScrollPaneDRLCaNhan = new javax.swing.JScrollPane();
-        jTableDRLCaNhan = new com.raven.swing.TableDRLCaNhan();
-        jLabelTableTitleLop2 = new javax.swing.JLabel();
-        jLabelHKXet_DRL = new javax.swing.JLabel();
         jPanelChamDiem = new javax.swing.JPanel();
         jPanelThanhTieuDeTrangChu = new javax.swing.JPanel();
         jPanelNutTieuDeTrangChu = RoundedPanel.createRoundedPanel();
@@ -714,7 +687,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         jLabelDoiMK = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Ban cán sự lớp");
+        setTitle("Cố vấn học tập");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -788,36 +761,6 @@ public final class FormBanCanSu extends javax.swing.JFrame {
 
         jPanelMenu.add(jPanelSinhVien);
 
-        jPanelLop.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelLop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        jLabelLop.setBackground(new java.awt.Color(255, 255, 255));
-        jLabelLop.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabelLop.setForeground(new java.awt.Color(227, 70, 34));
-        jLabelLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/redpoint.png"))); // NOI18N
-        jLabelLop.setText("ĐIỂM CỦA BẠN");
-
-        jLabelLopLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/redleft.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanelLopLayout = new javax.swing.GroupLayout(jPanelLop);
-        jPanelLop.setLayout(jPanelLopLayout);
-        jPanelLopLayout.setHorizontalGroup(
-            jPanelLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelLopLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelLop, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelLopLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelLopLayout.setVerticalGroup(
-            jPanelLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelLop, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-            .addComponent(jLabelLopLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jPanelMenu.add(jPanelLop);
-
         jPanelDRL.setBackground(new java.awt.Color(255, 255, 255));
         jPanelDRL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
@@ -869,6 +812,22 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         );
 
         jPanelMenu.add(jPanelNullDot1);
+
+        jPanelNullDot6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelNullDot6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout jPanelNullDot6Layout = new javax.swing.GroupLayout(jPanelNullDot6);
+        jPanelNullDot6.setLayout(jPanelNullDot6Layout);
+        jPanelNullDot6Layout.setHorizontalGroup(
+            jPanelNullDot6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+        jPanelNullDot6Layout.setVerticalGroup(
+            jPanelNullDot6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        jPanelMenu.add(jPanelNullDot6);
 
         jPanelNullDot5.setBackground(new java.awt.Color(255, 255, 255));
         jPanelNullDot5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1069,17 +1028,24 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         jPanelPtitLayout.setHorizontalGroup(
             jPanelPtitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPtitLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabelpanelPtit, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addComponent(jPanelNutLienHe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelPtitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelPtitLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabelpanelPtit, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(jPanelNutLienHe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelPtitLayout.createSequentialGroup()
+                        .addGap(426, 426, 426)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
         jPanelPtitLayout.setVerticalGroup(
             jPanelPtitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPtitLayout.createSequentialGroup()
                 .addComponent(jLabelpanelPtit, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 73, Short.MAX_VALUE))
             .addGroup(jPanelPtitLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jPanelNutLienHe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1338,161 +1304,9 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         jPanelTableLop_Xet.add(jLabelChonKhoa_Lop1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 45, 30));
 
         jPanelTrangChuMain.add(jPanelTableLop_Xet, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 760, 440));
+        jPanelTrangChuMain.add(jScrollPaneLop, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, -1));
 
         jLayeredPaneMain.add(jPanelTrangChuMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 600));
-
-        jPanelDRLCaNhan.setPreferredSize(new java.awt.Dimension(684, 505));
-        jPanelDRLCaNhan.setRequestFocusEnabled(false);
-        jPanelDRLCaNhan.setVerifyInputWhenFocusTarget(false);
-        jPanelDRLCaNhan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanelThanhTieuDeLop.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelThanhTieuDeLop.setPreferredSize(new java.awt.Dimension(770, 34));
-
-        jPanelNutTieuDeLop.setBackground(new java.awt.Color(221, 51, 51));
-
-        jLabelNutTieuDeKhoa2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabelNutTieuDeKhoa2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelNutTieuDeKhoa2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/whitepoint.png"))); // NOI18N
-        jLabelNutTieuDeKhoa2.setText("Điểm rèn luyện của bạn");
-        jLabelNutTieuDeKhoa2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jLabelNutTieuDeKhoa2.setPreferredSize(new java.awt.Dimension(32, 16));
-
-        javax.swing.GroupLayout jPanelNutTieuDeLopLayout = new javax.swing.GroupLayout(jPanelNutTieuDeLop);
-        jPanelNutTieuDeLop.setLayout(jPanelNutTieuDeLopLayout);
-        jPanelNutTieuDeLopLayout.setHorizontalGroup(
-            jPanelNutTieuDeLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelNutTieuDeLopLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabelNutTieuDeKhoa2, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanelNutTieuDeLopLayout.setVerticalGroup(
-            jPanelNutTieuDeLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelNutTieuDeKhoa2, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
-
-        jPanelNutXoaLop.setBackground(new java.awt.Color(221, 51, 51));
-        jPanelNutXoaLop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        jLabelNutXoaLop.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabelNutXoaLop.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelNutXoaLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/whitewrite.png"))); // NOI18N
-        jLabelNutXoaLop.setText("Chấm điểm");
-        jLabelNutXoaLop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabelNutXoaLop.setPreferredSize(new java.awt.Dimension(32, 16));
-        jLabelNutXoaLop.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelNutXoaLopMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelNutXoaLopLayout = new javax.swing.GroupLayout(jPanelNutXoaLop);
-        jPanelNutXoaLop.setLayout(jPanelNutXoaLopLayout);
-        jPanelNutXoaLopLayout.setHorizontalGroup(
-            jPanelNutXoaLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNutXoaLopLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelNutXoaLop, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
-        );
-        jPanelNutXoaLopLayout.setVerticalGroup(
-            jPanelNutXoaLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelNutXoaLop, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanelThanhTieuDeLopLayout = new javax.swing.GroupLayout(jPanelThanhTieuDeLop);
-        jPanelThanhTieuDeLop.setLayout(jPanelThanhTieuDeLopLayout);
-        jPanelThanhTieuDeLopLayout.setHorizontalGroup(
-            jPanelThanhTieuDeLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelThanhTieuDeLopLayout.createSequentialGroup()
-                .addComponent(jPanelNutTieuDeLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPaneLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 378, Short.MAX_VALUE)
-                .addComponent(jPanelNutXoaLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanelThanhTieuDeLopLayout.setVerticalGroup(
-            jPanelThanhTieuDeLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelNutTieuDeLop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanelNutXoaLop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelThanhTieuDeLopLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPaneLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jPanelDRLCaNhan.add(jPanelThanhTieuDeLop, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 764, 40));
-
-        jPanelTabeDRLCaNhan.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelTabeDRLCaNhan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
-
-        jScrollPaneDRLCaNhan.setBorder(null);
-        jScrollPaneDRLCaNhan.setVerticalScrollBar(new ScrollBar());
-        jScrollPaneDRLCaNhan.getVerticalScrollBar().setBackground(Color.WHITE);
-        jScrollPaneDRLCaNhan.getViewport().setBackground(Color.WHITE);
-        JPanel p25 = new JPanel();
-        p25.setBackground(Color.WHITE);
-        jScrollPaneDRLCaNhan.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p25);
-
-        jTableDRLCaNhan.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Học kỳ", "Mã sinh viên", "  Họ và tên", "ĐSV", "ĐCS", "ĐCV", "Trạng thái"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTableDRLCaNhan.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
-        jTableDRLCaNhan.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTableDRLCaNhan.setShowGrid(true);
-        jTableDRLCaNhan.setShowVerticalLines(false);
-        jScrollPaneDRLCaNhan.setViewportView(jTableDRLCaNhan);
-
-        jLabelTableTitleLop2.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        jLabelTableTitleLop2.setForeground(new java.awt.Color(127, 127, 127));
-        jLabelTableTitleLop2.setText("Điểm rèn luyện các học kỳ");
-
-        jLabelHKXet_DRL.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-        jLabelHKXet_DRL.setText("Học kỳ đang xét là: II 2023-2024");
-
-        javax.swing.GroupLayout jPanelTabeDRLCaNhanLayout = new javax.swing.GroupLayout(jPanelTabeDRLCaNhan);
-        jPanelTabeDRLCaNhan.setLayout(jPanelTabeDRLCaNhanLayout);
-        jPanelTabeDRLCaNhanLayout.setHorizontalGroup(
-            jPanelTabeDRLCaNhanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTabeDRLCaNhanLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jScrollPaneDRLCaNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
-            .addGroup(jPanelTabeDRLCaNhanLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabelTableTitleLop2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelHKXet_DRL)
-                .addGap(23, 23, 23))
-        );
-        jPanelTabeDRLCaNhanLayout.setVerticalGroup(
-            jPanelTabeDRLCaNhanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTabeDRLCaNhanLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelTabeDRLCaNhanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelTableTitleLop2)
-                    .addComponent(jLabelHKXet_DRL, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneDRLCaNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
-        );
-
-        jPanelDRLCaNhan.add(jPanelTabeDRLCaNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 756, 490));
-
-        jLayeredPaneMain.add(jPanelDRLCaNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 804, 612));
 
         jPanelChamDiem.setPreferredSize(new java.awt.Dimension(804, 612));
         jPanelChamDiem.setRequestFocusEnabled(false);
@@ -1585,7 +1399,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Mã sinh viên", "Họ và tên", "ĐSV", "ĐCS", "ĐCV", "Trạng thái"
+                "STT", "Mã sinh viên", "  Họ và tên", "ĐSV", "ĐCS", "ĐCV", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -1735,10 +1549,10 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabelChonKhoa_Lop10.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-        jLabelChonKhoa_Lop10.setText("Mã số sinh viên:");
+        jLabelChonKhoa_Lop10.setText("Mã cố vấn:");
 
         jLabelChonKhoa_Lop11.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-        jLabelChonKhoa_Lop11.setText("Lớp:");
+        jLabelChonKhoa_Lop11.setText("Khoa:");
 
         jLabelChonKhoa_Lop12.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
         jLabelChonKhoa_Lop12.setText("Họ và tên:");
@@ -1765,16 +1579,16 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         jLabelChonKhoa_Lop20.setText("Địa chỉ:");
 
         jLabelMSV.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
-        jLabelMSV.setText("N21DCAT010");
+        jLabelMSV.setText("CV0001");
 
         jLabelHoTen.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
         jLabelHoTen.setText("Ngô Văn Đạt");
 
         jLabelLop_TK.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
-        jLabelLop_TK.setText("D21CQAT01-N");
+        jLabelLop_TK.setText("An toàn thông tin");
 
         jLabelChucVu.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
-        jLabelChucVu.setText("Sinh viên");
+        jLabelChucVu.setText("Cố vấn học tập");
 
         jLabelGioiTinh.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
         jLabelGioiTinh.setText("Nam");
@@ -2072,41 +1886,12 @@ public final class FormBanCanSu extends javax.swing.JFrame {
 
     
 
-    private void jLabelNutXoaLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutXoaLopMouseClicked
-
-        int chon = jTableDRLCaNhan.getSelectedRow();
-        if(chon==-1){
-            JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn học kỳ cần đánh giá!");
-            return;
-        }
-        
-        Object cell = jTableDRLCaNhan.getValueAt(chon, 6);
-        Object cell2 = jTableDRLCaNhan.getValueAt(chon, 3);
-        if(cell.toString().equals("Đã duyệt") ){
-            JOptionPane.showMessageDialog(rootPane, "Bảng điểm đã được duyệt!");
-            return;
-        }
-        if(!ThuatToan.kTraTGXetSV(dsThongBao, dsHocKy)){
-            JOptionPane.showMessageDialog(rootPane, "Không trong thời gian xét duyệt!");
-            return;
-        }
-        if(!cell2.toString().equals(("0"))){
-            JOptionPane.showMessageDialog(rootPane, "Bạn đã đánh giá điểm học kỳ này!");
-            return;
-        }
-        String hk = ThuatToan.getHKXet(dsHocKy);
-        new FormChamDiem(dsDRL, dsTieuChi, hk, sv.getMaSV(), jTableDRLCaNhan, chon, "SV").setVisible(true);
-        
-        
-    }//GEN-LAST:event_jLabelNutXoaLopMouseClicked
-
     private void jLabelDoiTTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDoiTTMouseClicked
          try {
-             new FormSuaSinhVien(dsSinhVien, sv, dsLabel).setVisible(true);
+             new FormSuaCoVan(dsCoVan, cv, dsLabel).setVisible(true);
          } catch (ParseException ex) {
-             Logger.getLogger(FormBanCanSu.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(FormCoVanHT.class.getName()).log(Level.SEVERE, null, ex);
          }
-         TaiKhoan();
     }//GEN-LAST:event_jLabelDoiTTMouseClicked
 
     private void jLabelNutChamLaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutChamLaiMouseClicked
@@ -2116,22 +1901,20 @@ public final class FormBanCanSu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn sinh viên cần đánh giá!");
             return;
         }
-        if(!ThuatToan.kTraTGXetCS(dsThongBao, dsHocKy)){
+        if(!ThuatToan.kTraTGXetCV(dsThongBao, dsHocKy)){
             JOptionPane.showMessageDialog(rootPane, "Không trong thời gian xét duyệt!");
             return;
         }
-        String diemSV = jTableDRL.getValueAt(chon, 3).toString();
+        String diemSV = jTableDRL.getValueAt(chon, 4).toString();
         if(diemSV.equals("0")){
-            JOptionPane.showMessageDialog(rootPane, "Sinh viên này chưa hoàn tất cột đánh giá điểm của mình!");
+            JOptionPane.showMessageDialog(rootPane, "Sinh viên này chưa được ban cán sự lớp đánh giá!");
             return;
         }
+        
         String msv = jTableDRL.getValueAt(chon, 1).toString();
-        if(msv.equals(sv.getMaSV())){
-            JOptionPane.showMessageDialog(rootPane, "Không thể tự đánh giá điểm của bản thân ở cột này!");
-            return;
-        }
+
         String hk = ThuatToan.getHKXet(dsHocKy);
-        new FormChamDiem(dsDRL, dsTieuChi, hk, sv.getMaSV(), jTableDRL, chon, "CS").setVisible(true);
+        new FormChamDiem(dsDRL, dsTieuChi, hk, msv, jTableDRL, chon, "CV").setVisible(true);
             
         
     }//GEN-LAST:event_jLabelNutChamLaiMouseClicked
@@ -2201,7 +1984,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
 
     private void jLabelDoiMKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDoiMKMouseClicked
         // TODO add your handling code here:
-        new FormDoiMatKhau(dsTaiKhoan, sv.getMaSV()).setVisible(true);
+        new FormDoiMatKhau(dsTaiKhoan, cv.getMaCV()).setVisible(true);
     }//GEN-LAST:event_jLabelDoiMKMouseClicked
 
     
@@ -2223,14 +2006,30 @@ public final class FormBanCanSu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormBanCanSu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormCoVanHT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormBanCanSu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormCoVanHT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormBanCanSu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormCoVanHT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormBanCanSu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormCoVanHT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -2250,7 +2049,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new FormBanCanSu().setVisible(true);
+            new FormCoVanHT().setVisible(true);
         });
     }
 
@@ -2294,7 +2093,6 @@ public final class FormBanCanSu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelFb;
     private javax.swing.JLabel jLabelGioiTinh;
     private javax.swing.JLabel jLabelHKXet;
-    private javax.swing.JLabel jLabelHKXet_DRL;
     private javax.swing.JLabel jLabelHanCS;
     private javax.swing.JLabel jLabelHanCV;
     private javax.swing.JLabel jLabelHanKhoa;
@@ -2304,8 +2102,6 @@ public final class FormBanCanSu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelLeft8;
     private javax.swing.JLabel jLabelLeft9;
     private javax.swing.JLabel jLabelLogOut;
-    private javax.swing.JLabel jLabelLop;
-    private javax.swing.JLabel jLabelLopLeft;
     private javax.swing.JLabel jLabelLop_TK;
     private javax.swing.JLabel jLabelMSV;
     private javax.swing.JLabel jLabelMatKhau;
@@ -2314,16 +2110,13 @@ public final class FormBanCanSu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNutChamLai;
     private javax.swing.JLabel jLabelNutLienHe;
     private javax.swing.JLabel jLabelNutSV;
-    private javax.swing.JLabel jLabelNutTieuDeKhoa2;
     private javax.swing.JLabel jLabelNutTieuDeTrangChu;
     private javax.swing.JLabel jLabelNutTieuDeTrangChu1;
-    private javax.swing.JLabel jLabelNutXoaLop;
     private javax.swing.JLabel jLabelQueQuan;
     private javax.swing.JLabel jLabelSdt;
     private javax.swing.JLabel jLabelSinhVien;
     private javax.swing.JLabel jLabelSinhVienLeft;
     private javax.swing.JLabel jLabelTableTitleLop1;
-    private javax.swing.JLabel jLabelTableTitleLop2;
     private javax.swing.JLabel jLabelTenDN;
     private javax.swing.JLabel jLabelThreeDots;
     private javax.swing.JLabel jLabelThreedots1;
@@ -2340,12 +2133,10 @@ public final class FormBanCanSu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelChamDiem;
     private javax.swing.JPanel jPanelContact;
     private javax.swing.JPanel jPanelDRL;
-    private javax.swing.JPanel jPanelDRLCaNhan;
     private javax.swing.JPanel jPanelDoiMK;
     private javax.swing.JPanel jPanelDoiTT;
     private javax.swing.JPanel jPanelHelp;
     private javax.swing.JPanel jPanelLogOut;
-    private javax.swing.JPanel jPanelLop;
     private javax.swing.JPanel jPanelMenu;
     private javax.swing.JPanel jPanelNullDot;
     private javax.swing.JPanel jPanelNullDot1;
@@ -2353,33 +2144,29 @@ public final class FormBanCanSu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelNullDot3;
     private javax.swing.JPanel jPanelNullDot4;
     private javax.swing.JPanel jPanelNullDot5;
+    private javax.swing.JPanel jPanelNullDot6;
     private javax.swing.JPanel jPanelNutChamLai;
     private javax.swing.JPanel jPanelNutLienHe;
-    private javax.swing.JPanel jPanelNutTieuDeLop;
     private javax.swing.JPanel jPanelNutTieuDeTrangChu;
     private javax.swing.JPanel jPanelNutTieuDeTrangChu1;
     private javax.swing.JPanel jPanelNutTitleSV;
-    private javax.swing.JPanel jPanelNutXoaLop;
     private javax.swing.JPanel jPanelPanel;
     private javax.swing.JPanel jPanelPtit;
     private javax.swing.JPanel jPanelSinhVien;
     private javax.swing.JPanel jPanelTTCN;
     private com.raven.swing.PanelBorder jPanelTabeDRL;
-    private com.raven.swing.PanelBorder jPanelTabeDRLCaNhan;
     private com.raven.swing.PanelBorder jPanelTableLop_Xet;
-    private javax.swing.JPanel jPanelThanhTieuDeLop;
     private javax.swing.JPanel jPanelThanhTieuDeTrangChu;
     private javax.swing.JPanel jPanelThanhTieuDeTrangChu1;
     private javax.swing.JPanel jPanelTitleSV;
     private javax.swing.JPanel jPanelTrangChu;
     private javax.swing.JPanel jPanelTrangChuMain;
     private javax.swing.JPanel jPanelView;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPaneDRL;
-    private javax.swing.JScrollPane jScrollPaneDRLCaNhan;
     private javax.swing.JScrollPane jScrollPaneLop;
     private javax.swing.JScrollPane jScrollPaneLopXet;
     private com.raven.swing.TableCo5Cot jTableDRL;
-    private com.raven.swing.TableCo5Cot jTableDRLCaNhan;
     private com.raven.swing.TableCo5Cot jTableLopXet;
     // End of variables declaration//GEN-END:variables
 
