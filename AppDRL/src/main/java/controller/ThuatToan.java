@@ -95,8 +95,14 @@ public class ThuatToan {
         }
     }
     
+    
+    
     public static void sapXepTheoDRL(ArrayList<DRL> danhSachDRL) {
         Collections.sort(danhSachDRL, (DRL drl1, DRL drl2) -> drl1.getMSSV().compareTo(drl2.getMSSV()));
+    }
+    
+    public static void sapXepTheoDRL_HK(ArrayList<DRL> danhSachDRL) {
+        Collections.sort(danhSachDRL, (DRL drl1, DRL drl2) -> drl1.getMaHK().compareTo(drl2.getMaHK()));
     }
     
     public static void sapXepTheoMSSV(ArrayList<SinhVien> dsSV) {
@@ -938,6 +944,15 @@ public class ThuatToan {
                 ch.add(lop.getLop());
             }
         }
+    }
+    
+    public static String getMaChucVuFromTen(String ten, ArrayList<ChucVu> dsChucVu){
+        for(ChucVu cv: dsChucVu){
+            if(cv.getTenChucVu().toLowerCase().equals(ten.toLowerCase())){
+                return cv.getMaChucVu();
+            }
+        }
+        return "";
     }
     
 }

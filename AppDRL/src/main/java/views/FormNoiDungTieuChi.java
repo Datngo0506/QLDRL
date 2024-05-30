@@ -5,16 +5,15 @@
 package views;
 
 import com.raven.swing.ScrollBar;
-import icons.Icon;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import java.util.ArrayList;
 import models.NoiDungTieuChi;
 import controller.Database;
+import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
@@ -36,10 +35,9 @@ public final class FormNoiDungTieuChi extends javax.swing.JFrame {
     
     public void edit(){
         setLocationRelativeTo(null);
-        JFrame.setDefaultLookAndFeelDecorated(true);
-        ImageIcon icon = new ImageIcon(Icon.getUrlIcon("logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
+        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
         Image logo = icon.getImage();
-        this.setIconImage(logo);
+        this.setIconImage(logo);  
         jLabelTitleTieuChi.setText(title);
         Database.addListGiaiThichToTable(dsNoiDung, jTableTieuChi);
         buttonHoverEvent(jLabelNutThemTieuChi, jPanelNutThemTieuChi);
@@ -118,6 +116,7 @@ public final class FormNoiDungTieuChi extends javax.swing.JFrame {
 
         jScrollPaneTieuChi.setBorder(null);
 
+        jTableTieuChi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableTieuChi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

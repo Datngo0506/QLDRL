@@ -15,14 +15,40 @@ import java.awt.Color;
 import java.awt.Image;
 import com.raven.swing.RoundedTextField;
 import com.raven.swing.RoundedPasswordField;
+import controller.ThuatToan;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPasswordField;
+import javax.swing.JRootPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+import models.ChucVu;
+import models.CoVan;
+import models.DRL;
+import models.HocKy;
+import models.Khoa;
+import models.KhoaHoc;
+import models.Lop;
+import models.SinhVien;
+import models.TaiKhoan;
+import models.ThongBao;
+import models.TieuChi;
 
 
 
@@ -83,8 +109,29 @@ public final class FormDangNhap extends javax.swing.JFrame {
      * @param frame
      */
     
+    
+    private ArrayList<TaiKhoan> dsTaiKhoan = new ArrayList<>();
+    private ArrayList<Khoa> dsKhoa = new ArrayList<>();
+    private ArrayList<CoVan> dsCoVan = new ArrayList<>();
+    private ArrayList<HocKy> dsHocKy = new ArrayList<>();
+    private ArrayList<KhoaHoc> dsKhoaHoc = new ArrayList<>();
+    private ArrayList<Lop> dsLop = new ArrayList<>();
+    private ArrayList<TieuChi> dsTieuChi = new ArrayList<>();
+    private ArrayList<SinhVien> dsSinhVien = new ArrayList<>();
+    private ArrayList<ChucVu> dsChucVu = new ArrayList<>();
+    private ArrayList<ThongBao> dsThongBao = new ArrayList<>();
+    private ArrayList<DRL> dsDRL = new ArrayList<>();
+    private Khoa khoa = new Khoa();
+    private Lop lop = new Lop();
+    private SinhVien sv = new SinhVien();
+    private CoVan cv = new CoVan();
+    private TaiKhoan tk = new TaiKhoan();
+    private String role = "";
+    private boolean flag = false;
+    
+    
     public void setIconFrame(JFrame frame){
-        JFrame.setDefaultLookAndFeelDecorated(true);
+        //JFrame.setDefaultLookAndFeelDecorated(true);
         ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
         Image logo = icon.getImage();
         frame.setIconImage(logo);
@@ -131,19 +178,63 @@ public final class FormDangNhap extends javax.swing.JFrame {
     }
     
     public void suKienMenu(){
+        
         setLocationRelativeTo(null);
         setIconFrame(this);
         setBorderTextField(jTextFieldTenDN);
         setBorderTextField(jPasswordField);
+        getData();
+        jButton1.addActionListener((ActionEvent e) -> {
+            click();
+        });
+        bindKeyStroke(jButton1, "enter");
+        // Ẩn các nút tắt trên cửa sổ
+        //setUndecorated(true);
     }
-    
-    
+
     public FormDangNhap() {
+        //setRootPaneCheckingEnabled(false);
+
         initComponents();
         suKienMenu();
     }
     
+    private void getData(){
+        // Tạo một ExecutorService để thực hiện các tác vụ bất đồng bộ
+        ExecutorService executor = Executors.newFixedThreadPool(1);
 
+        // Tạo một Future để theo dõi tiến trình của tác vụ
+        Future<?> future = executor.submit(() -> {
+            Database.saveTaiKhoanToList(dsTaiKhoan);
+            Database.saveKhoaToList(dsKhoa);
+            Database.saveCoVanToList(dsCoVan);
+            Database.saveHocKyToList(dsHocKy);
+            Database.saveKhoaHocToList(dsKhoaHoc);
+            Database.saveLopToList(dsLop);
+            Database.saveTieuChiToList(dsTieuChi);
+            Database.saveSinhVienToList(dsSinhVien);
+            Database.saveChucVuToList(dsChucVu);
+            Database.saveThongBaoToList(dsThongBao);
+            Database.saveDRLToList(dsDRL);
+        });
+
+        try {
+            // Chờ tác vụ hoàn thành
+            future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            //e.printStackTrace();
+        } finally {
+            // Kết thúc ExecutorService sau khi tất cả các tác vụ đã hoàn thành
+            executor.shutdown();
+        }
+
+        // Sau khi tất cả các tác vụ đã hoàn thành, bạn có thể thực hiện xử lý tiếp theo
+        new Thread(() -> {
+            ThuatToan.sapXepTheoDRL(dsDRL);
+            ThuatToan.sapXepTheoDRL_HK(dsDRL);
+        }).start();
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -164,6 +255,7 @@ public final class FormDangNhap extends javax.swing.JFrame {
         jPasswordField = new RoundedPasswordField(15, 10, 10);
         jLabelSubmit = new javax.swing.JLabel();
         jLabelMatKhau = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng nhập");
@@ -201,6 +293,9 @@ public final class FormDangNhap extends javax.swing.JFrame {
         jLabelQuenMatKhau.setText("Quên mật khẩu?");
         jLabelQuenMatKhau.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelQuenMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelQuenMatKhauMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabelQuenMatKhauMouseEntered(evt);
             }
@@ -238,12 +333,20 @@ public final class FormDangNhap extends javax.swing.JFrame {
                 jLabelSubmitMouseExited(evt);
             }
         });
+        jLabelSubmit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jLabelSubmitKeyTyped(evt);
+            }
+        });
         jPanelMain.add(jLabelSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 370, 40));
 
         jLabelMatKhau.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabelMatKhau.setForeground(new java.awt.Color(102, 102, 102));
         jLabelMatKhau.setText("Mật khẩu");
         jPanelMain.add(jLabelMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 370, -1));
+
+        jButton1.setText("jButton1");
+        jPanelMain.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 0, 10));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -261,32 +364,122 @@ public final class FormDangNhap extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabelSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSubmitMouseClicked
+    public void click(){
         // TODO add your handling code here:
-        
-        if(jTextFieldTenDN.getText().isEmpty() || jPasswordField.getPassword().length == 0) {
+        String username = jTextFieldTenDN.getText().trim();
+        char[] passwordChars = jPasswordField.getPassword();
+        String password = new String(passwordChars);
+        if(username.equals("") || password.equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập tên đăng nhập và mật khẩu!");
+            return;
         }
-        else{
-            String username = jTextFieldTenDN.getText();
-            // Lấy mật khẩu từ JPasswordField
-            char[] passwordChars = jPasswordField.getPassword();
-            // Chuyển mật khẩu thành chuỗi String
-            String password = new String(passwordChars);
-
-            boolean isValid = Database.kiemTraDangNhap(username, password);
-            if(isValid == true){
-                String role = Database.getRole(username);
-                if(role.equals("admin")){
-                    new FormQuanLy().setVisible(true);
+        //System.out.println(username + " " + password);
+        flag = false;
+        Thread searchThread = new Thread(() -> {
+            for(TaiKhoan t: dsTaiKhoan) {
+                if((t.getTenTK().toLowerCase()).equals(username.toLowerCase()) 
+                        && t.getMatKhau().equals(password) && t.isTrangThai()) {
+                    role = t.getLoaiTK();
+                    tk = t;
+                    flag = true;
+                    break;
                 }
+            }
+        });
+        searchThread.start(); // Bắt đầu luồng tìm kiếm
+        try {
+            searchThread.join(); // Chờ luồng tìm kiếm kết thúc
+        } catch (InterruptedException e) {
+        }
+
+        if(!flag) {
+            JOptionPane.showMessageDialog(rootPane, "Tên đăng nhập hoặc mật khẩu không đúng!");
+            return;
+        }
+        
+        switch (role.toLowerCase()) {
+            case "admin" -> {
+                new FormQuanLy(this, dsTaiKhoan, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop,
+                    dsTieuChi, dsChucVu, dsSinhVien, dsThongBao, dsDRL).setVisible(true);
+                
+                jTextFieldTenDN.setText("");
+                jPasswordField.setText("");
                 this.setVisible(false);
             }
-            else{
-                JOptionPane.showMessageDialog(rootPane, "Tên đăng nhập hoặc mật khẩu không đúng!");
+            case "khoa" -> {
+                for(Khoa k: dsKhoa){
+                    if(k.getMaKhoa().toLowerCase().equals(username.toLowerCase())){
+                        khoa = k;
+                        break;
+                    }
+                }   
+                new FormHoiDongKhoa(this, khoa, dsTaiKhoan, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop, 
+                    dsChucVu, dsSinhVien, dsThongBao, dsDRL).setVisible(true);
+                jTextFieldTenDN.setText("");
+                jPasswordField.setText("");
+                this.setVisible(false);
+            }
+            case "covan" -> {
+                for(CoVan c: dsCoVan){
+                    if(c.getMaCV().toLowerCase().equals(username.toLowerCase())){
+                        cv = c;
+                        break;
+                    }
+                }   for(Khoa k: dsKhoa){
+                    if(k.getMaKhoa().toLowerCase().equals(cv.getKhoa().toLowerCase())){
+                        khoa = k;
+                        break;
+                    }
+                }   
+                new FormCoVanHT(this, khoa, cv, tk, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop, 
+                    dsChucVu, dsTaiKhoan, dsSinhVien, dsThongBao, dsDRL, dsTieuChi).setVisible(true);
+                jTextFieldTenDN.setText("");
+                jPasswordField.setText("");    
+                this.setVisible(false);
+            }
+            default -> {
+                Thread searchSV = new Thread(() -> {
+                    for(SinhVien s: dsSinhVien){
+                        if(s.getMaSV().toLowerCase().equals(username.toLowerCase())){
+                            sv = s;
+                            break;
+                        }
+                    }
+                }); searchSV.start();
+                try {
+                    searchSV.join(); // Chờ luồng tìm kiếm kết thúc
+                } catch (InterruptedException e) {
+                }   for(Lop l: dsLop){
+                    if(l.getLop().toLowerCase().equals(sv.getLop().toLowerCase())){
+                        lop = l;
+                        break;
+                    }
+                }   for(Khoa k: dsKhoa){
+                    if(k.getMaKhoa().toLowerCase().equals(lop.getMaKhoa().toLowerCase())){
+                        khoa = k;
+                        break;
+                    }
+                }   
+                if(sv.getChucVu().equals(ThuatToan.getMaChucVuFromTen("sinh viên", dsChucVu))){
+                    new FormSinhVien(this, khoa, sv, lop, tk, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop, dsChucVu,
+                            dsTaiKhoan, dsSinhVien, dsThongBao, dsDRL, dsTieuChi).setVisible(true);
+                    jTextFieldTenDN.setText("");
+                    jPasswordField.setText("");
+                    this.setVisible(false);
+                }
+                else{
+                    new FormBanCanSu(this, khoa, sv, lop, tk, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc, dsLop, dsChucVu,
+                            dsTaiKhoan, dsSinhVien, dsThongBao, dsDRL, dsTieuChi).setVisible(true);
+                    jTextFieldTenDN.setText("");
+                    jPasswordField.setText("");
+                    this.setVisible(false);
+                }   
             }
         }
-        
+    }
+    
+    private void jLabelSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSubmitMouseClicked
+        click();
     }//GEN-LAST:event_jLabelSubmitMouseClicked
 
     Color color = new Color(221,25,25);
@@ -312,6 +505,39 @@ public final class FormDangNhap extends javax.swing.JFrame {
         jLabelSubmit.setBackground(color);
     }//GEN-LAST:event_jLabelSubmitMouseExited
 
+    private void jLabelQuenMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelQuenMatKhauMouseClicked
+        // TODO add your handling code here:
+        new FormNhapMail(dsTaiKhoan, dsSinhVien, dsCoVan).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabelQuenMatKhauMouseClicked
+
+    private void jLabelSubmitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabelSubmitKeyTyped
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jLabelSubmitKeyTyped
+
+    public static void bindKeyStroke(final JButton btn, String ks) {
+        final ActionListener[] alist = btn.getActionListeners();
+        if (alist.length != 0) {
+            AbstractAction action = new AbstractAction(btn.getText(), btn.getIcon()) {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    for (ActionListener al : alist) {
+                        ActionEvent ae = new ActionEvent(e.getSource(), e.getID(), Action.ACCELERATOR_KEY);
+                        al.actionPerformed(ae);
+                    }
+                }
+            };
+
+            KeyStroke keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0); // Chỉ định phím Enter
+            btn.setAction(action);
+            btn.getActionMap().put(Action.ACCELERATOR_KEY, action);
+            btn.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keyStroke, Action.ACCELERATOR_KEY);
+        }
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -347,6 +573,7 @@ public final class FormDangNhap extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabelLogo;
     private javax.swing.JLabel jLabelMatKhau;
     private javax.swing.JLabel jLabelPhanMem;
@@ -358,4 +585,8 @@ public final class FormDangNhap extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextFieldTenDN;
     // End of variables declaration//GEN-END:variables
+        
 }
+
+
+

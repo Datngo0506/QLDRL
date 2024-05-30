@@ -112,6 +112,27 @@ public class Database {
         }
     }
     
+    public static void updateMatKhau(String tenDN, String newMatKhau) {
+    try {
+        // Thực hiện kết nối đến cơ sở dữ liệu
+        try (Connection connection = getConnection()) {
+            // Chuẩn bị câu lệnh SQL cho việc cập nhật mật khẩu
+            String updateQuery = "UPDATE TaiKhoan SET MatKhau = ? WHERE TenTK = ?";
+
+            // Tạo đối tượng PreparedStatement và thực hiện lệnh cập nhật
+            PreparedStatement pstmt = connection.prepareStatement(updateQuery);
+            pstmt.setString(1, newMatKhau.trim());
+            pstmt.setString(2, tenDN.trim());
+            
+            // Thực hiện lệnh cập nhật
+            pstmt.executeUpdate();
+        }
+    } catch (SQLException ex) {
+        // Xử lý ngoại lệ nếu có lỗi xảy ra khi thực hiện truy vấn SQL
+        //ex.printStackTrace();
+    }
+}
+    
     
     public static void saveKhoaToList(ArrayList<Khoa> khoa) {
         if (!khoa.isEmpty()) {
@@ -1242,6 +1263,7 @@ public class Database {
             // Xử lý các lỗi khác
             //e.printStackTrace();
         } 
+
     }
     
     public static void saveListDRLToDB(ArrayList<DRL> dsDRL) {
@@ -1274,6 +1296,7 @@ public class Database {
             // Xử lý các lỗi khác
            // e.printStackTrace();
         }
+        
     }
     
     public static void updateDRLSV_SV(String mssv, String maHK, int diemSV, int diemCS, int diemCV) {

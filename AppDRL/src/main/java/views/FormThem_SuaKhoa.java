@@ -15,7 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import models.CoVan;
@@ -45,10 +44,9 @@ public final class FormThem_SuaKhoa extends javax.swing.JFrame {
     
     public void edit() throws ParseException{
         setLocationRelativeTo(null);
-        JFrame.setDefaultLookAndFeelDecorated(true);
         ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
         Image logo = icon.getImage();
-        this.setIconImage(logo);
+        this.setIconImage(logo);  
         if(chucNang.equals("Them")){
             jDateChooserNgaySinh.setDateFormatString("yyyy-MM-dd");
             jLabelNutTieuDeTieuChi.setText("Thêm khoa");

@@ -40,10 +40,9 @@ public final class FormSuaSinhVien extends javax.swing.JFrame {
 
     
     public void edit() throws ParseException{
-        JFrame.setDefaultLookAndFeelDecorated(true);
         ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
         Image logo = icon.getImage();
-        this.setIconImage(logo);
+        this.setIconImage(logo);  
         setLocationRelativeTo(null);
         
         jTextFieldMaCoVan.setEditable(false);

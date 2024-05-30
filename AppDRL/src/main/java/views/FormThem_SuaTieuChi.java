@@ -9,12 +9,10 @@ import com.raven.swing.RoundedTextField;
 import com.raven.swing.RoundedScrollPane;
 import controller.Database;
 import controller.ThuatToan;
-import icons.Icon;
 import java.awt.Color;
 import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -44,10 +42,9 @@ public final class FormThem_SuaTieuChi extends javax.swing.JFrame {
     public void edit(){
         setLocationRelativeTo(null);
         FormDangNhap.setBorderTextArea(jTextAreaChiTiet);
-        JFrame.setDefaultLookAndFeelDecorated(true);
-        ImageIcon icon = new ImageIcon(Icon.getUrlIcon("logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
+        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
         Image logo = icon.getImage();
-        this.setIconImage(logo);
+        this.setIconImage(logo);  
         
         switch (chucNang) {
             case "ChiTiet" -> {
@@ -87,7 +84,11 @@ public final class FormThem_SuaTieuChi extends javax.swing.JFrame {
                 String nd = ds.get(chonND).getNoiDung();
                 String diemQD = Integer.toString(ds.get(chonND).getDiem());
                 jTextAreaChiTiet.setText(nd);
-                jTextFieldDiem.setText(diemQD);
+                String text = "";
+                if(!diemQD.equals("-50")){
+                    text = diemQD;
+                }
+                jTextFieldDiem.setText(text);
                 jLabelNutTieuDeTieuChi.setText("Cập nhật nội dung");
             }
         }
@@ -451,11 +452,19 @@ public final class FormThem_SuaTieuChi extends javax.swing.JFrame {
         
         if(jTextAreaChiTiet.getText().equals("")){
             JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập đầy đủ thông tin!");
+            return;
         }
-        else if(!ThuatToan.isInteger(jTextFieldDiem.getText().trim())){
-            JOptionPane.showMessageDialog(rootPane, "Điểm quyết định phải là số nguyên!");
+        if(chucNang.equals("ChiTietND") || chucNang.equals("ThemND")){
+            if(!jTextFieldDiem.getText().trim().equals("") && !ThuatToan.isInteger(jTextFieldDiem.getText().trim())){
+                JOptionPane.showMessageDialog(rootPane, "Điểm quyết định phải là số nguyên!");
+                return;
+            }
         }
-        else if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn lưu không?") == JOptionPane.YES_OPTION){
+        else if(!ThuatToan.isInteger(jTextFieldDiem.getText().trim()) ){
+                JOptionPane.showMessageDialog(rootPane, "Điểm quyết định phải là số nguyên!");
+                return;
+        }
+        if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn lưu không?") == JOptionPane.YES_OPTION){
             switch (chucNang) {
                 //Xem chi tiết tiêu chí lớn
                 case "ChiTiet" -> {

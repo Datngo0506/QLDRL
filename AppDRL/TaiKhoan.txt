@@ -1,0 +1,14 @@
+Nhà trường: 
+tenDN: admin mk: admin
+tenDN: admin1 mk: admin1
+tenDN: admin2 mk: admin2
+tenDN: admin3 mk: admin3
+Khoa:
+CNTT2: 123456
+VT2: 123456
+DT2: 123456
+.....
+Cố vấn: 
+CV0001-> CV0111 mk: 123456
+Sinh viên:
+Mã sinh viên: mk 123456

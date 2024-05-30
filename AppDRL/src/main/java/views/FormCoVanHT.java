@@ -15,6 +15,7 @@ import controller.Database;
 import controller.Link;
 import com.raven.swing.ScrollBar;
 import controller.ThuatToan;
+import java.awt.Cursor;
 import java.awt.Image;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -63,6 +64,7 @@ public final class FormCoVanHT extends javax.swing.JFrame {
         private ArrayList <TieuChi> dsTieuChi = null;
         private ArrayList <Lop> dsLop_CV = new ArrayList<>();
         private Khoa khoa;
+        private JFrame frame;
         private CoVan cv;
         private ArrayList<JLabel> dsLabel = new ArrayList<>();
         private TaiKhoan tk;
@@ -89,7 +91,7 @@ public final class FormCoVanHT extends javax.swing.JFrame {
     }
     
     //covan
-    public FormCoVanHT(Khoa khoa,  CoVan cv, TaiKhoan tk, ArrayList <Khoa>dsKhoa, ArrayList <CoVan>dsCoVan, ArrayList<HocKy>dsHocKy,
+    public FormCoVanHT(JFrame frame, Khoa khoa,  CoVan cv, TaiKhoan tk, ArrayList <Khoa>dsKhoa, ArrayList <CoVan>dsCoVan, ArrayList<HocKy>dsHocKy,
             ArrayList<KhoaHoc>dsKhoaHoc, ArrayList<Lop> dsLop,  ArrayList<ChucVu> dsChucVu,  ArrayList<TaiKhoan>dsTaiKhoan,
             ArrayList<SinhVien>dsSinhVien, ArrayList <ThongBao> dsThongBao, ArrayList<DRL> dsDRL, ArrayList<TieuChi> dsTieuChi) {
         this.dsKhoa = dsKhoa;
@@ -97,6 +99,7 @@ public final class FormCoVanHT extends javax.swing.JFrame {
         this.dsHocKy = dsHocKy;
         this.khoa = khoa;
         this.tk = tk;
+        this.frame = frame;
         this.dsKhoaHoc = dsKhoaHoc;
         this.dsLop = dsLop;
         this.dsTieuChi = dsTieuChi;
@@ -149,20 +152,39 @@ public final class FormCoVanHT extends javax.swing.JFrame {
         choiceKhoa_DRL.removeAll();
         choiceKhoa_DRL.add(ThuatToan.doiMaKhoaThanhTenKhoa(khoa.getMaKhoa(), dsKhoa));
         choiceLop_DRL.removeAll();
-        Lop lop = dsLop_CV.getFirst();
-        for(Lop l: dsLop_CV){
-            choiceLop_DRL.add(l.getLop());
+        if(!dsLop_CV.isEmpty()){
+            anLop(true, "Khoa:");
+            Lop lop = dsLop_CV.getFirst();
+            for(Lop l: dsLop_CV){
+                choiceLop_DRL.add(l.getLop());
+            }
+            String hk = ThuatToan.getHKXet(dsHocKy);
+            choiceHK_DRL.removeAll();
+            ThuatToan.addChoiceHocKy(dsHocKy, lop.getMaKhoaHoc(), 4.5, choiceHK_DRL);
+            choiceHK_DRL.select(ThuatToan.doiMaHKSangHK(hk));
+            Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, lop.getLop(), hk);
+            if(choiceHK_DRL.getSelectedItem().equals(ThuatToan.doiMaHKSangHK(hk))){
+                jPanelNutChamLai.setVisible(true);
+                jLabelNutChamLai.setVisible(true);
+            }
         }
-        String hk = ThuatToan.getHKXet(dsHocKy);
-        choiceHK_DRL.removeAll();
-        ThuatToan.addChoiceHocKy(dsHocKy, lop.getMaKhoaHoc(), 4.5, choiceHK_DRL);
-        choiceHK_DRL.select(ThuatToan.doiMaHKSangHK(hk));
-        Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, lop.getLop(), hk);
-        if(choiceHK_DRL.getSelectedItem().equals(ThuatToan.doiMaHKSangHK(hk))){
-            jPanelNutChamLai.setVisible(true);
-            jLabelNutChamLai.setVisible(true);
+        else{
+            anLop(false, "Bạn hiện đang không cố vấn cho lớp nào cả!");
         }
         
+        
+        
+    }
+    
+    public void anLop(boolean flag , String text){
+        jScrollPaneDRL.setVisible(flag);
+        jTableDRL.setVisible(flag);
+        choiceKhoa_DRL.setVisible(flag);
+        choiceLop_DRL.setVisible(flag);
+        choiceHK_DRL.setVisible(flag);
+        jLabelChonLop_SV1.setVisible(flag);
+        jLabelChon2.setVisible(flag);
+        jLabelChon3.setText(text);
     }
     
 
@@ -331,10 +353,9 @@ public final class FormCoVanHT extends javax.swing.JFrame {
         hoverUnderMenu();
         hoverButton();
         openFromMenu();
-        JFrame.setDefaultLookAndFeelDecorated(true);
         ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
         Image logo = icon.getImage();
-        this.setIconImage(logo);        
+        this.setIconImage(logo);     
         //Mặc định khi mở sẽ hiện màn hình tài khoản khi kích vào nút nào thì nút đó hiện ra phần màn hình đó
         jPanelTrangChu.setBackground(hoveColor);
         hienManHinhCanMo(jPanelTrangChu, jPanelTTCN, jPanelChamDiem);
@@ -346,7 +367,7 @@ public final class FormCoVanHT extends javax.swing.JFrame {
 
         dsLabel.add(jLabelQueQuan);
         dsLabel.add(jLabelDiaChi);
-        
+        dangXuat(jPanelLogOut, jLabelLogOut, jLabelLeft9, this, frame);
     }
     
     public void anMenu(JPanel main, JLabel label, JLabel icon){
@@ -686,7 +707,7 @@ public final class FormCoVanHT extends javax.swing.JFrame {
         jPanelDoiMK = RoundedPanel.createRoundedPanel();
         jLabelDoiMK = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Cố vấn học tập");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1265,6 +1286,7 @@ public final class FormCoVanHT extends javax.swing.JFrame {
         p24.setBackground(Color.WHITE);
         jScrollPaneLop.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p24);
 
+        jTableLopXet.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableLopXet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1394,6 +1416,7 @@ public final class FormCoVanHT extends javax.swing.JFrame {
         p22.setBackground(Color.WHITE);
         jScrollPaneDRL.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p22);
 
+        jTableDRL.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableDRL.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

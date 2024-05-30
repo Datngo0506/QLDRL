@@ -135,6 +135,7 @@
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.raven.swing.TableGTTC()"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTableTieuChi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
                   </AuxValues>
                 </Component>
               </SubComponents>

@@ -15,6 +15,7 @@ import controller.Database;
 import controller.Link;
 import com.raven.swing.ScrollBar;
 import controller.ThuatToan;
+import java.awt.Cursor;
 import java.awt.Image;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -62,6 +63,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
         private ArrayList <DRL> dsDRL = null;
         private ArrayList <TieuChi> dsTieuChi = null;
         private Khoa khoa;
+        private JFrame frame;
         private SinhVien sv;
         private ArrayList<JLabel> dsLabel = new ArrayList<>();
         private Lop lop;
@@ -80,7 +82,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
     }
     
     //covan
-    public FormSinhVien(Khoa khoa,  SinhVien sv, Lop lop, TaiKhoan tk, ArrayList <Khoa>dsKhoa, ArrayList <CoVan>dsCoVan, ArrayList<HocKy>dsHocKy,
+    public FormSinhVien(JFrame frame, Khoa khoa,  SinhVien sv, Lop lop, TaiKhoan tk, ArrayList <Khoa>dsKhoa, ArrayList <CoVan>dsCoVan, ArrayList<HocKy>dsHocKy,
             ArrayList<KhoaHoc>dsKhoaHoc, ArrayList<Lop> dsLop,  ArrayList<ChucVu> dsChucVu,  ArrayList<TaiKhoan>dsTaiKhoan,
             ArrayList<SinhVien>dsSinhVien, ArrayList <ThongBao> dsThongBao, ArrayList<DRL> dsDRL, ArrayList<TieuChi> dsTieuChi) {
         this.dsKhoa = dsKhoa;
@@ -88,6 +90,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
         this.dsHocKy = dsHocKy;
         this.khoa = khoa;
         this.tk = tk;
+        this.frame = frame;
         this.lop = lop;
         this.dsKhoaHoc = dsKhoaHoc;
         this.dsLop = dsLop;
@@ -308,10 +311,9 @@ public final class FormSinhVien extends javax.swing.JFrame {
         hoverUnderMenu();
         hoverButton();
         openFromMenu();
-        JFrame.setDefaultLookAndFeelDecorated(true);
         ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
         Image logo = icon.getImage();
-        this.setIconImage(logo);        
+        this.setIconImage(logo);     
         //Mặc định khi mở sẽ hiện màn hình tài khoản khi kích vào nút nào thì nút đó hiện ra phần màn hình đó
         jPanelTrangChu.setBackground(hoveColor);
         hienManHinhCanMo(jPanelTrangChu, jPanelDRLCaNhan, jPanelTTCN);
@@ -323,6 +325,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
 
         dsLabel.add(jLabelQueQuan);
         dsLabel.add(jLabelDiaChi);
+        dangXuat(jPanelLogOut, jLabelLogOut, jLabelLeft9, this, frame);
         
     }
     
@@ -658,7 +661,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
         jPanelDoiMK = RoundedPanel.createRoundedPanel();
         jLabelDoiMK = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Sinh viên");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1229,6 +1232,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
         p24.setBackground(Color.WHITE);
         jScrollPaneLop.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p24);
 
+        jTableLopXet.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableLopXet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1364,6 +1368,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
         p25.setBackground(Color.WHITE);
         jScrollPaneDRLCaNhan.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p25);
 
+        jTableDRLCaNhan.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableDRLCaNhan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

@@ -15,6 +15,7 @@ import controller.Database;
 import controller.Link;
 import com.raven.swing.ScrollBar;
 import controller.ThuatToan;
+import java.awt.Cursor;
 import java.awt.Image;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -60,6 +61,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
         private ArrayList <ThongBao> dsThongBao = null;
         private ArrayList <DRL> dsDRL = null;
         private Khoa khoa;
+        private JFrame frame;
         //private final static Color textColor = new Color(0, 0, 139);
         private final static Color white = Color.WHITE;
         private final static Color hoveColor = new Color(255,204,102);//màu đậm
@@ -74,7 +76,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
     }
     
     //covan
-    public FormHoiDongKhoa(Khoa khoa, ArrayList<TaiKhoan> dsTaiKhoan, ArrayList <Khoa>dsKhoa, ArrayList <CoVan>dsCoVan, ArrayList<HocKy>dsHocKy,
+    public FormHoiDongKhoa(JFrame frame, Khoa khoa, ArrayList<TaiKhoan> dsTaiKhoan, ArrayList <Khoa>dsKhoa, ArrayList <CoVan>dsCoVan, ArrayList<HocKy>dsHocKy,
             ArrayList<KhoaHoc>dsKhoaHoc, ArrayList<Lop> dsLop, ArrayList<ChucVu>dsChucVu, 
             ArrayList<SinhVien>dsSinhVien, ArrayList <ThongBao> dsThongBao, ArrayList<DRL> dsDRL) {
         this.dsKhoa = dsKhoa;
@@ -86,6 +88,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
         this.dsTaiKhoan = dsTaiKhoan;
         this.dsSinhVien = dsSinhVien;
         this.dsChucVu = dsChucVu;
+        this.frame = frame;
         this.dsThongBao = dsThongBao;
         this.dsDRL = dsDRL;
         initComponents();
@@ -347,14 +350,14 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
         hoverUnderMenu();
         hoverButton();
         openFromMenu();
-        JFrame.setDefaultLookAndFeelDecorated(true);
         ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
         Image logo = icon.getImage();
-        this.setIconImage(logo);        
+        this.setIconImage(logo);   
         //Mặc định khi mở sẽ hiện màn hình tài khoản khi kích vào nút nào thì nút đó hiện ra phần màn hình đó
         jPanelTrangChu.setBackground(hoveColor);
         hienManHinhCanMo(jPanelTrangChu, jPanelCoVanMain, jPanelLopMain, jPanelSinhVienMain, jPanelDuyetDiem);
         moTrangChu();
+        dangXuat(jPanelLogOut, jLabelLogOut, jLabelLeft9, this, frame);
     }
     
     public void anMenu(JPanel main, JLabel label, JLabel icon){
@@ -712,7 +715,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
         choiceKhoa_SV = new java.awt.Choice();
         choiceLop_SV = new java.awt.Choice();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Hội đồng khoa");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1311,6 +1314,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
         p24.setBackground(Color.WHITE);
         jScrollPaneLop.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p24);
 
+        jTableLopXet .setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableLopXet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1531,6 +1535,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
         p2.setBackground(Color.WHITE);
         jScrollPaneCoVan.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p2);
 
+        jTableCoVan.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableCoVan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1751,6 +1756,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
         p5.setBackground(Color.WHITE);
         jScrollPaneLop.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p5);
 
+        jTableLop.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableLop.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1935,6 +1941,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
         p22.setBackground(Color.WHITE);
         jScrollPaneDRL.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p22);
 
+        jTableDRL.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableDRL.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -2187,6 +2194,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
 
         jScrollPaneSV.setBorder(null);
 
+        jTableSV .setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableSV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -2541,21 +2549,25 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
             String tt5 = cell5.toString();
             if(tt.equals("Chưa duyệt")){
                 if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn hủy bỏ điểm của sinh viên này?") == JOptionPane.YES_OPTION){
-                    for(DRL drl: dsDRL){
-                        System.out.println(ThuatToan.getHKXet(dsHocKy));
-                        if(drl.getMSSV().equals(tt5) && drl.getMaHK().equals(ThuatToan.getHKXet(dsHocKy))){
-                            drl.setTrangThai(false);
-                            drl.setDiem1(0);
-                            drl.setDiem2(0);
-                            drl.setDiem3(0);
-                            jTableDRL.setValueAt("0", chon, 3);
-                            jTableDRL.setValueAt("0", chon, 4);
-                            jTableDRL.setValueAt("0", chon, 5);
-                            Database.updateDiem(tt5, ThuatToan.getHKXet(dsHocKy));
-                            //jTableDRL.setValueAt("Đã duyệt", chon, 6);
-                            return;
+                    new Thread(() -> {
+                        for(DRL drl: dsDRL){
+                            if(drl.getMSSV().equals(tt5) && drl.getMaHK().equals(ThuatToan.getHKXet(dsHocKy))){
+                                drl.setTrangThai(false);
+                                drl.setDiem1(0);
+                                drl.setDiem2(0);
+                                drl.setDiem3(0);
+                                return;
+                            }
                         }
-                    }
+                    }).start();
+                    new Thread(() -> {
+                        Database.updateDiem(tt5, ThuatToan.getHKXet(dsHocKy));
+                    }).start();
+                    
+                    jTableDRL.setValueAt("0", chon, 3);
+                    jTableDRL.setValueAt("0", chon, 4);
+                    jTableDRL.setValueAt("0", chon, 5);
+                    
                 }
             }
             else{
@@ -2592,14 +2604,19 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
                 }
                 else{
                     if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn duyệt điểm sinh viên này?") == JOptionPane.YES_OPTION){
-                        for(DRL drl: dsDRL){
-                            if(drl.getMSSV().equals(tt5) && drl.getMaHK().equals(ThuatToan.getHKXet(dsHocKy))){
-                                drl.setTrangThai(true);
-                                jTableDRL.setValueAt("Đã duyệt", chon, 6);
-                                Database.updateTrangThai(tt5, ThuatToan.getHKXet(dsHocKy));
-                                return;
+                        new Thread(() -> {
+                            for(DRL drl: dsDRL){
+                                if(drl.getMSSV().equals(tt5) && drl.getMaHK().equals(ThuatToan.getHKXet(dsHocKy))){
+                                    drl.setTrangThai(true);
+                                    
+                                    return;
+                                }
                             }
-                        }
+                        }).start();
+                        new Thread(() -> {
+                            Database.updateTrangThai(tt5, ThuatToan.getHKXet(dsHocKy));
+                        }).start();
+                        jTableDRL.setValueAt("Đã duyệt", chon, 6);
                     }
                 }
             }
@@ -2666,6 +2683,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
        int chon = jTableSV.getSelectedRow();
        if(chon == -1){
            JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn sinh viên cần xóa!");
+           return;
        }
         Object cellValue = jTableSV.getValueAt(chon, 1);
         String maSV = cellValue.toString().trim();
@@ -2706,9 +2724,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
 
     private void jLabelLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLogOutMouseClicked
         // TODO add your handling code here:
-        if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn thoát không?") == JOptionPane.YES_OPTION){
-            this.setVisible(false);
-        }
+        
     }//GEN-LAST:event_jLabelLogOutMouseClicked
 
     private void choiceKhoa_LopXetItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceKhoa_LopXetItemStateChanged

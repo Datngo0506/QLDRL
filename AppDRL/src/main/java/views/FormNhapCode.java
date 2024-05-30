@@ -4,9 +4,8 @@
  */
 package views;
 
-import com.raven.swing.RoundedPasswordField;
-import controller.Database;
-import controller.ThuatToan;
+
+import com.raven.swing.RoundedTextField;
 import java.awt.Color;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -18,18 +17,19 @@ import models.TaiKhoan;
  *
  * @author Dat
  */
-public class FormDoiMatKhau extends javax.swing.JFrame {
+public class FormNhapCode extends javax.swing.JFrame {
     
     private ArrayList<TaiKhoan> dsTaiKhoan;
-    private String tenDN;
+    private String tenDN, code;
+    private int lanNhap = 1;
     /**
      * Creates new form FormDoiMatKhau
      */
-    public FormDoiMatKhau() {
+    public FormNhapCode() {
         initComponents();
     }
     
-    public FormDoiMatKhau(ArrayList<TaiKhoan> dsTaiKhoan, String tenDN) {
+    public FormNhapCode(ArrayList<TaiKhoan> dsTaiKhoan, String tenDN, String code) {
         ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
         Image logo = icon.getImage();
         this.setIconImage(logo);  
@@ -37,6 +37,7 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.dsTaiKhoan = dsTaiKhoan;
         this.tenDN = tenDN;
+        this.code = code;
     }
 
     /**
@@ -50,11 +51,7 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jPasswordFieldOldPass = new RoundedPasswordField(15, 10, 10);
-        jLabel4 = new javax.swing.JLabel();
-        jPasswordFieldNewPass = new RoundedPasswordField(15, 10, 10);
-        jLabel5 = new javax.swing.JLabel();
-        jPasswordFieldRepeatPass = new RoundedPasswordField(15, 10, 10);
+        jTextFieldMail = new RoundedTextField(15, 10, 10);
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanelSave = RoundedPanel.createRoundedPanel();
@@ -64,31 +61,17 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Đổi mật khẩu");
+        setTitle("Nhập code");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        jLabel3.setText("Nhập mật khẩu cũ:");
+        jLabel3.setText("Nhập mã code gồm 6 chữ số được gửi tới email của bạn:");
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        FormDangNhap.setBorderPassword(jPasswordFieldOldPass);
-        jPasswordFieldOldPass.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        jLabel4.setText("Nhập mật khẩu mới:");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-
-        FormDangNhap.setBorderPassword(jPasswordFieldNewPass);
-        jPasswordFieldNewPass.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        jLabel5.setText("Nhập lại mật khẩu mới:");
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-
-        FormDangNhap.setBorderPassword(jPasswordFieldRepeatPass);
-        jPasswordFieldRepeatPass.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        FormDangNhap.setBorderTextField(jTextFieldMail);
+        jTextFieldMail.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -97,12 +80,8 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jPasswordFieldOldPass, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jPasswordFieldNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jPasswordFieldRepeatPass, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -111,15 +90,7 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordFieldOldPass, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordFieldNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordFieldRepeatPass, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -129,11 +100,11 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 88, Short.MAX_VALUE)
+            .addGap(0, 109, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 39, Short.MAX_VALUE)
+            .addGap(0, 38, Short.MAX_VALUE)
         );
 
         jPanel2.add(jPanel4);
@@ -144,7 +115,7 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
         jLabelSave.setForeground(new java.awt.Color(255, 255, 255));
         jLabelSave.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/whitetick2.png"))); // NOI18N
-        jLabelSave.setText("Lưu");
+        jLabelSave.setText("Gửi");
         jLabelSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelSave.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -165,11 +136,11 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
         jPanelSave.setLayout(jPanelSaveLayout);
         jPanelSaveLayout.setHorizontalGroup(
             jPanelSaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelSave, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+            .addComponent(jLabelSave, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
         );
         jPanelSaveLayout.setVerticalGroup(
             jPanelSaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelSave, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+            .addComponent(jLabelSave, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
         );
 
         jPanel2.add(jPanelSave);
@@ -178,17 +149,18 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 88, Short.MAX_VALUE)
+            .addGap(0, 109, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 39, Short.MAX_VALUE)
+            .addGap(0, 38, Short.MAX_VALUE)
         );
 
         jPanel2.add(jPanel3);
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
+        jPanel5.setPreferredSize(new java.awt.Dimension(340, 43));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Variable", 1, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(221, 51, 51));
@@ -199,11 +171,11 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -213,14 +185,14 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 10, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,9 +201,9 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -252,48 +224,21 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelSaveMousePressed
 
     private void jLabelSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSaveMouseClicked
-        // TODO add your handling code here:
-        char[] passwordChars = jPasswordFieldOldPass.getPassword();
-        String password = new String(passwordChars);
-        char[] passwordChars2 = jPasswordFieldNewPass.getPassword();
-        String password2 = new String(passwordChars2);
-        char[] passwordChars3 = jPasswordFieldRepeatPass.getPassword();
-        String password3 = new String(passwordChars3);
-        if(password.equals("") || password2.equals("") || password3.equals("")){
-            JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập đầy đủ thông tin!");
-            return;
-        }
-        String oldpass = "";
-        for(TaiKhoan tk: dsTaiKhoan){
-            if(tk.getTenTK().equals(tenDN)){
-                oldpass = tk.getMatKhau();
-                break;
+        
+        String maSo = jTextFieldMail.getText();
+        if(!maSo.equals(code)){
+            if(lanNhap == 3){
+                JOptionPane.showMessageDialog(rootPane, "Code này đã bị vô hiệu!");
+                new FormDangNhap().setVisible(true);
+                this.setVisible(false);
+                return;
             }
-        }
-        if(!oldpass.equals(password)){
-            JOptionPane.showMessageDialog(rootPane, "Mật khẩu cũ không đúng!");
-            return;
-        }
-        if(!password2.equals(password3)){
-            JOptionPane.showMessageDialog(rootPane, "Mật khẩu mới không khớp với nhau!");
-            return;
-        }
-        if(!ThuatToan.isStrongPassword(password2)){
-            JOptionPane.showMessageDialog(rootPane, "Mật khẩu phải nhiều hơn 8 ký tự, phải chứa ít \nnhất 1 ký tự hoa, thường, số và ký tự đặc biệt!");
-            return;
-        }
-        if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn thay đổi không?") == JOptionPane.YES_OPTION){
-            new Thread(() -> {
-                for(TaiKhoan tk: dsTaiKhoan){
-                    if(tk.getTenTK().equals(tenDN)){
-                        tk.setMatKhau(password2);
-                        break;
-                    }
-                }
-            }).start();
-            new Thread(() -> {
-                Database.updateMatKhau(tenDN, password2);
-            }).start();
+            String text = "Code được nhập không trùng khớp!\nBạn còn " + (3-lanNhap) + " lần nhập code này!";
+            JOptionPane.showMessageDialog(rootPane, text);
+            lanNhap++;
+            
+        }else{
+            new FormResetPass(dsTaiKhoan, tenDN).setVisible(true);
             this.setVisible(false);
         }
         
@@ -316,27 +261,28 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormDoiMatKhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormNhapCode.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormDoiMatKhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormNhapCode.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormDoiMatKhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormNhapCode.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormDoiMatKhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormNhapCode.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new FormDoiMatKhau().setVisible(true);
+            new FormNhapCode().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelSave;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -344,8 +290,6 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanelSave;
-    private javax.swing.JPasswordField jPasswordFieldNewPass;
-    private javax.swing.JPasswordField jPasswordFieldOldPass;
-    private javax.swing.JPasswordField jPasswordFieldRepeatPass;
+    private javax.swing.JTextField jTextFieldMail;
     // End of variables declaration//GEN-END:variables
 }

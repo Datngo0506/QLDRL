@@ -49,78 +49,73 @@ public final class FormThem_SuaLop extends javax.swing.JFrame {
     
     public void edit(){
         setLocationRelativeTo(null);
-        JFrame.setDefaultLookAndFeelDecorated(true);
         ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
         Image logo = icon.getImage();
-        this.setIconImage(logo);
+        this.setIconImage(logo);  
         //choiceKhoa.removeAll();
-        if(chucNang.equals("Them")){
-            ThuatToan.addChoiceKhoa(choiceKhoa, dsKhoa);
-            //choiceKhoa.add("");
-            choiceKhoa.select("");
-            ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
-            jLabelNutTieuDeTieuChi.setText("Thêm lớp");
-            
-        }
-        else if(chucNang.equals("ThemND")){
-            ThuatToan.addChoiceKhoa(choiceKhoa, dsKhoa);
-            choiceKhoa.removeAll();
-            choiceKhoa.add(khoa.getTenKhoa());
-            //choiceKhoa.add("");
-            ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
-            ThuatToan.addChoiceCoVanTheoTen(choiceCoVan, dsCoVan, dsKhoa, khoa.getTenKhoa());
-            
-            jLabelNutTieuDeTieuChi.setText("Thêm lớp");
-        }
-        else if(chucNang.equals("SuaND")){
-            ThuatToan.addChoiceKhoa(choiceKhoa, dsKhoa);
-            choiceKhoa.select("");
-            ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
-
-            Object  cell = table.getValueAt(chon, 1);
-            String maLop = cell.toString();
-            int temp = 0;
-            for(Lop lop:dsLop){
-                if(lop.getLop().equals(maLop)){
-                    temp = dsLop.indexOf(lop);
-                    break;
-                }
+        switch (chucNang) {
+            case "Them" -> {
+                ThuatToan.addChoiceKhoa(choiceKhoa, dsKhoa);
+                //choiceKhoa.add("");
+                choiceKhoa.select("");
+                ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
+                jLabelNutTieuDeTieuChi.setText("Thêm lớp");
             }
-            jLabelNutTieuDeTieuChi.setText("Sửa thông tin lớp");
-            Lop lop = dsLop.get(temp);
-            jTextFieldLop.setText(maLop);
-            choiceKhoa.select(ThuatToan.doiMaKhoaThanhTenKhoa(lop.getMaKhoa(), dsKhoa));
-            choiceKhoaHoc.select(lop.getMaKhoaHoc());
-            jTextFieldName.setText(ThuatToan.doiMaCVThanhTen(lop.getMaCoVan(), dsCoVan));
-            choiceKhoa.removeAll();
-            choiceKhoa.add(khoa.getTenKhoa());
-            //choiceKhoa.add("");
-            ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
-            ThuatToan.addChoiceCoVanTheoTen(choiceCoVan, dsCoVan, dsKhoa, khoa.getTenKhoa());
-            choiceCoVan.select(lop.getMaCoVan());
-        }
-        else {
-            ThuatToan.addChoiceKhoa(choiceKhoa, dsKhoa);
-            choiceKhoa.select("");
-            ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
-
-            Object  cell = table.getValueAt(chon, 1);
-            String maLop = cell.toString();
-            int temp = 0;
-            for(Lop lop:dsLop){
-                if(lop.getLop().equals(maLop)){
-                    temp = dsLop.indexOf(lop);
-                    break;
-                }
+            case "ThemND" -> {
+                ThuatToan.addChoiceKhoa(choiceKhoa, dsKhoa);
+                choiceKhoa.removeAll();
+                choiceKhoa.add(khoa.getTenKhoa());
+                //choiceKhoa.add("");
+                ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
+                ThuatToan.addChoiceCoVanTheoTen(choiceCoVan, dsCoVan, dsKhoa, khoa.getTenKhoa());
+                jLabelNutTieuDeTieuChi.setText("Thêm lớp");
             }
-            jLabelNutTieuDeTieuChi.setText("Sửa thông tin lớp");
-            Lop lop = dsLop.get(temp);
-            jTextFieldLop.setText(maLop);
-            choiceKhoa.select(ThuatToan.doiMaKhoaThanhTenKhoa(lop.getMaKhoa(), dsKhoa));
-            ThuatToan.addChoiceCoVanTheoTen(choiceCoVan, dsCoVan, dsKhoa, lop.getMaCoVan());
-            choiceCoVan.select(ThuatToan.doiMaCVThanhTen(lop.getMaCoVan(), dsCoVan));
-            choiceKhoaHoc.select(lop.getMaKhoaHoc());
-            jTextFieldName.setText(ThuatToan.doiMaCVThanhTen(lop.getMaCoVan(), dsCoVan));
+            case "SuaND" ->                 {
+                    ThuatToan.addChoiceKhoa(choiceKhoa, dsKhoa);
+                    choiceKhoa.select("");
+                    ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
+                    Object  cell = table.getValueAt(chon, 1);
+                    String maLop = cell.toString();
+                    int temp = 0;
+                    for(Lop lop:dsLop){
+                        if(lop.getLop().equals(maLop)){
+                            temp = dsLop.indexOf(lop);
+                            break;
+                        }
+                    }       jLabelNutTieuDeTieuChi.setText("Sửa thông tin lớp");
+                    Lop lop = dsLop.get(temp);
+                    jTextFieldLop.setText(maLop);
+                    choiceKhoa.select(ThuatToan.doiMaKhoaThanhTenKhoa(lop.getMaKhoa(), dsKhoa));
+                    choiceKhoaHoc.select(lop.getMaKhoaHoc());
+                    jTextFieldName.setText(ThuatToan.doiMaCVThanhTen(lop.getMaCoVan(), dsCoVan));
+                    choiceKhoa.removeAll();
+                    choiceKhoa.add(khoa.getTenKhoa());
+                    //choiceKhoa.add("");
+                    ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
+                    ThuatToan.addChoiceCoVanTheoTen(choiceCoVan, dsCoVan, dsKhoa, khoa.getTenKhoa());
+                    choiceCoVan.select(lop.getMaCoVan());
+                }
+            default ->                 {
+                    ThuatToan.addChoiceKhoa(choiceKhoa, dsKhoa);
+                    choiceKhoa.select("");
+                    ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
+                    Object  cell = table.getValueAt(chon, 1);
+                    String maLop = cell.toString();
+                    int temp = 0;
+                    for(Lop lop:dsLop){
+                        if(lop.getLop().equals(maLop)){
+                            temp = dsLop.indexOf(lop);
+                            break;
+                        }
+                    }       jLabelNutTieuDeTieuChi.setText("Sửa thông tin lớp");
+                    Lop lop = dsLop.get(temp);
+                    jTextFieldLop.setText(maLop);
+                    choiceKhoa.select(ThuatToan.doiMaKhoaThanhTenKhoa(lop.getMaKhoa(), dsKhoa));
+                    ThuatToan.addChoiceCoVanTheoTen(choiceCoVan, dsCoVan, dsKhoa, lop.getMaCoVan());
+                    choiceCoVan.select(ThuatToan.doiMaCVThanhTen(lop.getMaCoVan(), dsCoVan));
+                    choiceKhoaHoc.select(lop.getMaKhoaHoc());
+                    jTextFieldName.setText(ThuatToan.doiMaCVThanhTen(lop.getMaCoVan(), dsCoVan));
+                }
         }
         
     }

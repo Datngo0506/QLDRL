@@ -2,7 +2,7 @@
 
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="defaultCloseOperation" type="int" value="0"/>
     <Property name="title" type="java.lang.String" value="Sinh vi&#xea;n"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
@@ -1165,6 +1165,7 @@
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.raven.swing.TableLop()"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTableLopXet.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>
@@ -1501,6 +1502,7 @@
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.raven.swing.TableDRLCaNhan()"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTableDRLCaNhan.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>

@@ -15,6 +15,7 @@ import controller.Database;
 import controller.Link;
 import com.raven.swing.ScrollBar;
 import controller.ThuatToan;
+import java.awt.Cursor;
 import java.awt.Image;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -64,6 +65,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         private ArrayList <ChucVu> dsChucVu = null;
         private ArrayList <ThongBao> dsThongBao = null;
         private ArrayList <DRL> dsDRL = null;
+        private JFrame frame;
         //private final static Color textColor = new Color(0, 0, 139);
         private final static Color white = Color.WHITE;
         private final static Color hoveColor = new Color(255,204,102);//màu đậm
@@ -78,7 +80,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
     }
     
     //covan
-    public FormQuanLy(ArrayList<TaiKhoan> dsTaiKhoan, ArrayList <Khoa>dsKhoa, ArrayList <CoVan>dsCoVan, ArrayList<HocKy>dsHocKy,
+    public FormQuanLy(JFrame frame, ArrayList<TaiKhoan> dsTaiKhoan, ArrayList <Khoa>dsKhoa, ArrayList <CoVan>dsCoVan, ArrayList<HocKy>dsHocKy,
             ArrayList<KhoaHoc>dsKhoaHoc, ArrayList<Lop> dsLop, ArrayList<TieuChi> dsTieuChi, ArrayList<ChucVu>dsChucVu, 
             ArrayList<SinhVien>dsSinhVien, ArrayList <ThongBao> dsThongBao, ArrayList<DRL> dsDRL) {
         this.dsKhoa = dsKhoa;
@@ -92,6 +94,8 @@ public final class FormQuanLy extends javax.swing.JFrame {
         this.dsChucVu = dsChucVu;
         this.dsThongBao = dsThongBao;
         this.dsDRL = dsDRL;
+        this.frame = frame;
+        //setRootPaneCheckingEnabled(false);
         initComponents();
         suKienMenu();
     }
@@ -413,7 +417,6 @@ public final class FormQuanLy extends javax.swing.JFrame {
         hoverUnderMenu();
         hoverButton();
         openFromMenu();
-        JFrame.setDefaultLookAndFeelDecorated(true);
         ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
         Image logo = icon.getImage();
         this.setIconImage(logo);        
@@ -421,7 +424,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         jPanelTrangChu.setBackground(hoveColor);
         hienManHinhCanMo(jPanelTrangChu, jPanelKhoaMain, jPanelTieuChiMain, jPanelCoVanMain, jPanelLopMain, jPanelHocKyMain, jPanelSinhVienMain, jPanelDuyetDiem);
         moTrangChu();
-        
+        dangXuat(jPanelLogOut, jLabelLogOut, jLabelLeft9, this, frame);
     }
     
     
@@ -842,7 +845,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         choiceKhoa_SV = new java.awt.Choice();
         choiceLop_SV = new java.awt.Choice();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Quản lý điểm rèn luyện học viện cơ sở");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1485,6 +1488,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         p24.setBackground(Color.WHITE);
         jScrollPaneLop.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p24);
 
+        jTableLopXet.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableLopXet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1649,6 +1653,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         p4.setBackground(Color.WHITE);
         jScrollPaneHocKy.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p4);
 
+        jTableHocKy.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableHocKy.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1747,6 +1752,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
 
         jScrollPaneKhoaHoc.setBorder(null);
 
+        jTableKhoaHoc.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableKhoaHoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1821,6 +1827,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
 
         jScrollPaneHanNop.setBorder(null);
 
+        jTableHanNop.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableHanNop.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -2064,6 +2071,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         p1.setBackground(Color.WHITE);
         jScrollPaneKhoa.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p1);
 
+        jTableKhoa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableKhoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -2226,6 +2234,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
 
         jScrollPaneTieuChi.setBorder(null);
 
+        jTableTieuChi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableTieuChi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -2494,6 +2503,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         p2.setBackground(Color.WHITE);
         jScrollPaneCoVan.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p2);
 
+        jTableCoVan.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableCoVan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -2713,6 +2723,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         p5.setBackground(Color.WHITE);
         jScrollPaneLop.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p5);
 
+        jTableLop.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableLop.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -2896,6 +2907,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         p22.setBackground(Color.WHITE);
         jScrollPaneDRL.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p22);
 
+        jTableDRL.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableDRL.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -3182,6 +3194,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
 
         jScrollPaneSV.setBorder(null);
 
+        jTableSV.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jTableSV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -3723,21 +3736,25 @@ public final class FormQuanLy extends javax.swing.JFrame {
             String tt5 = cell5.toString();
             if(tt.equals("Chưa duyệt")){
                 if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn hủy bỏ điểm của sinh viên này?") == JOptionPane.YES_OPTION){
-                    for(DRL drl: dsDRL){
-                        System.out.println(ThuatToan.getHKXet(dsHocKy));
-                        if(drl.getMSSV().equals(tt5) && drl.getMaHK().equals(ThuatToan.getHKXet(dsHocKy))){
-                            drl.setTrangThai(false);
-                            drl.setDiem1(0);
-                            drl.setDiem2(0);
-                            drl.setDiem3(0);
-                            jTableDRL.setValueAt("0", chon, 3);
-                            jTableDRL.setValueAt("0", chon, 4);
-                            jTableDRL.setValueAt("0", chon, 5);
-                            Database.updateDiem(tt5, ThuatToan.getHKXet(dsHocKy));
-                            //jTableDRL.setValueAt("Đã duyệt", chon, 6);
-                            return;
+                    jTableDRL.setValueAt("0", chon, 3);
+                    jTableDRL.setValueAt("0", chon, 4);
+                    jTableDRL.setValueAt("0", chon, 5);
+                    new Thread(() -> {
+                        for(DRL drl: dsDRL){
+                            System.out.println(ThuatToan.getHKXet(dsHocKy));
+                            if(drl.getMSSV().equals(tt5) && drl.getMaHK().equals(ThuatToan.getHKXet(dsHocKy))){
+                                drl.setTrangThai(false);
+                                drl.setDiem1(0);
+                                drl.setDiem2(0);
+                                drl.setDiem3(0);
+
+                                return;
+                            }
                         }
-                    }
+                    }).start();
+                    new Thread(() -> {
+                        Database.updateDiem(tt5, ThuatToan.getHKXet(dsHocKy));
+                    }).start();
                 }
             }
             else{
@@ -3769,14 +3786,20 @@ public final class FormQuanLy extends javax.swing.JFrame {
                 }
                 else{
                     if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn duyệt điểm sinh viên này?") == JOptionPane.YES_OPTION){
-                        for(DRL drl: dsDRL){
-                            if(drl.getMSSV().equals(tt5) && drl.getMaHK().equals(ThuatToan.getHKXet(dsHocKy))){
-                                drl.setTrangThai(true);
-                                jTableDRL.setValueAt("Đã duyệt", chon, 6);
-                                Database.updateTrangThai(tt5, ThuatToan.getHKXet(dsHocKy));
-                                return;
+                            jTableDRL.setValueAt("Đã duyệt", chon, 6);
+                            new Thread(() -> {
+                            for(DRL drl: dsDRL){
+                                if(drl.getMSSV().equals(tt5) && drl.getMaHK().equals(ThuatToan.getHKXet(dsHocKy))){
+                                    drl.setTrangThai(true);
+
+                                    return;
+                                }
                             }
-                        }
+                        }).start();
+                        new Thread(() -> {
+                            Database.updateTrangThai(tt5, ThuatToan.getHKXet(dsHocKy));
+                        }).start();
+                        
                     }
                 }
             }
@@ -3928,6 +3951,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         int chon = jTableSV.getSelectedRow();
         if(chon == -1){
             JOptionPane.showMessageDialog(jPanelNutCapNhat, "Vui lòng chọn sinh viên cần xóa!");
+            return;
         }
         Object cellValue = jTableSV.getValueAt(chon, 1);
         String maSV = cellValue.toString().trim();
@@ -3974,10 +3998,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelXoaSVMouseClicked
 
     private void jLabelLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLogOutMouseClicked
-        // TODO add your handling code here:
-        if(JOptionPane.showConfirmDialog(jPanelNutCapNhat, "Bạn có chắc chắn thoát không?") == JOptionPane.YES_OPTION){
-            this.setVisible(false);
-        }
+
     }//GEN-LAST:event_jLabelLogOutMouseClicked
 
     private void jLabelNutKhoaKhoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutKhoaKhoaMouseClicked

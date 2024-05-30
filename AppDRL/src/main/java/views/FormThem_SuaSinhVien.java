@@ -12,7 +12,6 @@ import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Image;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import models.ChucVu;
@@ -53,76 +52,73 @@ public final class FormThem_SuaSinhVien extends javax.swing.JFrame {
 
     
     public void edit() throws ParseException{
-        JFrame.setDefaultLookAndFeelDecorated(true);
         ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
         Image logo = icon.getImage();
-        this.setIconImage(logo);
+        this.setIconImage(logo);  
         setLocationRelativeTo(null);
         
-        if(chucNang.equals("Them") || chucNang.equals("ThemND")){
-            choiceGioiTinh_Sua.add("Nam");
-            choiceGioiTinh_Sua.add("Nữ");
-            buttonHoverEvent(jLabelNutLuu, jPanelNutLuu);
-            jDateChooserNgaySinh.setDateFormatString("yyyy-MM-dd");
-            ThuatToan.addChoiceKhoa(choiceKhoa_CoVan, dsKhoa);
-            choiceKhoa_CoVan.remove("Tất cả");
-            ThuatToan.addChoiceChucVu(choiceChucVu, dsCV);
-            choiceChucVu.remove("Tất cả");
-            jLabelNutTieuDeTieuChi.setText("Thêm sinh viên");
-            if(chucNang.equals("ThemND")){
-                choiceKhoa_CoVan.removeAll();
-                choiceKhoa_CoVan.add(khoaMau.getTenKhoa());
-                ThuatToan.addChoiceLop_1Khoa(dsLop, khoaMau.getMaKhoa(), choiceLop);
-            }
-        }
-        else if(chucNang.equals("SuaSV")){
-            
-        }
-        else{
-            jLabelNutTieuDeTieuChi.setText("Cập nhật thông tin sinh viên");
-            Object cellValue = table.getValueAt(chon, 1);
-            //System.out.println(cellValue);
-            int hub = 0;
-            for(int i=0; i<dsSV.size(); i++){
-                if(dsSV.get(i).getMaSV().equals(cellValue.toString())){
-                    hub = i;
-                    //xoa = i;
+        switch (chucNang) {
+            case "Them", "ThemND" -> {
+                choiceGioiTinh_Sua.add("Nam");
+                choiceGioiTinh_Sua.add("Nữ");
+                buttonHoverEvent(jLabelNutLuu, jPanelNutLuu);
+                jDateChooserNgaySinh.setDateFormatString("yyyy-MM-dd");
+                ThuatToan.addChoiceKhoa(choiceKhoa_CoVan, dsKhoa);
+                choiceKhoa_CoVan.remove("Tất cả");
+                ThuatToan.addChoiceChucVu(choiceChucVu, dsCV);
+                choiceChucVu.remove("Tất cả");
+                jLabelNutTieuDeTieuChi.setText("Thêm sinh viên");
+                if(chucNang.equals("ThemND")){
+                    choiceKhoa_CoVan.removeAll();
+                    choiceKhoa_CoVan.add(khoaMau.getTenKhoa());
+                    ThuatToan.addChoiceLop_1Khoa(dsLop, khoaMau.getMaKhoa(), choiceLop);
                 }
             }
-            //jLabelNutTieuDeTieuChi.setText("Cập nhật");
-            SinhVien sv = dsSV.get(hub);
-            jTextFieldMaCoVan.setText(sv.getMaSV());
-            //jTextFieldMaCoVan.setText(cv.getMaCV());
-            jTextFieldTenCoVan.setText(sv.getHoTen());
-            jTextFieldSdt.setText(sv.getSdt());
-            jTextFieldQueQuan.setText(sv.getQueQuan());
-            jTextFieldDiaChi.setText(sv.getDiaChi());
-            jTextFieldEmail.setText(sv.getEmail().toLowerCase());
-            //cho
-            ThuatToan.addChoiceKhoa(choiceKhoa_CoVan, dsKhoa);
-
-            ThuatToan.addChoiceChucVu(choiceChucVu, dsCV);
-            choiceChucVu.remove("Tất cả");
-            choiceChucVu.select(ThuatToan.doiMaChucVuThanhTen(sv.getChucVu(), dsCV));
-            choiceKhoa_CoVan.remove("Tất cả");
-            choiceKhoa_CoVan.select(ThuatToan.getKhoaFromSinhVien(dsLop, sv.getLop()));
-            choiceGioiTinh_Sua.add("Nam");
-            choiceGioiTinh_Sua.add("Nữ");
-            choiceGioiTinh_Sua.select(ThuatToan.doiBoolToGioiTinh(sv.isGioiTinh()?"Nam":"Nữ"));
-            ThuatToan.addChoiceLop(choiceLop, dsLop,ThuatToan.doiMaKhoaThanhTenKhoa(ThuatToan.getKhoaFromSinhVien(dsLop, sv.getLop()), dsKhoa) , dsKhoa);
-            choiceLop.select(sv.getLop());
-            String dateString = sv.getNgaySinh();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = sdf.parse(dateString);
-            jDateChooserNgaySinh.setDate(date);
-            jPasswordFieldPass.setText(ThuatToan.getMatKhau(dsTaiKhoan, cellValue.toString()));
-            jDateChooserNgaySinh.setDateFormatString("yyyy-MM-dd");
-            if(chucNang.equals("SuaND")){
-                choiceKhoa_CoVan.removeAll();
-                choiceKhoa_CoVan.add(khoaMau.getTenKhoa());
-                ThuatToan.addChoiceLop_1Khoa(dsLop, khoaMau.getMaKhoa(), choiceLop);
+            case "SuaSV" -> {
             }
-            
+            default -> {
+                jLabelNutTieuDeTieuChi.setText("Cập nhật thông tin sinh viên");
+                Object cellValue = table.getValueAt(chon, 1);
+                //System.out.println(cellValue);
+                int hub = 0;
+                for(int i=0; i<dsSV.size(); i++){
+                    if(dsSV.get(i).getMaSV().equals(cellValue.toString())){
+                        hub = i;
+                        //xoa = i;
+                    }
+                }   //jLabelNutTieuDeTieuChi.setText("Cập nhật");
+                SinhVien sv = dsSV.get(hub);
+                jTextFieldMaCoVan.setText(sv.getMaSV());
+                //jTextFieldMaCoVan.setText(cv.getMaCV());
+                jTextFieldTenCoVan.setText(sv.getHoTen());
+                jTextFieldSdt.setText(sv.getSdt());
+                jTextFieldQueQuan.setText(sv.getQueQuan());
+                jTextFieldDiaChi.setText(sv.getDiaChi());
+                jTextFieldEmail.setText(sv.getEmail().toLowerCase());
+                //cho
+                ThuatToan.addChoiceKhoa(choiceKhoa_CoVan, dsKhoa);
+                ThuatToan.addChoiceChucVu(choiceChucVu, dsCV);
+                choiceChucVu.remove("Tất cả");
+                choiceChucVu.select(ThuatToan.doiMaChucVuThanhTen(sv.getChucVu(), dsCV));
+                choiceKhoa_CoVan.remove("Tất cả");
+                choiceKhoa_CoVan.select(ThuatToan.getKhoaFromSinhVien(dsLop, sv.getLop()));
+                choiceGioiTinh_Sua.add("Nam");
+                choiceGioiTinh_Sua.add("Nữ");
+                choiceGioiTinh_Sua.select(ThuatToan.doiBoolToGioiTinh(sv.isGioiTinh()?"Nam":"Nữ"));
+                ThuatToan.addChoiceLop(choiceLop, dsLop,ThuatToan.doiMaKhoaThanhTenKhoa(ThuatToan.getKhoaFromSinhVien(dsLop, sv.getLop()), dsKhoa) , dsKhoa);
+                choiceLop.select(sv.getLop());
+                String dateString = sv.getNgaySinh();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = sdf.parse(dateString);
+                jDateChooserNgaySinh.setDate(date);
+                jPasswordFieldPass.setText(ThuatToan.getMatKhau(dsTaiKhoan, cellValue.toString()));
+                jDateChooserNgaySinh.setDateFormatString("yyyy-MM-dd");
+                if(chucNang.equals("SuaND")){
+                    choiceKhoa_CoVan.removeAll();
+                    choiceKhoa_CoVan.add(khoaMau.getTenKhoa());
+                    ThuatToan.addChoiceLop_1Khoa(dsLop, khoaMau.getMaKhoa(), choiceLop);
+                }
+            }
         }
         
         

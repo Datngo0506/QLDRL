@@ -7,7 +7,15 @@ package views;
 import com.raven.swing.ScrollBar;
 import controller.Database;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -19,7 +27,7 @@ import models.TieuChi;
  *
  * @author Dat
  */
-public class FormChamDiem extends javax.swing.JFrame {
+public final class FormChamDiem extends javax.swing.JFrame {
 
     private ArrayList<DRL> dsDRL;
     private ArrayList<TieuChi> dsTieuChi;
@@ -28,6 +36,8 @@ public class FormChamDiem extends javax.swing.JFrame {
     private String hocky;
     private int row;
     private String ngCham;
+    private final Color buttonHoverColor = new Color(30,115,190);
+    private final Color buttonColor = new Color(221,51,51);
     
     /**
      * Creates new form FormChamDiem
@@ -37,7 +47,9 @@ public class FormChamDiem extends javax.swing.JFrame {
     }
     
     public FormChamDiem(ArrayList<DRL>dsDRL, ArrayList<TieuChi>dsTieuChi, String hocky, String msv, JTable table, int row, String ngCham) {
-        
+        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
+        Image logo = icon.getImage();
+        this.setIconImage(logo);  
         initComponents();
         setLocationRelativeTo(null);
         Database.addListTieuChiToTable_Cham(dsTieuChi, jTableTieuChi);
@@ -48,6 +60,49 @@ public class FormChamDiem extends javax.swing.JFrame {
         this.table = table;
         this.dsDRL = dsDRL;
         this.ngCham = ngCham;
+        editButton();
+        
+    }
+    
+    public void editButton(){
+        buttonHoverEvent(jLabelNutChiTietTC, jPanelNutChiTietTC);
+        buttonHoverEvent(jLabelNutXoaTieuChi, jPanelNutXoaTieuChi);
+        buttonHoverEvent(jLabelTong, jPanelNutTong);
+    }
+    
+    public  void buttonHoverEvent(JLabel label, JPanel panel){
+        label.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                panel.setBackground(buttonHoverColor);
+                panel.revalidate(); // Cập nhật giao diện
+                panel.repaint();    // Vẽ lại giao diện
+            }
+        });
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                panel.setBackground(buttonHoverColor);
+                panel.revalidate(); // Cập nhật giao diện
+                panel.repaint();    // Vẽ lại giao diện
+            }
+        });
+        label.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                panel.setBackground(buttonColor);
+                panel.revalidate(); // Cập nhật giao diện
+                panel.repaint();    // Vẽ lại giao diện
+            }
+        });
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                panel.setBackground(buttonColor);
+                panel.revalidate(); // Cập nhật giao diện
+                panel.repaint();    // Vẽ lại giao diện
+            }
+        });
     }
 
     /**
@@ -230,7 +285,7 @@ public class FormChamDiem extends javax.swing.JFrame {
         jLabelTong.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelTong.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/whiteplus.png"))); // NOI18N
-        jLabelTong.setText("Tính tổng");
+        jLabelTong.setText("Điểm tổng:");
         jLabelTong.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelTong.setPreferredSize(new java.awt.Dimension(32, 16));
         jLabelTong.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -245,7 +300,7 @@ public class FormChamDiem extends javax.swing.JFrame {
             jPanelNutTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNutTongLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelTong, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
+                .addComponent(jLabelTong, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))
         );
         jPanelNutTongLayout.setVerticalGroup(
             jPanelNutTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,7 +333,7 @@ public class FormChamDiem extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanelBorderTieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelBorderTieuChiLayout.createSequentialGroup()
-                        .addComponent(jPanelNutTong, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanelNutTong, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanelTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(9, 9, 9))
@@ -351,29 +406,36 @@ public class FormChamDiem extends javax.swing.JFrame {
         }
         if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn nộp điểm không?") ==  JOptionPane.YES_OPTION){
             int diem = Integer.parseInt(jLabelDiemTong.getText());
+            
+            
+            switch (ngCham) {
+                case "SV" -> table.setValueAt(jLabelDiemTong.getText(), row, 3);
+                case "CS" -> table.setValueAt(jLabelDiemTong.getText(), row, 4);
+                default -> table.setValueAt(jLabelDiemTong.getText(), row, 5);
+            }
+            
+            // Kiểm tra điều kiện trước khi bắt đầu vòng lặp
+            if (!ngCham.equals("SV") && !ngCham.equals("CS") && !ngCham.equals("CV")) {
+                return;
+            }
+
+            Map<String, DRL> drlMap = dsDRL.stream()
+                .filter(drl -> drl.getMSSV().equals(msv) && drl.getMaHK().equals(hocky))
+                .collect(Collectors.toConcurrentMap(DRL::getMSSV, Function.identity()));
+
+            drlMap.forEach((key, drl) -> {
+                switch (ngCham) {
+                    case "SV" -> drl.setDiem1(diem);
+                    case "CS" -> drl.setDiem2(diem);
+                    default -> drl.setDiem3(diem);
+                }
+            });
+
             new Thread(() -> {
                 switch (ngCham) {
                     case "SV" -> Database.updateDRLSV_SV(msv, hocky, diem, 0, 0);
                     case "CS" -> Database.updateDRLSV_CS(msv, hocky, diem, 0);
                     default -> Database.updateDRLSV_CV(msv, hocky, diem);
-                }
-            }).start();
-            new Thread(() -> {
-                switch (ngCham) {
-                    case "SV" -> table.setValueAt(jLabelDiemTong.getText(), row, 3);
-                    case "CS" -> table.setValueAt(jLabelDiemTong.getText(), row, 4);
-                    default -> table.setValueAt(jLabelDiemTong.getText(), row, 5);
-                }
-            }).start();
-            new Thread(() -> {
-                for(DRL drl : dsDRL){
-                    if(drl.getMSSV().equals(msv) && drl.getMaHK().equals(hocky)){
-                        switch (ngCham) {
-                            case "SV" -> drl.setDiem1(diem);
-                            case "CS" -> drl.setDiem2(diem);
-                            default -> drl.setDiem3(diem);
-                        }
-                    }
                 }
             }).start();
             this.setVisible(false);
@@ -490,24 +552,16 @@ public class FormChamDiem extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDiemTong;
     private javax.swing.JLabel jLabelHKXet_DRL;
     private javax.swing.JLabel jLabelNutChiTietTC;
-    private javax.swing.JLabel jLabelNutTieuDeTieuChi;
-    private javax.swing.JLabel jLabelNutTieuDeTieuChi1;
     private javax.swing.JLabel jLabelNutTieuDeTieuChi2;
     private javax.swing.JLabel jLabelNutXoaTieuChi;
     private javax.swing.JLabel jLabelTitleTieuChi;
     private javax.swing.JLabel jLabelTong;
     private com.raven.swing.PanelBorder jPanelBorderTieuChi;
     private javax.swing.JPanel jPanelNutChiTietTC;
-    private javax.swing.JPanel jPanelNutTieuDeTieuChi;
-    private javax.swing.JPanel jPanelNutTieuDeTieuChi1;
     private javax.swing.JPanel jPanelNutTieuDeTieuChi2;
     private javax.swing.JPanel jPanelNutTong;
     private javax.swing.JPanel jPanelNutXoaTieuChi;
-    private javax.swing.JPanel jPanelThanhTieuDeTieuChi;
-    private javax.swing.JPanel jPanelThanhTieuDeTieuChi1;
     private javax.swing.JPanel jPanelThanhTieuDeTieuChi2;
-    private javax.swing.JPanel jPanelTieuChiMain;
-    private javax.swing.JPanel jPanelTieuChiMain1;
     private javax.swing.JPanel jPanelTieuChiMain2;
     private javax.swing.JPanel jPanelTong;
     private javax.swing.JScrollPane jScrollPaneTieuChi;

@@ -2,7 +2,7 @@
 
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="defaultCloseOperation" type="int" value="0"/>
     <Property name="title" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; &#x111;i&#x1ec3;m r&#xe8;n luy&#x1ec7;n h&#x1ecd;c vi&#x1ec7;n c&#x1a1; s&#x1edf;"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
@@ -1356,6 +1356,7 @@
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.raven.swing.TableLop()"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTableLopXet.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>
@@ -1642,6 +1643,7 @@
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.raven.swing.TableHocKy()"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTableHocKy.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>
@@ -1853,6 +1855,7 @@
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.raven.swing.TableKhoaHoc()"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTableKhoaHoc.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>
@@ -2029,6 +2032,7 @@
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.raven.swing.TableThongBao()"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTableHanNop.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>
@@ -2532,6 +2536,7 @@
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.raven.swing.TableKhoa()"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTableKhoa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>
@@ -2858,6 +2863,7 @@
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.raven.swing.TableTieuChi()"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTableTieuChi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>
@@ -3375,6 +3381,7 @@
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.raven.swing.TableCoVan()"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTableCoVan.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>
@@ -3799,6 +3806,7 @@
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.raven.swing.TableLop()"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTableLop.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>
@@ -4183,6 +4191,7 @@
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.raven.swing.TableDRL()"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTableDRL.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>
@@ -4739,6 +4748,7 @@
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.raven.swing.TableSinhVien()"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTableSV.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>

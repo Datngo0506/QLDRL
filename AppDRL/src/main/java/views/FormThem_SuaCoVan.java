@@ -47,10 +47,9 @@ public final class FormThem_SuaCoVan extends javax.swing.JFrame {
     
     public void edit() throws ParseException{
         setLocationRelativeTo(null);
-        JFrame.setDefaultLookAndFeelDecorated(true);
         ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
         Image logo = icon.getImage();
-        this.setIconImage(logo);
+        this.setIconImage(logo);  
         if(chucNang.equals("Sua") || chucNang.equals("SuaND")){
             Object cellValue = table.getValueAt(chon, 1);
             //System.out.println(cellValue);
