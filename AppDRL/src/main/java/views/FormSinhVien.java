@@ -156,7 +156,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
         jLabelHanKhoa.setText(ThuatToan.doiNgay(tb.getNgayKTKhoa()));
         choiceKhoa_LopXet.removeAll();
         choiceKhoa_LopXet.add(khoa.getTenKhoa());
-        Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, khoa.getTenKhoa());
+        Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, khoa.getTenKhoa(), dsKhoaHoc);
     }
         
         // Sử dụng màu này trong ứng dụng của bạn
@@ -227,7 +227,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
                     if(chon == JOptionPane.YES_OPTION) {
                 // Thực hiện hành động khi người dùng chọn "Yes"
                 // Ví dụ: thoát chương trình
-                    main.setVisible(false);
+                    main.dispose();
                     next.setVisible(true);
             }
                 
@@ -240,7 +240,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
                     if(chon == JOptionPane.YES_OPTION) {
                 // Thực hiện hành động khi người dùng chọn "Yes"
                 // Ví dụ: thoát chương trình
-                    main.setVisible(false);
+                    main.dispose();
                     next.setVisible(true);
                 
                 }
@@ -254,7 +254,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
                     if(chon == JOptionPane.YES_OPTION) {
                 // Thực hiện hành động khi người dùng chọn "Yes"
                 // Ví dụ: thoát chương trình
-                    main.setVisible(false);
+                    main.dispose();
                     next.setVisible(true);
                 }
             }
@@ -770,7 +770,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
         jPanelNullDot1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabelThreedots1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelThreedots1.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("threedot.png")));
+        jLabelThreedots1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/threedot.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanelNullDot1Layout = new javax.swing.GroupLayout(jPanelNullDot1);
         jPanelNullDot1.setLayout(jPanelNullDot1Layout);
@@ -871,7 +871,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
         jPanelNullDot2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabelThreeDots.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelThreeDots.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("threedot.png")));
+        jLabelThreeDots.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/threedot.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanelNullDot2Layout = new javax.swing.GroupLayout(jPanelNullDot2);
         jPanelNullDot2.setLayout(jPanelNullDot2Layout);
@@ -1875,10 +1875,10 @@ public final class FormSinhVien extends javax.swing.JFrame {
     private void choiceKhoa_LopXetItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceKhoa_LopXetItemStateChanged
         // TODO add your handling code here:
         if(choiceKhoa_LopXet.getSelectedItem().equals("Tất cả")){
-            Database.addListLopToTable_HKXet(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy);
+            Database.addListLopToTable_HKXet(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc);
         }
         else{
-            Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, choiceKhoa_LopXet.getSelectedItem());
+            Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, choiceKhoa_LopXet.getSelectedItem(), dsKhoaHoc);
         }
     }//GEN-LAST:event_choiceKhoa_LopXetItemStateChanged
 

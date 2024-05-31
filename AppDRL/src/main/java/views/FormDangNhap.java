@@ -110,17 +110,17 @@ public final class FormDangNhap extends javax.swing.JFrame {
      */
     
     
-    private ArrayList<TaiKhoan> dsTaiKhoan = new ArrayList<>();
-    private ArrayList<Khoa> dsKhoa = new ArrayList<>();
-    private ArrayList<CoVan> dsCoVan = new ArrayList<>();
-    private ArrayList<HocKy> dsHocKy = new ArrayList<>();
-    private ArrayList<KhoaHoc> dsKhoaHoc = new ArrayList<>();
-    private ArrayList<Lop> dsLop = new ArrayList<>();
-    private ArrayList<TieuChi> dsTieuChi = new ArrayList<>();
-    private ArrayList<SinhVien> dsSinhVien = new ArrayList<>();
-    private ArrayList<ChucVu> dsChucVu = new ArrayList<>();
-    private ArrayList<ThongBao> dsThongBao = new ArrayList<>();
-    private ArrayList<DRL> dsDRL = new ArrayList<>();
+    private final ArrayList<TaiKhoan> dsTaiKhoan = new ArrayList<>();
+    private final ArrayList<Khoa> dsKhoa = new ArrayList<>();
+    private final ArrayList<CoVan> dsCoVan = new ArrayList<>();
+    private final ArrayList<HocKy> dsHocKy = new ArrayList<>();
+    private final ArrayList<KhoaHoc> dsKhoaHoc = new ArrayList<>();
+    private final ArrayList<Lop> dsLop = new ArrayList<>();
+    private final ArrayList<TieuChi> dsTieuChi = new ArrayList<>();
+    private final ArrayList<SinhVien> dsSinhVien = new ArrayList<>();
+    private final ArrayList<ChucVu> dsChucVu = new ArrayList<>();
+    private final ArrayList<ThongBao> dsThongBao = new ArrayList<>();
+    private final ArrayList<DRL> dsDRL = new ArrayList<>();
     private Khoa khoa = new Khoa();
     private Lop lop = new Lop();
     private SinhVien sv = new SinhVien();
@@ -183,7 +183,6 @@ public final class FormDangNhap extends javax.swing.JFrame {
         setIconFrame(this);
         setBorderTextField(jTextFieldTenDN);
         setBorderTextField(jPasswordField);
-        getData();
         jButton1.addActionListener((ActionEvent e) -> {
             click();
         });
@@ -194,9 +193,14 @@ public final class FormDangNhap extends javax.swing.JFrame {
 
     public FormDangNhap() {
         //setRootPaneCheckingEnabled(false);
-
+        getData();
+        if(dsTaiKhoan.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Lỗi kết nối, xin hãy khởi động lại!");
+            System.exit(0);
+        }
         initComponents();
         suKienMenu();
+        
     }
     
     private void getData(){
@@ -227,6 +231,8 @@ public final class FormDangNhap extends javax.swing.JFrame {
             // Kết thúc ExecutorService sau khi tất cả các tác vụ đã hoàn thành
             executor.shutdown();
         }
+        
+        
 
         // Sau khi tất cả các tác vụ đã hoàn thành, bạn có thể thực hiện xử lý tiếp theo
         new Thread(() -> {
@@ -554,15 +560,12 @@ public final class FormDangNhap extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormDangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormDangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormDangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FormDangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        
         //</editor-fold>
         //</editor-fold>
 

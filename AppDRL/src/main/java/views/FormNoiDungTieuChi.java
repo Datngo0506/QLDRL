@@ -381,7 +381,11 @@ public final class FormNoiDungTieuChi extends javax.swing.JFrame {
     private void jLabelNutSuaTieuChiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutSuaTieuChiMouseClicked
         // TODO add your handling code here:
         int chonND = jTableTieuChi.getSelectedRow();
-        new FormThem_SuaTieuChi(dsTieuChi, ttTC, jTableTieuChi, chonND).setVisible(true);
+        if(chonND == -1){
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn nội dung cần chỉnh sửa!");
+        }else{
+            new FormThem_SuaTieuChi(dsTieuChi, ttTC, jTableTieuChi, chonND).setVisible(true);
+        }  
     }//GEN-LAST:event_jLabelNutSuaTieuChiMouseClicked
 
     /**

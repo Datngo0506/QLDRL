@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -377,17 +378,17 @@ public final class FormThem_SuaKhoa extends javax.swing.JFrame {
 
 
                             Database.saveListTaiKhoanToDB(dsTaiKhoan);
-                            this.setVisible(false);
+                            this.dispose();
                         }else{
                             JOptionPane.showMessageDialog(rootPane, "Mã khoa đã tồn tại trên hệ thống!");
                         }
                         
                     }).start();
-                    this.setVisible(false);
+                    this.dispose();
 
                 }
                 else if(them == JOptionPane.NO_OPTION){
-                    this.setVisible(false);
+                    this.dispose();
                 }
                 
             }
@@ -430,11 +431,11 @@ public final class FormThem_SuaKhoa extends javax.swing.JFrame {
                         Database.saveListTaiKhoanToDB(dsTaiKhoan);
                         
                     }).start();
-                    this.setVisible(false);
+                    this.dispose();
 
                 }
                 else if(sua == JOptionPane.NO_OPTION){
-                    this.setVisible(false);
+                    this.dispose();
                 }
             }
         }

@@ -545,7 +545,7 @@ public final class FormThem_SuaTieuChi extends javax.swing.JFrame {
 
 
             }
-            this.setVisible(false);
+            this.dispose();
             //Controller.saveTieuChiToDatabase(dsTieuChi);
             
         }

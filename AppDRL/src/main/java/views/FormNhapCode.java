@@ -230,7 +230,7 @@ public class FormNhapCode extends javax.swing.JFrame {
             if(lanNhap == 3){
                 JOptionPane.showMessageDialog(rootPane, "Code này đã bị vô hiệu!");
                 new FormDangNhap().setVisible(true);
-                this.setVisible(false);
+                this.dispose();
                 return;
             }
             String text = "Code được nhập không trùng khớp!\nBạn còn " + (3-lanNhap) + " lần nhập code này!";
@@ -239,7 +239,7 @@ public class FormNhapCode extends javax.swing.JFrame {
             
         }else{
             new FormResetPass(dsTaiKhoan, tenDN).setVisible(true);
-            this.setVisible(false);
+            this.dispose();
         }
         
     }//GEN-LAST:event_jLabelSaveMouseClicked

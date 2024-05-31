@@ -264,7 +264,7 @@ public class FormResetPass extends javax.swing.JFrame {
             }).start();
             JOptionPane.showMessageDialog(rootPane, "Cập nhật mật khẩu mới thành công!");
             new FormDangNhap().setVisible(true);
-            this.setVisible(false);
+            this.dispose();
             
         }
         

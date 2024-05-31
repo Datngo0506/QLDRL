@@ -294,7 +294,7 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
             new Thread(() -> {
                 Database.updateMatKhau(tenDN, password2);
             }).start();
-            this.setVisible(false);
+            this.dispose();
         }
         
     }//GEN-LAST:event_jLabelSaveMouseClicked

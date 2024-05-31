@@ -15,7 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import models.CoVan;
@@ -600,11 +599,11 @@ public final class FormThem_SuaCoVan extends javax.swing.JFrame {
                         Database.saveListLopToDB(dsLop);
                         
                     }).start();
-                    this.setVisible(false);
+                    this.dispose();
 
                 } else if(sua == JOptionPane.NO_OPTION){
                     // Đóng cửa sổ nếu không muốn sửa nữa
-                    this.setVisible(false);
+                    this.dispose();
                 }
             }
             else{
@@ -656,10 +655,10 @@ public final class FormThem_SuaCoVan extends javax.swing.JFrame {
                         }
                     }).start();
 
-                    this.setVisible(false); // Đóng cửa sổ sau khi thêm thành công
+                    this.dispose(); // Đóng cửa sổ sau khi thêm thành công
                 } else if(them == JOptionPane.NO_OPTION){
                     // Đóng cửa sổ nếu không muốn thêm nữa
-                    this.setVisible(false);
+                    this.dispose();
                 }
             }
         }

@@ -15,7 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import models.ThongBao;
 
 /**
@@ -415,7 +414,7 @@ public final class FormDoiHanNop extends javax.swing.JFrame {
                 Database.saveListThongBaoToDB(dsThongBao);
             }).start();
             
-            this.setVisible(false);
+            this.dispose();
         }            
         
     }//GEN-LAST:event_jLabelNutLuuMouseClicked

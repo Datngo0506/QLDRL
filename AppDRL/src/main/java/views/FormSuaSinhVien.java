@@ -10,7 +10,6 @@ import com.raven.swing.RoundedTextField;
 import java.awt.Color;
 import java.awt.Image;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import models.SinhVien;
@@ -430,7 +429,7 @@ public final class FormSuaSinhVien extends javax.swing.JFrame {
                 new Thread(() -> {
                     Database.saveListSinhVienToDB(dsSV);
                 }).start();
-                this.setVisible(false);
+                this.dispose();
             }
             
         }

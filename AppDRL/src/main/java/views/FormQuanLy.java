@@ -15,6 +15,10 @@ import controller.Database;
 import controller.Link;
 import com.raven.swing.ScrollBar;
 import controller.ThuatToan;
+import static controller.ThuatToan.doiKhoaHocSangHKCuoi;
+import static controller.ThuatToan.getKhoaHocFromSV;
+import static controller.ThuatToan.getSoNamHoc;
+import static controller.ThuatToan.soSanhHocKy;
 import java.awt.Cursor;
 import java.awt.Image;
 import java.text.ParseException;
@@ -159,7 +163,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         choiceKhoa_LopXet.removeAll();
         ThuatToan.addChoiceKhoa(choiceKhoa_LopXet, dsKhoa);
         
-        Database.addListLopToTable_HKXet(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy);
+        Database.addListLopToTable_HKXet(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc);
     }
         
         // Sử dụng màu này trong ứng dụng của bạn
@@ -295,7 +299,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
                     if(chon == JOptionPane.YES_OPTION) {
                 // Thực hiện hành động khi người dùng chọn "Yes"
                 // Ví dụ: thoát chương trình
-                    main.setVisible(false);
+                    main.dispose();
                     next.setVisible(true);
             }
                 
@@ -308,7 +312,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
                     if(chon == JOptionPane.YES_OPTION) {
                 // Thực hiện hành động khi người dùng chọn "Yes"
                 // Ví dụ: thoát chương trình
-                    main.setVisible(false);
+                    main.dispose();
                     next.setVisible(true);
                 
                 }
@@ -322,7 +326,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
                     if(chon == JOptionPane.YES_OPTION) {
                 // Thực hiện hành động khi người dùng chọn "Yes"
                 // Ví dụ: thoát chương trình
-                    main.setVisible(false);
+                    main.dispose();
                     next.setVisible(true);
                 }
             }
@@ -1107,20 +1111,22 @@ public final class FormQuanLy extends javax.swing.JFrame {
         jPanelNullDot.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabelThreedots.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelThreedots.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("threedot.png")));
+        jLabelThreedots.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/threedot.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanelNullDotLayout = new javax.swing.GroupLayout(jPanelNullDot);
         jPanelNullDot.setLayout(jPanelNullDotLayout);
         jPanelNullDotLayout.setHorizontalGroup(
             jPanelNullDotLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelThreedots, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNullDotLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelThreedots, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanelNullDotLayout.setVerticalGroup(
             jPanelNullDotLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelNullDotLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabelThreedots, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGap(0, 38, Short.MAX_VALUE))
         );
 
         jPanelMenu.add(jPanelNullDot);
@@ -1129,7 +1135,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         jPanelNullDot2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabelThreeDots.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelThreeDots.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("threedot.png")));
+        jLabelThreeDots.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/threedot.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanelNullDot2Layout = new javax.swing.GroupLayout(jPanelNullDot2);
         jPanelNullDot2.setLayout(jPanelNullDot2Layout);
@@ -3925,7 +3931,12 @@ public final class FormQuanLy extends javax.swing.JFrame {
     new Thread(() -> {
         // Thêm dữ liệu mới vào dsDRL
         for(SinhVien sv : dsSinhVien) {
-            if(!ThuatToan.kTraTonTaiMSSV(sv.getMaSV(), dsDRL, ThuatToan.getHKXet(dsHocKy))) {
+            String khoaHoc = getKhoaHocFromSV(dsLop, sv.getLop());
+            float soNamHoc = getSoNamHoc(dsKhoaHoc, khoaHoc);
+            String hkCuoi = doiKhoaHocSangHKCuoi(khoaHoc, soNamHoc);
+            String hkHienTai = ThuatToan.getHKXet(dsHocKy);
+            int soSanh = ThuatToan.soSanhHocKy(hkHienTai, hkCuoi);
+            if(!ThuatToan.kTraTonTaiMSSV(sv.getMaSV(), dsDRL, ThuatToan.getHKXet(dsHocKy)) && soSanh <= 0) {
                 DRL drl = new DRL();
                 drl.setMSSV(sv.getMaSV());
                 drl.setMaHK(ThuatToan.getHKXet(dsHocKy));
@@ -4089,10 +4100,10 @@ public final class FormQuanLy extends javax.swing.JFrame {
     private void choiceKhoa_LopXetItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceKhoa_LopXetItemStateChanged
         // TODO add your handling code here:
         if(choiceKhoa_LopXet.getSelectedItem().equals("Tất cả")){
-            Database.addListLopToTable_HKXet(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy);
+            Database.addListLopToTable_HKXet(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc);
         }
         else{
-            Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, choiceKhoa_LopXet.getSelectedItem());
+            Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, choiceKhoa_LopXet.getSelectedItem(), dsKhoaHoc);
         }
     }//GEN-LAST:event_choiceKhoa_LopXetItemStateChanged
 

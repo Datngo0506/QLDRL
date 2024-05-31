@@ -65,13 +65,13 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         private Khoa khoa;
         private JFrame frame;
         private SinhVien sv;
-        private ArrayList<JLabel> dsLabel = new ArrayList<>();
+        private final ArrayList<JLabel> dsLabel = new ArrayList<>();
         private Lop lop;
         private TaiKhoan tk;
         //private final static Color textColor = new Color(0, 0, 139);
-        private final static Color white = Color.WHITE;
-        private final static Color hoveColor = new Color(255,204,102);//màu đậm
-        private final static Color hoveColor2 = new Color(255, 228, 181);//màu lợt
+        private final Color white = Color.WHITE;
+        private final Color hoveColor = new Color(255,204,102);//màu đậm
+        private final  Color hoveColor2 = new Color(255, 228, 181);//màu lợt
         private final Color buttonHoverColor = new Color(30,115,190);
         private final Color buttonColor = new Color(221,51,51);
     // Màu của viền
@@ -144,7 +144,8 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         choiceLop_DRL.removeAll();
         choiceLop_DRL.add(sv.getLop());
         String hk = ThuatToan.getHKXet(dsHocKy);
-        ThuatToan.addChoiceHocKy(dsHocKy, lop.getMaKhoaHoc(), 4.5, choiceHK_DRL);
+        float soNamHoc = ThuatToan.getSoNamHoc(dsKhoaHoc, lop.getMaKhoaHoc());
+        ThuatToan.addChoiceHocKy(dsHocKy, lop.getMaKhoaHoc(), soNamHoc, choiceHK_DRL);
         choiceHK_DRL.select(ThuatToan.doiMaHKSangHK(hk));
         Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, lop.getLop(), hk);
         if(choiceHK_DRL.getSelectedItem().equals(ThuatToan.doiMaHKSangHK(hk))){
@@ -173,7 +174,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         jLabelHanKhoa.setText(ThuatToan.doiNgay(tb.getNgayKTKhoa()));
         choiceKhoa_LopXet.removeAll();
         choiceKhoa_LopXet.add(khoa.getTenKhoa());
-        Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, khoa.getTenKhoa());
+        Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, khoa.getTenKhoa(), dsKhoaHoc);
     }
         
         // Sử dụng màu này trong ứng dụng của bạn
@@ -258,7 +259,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
                     if(chon == JOptionPane.YES_OPTION) {
                 // Thực hiện hành động khi người dùng chọn "Yes"
                 // Ví dụ: thoát chương trình
-                    main.setVisible(false);
+                    main.dispose();
                     next.setVisible(true);
             }
                 
@@ -271,7 +272,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
                     if(chon == JOptionPane.YES_OPTION) {
                 // Thực hiện hành động khi người dùng chọn "Yes"
                 // Ví dụ: thoát chương trình
-                    main.setVisible(false);
+                    main.dispose();
                     next.setVisible(true);
                 
                 }
@@ -285,7 +286,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
                     if(chon == JOptionPane.YES_OPTION) {
                 // Thực hiện hành động khi người dùng chọn "Yes"
                 // Ví dụ: thoát chương trình
-                    main.setVisible(false);
+                    main.dispose();
                     next.setVisible(true);
                 }
             }
@@ -855,7 +856,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         jPanelNullDot1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabelThreedots1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelThreedots1.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("threedot.png")));
+        jLabelThreedots1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/threedot.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanelNullDot1Layout = new javax.swing.GroupLayout(jPanelNullDot1);
         jPanelNullDot1.setLayout(jPanelNullDot1Layout);
@@ -940,7 +941,7 @@ public final class FormBanCanSu extends javax.swing.JFrame {
         jPanelNullDot2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabelThreeDots.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelThreeDots.setIcon(new javax.swing.ImageIcon(Icon.getUrlIcon("threedot.png")));
+        jLabelThreeDots.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/threedot.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanelNullDot2Layout = new javax.swing.GroupLayout(jPanelNullDot2);
         jPanelNullDot2.setLayout(jPanelNullDot2Layout);
@@ -2197,10 +2198,10 @@ public final class FormBanCanSu extends javax.swing.JFrame {
     private void choiceKhoa_LopXetItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceKhoa_LopXetItemStateChanged
         // TODO add your handling code here:
         if(choiceKhoa_LopXet.getSelectedItem().equals("Tất cả")){
-            Database.addListLopToTable_HKXet(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy);
+            Database.addListLopToTable_HKXet(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc);
         }
         else{
-            Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, choiceKhoa_LopXet.getSelectedItem());
+            Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, choiceKhoa_LopXet.getSelectedItem(), dsKhoaHoc);
         }
     }//GEN-LAST:event_choiceKhoa_LopXetItemStateChanged
 

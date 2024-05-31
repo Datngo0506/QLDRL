@@ -381,8 +381,8 @@
                 <Component class="javax.swing.JLabel" name="jLabelThreedots1">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="new javax.swing.ImageIcon(Icon.getUrlIcon(&quot;threedot.png&quot;))" type="code"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icons/threedot.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -486,8 +486,8 @@
                 <Component class="javax.swing.JLabel" name="jLabelThreeDots">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="new javax.swing.ImageIcon(Icon.getUrlIcon(&quot;threedot.png&quot;))" type="code"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icons/threedot.png"/>
                     </Property>
                   </Properties>
                 </Component>

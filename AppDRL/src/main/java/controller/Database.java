@@ -1,4 +1,5 @@
 /*
+
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -611,7 +612,7 @@ public class Database {
         }
     }
     
-    public static void addListLopToTable_HKXet(ArrayList<Lop> dsLop, JTable tableLop, ArrayList<Khoa> dsKhoa, ArrayList<CoVan> dsCoVan, ArrayList<HocKy> dsHocKy) {
+    public static void addListLopToTable_HKXet(ArrayList<Lop> dsLop, JTable tableLop, ArrayList<Khoa> dsKhoa, ArrayList<CoVan> dsCoVan, ArrayList<HocKy> dsHocKy, ArrayList<KhoaHoc>dsKhoaHoc) {
         DefaultTableModel model = (DefaultTableModel) tableLop.getModel();
 
         // Xóa dữ liệu cũ trong bảng
@@ -624,7 +625,8 @@ public class Database {
                 String khoaHoc = kh.getMaKhoaHoc();
                 String parts[] = khoaHoc.split("-");
                 String hkDau = parts[0]+"-"+(Integer.parseInt(parts[0])+1)+"-1";
-                String hkCuoi = ThuatToan.doiKhoaHocSangHKCuoi(khoaHoc, 4.5);
+                float soNamHoc = ThuatToan.getSoNamHoc(dsKhoaHoc, kh.getMaKhoaHoc());
+                String hkCuoi = ThuatToan.doiKhoaHocSangHKCuoi(khoaHoc, soNamHoc);
                 String hkHienTai = ThuatToan.getHKXet(dsHocKy);
                 if(ThuatToan.soSanhHocKy(hkHienTai, hkDau) >=0 && ThuatToan.soSanhHocKy(hkHienTai, hkCuoi) <=0){
                     String khoa = ThuatToan.doiMaKhoaThanhTenKhoa(kh.getMaKhoa(), dsKhoa);
@@ -640,7 +642,7 @@ public class Database {
         }
     }
     
-    public static void addListLopToTable_HKXet_Khoa(ArrayList<Lop> dsLop, JTable tableLop, ArrayList<Khoa> dsKhoa, ArrayList<CoVan> dsCoVan, ArrayList<HocKy> dsHocKy, String tenKhoa) {
+    public static void addListLopToTable_HKXet_Khoa(ArrayList<Lop> dsLop, JTable tableLop, ArrayList<Khoa> dsKhoa, ArrayList<CoVan> dsCoVan, ArrayList<HocKy> dsHocKy, String tenKhoa, ArrayList<KhoaHoc>dsKhoaHoc) {
         DefaultTableModel model = (DefaultTableModel) tableLop.getModel();
 
         // Xóa dữ liệu cũ trong bảng
@@ -653,7 +655,8 @@ public class Database {
                 String khoaHoc = kh.getMaKhoaHoc();
                 String parts[] = khoaHoc.split("-");
                 String hkDau = parts[0]+"-"+(Integer.parseInt(parts[0])+1)+"-1";
-                String hkCuoi = ThuatToan.doiKhoaHocSangHKCuoi(khoaHoc, 4.5);
+                float soNamHoc = ThuatToan.getSoNamHoc(dsKhoaHoc, kh.getMaKhoaHoc());
+                String hkCuoi = ThuatToan.doiKhoaHocSangHKCuoi(khoaHoc, soNamHoc);
                 String hkHienTai = ThuatToan.getHKXet(dsHocKy);
                 if(ThuatToan.soSanhHocKy(hkHienTai, hkDau) >=0 && ThuatToan.soSanhHocKy(hkHienTai, hkCuoi) <=0 && kh.getMaKhoa().equals(ThuatToan.doiTenKhoaThanhMaKhoa(tenKhoa, dsKhoa))){
                     String khoa = ThuatToan.doiMaKhoaThanhTenKhoa(kh.getMaKhoa(), dsKhoa);

@@ -16,7 +16,6 @@ import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import models.SinhVien;
@@ -418,7 +417,7 @@ public final class FormThem_SuaLop extends javax.swing.JFrame {
                     }
                     
                     
-                    this.setVisible(false);
+                    this.dispose();
                     Database.saveListLopToDB(dsLop);
                 }
             }
@@ -458,7 +457,7 @@ public final class FormThem_SuaLop extends javax.swing.JFrame {
                     }
                     ThuatToan.doiLopDsSV(dsSinhVien, maLop, jTextFieldLop.getText().toUpperCase());
                     Database.saveListLopToDB(dsLop);
-                    this.setVisible(false);
+                    this.dispose();
                 }
             }
         }

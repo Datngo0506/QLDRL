@@ -6,14 +6,11 @@ package views;
 
 
 import com.raven.swing.RoundedTextField;
-import controller.Database;
 import controller.Email;
-import controller.ThuatToan;
 import java.awt.Color;
 import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import models.CoVan;
 import models.SinhVien;
@@ -262,7 +259,7 @@ public class FormNhapMail extends javax.swing.JFrame {
             emailThread.start(); // Bắt đầu luồng gửi email
 
             new FormNhapCode(dsTaiKhoan, username, code).setVisible(true);
-            this.setVisible(false);
+            this.dispose();
         }
         
     }//GEN-LAST:event_jLabelSaveMouseClicked

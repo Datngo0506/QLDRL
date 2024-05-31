@@ -438,7 +438,7 @@ public final class FormChamDiem extends javax.swing.JFrame {
                     default -> Database.updateDRLSV_CV(msv, hocky, diem);
                 }
             }).start();
-            this.setVisible(false);
+            this.dispose();
         }
         
     }//GEN-LAST:event_jLabelNutXoaTieuChiMouseClicked
