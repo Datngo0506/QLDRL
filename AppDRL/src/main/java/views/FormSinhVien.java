@@ -5,7 +5,6 @@
 package views;
 
 import java.awt.Color;
-import icons.Icon;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -138,25 +137,32 @@ public final class FormSinhVien extends javax.swing.JFrame {
 
     
     public void DRLCaNhan(){
-        String hk = ThuatToan.getHKXet(dsHocKy);
-        hk = Database.chuyenMaHocKy(hk);
-        jLabelHKXet_DRL.setText("Học kỳ đang xét là: "+hk);
-        Database.addListDRLToTable_SV_HK(dsDRL, sv, jTableDRLCaNhan);
+        new Thread(() -> {
+            Database.saveDRLToList(dsDRL);
+            String hk = ThuatToan.getHKXet(dsHocKy);
+            hk = Database.chuyenMaHocKy(hk);
+            jLabelHKXet_DRL.setText("Học kỳ đang xét là: "+hk);
+            Database.addListDRLToTable_SV_HK(dsDRL, sv, jTableDRLCaNhan);
+        }).start();
     }
     
     public void moTrangChu(){
-        ThuatToan.addChoiceKhoa(choiceKhoa_LopXet, dsKhoa);
-        String hkxet = ThuatToan.getHKXet(dsHocKy);
-        jLabelHKXet.setText(Database.chuyenMaHocKy(hkxet));
-        ThongBao tb = ThuatToan.getThongBao(dsThongBao, hkxet);
-        jLabelNgayBD.setText(ThuatToan.doiNgay(tb.getNgayBD()));
-        jLabelHanSV.setText(ThuatToan.doiNgay(tb.getNgayKTSV()));
-        jLabelHanCS.setText(ThuatToan.doiNgay(tb.getNgayKTCS()));
-        jLabelHanCV.setText(ThuatToan.doiNgay(tb.getNgayKTCV()));
-        jLabelHanKhoa.setText(ThuatToan.doiNgay(tb.getNgayKTKhoa()));
-        choiceKhoa_LopXet.removeAll();
-        choiceKhoa_LopXet.add(khoa.getTenKhoa());
-        Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, khoa.getTenKhoa(), dsKhoaHoc);
+        new Thread(() -> {
+            Database.saveLopToList(dsLop);
+            Database.saveThongBaoToList(dsThongBao);
+            ThuatToan.addChoiceKhoa(choiceKhoa_LopXet, dsKhoa);
+            String hkxet = ThuatToan.getHKXet(dsHocKy);
+            jLabelHKXet.setText(Database.chuyenMaHocKy(hkxet));
+            ThongBao tb = ThuatToan.getThongBao(dsThongBao, hkxet);
+            jLabelNgayBD.setText(ThuatToan.doiNgay(tb.getNgayBD()));
+            jLabelHanSV.setText(ThuatToan.doiNgay(tb.getNgayKTSV()));
+            jLabelHanCS.setText(ThuatToan.doiNgay(tb.getNgayKTCS()));
+            jLabelHanCV.setText(ThuatToan.doiNgay(tb.getNgayKTCV()));
+            jLabelHanKhoa.setText(ThuatToan.doiNgay(tb.getNgayKTKhoa()));
+            choiceKhoa_LopXet.removeAll();
+            choiceKhoa_LopXet.add(khoa.getTenKhoa());
+            Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, khoa.getTenKhoa(), dsKhoaHoc);
+        }).start();
     }
         
         // Sử dụng màu này trong ứng dụng của bạn
@@ -1838,8 +1844,11 @@ public final class FormSinhVien extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Bạn đã đánh giá điểm học kỳ này!");
             return;
         }
-        String hk = ThuatToan.getHKXet(dsHocKy);
-        new FormChamDiem(dsDRL, dsTieuChi, hk, sv.getMaSV(), jTableDRLCaNhan, chon, "SV").setVisible(true);
+        new Thread(() -> {
+            Database.saveTieuChiToList(dsTieuChi);
+            String hk = ThuatToan.getHKXet(dsHocKy);
+            new FormChamDiem(dsDRL, dsTieuChi, hk, sv.getMaSV(), jTableDRLCaNhan, chon, "SV").setVisible(true);
+        }).start();
         
         
     }//GEN-LAST:event_jLabelNutXoaLopMouseClicked

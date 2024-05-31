@@ -50,6 +50,9 @@ public class Database {
     }
     
     public static void saveTaiKhoanToList(ArrayList<TaiKhoan> dsTaiKhoan){
+        if(!dsTaiKhoan.isEmpty()){
+            dsTaiKhoan.clear();
+        }
         try {
             // Thực hiện kết nối đến cơ sở dữ liệu
             try (Connection connection = getConnection();
@@ -400,6 +403,9 @@ public class Database {
     }
     
     public static void saveHocKyToList(ArrayList <HocKy> dsHocKy){
+        if(!dsHocKy.isEmpty()){
+            dsHocKy.clear();
+        }
         try {
             try ( // Tạo kết nối tới cơ sở dữ liệu và thực hiện truy vấn
                 Connection con = Database.getConnection()) {
@@ -479,6 +485,9 @@ public class Database {
     }
  
     public static void saveKhoaHocToList(ArrayList <KhoaHoc> dsKhoaHoc){
+        if(!dsKhoaHoc.isEmpty()){
+            dsKhoaHoc.clear();
+        }
         try {
             try ( // Tạo kết nối tới cơ sở dữ liệu và thực hiện truy vấn
                 Connection con = Database.getConnection()) {
@@ -555,6 +564,9 @@ public class Database {
     
     
     public static void saveLopToList(ArrayList <Lop> dsLop){
+        if(!dsLop.isEmpty()){
+            dsLop.clear();
+        }
         try (Connection connection = getConnection()) {
             // Tạo câu truy vấn SQL
             String sql = "SELECT * FROM Lop";
@@ -739,6 +751,9 @@ public class Database {
     }
     
     public static void saveTieuChiToList(ArrayList<TieuChi> dsTieuChi){
+        if(!dsTieuChi.isEmpty()){
+            dsTieuChi.clear();
+        }
         
         try (Connection conn = getConnection()) {
             // Lấy dữ liệu từ bảng TieuChiDanhGia
@@ -892,6 +907,9 @@ public class Database {
     }
     
     public static void saveSinhVienToList(ArrayList<SinhVien> dsSinhVien){
+        if(!dsSinhVien.isEmpty()){
+            dsSinhVien.clear();
+        }
         try (Connection connection = getConnection()) {
             // Chuẩn bị truy vấn SQL
             String sql = "SELECT * FROM SinhVien";
@@ -962,6 +980,9 @@ public class Database {
     }
     
     public static void saveChucVuToList(ArrayList<ChucVu> dsChucVu){
+        if(!dsChucVu.isEmpty()){
+            dsChucVu.clear();
+        }
         try (Connection connection = getConnection()) {
             String sql = "SELECT * FROM ChucVu";
             // Tạo một đối tượng PreparedStatement
@@ -1125,6 +1146,9 @@ public class Database {
     
     
     public static void saveThongBaoToList(ArrayList<ThongBao> dsThongBao){
+        if(!dsThongBao.isEmpty()){
+            dsThongBao.clear();
+        }
         try (Connection connection = getConnection()) {
             String query = "SELECT maHK_NK, ngayBD, ngayKT_SV, ngayKT_CS, ngayKT_CV, ngayKT_Khoa FROM TBChamDiem";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -1233,6 +1257,9 @@ public class Database {
     }
     
     public static void saveDRLToList(ArrayList<DRL>dsDRL){
+        if(!dsDRL.isEmpty()){
+            dsDRL.clear();
+        }
         try {
             // Bước 1: Đăng ký JDBC driver
 
@@ -1384,6 +1411,8 @@ public class Database {
             // Xử lý lỗi khác
             //e.printStackTrace();
         }
+        
+        
     }
     
     public static void saveOneDRLToDB(DRL drl) {
@@ -1477,8 +1506,8 @@ public class Database {
     }
     
     public static void updateTrangThai(String mssv, String maHK_NK) {
-        Connection conn = null;
-        PreparedStatement stmt = null;
+        Connection conn;
+        PreparedStatement stmt;
 
         try {
             // Mở kết nối
@@ -1505,8 +1534,8 @@ public class Database {
     }
     
     public static void updateDiem(String mssv, String maHK_NK) {
-        Connection conn = null;
-        PreparedStatement stmt = null;
+        Connection conn;
+        PreparedStatement stmt;
 
         try {
             // Mở kết nối

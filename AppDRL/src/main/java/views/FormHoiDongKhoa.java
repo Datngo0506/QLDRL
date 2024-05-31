@@ -5,7 +5,6 @@
 package views;
 
 import java.awt.Color;
-import icons.Icon;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -63,9 +62,9 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
         private Khoa khoa;
         private JFrame frame;
         //private final static Color textColor = new Color(0, 0, 139);
-        private final static Color white = Color.WHITE;
-        private final static Color hoveColor = new Color(255,204,102);//màu đậm
-        private final static Color hoveColor2 = new Color(255, 228, 181);//màu lợt
+        private final Color white = Color.WHITE;
+        private final Color hoveColor = new Color(255,204,102);//màu đậm
+        private final Color hoveColor2 = new Color(255, 228, 181);//màu lợt
         private final Color buttonHoverColor = new Color(30,115,190);
         private final Color buttonColor = new Color(221,51,51);
     // Màu của viền
@@ -98,45 +97,61 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
     //Xử lý khi click vào menu nào thì bảng của menu đó có dữ liệu
     public void addTable(String text){
         if (text.contains("CỐ VẤN")){
-            Database.addListCoVanToTable_1Khoa(dsCoVan, jTableCoVan, khoa.getMaKhoa(), khoa.getTenKhoa(), dsTaiKhoan);
-            choiceKhoa_CoVan.removeAll();
-            choiceKhoa_CoVan.add(khoa.getTenKhoa());
+            new Thread(() -> {
+                Database.saveCoVanToList(dsCoVan);
+                Database.addListCoVanToTable_1Khoa(dsCoVan, jTableCoVan, khoa.getMaKhoa(), khoa.getTenKhoa(), dsTaiKhoan);
+                choiceKhoa_CoVan.removeAll();
+                choiceKhoa_CoVan.add(khoa.getTenKhoa());
+            }).start();
+            
         }
         else if(text.contains("LỚP")){
-            Database.addListLopToTable_1Khoa(dsLop, jTableLop, khoa.getMaKhoa(),khoa.getTenKhoa(), dsCoVan);
-            choiceKhoa_Lop.removeAll();
-            choiceKhoa_Lop.add(khoa.getTenKhoa());
+            new Thread(() -> {
+                Database.saveLopToList(dsLop);
+                Database.addListLopToTable_1Khoa(dsLop, jTableLop, khoa.getMaKhoa(),khoa.getTenKhoa(), dsCoVan);
+                choiceKhoa_Lop.removeAll();
+                choiceKhoa_Lop.add(khoa.getTenKhoa());
+            }).start();
         }
 
         else if(text.contains("SINH VIÊN")){
-            Database.addListSinhVienToTable_1Khoa(dsSinhVien, khoa.getMaKhoa(), dsLop, jTableSV, dsChucVu, dsTaiKhoan, khoa.getTenKhoa());
-            choiceKhoa_SV.removeAll();
-            choiceKhoa_SV.add(khoa.getTenKhoa());
-            
-            ThuatToan.addChoiceLop_1Khoa(dsLop, khoa.getMaKhoa(), choiceLop_SV);
+            new Thread(() -> {
+                Database.saveLopToList(dsLop);
+                Database.saveSinhVienToList(dsSinhVien);
+                Database.addListSinhVienToTable_1Khoa(dsSinhVien, khoa.getMaKhoa(), dsLop, jTableSV, dsChucVu, dsTaiKhoan, khoa.getTenKhoa());
+                choiceKhoa_SV.removeAll();
+                choiceKhoa_SV.add(khoa.getTenKhoa());
+
+                ThuatToan.addChoiceLop_1Khoa(dsLop, khoa.getMaKhoa(), choiceLop_SV);
+            }).start();
         }
         else if(text.contains("DUYỆT ĐIỂM")){
-            choiceKhoa_DRL.removeAll();
-            choiceKhoa_DRL.add(khoa.getTenKhoa());
-            ThuatToan.addChoiceLop(choiceLop_DRL, dsLop, khoa.getTenKhoa(), dsKhoa);
-            
-            Lop lopDau = new Lop();
-            
-            for(Lop lop: dsLop){
-                if(lop.getMaKhoa().equals(khoa.getMaKhoa())){
-                    lopDau = lop;
-                    break;
-                }
-            }
-            
-            String parts[] = (lopDau.getMaKhoaHoc()).split("-");
-            String hocKyDau = parts[0] + "-" + (Integer.parseInt(parts[0]) + 1) + "-1";
+            new Thread(() -> {
+                Database.saveLopToList(dsLop);
+                Database.saveHocKyToList(dsHocKy);
+                Database.saveDRLToList(dsDRL);
+                choiceKhoa_DRL.removeAll();
+                choiceKhoa_DRL.add(khoa.getTenKhoa());
+                ThuatToan.addChoiceLop(choiceLop_DRL, dsLop, khoa.getTenKhoa(), dsKhoa);
 
-            Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, lopDau.getLop(), hocKyDau);
-            jPanelNutDuyet.setVisible(false);
-            jLabelNutDuyet.setVisible(false);
-            jPanelNutChamLai.setVisible(false);
-            jLabelNutChamLai.setVisible(false);
+                Lop lopDau = new Lop();
+
+                for(Lop lop: dsLop){
+                    if(lop.getMaKhoa().equals(khoa.getMaKhoa())){
+                        lopDau = lop;
+                        break;
+                    }
+                }
+
+                String parts[] = (lopDau.getMaKhoaHoc()).split("-");
+                String hocKyDau = parts[0] + "-" + (Integer.parseInt(parts[0]) + 1) + "-1";
+
+                Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, lopDau.getLop(), hocKyDau);
+                jPanelNutDuyet.setVisible(false);
+                jLabelNutDuyet.setVisible(false);
+                jPanelNutChamLai.setVisible(false);
+                jLabelNutChamLai.setVisible(false);
+            }).start();
         }
         else {
             moTrangChu();
@@ -144,18 +159,22 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
     }    
     
     public void moTrangChu(){
-        ThuatToan.addChoiceKhoa(choiceKhoa_LopXet, dsKhoa);
-        String hkxet = ThuatToan.getHKXet(dsHocKy);
-        jLabelHKXet.setText(Database.chuyenMaHocKy(hkxet));
-        ThongBao tb = ThuatToan.getThongBao(dsThongBao, hkxet);
-        jLabelNgayBD.setText(ThuatToan.doiNgay(tb.getNgayBD()));
-        jLabelHanSV.setText(ThuatToan.doiNgay(tb.getNgayKTSV()));
-        jLabelHanCS.setText(ThuatToan.doiNgay(tb.getNgayKTCS()));
-        jLabelHanCV.setText(ThuatToan.doiNgay(tb.getNgayKTCV()));
-        jLabelHanKhoa.setText(ThuatToan.doiNgay(tb.getNgayKTKhoa()));
-        choiceKhoa_LopXet.removeAll();
-        choiceKhoa_LopXet.add(khoa.getTenKhoa());
-        Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, khoa.getTenKhoa(), dsKhoaHoc);
+        new Thread(() -> {
+            Database.saveLopToList(dsLop);
+            Database.saveThongBaoToList(dsThongBao);
+            ThuatToan.addChoiceKhoa(choiceKhoa_LopXet, dsKhoa);
+            String hkxet = ThuatToan.getHKXet(dsHocKy);
+            jLabelHKXet.setText(Database.chuyenMaHocKy(hkxet));
+            ThongBao tb = ThuatToan.getThongBao(dsThongBao, hkxet);
+            jLabelNgayBD.setText(ThuatToan.doiNgay(tb.getNgayBD()));
+            jLabelHanSV.setText(ThuatToan.doiNgay(tb.getNgayKTSV()));
+            jLabelHanCS.setText(ThuatToan.doiNgay(tb.getNgayKTCS()));
+            jLabelHanCV.setText(ThuatToan.doiNgay(tb.getNgayKTCV()));
+            jLabelHanKhoa.setText(ThuatToan.doiNgay(tb.getNgayKTKhoa()));
+            choiceKhoa_LopXet.removeAll();
+            choiceKhoa_LopXet.add(khoa.getTenKhoa());
+            Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, khoa.getTenKhoa(), dsKhoaHoc);
+        }).start();
     }
         
         // Sử dụng màu này trong ứng dụng của bạn

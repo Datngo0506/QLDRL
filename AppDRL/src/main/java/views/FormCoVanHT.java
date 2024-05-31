@@ -148,30 +148,33 @@ public final class FormCoVanHT extends javax.swing.JFrame {
     }
     
     public void DRL(){
-        choiceKhoa_DRL.removeAll();
-        choiceKhoa_DRL.add(ThuatToan.doiMaKhoaThanhTenKhoa(khoa.getMaKhoa(), dsKhoa));
-        choiceLop_DRL.removeAll();
-        if(!dsLop_CV.isEmpty()){
-            anLop(true, "Khoa:");
-            Lop lop = dsLop_CV.getFirst();
-            for(Lop l: dsLop_CV){
-                choiceLop_DRL.add(l.getLop());
+        new Thread(() -> {
+            Database.saveHocKyToList(dsHocKy);
+            Database.saveDRLToList(dsDRL);
+            choiceKhoa_DRL.removeAll();
+            choiceKhoa_DRL.add(ThuatToan.doiMaKhoaThanhTenKhoa(khoa.getMaKhoa(), dsKhoa));
+            choiceLop_DRL.removeAll();
+            if(!dsLop_CV.isEmpty()){
+                anLop(true, "Khoa:");
+                Lop lop = dsLop_CV.getFirst();
+                for(Lop l: dsLop_CV){
+                    choiceLop_DRL.add(l.getLop());
+                }
+                String hk = ThuatToan.getHKXet(dsHocKy);
+                choiceHK_DRL.removeAll();
+                ThuatToan.addChoiceHocKy(dsHocKy, lop.getMaKhoaHoc(), 4.5, choiceHK_DRL);
+                choiceHK_DRL.select(ThuatToan.doiMaHKSangHK(hk));
+                Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, lop.getLop(), hk);
+                if(choiceHK_DRL.getSelectedItem().equals(ThuatToan.doiMaHKSangHK(hk))){
+                    jPanelNutChamLai.setVisible(true);
+                    jLabelNutChamLai.setVisible(true);
+                }
             }
-            String hk = ThuatToan.getHKXet(dsHocKy);
-            choiceHK_DRL.removeAll();
-            ThuatToan.addChoiceHocKy(dsHocKy, lop.getMaKhoaHoc(), 4.5, choiceHK_DRL);
-            choiceHK_DRL.select(ThuatToan.doiMaHKSangHK(hk));
-            Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, lop.getLop(), hk);
-            if(choiceHK_DRL.getSelectedItem().equals(ThuatToan.doiMaHKSangHK(hk))){
-                jPanelNutChamLai.setVisible(true);
-                jLabelNutChamLai.setVisible(true);
+            else{
+                anLop(false, "Bạn hiện đang không cố vấn cho lớp nào cả!");
             }
-        }
-        else{
-            anLop(false, "Bạn hiện đang không cố vấn cho lớp nào cả!");
-        }
         
-        
+        }).start();
         
     }
     
@@ -189,18 +192,22 @@ public final class FormCoVanHT extends javax.swing.JFrame {
 
     
     public void moTrangChu(){
-        ThuatToan.addChoiceKhoa(choiceKhoa_LopXet, dsKhoa);
-        String hkxet = ThuatToan.getHKXet(dsHocKy);
-        jLabelHKXet.setText(Database.chuyenMaHocKy(hkxet));
-        ThongBao tb = ThuatToan.getThongBao(dsThongBao, hkxet);
-        jLabelNgayBD.setText(ThuatToan.doiNgay(tb.getNgayBD()));
-        jLabelHanSV.setText(ThuatToan.doiNgay(tb.getNgayKTSV()));
-        jLabelHanCS.setText(ThuatToan.doiNgay(tb.getNgayKTCS()));
-        jLabelHanCV.setText(ThuatToan.doiNgay(tb.getNgayKTCV()));
-        jLabelHanKhoa.setText(ThuatToan.doiNgay(tb.getNgayKTKhoa()));
-        choiceKhoa_LopXet.removeAll();
-        choiceKhoa_LopXet.add(khoa.getTenKhoa());
-        Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, khoa.getTenKhoa(), dsKhoaHoc);
+        new Thread(() -> {
+            Database.saveLopToList(dsLop);
+            Database.saveThongBaoToList(dsThongBao);
+            ThuatToan.addChoiceKhoa(choiceKhoa_LopXet, dsKhoa);
+            String hkxet = ThuatToan.getHKXet(dsHocKy);
+            jLabelHKXet.setText(Database.chuyenMaHocKy(hkxet));
+            ThongBao tb = ThuatToan.getThongBao(dsThongBao, hkxet);
+            jLabelNgayBD.setText(ThuatToan.doiNgay(tb.getNgayBD()));
+            jLabelHanSV.setText(ThuatToan.doiNgay(tb.getNgayKTSV()));
+            jLabelHanCS.setText(ThuatToan.doiNgay(tb.getNgayKTCS()));
+            jLabelHanCV.setText(ThuatToan.doiNgay(tb.getNgayKTCV()));
+            jLabelHanKhoa.setText(ThuatToan.doiNgay(tb.getNgayKTKhoa()));
+            choiceKhoa_LopXet.removeAll();
+            choiceKhoa_LopXet.add(khoa.getTenKhoa());
+            Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, khoa.getTenKhoa(), dsKhoaHoc);
+        }).start();
     }
         
         // Sử dụng màu này trong ứng dụng của bạn
@@ -1932,11 +1939,13 @@ public final class FormCoVanHT extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Sinh viên này chưa được ban cán sự lớp đánh giá!");
             return;
         }
-        
-        String msv = jTableDRL.getValueAt(chon, 1).toString();
+        new Thread(() -> {
+            Database.saveTieuChiToList(dsTieuChi);
+            String msv = jTableDRL.getValueAt(chon, 1).toString();
 
-        String hk = ThuatToan.getHKXet(dsHocKy);
-        new FormChamDiem(dsDRL, dsTieuChi, hk, msv, jTableDRL, chon, "CV").setVisible(true);
+            String hk = ThuatToan.getHKXet(dsHocKy);
+            new FormChamDiem(dsDRL, dsTieuChi, hk, msv, jTableDRL, chon, "CV").setVisible(true);
+        }).start();
             
         
     }//GEN-LAST:event_jLabelNutChamLaiMouseClicked

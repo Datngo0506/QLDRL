@@ -5,7 +5,6 @@
 package views;
 
 import java.awt.Color;
-import icons.Icon;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -18,7 +17,6 @@ import controller.ThuatToan;
 import static controller.ThuatToan.doiKhoaHocSangHKCuoi;
 import static controller.ThuatToan.getKhoaHocFromSV;
 import static controller.ThuatToan.getSoNamHoc;
-import static controller.ThuatToan.soSanhHocKy;
 import java.awt.Cursor;
 import java.awt.Image;
 import java.text.ParseException;
@@ -107,43 +105,74 @@ public final class FormQuanLy extends javax.swing.JFrame {
     //Xử lý khi click vào menu nào thì bảng của menu đó có dữ liệu
     public void addTable(String text){
         if(text.contains("KHOA")){
-            Database.addListKhoaToTable(dsKhoa, jTableKhoa, dsTaiKhoan);
+            new Thread(() -> {
+                Database.saveKhoaToList(dsKhoa);
+                Database.addListKhoaToTable(dsKhoa, jTableKhoa, dsTaiKhoan);
+            }).start();
         }
         else if (text.contains("CỐ VẤN")){
-            Database.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa, dsTaiKhoan);
-            ThuatToan.addChoiceKhoa(choiceKhoa_CoVan, dsKhoa);
+            new Thread(() -> {
+                Database.saveKhoaToList(dsKhoa);
+                Database.saveCoVanToList(dsCoVan);
+                Database.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa, dsTaiKhoan);
+                ThuatToan.addChoiceKhoa(choiceKhoa_CoVan, dsKhoa);
+            }).start();
+            
         }
         else if(text.contains("THỜI GIAN BIỂU")){
-            Database.addListHocKyToTable(dsHocKy, jTableHocKy);
-            Database.addListKhoaHocToTable(dsKhoaHoc, jTableKhoaHoc);
-            Database.addListThongBaoToTable(dsThongBao, jTableHanNop);
+            new Thread(() -> {
+                Database.saveHocKyToList(dsHocKy);
+                Database.saveKhoaHocToList(dsKhoaHoc);
+                Database.saveThongBaoToList(dsThongBao);
+                Database.addListHocKyToTable(dsHocKy, jTableHocKy);
+                Database.addListKhoaHocToTable(dsKhoaHoc, jTableKhoaHoc);
+                Database.addListThongBaoToTable(dsThongBao, jTableHanNop);
+            }).start();
         }
         else if(text.contains("LỚP")){
-            Database.addListLopToTable(dsLop, jTableLop, dsKhoa, dsCoVan);
-            ThuatToan.addChoiceKhoa(choiceKhoa_Lop, dsKhoa);
+            new Thread(() -> {
+                Database.saveKhoaToList(dsKhoa);
+                Database.saveLopToList(dsLop);
+                Database.addListLopToTable(dsLop, jTableLop, dsKhoa, dsCoVan);
+                ThuatToan.addChoiceKhoa(choiceKhoa_Lop, dsKhoa);
+            }).start();
         }
         else if(text.contains("TIÊU CHÍ")){
-            Database.addListTieuChiToTable(dsTieuChi, jTableTieuChi);
+            new Thread(() -> {
+                Database.saveTieuChiToList(dsTieuChi);
+                Database.addListTieuChiToTable(dsTieuChi, jTableTieuChi);
+            }).start();
         }
         else if(text.contains("SINH VIÊN")){
-            Database.addListSinhVienToTable(dsSinhVien, jTableSV, dsChucVu, dsTaiKhoan);
-            ThuatToan.addChoiceKhoa(choiceKhoa_SV, dsKhoa);
+            new Thread(() -> {
+                Database.saveKhoaToList(dsKhoa);
+                Database.saveLopToList(dsLop);
+                Database.saveSinhVienToList(dsSinhVien);
+                Database.addListSinhVienToTable(dsSinhVien, jTableSV, dsChucVu, dsTaiKhoan);
+                ThuatToan.addChoiceKhoa(choiceKhoa_SV, dsKhoa);
+            }).start();
         }
         else if(text.contains("DUYỆT ĐIỂM")){
-            ThuatToan.addChoiceKhoa(choiceKhoa_DRL, dsKhoa);
-            choiceKhoa_DRL.remove("Tất cả");
-            choiceKhoa_DRL.select(dsKhoa.get(1).getTenKhoa());
-            ThuatToan.addChoiceLop(choiceLop_DRL, dsLop, dsKhoa.get(1).getTenKhoa(), dsKhoa);
-            choiceLop_DRL.select("D15CQAT01-N");
-            String khoaHoc = ThuatToan.getKhoaHocFromSV(dsLop, dsLop.getFirst().getLop());
-            ThuatToan.addChoiceHocKy(dsHocKy, khoaHoc, ThuatToan.getSoNamHoc(dsKhoaHoc, khoaHoc), choiceHK_DRL);
-            
-            choiceHK_DRL.select(dsHocKy.getFirst().getMaHK_NK());
-            Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, dsLop.getFirst().getLop(), dsHocKy.getFirst().getMaHK_NK());
-            jPanelNutDuyet.setVisible(false);
-            jLabelNutDuyet.setVisible(false);
-            jPanelNutChamLai.setVisible(false);
-            jLabelNutChamLai.setVisible(false);
+            new Thread(() -> {
+                Database.saveLopToList(dsLop);
+                Database.saveHocKyToList(dsHocKy);
+                Database.saveKhoaToList(dsKhoa);
+                Database.saveDRLToList(dsDRL);
+                ThuatToan.addChoiceKhoa(choiceKhoa_DRL, dsKhoa);
+                choiceKhoa_DRL.remove("Tất cả");
+                choiceKhoa_DRL.select(dsKhoa.get(1).getTenKhoa());
+                ThuatToan.addChoiceLop(choiceLop_DRL, dsLop, dsKhoa.get(1).getTenKhoa(), dsKhoa);
+                choiceLop_DRL.select("D15CQAT01-N");
+                String khoaHoc = ThuatToan.getKhoaHocFromSV(dsLop, dsLop.getFirst().getLop());
+                ThuatToan.addChoiceHocKy(dsHocKy, khoaHoc, ThuatToan.getSoNamHoc(dsKhoaHoc, khoaHoc), choiceHK_DRL);
+
+                choiceHK_DRL.select(dsHocKy.getFirst().getMaHK_NK());
+                Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, dsLop.getFirst().getLop(), dsHocKy.getFirst().getMaHK_NK());
+                jPanelNutDuyet.setVisible(false);
+                jLabelNutDuyet.setVisible(false);
+                jPanelNutChamLai.setVisible(false);
+                jLabelNutChamLai.setVisible(false);
+            }).start();
         }
         else {
             moTrangChu();
@@ -151,19 +180,24 @@ public final class FormQuanLy extends javax.swing.JFrame {
     }    
     
     public void moTrangChu(){
-        ThuatToan.addChoiceKhoa(choiceKhoa_LopXet, dsKhoa);
-        String hkxet = ThuatToan.getHKXet(dsHocKy);
-        jLabelHKXet.setText(Database.chuyenMaHocKy(hkxet));
-        ThongBao tb = ThuatToan.getThongBao(dsThongBao, hkxet);
-        jLabelNgayBD.setText(ThuatToan.doiNgay(tb.getNgayBD()));
-        jLabelHanSV.setText(ThuatToan.doiNgay(tb.getNgayKTSV()));
-        jLabelHanCS.setText(ThuatToan.doiNgay(tb.getNgayKTCS()));
-        jLabelHanCV.setText(ThuatToan.doiNgay(tb.getNgayKTCV()));
-        jLabelHanKhoa.setText(ThuatToan.doiNgay(tb.getNgayKTKhoa()));
-        choiceKhoa_LopXet.removeAll();
-        ThuatToan.addChoiceKhoa(choiceKhoa_LopXet, dsKhoa);
-        
-        Database.addListLopToTable_HKXet(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc);
+        new Thread(() -> {
+            Database.saveKhoaToList(dsKhoa);
+            Database.saveLopToList(dsLop);
+            Database.saveThongBaoToList(dsThongBao);
+            ThuatToan.addChoiceKhoa(choiceKhoa_LopXet, dsKhoa);
+            String hkxet = ThuatToan.getHKXet(dsHocKy);
+            jLabelHKXet.setText(Database.chuyenMaHocKy(hkxet));
+            ThongBao tb = ThuatToan.getThongBao(dsThongBao, hkxet);
+            jLabelNgayBD.setText(ThuatToan.doiNgay(tb.getNgayBD()));
+            jLabelHanSV.setText(ThuatToan.doiNgay(tb.getNgayKTSV()));
+            jLabelHanCS.setText(ThuatToan.doiNgay(tb.getNgayKTCS()));
+            jLabelHanCV.setText(ThuatToan.doiNgay(tb.getNgayKTCV()));
+            jLabelHanKhoa.setText(ThuatToan.doiNgay(tb.getNgayKTKhoa()));
+            choiceKhoa_LopXet.removeAll();
+            ThuatToan.addChoiceKhoa(choiceKhoa_LopXet, dsKhoa);
+
+            Database.addListLopToTable_HKXet(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc);
+        }).start();
     }
         
         // Sử dụng màu này trong ứng dụng của bạn
@@ -3575,7 +3609,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
             else{
                 //System.out.println(dsHocKy.get(chonHang).getNienKhoa()+ " " +dsHocKy.get(chonHang).getXet());
                 String nam = dsHocKy.get(dsHocKy.size()-chonHang-1).getNienKhoa();
-                System.out.println(nam);
+                //System.out.println(nam);
                 String parts[] = nam.split("-");
                 LocalDate currentDate = LocalDate.now();      
                 // Lấy năm từ ngày hiện tại
@@ -3747,7 +3781,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
                     jTableDRL.setValueAt("0", chon, 5);
                     new Thread(() -> {
                         for(DRL drl: dsDRL){
-                            System.out.println(ThuatToan.getHKXet(dsHocKy));
+                            //System.out.println(ThuatToan.getHKXet(dsHocKy));
                             if(drl.getMSSV().equals(tt5) && drl.getMaHK().equals(ThuatToan.getHKXet(dsHocKy))){
                                 drl.setTrangThai(false);
                                 drl.setDiem1(0);

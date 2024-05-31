@@ -5,7 +5,6 @@
 package views;
 
 import java.awt.Color;
-import icons.Icon;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -139,42 +138,52 @@ public final class FormBanCanSu extends javax.swing.JFrame {
     }
     
     public void DRL(){
-        choiceKhoa_DRL.removeAll();
-        choiceKhoa_DRL.add(ThuatToan.doiMaKhoaThanhTenKhoa(khoa.getMaKhoa(), dsKhoa));
-        choiceLop_DRL.removeAll();
-        choiceLop_DRL.add(sv.getLop());
-        String hk = ThuatToan.getHKXet(dsHocKy);
-        float soNamHoc = ThuatToan.getSoNamHoc(dsKhoaHoc, lop.getMaKhoaHoc());
-        ThuatToan.addChoiceHocKy(dsHocKy, lop.getMaKhoaHoc(), soNamHoc, choiceHK_DRL);
-        choiceHK_DRL.select(ThuatToan.doiMaHKSangHK(hk));
-        Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, lop.getLop(), hk);
-        if(choiceHK_DRL.getSelectedItem().equals(ThuatToan.doiMaHKSangHK(hk))){
-            jPanelNutChamLai.setVisible(true);
-            jLabelNutChamLai.setVisible(true);
-        }
-        
+        new Thread(() -> {
+            Database.saveHocKyToList(dsHocKy);
+            Database.saveDRLToList(dsDRL);
+            choiceKhoa_DRL.removeAll();
+            choiceKhoa_DRL.add(ThuatToan.doiMaKhoaThanhTenKhoa(khoa.getMaKhoa(), dsKhoa));
+            choiceLop_DRL.removeAll();
+            choiceLop_DRL.add(sv.getLop());
+            String hk = ThuatToan.getHKXet(dsHocKy);
+            float soNamHoc = ThuatToan.getSoNamHoc(dsKhoaHoc, lop.getMaKhoaHoc());
+            ThuatToan.addChoiceHocKy(dsHocKy, lop.getMaKhoaHoc(), soNamHoc, choiceHK_DRL);
+            choiceHK_DRL.select(ThuatToan.doiMaHKSangHK(hk));
+            Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, lop.getLop(), hk);
+            if(choiceHK_DRL.getSelectedItem().equals(ThuatToan.doiMaHKSangHK(hk))){
+                jPanelNutChamLai.setVisible(true);
+                jLabelNutChamLai.setVisible(true);
+            }
+        }).start();
     }
     
     public void DRLCaNhan(){
-        String hk = ThuatToan.getHKXet(dsHocKy);
-        hk = Database.chuyenMaHocKy(hk);
-        jLabelHKXet_DRL.setText("Học kỳ đang xét là: "+hk);
-        Database.addListDRLToTable_SV_HK(dsDRL, sv, jTableDRLCaNhan);
+        new Thread(() -> {
+            Database.saveDRLToList(dsDRL);
+            String hk = ThuatToan.getHKXet(dsHocKy);
+            hk = Database.chuyenMaHocKy(hk);
+            jLabelHKXet_DRL.setText("Học kỳ đang xét là: "+hk);
+            Database.addListDRLToTable_SV_HK(dsDRL, sv, jTableDRLCaNhan);
+        }).start();
     }
     
     public void moTrangChu(){
-        ThuatToan.addChoiceKhoa(choiceKhoa_LopXet, dsKhoa);
-        String hkxet = ThuatToan.getHKXet(dsHocKy);
-        jLabelHKXet.setText(Database.chuyenMaHocKy(hkxet));
-        ThongBao tb = ThuatToan.getThongBao(dsThongBao, hkxet);
-        jLabelNgayBD.setText(ThuatToan.doiNgay(tb.getNgayBD()));
-        jLabelHanSV.setText(ThuatToan.doiNgay(tb.getNgayKTSV()));
-        jLabelHanCS.setText(ThuatToan.doiNgay(tb.getNgayKTCS()));
-        jLabelHanCV.setText(ThuatToan.doiNgay(tb.getNgayKTCV()));
-        jLabelHanKhoa.setText(ThuatToan.doiNgay(tb.getNgayKTKhoa()));
-        choiceKhoa_LopXet.removeAll();
-        choiceKhoa_LopXet.add(khoa.getTenKhoa());
-        Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, khoa.getTenKhoa(), dsKhoaHoc);
+        new Thread(() -> {
+            Database.saveLopToList(dsLop);
+            Database.saveThongBaoToList(dsThongBao);
+            ThuatToan.addChoiceKhoa(choiceKhoa_LopXet, dsKhoa);
+            String hkxet = ThuatToan.getHKXet(dsHocKy);
+            jLabelHKXet.setText(Database.chuyenMaHocKy(hkxet));
+            ThongBao tb = ThuatToan.getThongBao(dsThongBao, hkxet);
+            jLabelNgayBD.setText(ThuatToan.doiNgay(tb.getNgayBD()));
+            jLabelHanSV.setText(ThuatToan.doiNgay(tb.getNgayKTSV()));
+            jLabelHanCS.setText(ThuatToan.doiNgay(tb.getNgayKTCS()));
+            jLabelHanCV.setText(ThuatToan.doiNgay(tb.getNgayKTCV()));
+            jLabelHanKhoa.setText(ThuatToan.doiNgay(tb.getNgayKTKhoa()));
+            choiceKhoa_LopXet.removeAll();
+            choiceKhoa_LopXet.add(khoa.getTenKhoa());
+            Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, khoa.getTenKhoa(), dsKhoaHoc);
+        }).start();
     }
         
         // Sử dụng màu này trong ứng dụng của bạn
@@ -2100,8 +2109,11 @@ public final class FormBanCanSu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Bạn đã đánh giá điểm học kỳ này!");
             return;
         }
-        String hk = ThuatToan.getHKXet(dsHocKy);
-        new FormChamDiem(dsDRL, dsTieuChi, hk, sv.getMaSV(), jTableDRLCaNhan, chon, "SV").setVisible(true);
+        new Thread(() -> {
+            Database.saveTieuChiToList(dsTieuChi);
+            String hk = ThuatToan.getHKXet(dsHocKy);
+            new FormChamDiem(dsDRL, dsTieuChi, hk, sv.getMaSV(), jTableDRLCaNhan, chon, "SV").setVisible(true);
+        }).start();
         
         
     }//GEN-LAST:event_jLabelNutXoaLopMouseClicked
@@ -2136,8 +2148,11 @@ public final class FormBanCanSu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Không thể tự đánh giá điểm của bản thân ở cột này!");
             return;
         }
-        String hk = ThuatToan.getHKXet(dsHocKy);
-        new FormChamDiem(dsDRL, dsTieuChi, hk, msv, jTableDRL, chon, "CS").setVisible(true);
+        new Thread(() -> {
+            Database.saveTieuChiToDB(dsTieuChi);
+            String hk = ThuatToan.getHKXet(dsHocKy);
+            new FormChamDiem(dsDRL, dsTieuChi, hk, msv, jTableDRL, chon, "CS").setVisible(true);
+        }).start();
             
         
     }//GEN-LAST:event_jLabelNutChamLaiMouseClicked
