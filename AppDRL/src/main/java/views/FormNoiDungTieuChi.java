@@ -327,6 +327,7 @@ public final class FormNoiDungTieuChi extends javax.swing.JFrame {
         }else{
             if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn xóa không?") == JOptionPane.YES_OPTION){
                 new Thread(() -> {
+                    Database.saveTieuChiToList(dsTieuChi);
                     dsNoiDung.remove(chon);
                     Database.addListGiaiThichToTable(dsNoiDung, jTableTieuChi);
                     dsTieuChi.get(ttTC).setDsNoiDung(dsNoiDung);
@@ -339,6 +340,7 @@ public final class FormNoiDungTieuChi extends javax.swing.JFrame {
 
     private void jLabelNutThemTieuChiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutThemTieuChiMouseClicked
         // TODO add your handling code here:
+        Database.saveTieuChiToList(dsTieuChi);
         new FormThem_SuaTieuChi(dsTieuChi, jTableTieuChi, ttTC, jTableTieuChi).setVisible(true);
         
     }//GEN-LAST:event_jLabelNutThemTieuChiMouseClicked
@@ -384,6 +386,7 @@ public final class FormNoiDungTieuChi extends javax.swing.JFrame {
         if(chonND == -1){
             JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn nội dung cần chỉnh sửa!");
         }else{
+            Database.saveTieuChiToList(dsTieuChi);
             new FormThem_SuaTieuChi(dsTieuChi, ttTC, jTableTieuChi, chonND).setVisible(true);
         }  
     }//GEN-LAST:event_jLabelNutSuaTieuChiMouseClicked

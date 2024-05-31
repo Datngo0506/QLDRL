@@ -359,6 +359,7 @@ public final class FormThem_SuaKhoa extends javax.swing.JFrame {
                         
                         String maKhoa = jTextFieldMaKhoa.getText().toUpperCase();
                         if(!ThuatToan.isRepeatMaKhoa(dsKhoa, maKhoa) ){
+                            Database.saveKhoaToList(dsKhoa);
                             Khoa kh = new Khoa();
 
                             String tenKhoa = ThuatToan.chuanHoaDiaDanh(jTextFieldTenKhoa.getText());
@@ -368,6 +369,7 @@ public final class FormThem_SuaKhoa extends javax.swing.JFrame {
                             kh.setNgayThanhLap(day);
 
                             dsKhoa.add(kh);
+                            Database.saveTaiKhoanToList(dsTaiKhoan);
                             TaiKhoan tk = new TaiKhoan();
                             tk.setLoaiTK("khoa");
                             tk.setTenTK(maKhoa);
@@ -403,7 +405,7 @@ public final class FormThem_SuaKhoa extends javax.swing.JFrame {
                                 return;
                             }
                         }
-
+                        Database.saveKhoaToList(dsKhoa);
                         String day = ThuatToan.getDate((java.util.Date)jDateChooserNgaySinh.getDate());
                         String tenKhoa = ThuatToan.chuanHoaDiaDanh(jTextFieldTenKhoa.getText());
                         //Thêm vào bảng
@@ -414,6 +416,7 @@ public final class FormThem_SuaKhoa extends javax.swing.JFrame {
                         table.setValueAt(ThuatToan.anMatKhau(password), chon, 4);
                         ThuatToan.suaKhoaTrongCoVan(dsCoVan, dsKhoa.get(chon).getMaKhoa(), maKhoa);
                         ThuatToan.suaKhoaTrongLop(dsLop, dsKhoa.get(chon).getMaKhoa(), maKhoa);
+                        Database.saveTaiKhoanToList(dsTaiKhoan);
                         for(TaiKhoan tk: dsTaiKhoan){
                             if(tk.getTenTK().equals(dsKhoa.get(chon).getMaKhoa())){
                                 tk.setTenTK(maKhoa);

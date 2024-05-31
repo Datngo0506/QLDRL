@@ -599,7 +599,7 @@ public final class FormThem_SuaSinhVien extends javax.swing.JFrame {
             if(chucNang.equals("Them") || chucNang.equals("ThemND")){
                 int them = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn thêm sinh viên không?");
                 if(them == JOptionPane.YES_OPTION){
-                    
+                    Database.saveSinhVienToList(dsSV);
                     String maKhoa = jTextFieldMaCoVan.getText().toUpperCase();
                     if(!ThuatToan.isRepeatMaSV(dsSV, maKhoa)){
                         new Thread(() -> {
@@ -624,7 +624,7 @@ public final class FormThem_SuaSinhVien extends javax.swing.JFrame {
                             
                             // Thêm cố vấn mới vào danh sách dsCoVan
                             dsSV.add(newCoVan);
-                            
+                            Database.saveTaiKhoanToList(dsTaiKhoan);
                             TaiKhoan tk = new TaiKhoan();
                             tk.setTenTK(jTextFieldMaCoVan.getText().toUpperCase());
                             tk.setLoaiTK("sinhvien");

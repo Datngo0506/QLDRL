@@ -3440,6 +3440,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         }
         else{
             try {
+                
                 new FormThem_SuaCoVan(dsTaiKhoan, dsKhoa, jTableCoVan, chon, dsCoVan, choiceKhoa_CoVan, "Sua", dsLop).setVisible(true);
             } catch (ParseException ex) {
                 Logger.getLogger(FormQuanLy.class.getName()).log(Level.SEVERE, null, ex);
@@ -3467,7 +3468,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         if(chon == JOptionPane.YES_OPTION){
             Object cellValue = jTableCoVan.getValueAt(selectedRow, 1); // Lấy dữ liệu từ cột MaCV
             new Thread(() -> {
-
+                Database.saveCoVanToList(dsCoVan);
                 String maCoVan = cellValue.toString().trim();
                 int hub = 0;
                 for(int i=0; i<dsCoVan.size(); i++){
@@ -3477,9 +3478,8 @@ public final class FormQuanLy extends javax.swing.JFrame {
                     }
                 }
                 //System.out.println(hub);
-                // Xóa cố vấn khỏi danh sách dsCoVan
-
                 dsCoVan.remove(hub);
+                Database.saveTaiKhoanToList(dsTaiKhoan);
                 for(int i=0; i<dsTaiKhoan.size(); i++){
                     TaiKhoan tk = dsTaiKhoan.get(i);
                     if(tk.getTenTK().equals(maCoVan)){
@@ -3507,6 +3507,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
 
     private void jLabelNutThemCoVanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutThemCoVanMouseClicked
          try {
+            
              // TODO add your handling code here:
              new FormThem_SuaCoVan(dsTaiKhoan, dsKhoa, jTableCoVan, dsCoVan, choiceKhoa_CoVan, "Them").setVisible(true);
          } catch (ParseException ex) {
@@ -3798,6 +3799,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
                     jTableDRL.setValueAt("0", chon, 4);
                     jTableDRL.setValueAt("0", chon, 5);
                     new Thread(() -> {
+                        Database.saveDRLToList(dsDRL);
                         for(DRL drl: dsDRL){
                             //System.out.println(ThuatToan.getHKXet(dsHocKy));
                             if(drl.getMSSV().equals(tt5) && drl.getMaHK().equals(ThuatToan.getHKXet(dsHocKy))){
@@ -3846,14 +3848,15 @@ public final class FormQuanLy extends javax.swing.JFrame {
                     if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn duyệt điểm sinh viên này?") == JOptionPane.YES_OPTION){
                             jTableDRL.setValueAt("Đã duyệt", chon, 6);
                             new Thread(() -> {
-                            for(DRL drl: dsDRL){
-                                if(drl.getMSSV().equals(tt5) && drl.getMaHK().equals(ThuatToan.getHKXet(dsHocKy))){
-                                    drl.setTrangThai(true);
+                                Database.saveDRLToList(dsDRL);
+                                for(DRL drl: dsDRL){
+                                    if(drl.getMSSV().equals(tt5) && drl.getMaHK().equals(ThuatToan.getHKXet(dsHocKy))){
+                                        drl.setTrangThai(true);
 
-                                    return;
+                                        return;
+                                    }
                                 }
-                            }
-                        }).start();
+                            }).start();
                         new Thread(() -> {
                             Database.updateTrangThai(tt5, ThuatToan.getHKXet(dsHocKy));
                         }).start();
@@ -3913,6 +3916,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
         }
         else{
             if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn xóa không?") ==  JOptionPane.YES_OPTION){
+                Database.saveTieuChiToList(dsTieuChi);
                 dsTieuChi.remove(select);
                 ThuatToan.resetMaTC(dsTieuChi);
                 Database.addListTieuChiToTable(dsTieuChi, jTableTieuChi);

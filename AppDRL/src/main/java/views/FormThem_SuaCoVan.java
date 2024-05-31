@@ -553,7 +553,8 @@ public final class FormThem_SuaCoVan extends javax.swing.JFrame {
                 if(sua == JOptionPane.YES_OPTION){
                     
                     new Thread(() -> {
-                        
+                         Database.saveKhoaToList(dsKhoa);
+                        Database.saveCoVanToList(dsCoVan);
                         Object cellValue = table.getValueAt(chon, 1);
                         int hub = 0;
                         for(int i=0; i<dsCoVan.size(); i++){
@@ -570,7 +571,7 @@ public final class FormThem_SuaCoVan extends javax.swing.JFrame {
                                 return;
                             }
                         }
-
+                        Database.saveTaiKhoanToList(dsTaiKhoan);
                         for(TaiKhoan tk: dsTaiKhoan){
                             if(tk.getTenTK().equals(cellValue)){
                                 tk.setTenTK(maCV);
@@ -611,6 +612,8 @@ public final class FormThem_SuaCoVan extends javax.swing.JFrame {
                 int them = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn thêm cố vấn không?");
                 if(them == JOptionPane.YES_OPTION){
                     new Thread(() -> {
+                         Database.saveKhoaToList(dsKhoa);
+                        Database.saveCoVanToList(dsCoVan);
                         String maKhoa = jTextFieldMaCoVan.getText().toUpperCase();
                         if(!ThuatToan.isRepeatMaCoVan(dsCoVan, maKhoa)){
                             // Tạo mới đối tượng CoVan từ thông tin nhập liệu
@@ -634,6 +637,7 @@ public final class FormThem_SuaCoVan extends javax.swing.JFrame {
                             
 
                             Database.saveListCoVanToDB(dsCoVan);
+                            Database.saveTaiKhoanToList(dsTaiKhoan);
                             TaiKhoan tk = new TaiKhoan();
                             tk.setTenTK(newCoVan.getMaCV());
                             tk.setMatKhau(password);

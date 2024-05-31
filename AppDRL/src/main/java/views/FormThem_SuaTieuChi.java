@@ -465,6 +465,7 @@ public final class FormThem_SuaTieuChi extends javax.swing.JFrame {
                 return;
         }
         if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn lưu không?") == JOptionPane.YES_OPTION){
+            Database.saveTieuChiToList(dsTieuChi);
             switch (chucNang) {
                 //Xem chi tiết tiêu chí lớn
                 case "ChiTiet" -> {

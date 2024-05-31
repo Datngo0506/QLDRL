@@ -110,8 +110,10 @@ public final class FormThem_SuaLop extends javax.swing.JFrame {
                     Lop lop = dsLop.get(temp);
                     jTextFieldLop.setText(maLop);
                     choiceKhoa.select(ThuatToan.doiMaKhoaThanhTenKhoa(lop.getMaKhoa(), dsKhoa));
-                    ThuatToan.addChoiceCoVanTheoTen(choiceCoVan, dsCoVan, dsKhoa, lop.getMaCoVan());
-                    choiceCoVan.select(ThuatToan.doiMaCVThanhTen(lop.getMaCoVan(), dsCoVan));
+                    ThuatToan.addChoiceCoVanTheoTen(choiceCoVan, dsCoVan, dsKhoa, 
+                            ThuatToan.doiMaKhoaThanhTenKhoa(lop.getMaKhoa(), dsKhoa));
+                    
+                    choiceCoVan.select(lop.getMaCoVan());
                     choiceKhoaHoc.select(lop.getMaKhoaHoc());
                     jTextFieldName.setText(ThuatToan.doiMaCVThanhTen(lop.getMaCoVan(), dsCoVan));
                 }
@@ -140,7 +142,6 @@ public final class FormThem_SuaLop extends javax.swing.JFrame {
         this.dsLop = dsLop;
         this.choice = choice;
         this.chucNang = chucNang;
-        this.khoa = khoa;
         initComponents();
         edit();
     }
@@ -392,7 +393,7 @@ public final class FormThem_SuaLop extends javax.swing.JFrame {
 
     private void jLabelNutLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutLuuMouseClicked
         if(jTextFieldLop.getText().equals("") || 
-            choiceCoVan.getSelectedItem()==null||
+            (choiceCoVan.getSelectedItem()==null && !(chucNang.equals("ThemND") || chucNang.equals("Them") ))||
             choiceKhoa.getSelectedItem().equals("Tất cả")){
                 JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập đầy đủ thông tin!");
         }
@@ -406,7 +407,13 @@ public final class FormThem_SuaLop extends javax.swing.JFrame {
                     Lop lop = new Lop();
                     lop.setLop(jTextFieldLop.getText().toUpperCase());
                     lop.setMaKhoa(ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa.getSelectedItem(), dsKhoa));
-                    lop.setMaCoVan(choiceCoVan.getSelectedItem());
+                    String maCoVan;
+                    if(choiceCoVan.getSelectedItem()==null){
+                        maCoVan = lop.getMaCoVan();
+                    }else{
+                        maCoVan = choiceCoVan.getSelectedItem();
+                    }
+                    lop.setMaCoVan(maCoVan);
                     lop.setMaKhoaHoc(choiceKhoaHoc.getSelectedItem());
                     dsLop.add(lop);
                     
@@ -429,13 +436,14 @@ public final class FormThem_SuaLop extends javax.swing.JFrame {
                     Object  cell = table.getValueAt(chon, 1);
                     String maLop = cell.toString();
                     int temp = 0;
+                    Database.saveLopToList(dsLop);
                     for(int i=0; i<dsLop.size(); i++){
                         if(dsLop.get(i).getLop().equals(maLop)){
                             temp = i;
                             break;
                         }
                     }
-                    System.out.println(temp);
+                    //System.out.println(temp);
                     if(!maLop.equals(jTextFieldLop.getText().toUpperCase())){
                         if(ThuatToan.isRepeatLop(dsLop, jTextFieldLop.getText().toUpperCase())){
                             JOptionPane.showMessageDialog(rootPane, "Lớp đã có trên hệ thống!");

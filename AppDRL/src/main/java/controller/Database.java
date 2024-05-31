@@ -161,6 +161,64 @@ public class Database {
         }
     }
     
+    public static void updateKhoa(String maKhoa, String maKhoaMoi, String tenMoi, String ngayThanhLapMoi) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement("UPDATE Khoa SET MaKhoa = ?, TenKhoa = ?, NgayThanhLap = ? WHERE MaKhoa = ?")) {
+
+            // Thiết lập tham số cho câu truy vấn
+            statement.setString(1, maKhoaMoi);
+            statement.setString(2, tenMoi);
+            statement.setString(3, ngayThanhLapMoi);
+            statement.setString(4, maKhoa);
+
+            // Thực thi câu truy vấn cập nhật
+            int rowsAffected = statement.executeUpdate();
+
+        } catch (SQLException e) {
+            // Xử lý lỗi nếu có
+            // e.printStackTrace();
+            System.out.println("Lỗi khi cập nhật Khoa: " + e.getMessage());
+        }
+    }
+    
+    public static void deleteKhoa(String maKhoa) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM khoa WHERE MaKhoa = ?")) {
+
+            // Thiết lập tham số cho câu truy vấn
+            statement.setString(1, maKhoa);
+
+            // Thực thi câu truy vấn xóa
+            int rowsAffected = statement.executeUpdate();
+
+        } catch (SQLException e) {
+            // Xử lý lỗi nếu có
+            // e.printStackTrace();
+            System.out.println("Lỗi khi xóa Khoa: " + e.getMessage());
+        }
+    }
+    
+    public static void insertKhoa(String maKhoa, String tenKhoa, String ngayThanhLap) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO Khoa (MaKhoa, TenKhoa, NgayThanhLap) VALUES (?, ?, ?)")) {
+
+            // Thiết lập tham số cho câu truy vấn
+            statement.setString(1, maKhoa);
+            statement.setString(2, tenKhoa);
+            statement.setDate(3, java.sql.Date.valueOf(ngayThanhLap));
+
+            // Thực thi câu truy vấn chèn
+            int rowsAffected = statement.executeUpdate();
+
+        } catch (SQLException e) {
+            // Xử lý lỗi nếu có
+            // e.printStackTrace();
+            System.out.println("Lỗi khi chèn Khoa mới: " + e.getMessage());
+        }
+    }
+
+
+    
     public static void saveListKhoaToDB(ArrayList<Khoa> dsKhoa) {
         try {
             // Thực hiện kết nối đến cơ sở dữ liệu
