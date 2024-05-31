@@ -2324,13 +2324,17 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
 
     private void choiceKhoa_CoVanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceKhoa_CoVanItemStateChanged
         // TODO add your handling code here:
-        String maKhoa = ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa);
-        if(maKhoa.equals("")){
-            Database.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa, dsTaiKhoan);
-        }
-        else{
-            Database.addListCoVanToTable_MaKhoa(dsCoVan, jTableCoVan, dsKhoa, maKhoa, dsTaiKhoan);
-        }
+        new Thread(() -> {
+            Database.saveCoVanToList(dsCoVan);
+            Database.saveKhoaToList(dsKhoa);
+            String maKhoa = ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa);
+            if(maKhoa.equals("")){
+                Database.addListCoVanToTable(dsCoVan, jTableCoVan, dsKhoa, dsTaiKhoan);
+            }
+            else{
+                Database.addListCoVanToTable_MaKhoa(dsCoVan, jTableCoVan, dsKhoa, maKhoa, dsTaiKhoan);
+            }
+        }).start();
         
     }//GEN-LAST:event_choiceKhoa_CoVanItemStateChanged
 
@@ -2423,13 +2427,18 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
 
     private void choiceKhoa_LopItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceKhoa_LopItemStateChanged
         // TODO add your handling code here:
-        String maKhoa = ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa_Lop.getSelectedItem(), dsKhoa);
-        if(maKhoa.equals("")){
-            Database.addListLopToTable(dsLop, jTableLop, dsKhoa, dsCoVan);
-        }
-        else{
-            Database.addListLopToTable_Khoa(dsLop, jTableLop, dsKhoa, dsCoVan, maKhoa);
-        }
+        new Thread(() -> {
+            Database.saveKhoaToList(dsKhoa);
+            Database.saveLopToList(dsLop);
+            Database.saveCoVanToList(dsCoVan);
+            String maKhoa = ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa_Lop.getSelectedItem(), dsKhoa);
+            if(maKhoa.equals("")){
+                Database.addListLopToTable(dsLop, jTableLop, dsKhoa, dsCoVan);
+            }
+            else{
+                Database.addListLopToTable_Khoa(dsLop, jTableLop, dsKhoa, dsCoVan, maKhoa);
+            }
+        }).start();
     }//GEN-LAST:event_choiceKhoa_LopItemStateChanged
 
     private void jLabelNutXoaLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutXoaLopMouseClicked
@@ -2499,21 +2508,24 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
 
     private void choiceKhoa_SVItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceKhoa_SVItemStateChanged
         // TODO add your handling code here:
-        
-        if(choiceKhoa_SV.getSelectedItem().equals("Tất cả")){
-            Database.addListSinhVienToTable(dsSinhVien, jTableSV, dsChucVu, dsTaiKhoan);
-            //choiceLop_SV.removeAll();
-            
-        }
-        else{
-            
-            Database.addListSinhVienToTable_Khoa(dsSinhVien, dsKhoa, dsLop, jTableSV, dsChucVu, dsTaiKhoan, choiceKhoa_SV.getSelectedItem());
-        }
-        
-        
-        ThuatToan.addChoiceLopTatCa(choiceLop_SV, dsLop, choiceKhoa_SV.getSelectedItem(), dsKhoa);
-        choiceLop_SV.select("Tất cả");
-        
+        new Thread(() -> {
+            Database.saveLopToList(dsLop);
+            Database.saveChucVuToList(dsChucVu);
+            Database.saveSinhVienToList(dsSinhVien);
+            if(choiceKhoa_SV.getSelectedItem().equals("Tất cả")){
+                Database.addListSinhVienToTable(dsSinhVien, jTableSV, dsChucVu, dsTaiKhoan);
+                //choiceLop_SV.removeAll();
+
+            }
+            else{
+
+                Database.addListSinhVienToTable_Khoa(dsSinhVien, dsKhoa, dsLop, jTableSV, dsChucVu, dsTaiKhoan, choiceKhoa_SV.getSelectedItem());
+            }
+
+
+            ThuatToan.addChoiceLopTatCa(choiceLop_SV, dsLop, choiceKhoa_SV.getSelectedItem(), dsKhoa);
+            choiceLop_SV.select("Tất cả");
+        }).start();
     }//GEN-LAST:event_choiceKhoa_SVItemStateChanged
 
     private void choiceLop_SVItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceLop_SVItemStateChanged
@@ -2662,38 +2674,47 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
 
     private void choiceKhoa_DRLItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceKhoa_DRLItemStateChanged
         // TODO add your handling code here:
-        ThuatToan.addChoiceLop(choiceLop_DRL, dsLop, choiceKhoa_DRL.getSelectedItem(), dsKhoa);
-        Database.deleteTable(jTableDRL);
-        choiceHK_DRL.removeAll();
+        new Thread(() -> {
+            Database.saveLopToList(dsLop);
+            ThuatToan.addChoiceLop(choiceLop_DRL, dsLop, choiceKhoa_DRL.getSelectedItem(), dsKhoa);
+            Database.deleteTable(jTableDRL);
+            choiceHK_DRL.removeAll();
+        }).start();
     }//GEN-LAST:event_choiceKhoa_DRLItemStateChanged
 
     private void choiceLop_DRLItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceLop_DRLItemStateChanged
         // TODO add your handling code here:
-        String khoaHoc = ThuatToan.getKhoaHocFromSV(dsLop, choiceLop_DRL.getSelectedItem());
-        ThuatToan.addChoiceHocKy(dsHocKy, khoaHoc, ThuatToan.getSoNamHoc(dsKhoaHoc, khoaHoc), choiceHK_DRL);
-        choiceHK_DRL.select("Chọn học kỳ");
-        Database.deleteTable(jTableDRL);
+        new Thread(() -> {
+            Database.saveHocKyToList(dsHocKy);
+            String khoaHoc = ThuatToan.getKhoaHocFromSV(dsLop, choiceLop_DRL.getSelectedItem());
+            ThuatToan.addChoiceHocKy(dsHocKy, khoaHoc, ThuatToan.getSoNamHoc(dsKhoaHoc, khoaHoc), choiceHK_DRL);
+            choiceHK_DRL.select("Chọn học kỳ");
+            Database.deleteTable(jTableDRL);
+        }).start();
     }//GEN-LAST:event_choiceLop_DRLItemStateChanged
 
     private void choiceHK_DRLItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceHK_DRLItemStateChanged
         // TODO add your handling code here:
-        if(!choiceHK_DRL.getSelectedItem().equals("Chọn học kỳ")){
-            Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, choiceLop_DRL.getSelectedItem(), 
-                                    ThuatToan.doiHKSangMaHK(choiceHK_DRL.getSelectedItem()));
-            if(ThuatToan.doiHKSangMaHK(choiceHK_DRL.getSelectedItem()).equals(ThuatToan.getHKXet(dsHocKy))){
-                jPanelNutDuyet.setVisible(true);
-                jLabelNutDuyet.setVisible(true);
-                jPanelNutChamLai.setVisible(true);
-                jLabelNutChamLai.setVisible(true);
+        new Thread(() -> {
+            Database.saveSinhVienToList(dsSinhVien);
+            Database.saveDRLToList(dsDRL);
+            if(!choiceHK_DRL.getSelectedItem().equals("Chọn học kỳ")){
+                Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, choiceLop_DRL.getSelectedItem(), 
+                                        ThuatToan.doiHKSangMaHK(choiceHK_DRL.getSelectedItem()));
+                if(ThuatToan.doiHKSangMaHK(choiceHK_DRL.getSelectedItem()).equals(ThuatToan.getHKXet(dsHocKy))){
+                    jPanelNutDuyet.setVisible(true);
+                    jLabelNutDuyet.setVisible(true);
+                    jPanelNutChamLai.setVisible(true);
+                    jLabelNutChamLai.setVisible(true);
+                }
+                else{
+                    jPanelNutDuyet.setVisible(false);
+                    jLabelNutDuyet.setVisible(false);
+                    jPanelNutChamLai.setVisible(false);
+                    jLabelNutChamLai.setVisible(false);
+                }
             }
-            else{
-                jPanelNutDuyet.setVisible(false);
-                jLabelNutDuyet.setVisible(false);
-                jPanelNutChamLai.setVisible(false);
-                jLabelNutChamLai.setVisible(false);
-            }
-        }
-        
+        }).start();
     }//GEN-LAST:event_choiceHK_DRLItemStateChanged
 
     private void jLabelXoaSVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelXoaSVMouseClicked
@@ -2748,12 +2769,17 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
 
     private void choiceKhoa_LopXetItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceKhoa_LopXetItemStateChanged
         // TODO add your handling code here:
-        if(choiceKhoa_LopXet.getSelectedItem().equals("Tất cả")){
-            Database.addListLopToTable_HKXet(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc);
-        }
-        else{
-            Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, choiceKhoa_LopXet.getSelectedItem(), dsKhoaHoc);
-        }
+        new Thread(() -> {
+            Database.saveKhoaToList(dsKhoa);
+            Database.saveLopToList(dsLop);
+            Database.saveCoVanToList(dsCoVan);
+            if(choiceKhoa_LopXet.getSelectedItem().equals("Tất cả")){
+                Database.addListLopToTable_HKXet(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc);
+            }
+            else{
+                Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, choiceKhoa_LopXet.getSelectedItem(), dsKhoaHoc);
+            }
+        }).start();
     }//GEN-LAST:event_choiceKhoa_LopXetItemStateChanged
 
     

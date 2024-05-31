@@ -2189,20 +2189,22 @@ public final class FormBanCanSu extends javax.swing.JFrame {
 
     private void choiceHK_DRLItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceHK_DRLItemStateChanged
         // TODO add your handling code here:
-        if(!choiceHK_DRL.getSelectedItem().equals("Chọn học kỳ")){
-            Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, choiceLop_DRL.getSelectedItem(), 
-                                    ThuatToan.doiHKSangMaHK(choiceHK_DRL.getSelectedItem()));
-            if(ThuatToan.doiHKSangMaHK(choiceHK_DRL.getSelectedItem()).equals(ThuatToan.getHKXet(dsHocKy))){
+        new Thread(() -> {
+            if(!choiceHK_DRL.getSelectedItem().equals("Chọn học kỳ")){
+                Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, choiceLop_DRL.getSelectedItem(), 
+                                        ThuatToan.doiHKSangMaHK(choiceHK_DRL.getSelectedItem()));
+                if(ThuatToan.doiHKSangMaHK(choiceHK_DRL.getSelectedItem()).equals(ThuatToan.getHKXet(dsHocKy))){
 
-                jPanelNutChamLai.setVisible(true);
-                jLabelNutChamLai.setVisible(true);
-            }
-            else{
+                    jPanelNutChamLai.setVisible(true);
+                    jLabelNutChamLai.setVisible(true);
+                }
+                else{
 
-                jPanelNutChamLai.setVisible(false);
-                jLabelNutChamLai.setVisible(false);
+                    jPanelNutChamLai.setVisible(false);
+                    jLabelNutChamLai.setVisible(false);
+                }
             }
-        }
+        }).start();
         
     }//GEN-LAST:event_choiceHK_DRLItemStateChanged
 
@@ -2212,12 +2214,17 @@ public final class FormBanCanSu extends javax.swing.JFrame {
 
     private void choiceKhoa_LopXetItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceKhoa_LopXetItemStateChanged
         // TODO add your handling code here:
-        if(choiceKhoa_LopXet.getSelectedItem().equals("Tất cả")){
-            Database.addListLopToTable_HKXet(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc);
-        }
-        else{
-            Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, choiceKhoa_LopXet.getSelectedItem(), dsKhoaHoc);
-        }
+        new Thread(() -> {
+            Database.saveKhoaToList(dsKhoa);
+            Database.saveLopToList(dsLop);
+            Database.saveCoVanToList(dsCoVan);
+            if(choiceKhoa_LopXet.getSelectedItem().equals("Tất cả")){
+                Database.addListLopToTable_HKXet(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, dsKhoaHoc);
+            }
+            else{
+                Database.addListLopToTable_HKXet_Khoa(dsLop, jTableLopXet, dsKhoa, dsCoVan, dsHocKy, choiceKhoa_LopXet.getSelectedItem(), dsKhoaHoc);
+            }
+        }).start();
     }//GEN-LAST:event_choiceKhoa_LopXetItemStateChanged
 
     private void jLabelDoiMKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDoiMKMouseClicked
