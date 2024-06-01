@@ -1934,9 +1934,24 @@ public final class FormCoVanHT extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Không trong thời gian xét duyệt!");
             return;
         }
-        String diemSV = jTableDRL.getValueAt(chon, 4).toString();
+        String duyet = jTableDRL.getValueAt(chon, 6).toString();
+        if(duyet.equals("Đã duyệt")){
+            JOptionPane.showMessageDialog(rootPane, "Bảng điểm này đã duyệt!");
+            return;
+        }
+        String diemSV = jTableDRL.getValueAt(chon, 3).toString();
         if(diemSV.equals("0")){
-            JOptionPane.showMessageDialog(rootPane, "Sinh viên này chưa được ban cán sự lớp đánh giá!");
+            JOptionPane.showMessageDialog(rootPane, "Sinh viên này chưa tự đánh giá!");
+            return;
+        }
+        String diemCS = jTableDRL.getValueAt(chon, 4).toString();
+        if(diemCS.equals("0")){
+            JOptionPane.showMessageDialog(rootPane, "Sinh viên này chưa được ban cán sự đánh giá!");
+            return;
+        }
+        String diemCV = jTableDRL.getValueAt(chon, 5).toString();
+        if(!diemCV.equals("0")){
+            JOptionPane.showMessageDialog(rootPane, "Đã đánh giá điểm sinh viên này!");
             return;
         }
         new Thread(() -> {
@@ -1976,8 +1991,13 @@ public final class FormCoVanHT extends javax.swing.JFrame {
         // TODO add your handling code here:
         String khoaHoc = ThuatToan.getKhoaHocFromSV(dsLop, choiceLop_DRL.getSelectedItem());
         ThuatToan.addChoiceHocKy(dsHocKy, khoaHoc, ThuatToan.getSoNamHoc(dsKhoaHoc, khoaHoc), choiceHK_DRL);
-        choiceHK_DRL.select("Chọn học kỳ");
-        Database.deleteTable(jTableDRL);
+        //choiceHK_DRL.remove("Chọn học kỳ");
+        String hk = ThuatToan.getHKXet(dsHocKy);
+        choiceHK_DRL.select(ThuatToan.doiMaHKSangHK(hk));
+        
+        Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, choiceLop_DRL.getSelectedItem(), 
+                                    ThuatToan.doiHKSangMaHK(choiceHK_DRL.getSelectedItem()));
+        
     }//GEN-LAST:event_choiceLop_DRLItemStateChanged
 
     private void choiceHK_DRLItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceHK_DRLItemStateChanged

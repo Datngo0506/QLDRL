@@ -49,23 +49,9 @@ public final class FormThem_SuaKhoa extends javax.swing.JFrame {
         Image logo = icon.getImage();
         this.setIconImage(logo);  
         if(chucNang.equals("Them")){
-            jDateChooserNgaySinh.setDateFormatString("yyyy-MM-dd");
-            jLabelNutTieuDeTieuChi.setText("Thêm khoa");
+            them();
         }else{
-            khoa = dsKhoa.get(chon);
-            String[] parts = khoa.getNgayThanhLap().split("-");
-            String year = parts[0];
-            String month = parts[1];
-            String day = parts[2];
-            jTextFieldMaKhoa.setText(khoa.getMaKhoa());
-            jTextFieldTenKhoa.setText(khoa.getTenKhoa());
-            String dateString = khoa.getNgayThanhLap();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = sdf.parse(dateString);
-            jDateChooserNgaySinh.setDate(date);
-            jDateChooserNgaySinh.setDateFormatString("yyyy-MM-dd");
-            jPasswordFieldPass.setText(ThuatToan.getMatKhau(dsTaiKhoan,khoa.getMaKhoa()));
-            jLabelNutTieuDeTieuChi.setText("Sửa thông tin khoa");
+            sua();
         }
         
         
@@ -96,7 +82,29 @@ public final class FormThem_SuaKhoa extends javax.swing.JFrame {
         this.chucNang = chucNang;
         edit();
     }
-
+    
+    public void them(){
+        jDateChooserNgaySinh.setDateFormatString("yyyy-MM-dd");
+        jLabelNutTieuDeTieuChi.setText("Thêm khoa");
+    }
+    
+    
+    public void sua() throws ParseException{
+        khoa = dsKhoa.get(chon);
+        String[] parts = khoa.getNgayThanhLap().split("-");
+        String year = parts[0];
+        String month = parts[1];
+        String day = parts[2];
+        jTextFieldMaKhoa.setText(khoa.getMaKhoa());
+        jTextFieldTenKhoa.setText(khoa.getTenKhoa());
+        String dateString = khoa.getNgayThanhLap();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = sdf.parse(dateString);
+        jDateChooserNgaySinh.setDate(date);
+        jDateChooserNgaySinh.setDateFormatString("yyyy-MM-dd");
+        jPasswordFieldPass.setText(ThuatToan.getMatKhau(dsTaiKhoan,khoa.getMaKhoa()));
+        jLabelNutTieuDeTieuChi.setText("Sửa thông tin khoa");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -349,101 +357,112 @@ public final class FormThem_SuaKhoa extends javax.swing.JFrame {
             jDateChooserNgaySinh.getDate()==null || 
             password.equals("")){
                 JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập đầy đủ thông tin!");
+                return;
+        }
+        if(chucNang.equals("Them")){
+            String maKhoa = jTextFieldMaKhoa.getText().toUpperCase();
+            if(ThuatToan.isRepeatMaKhoa(dsKhoa, maKhoa) ){
+                JOptionPane.showMessageDialog(rootPane, "Mã khoa đã tồn tại trên hệ thống!");
+                return;
+            }
+            int them = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn thêm không?");
+            if(them == JOptionPane.YES_OPTION){
+                luuKhoa_Them(password);
+            }
+            else if(them == JOptionPane.NO_OPTION){
+                this.dispose();
+            }
+
+        }
+        else{
+            String maKhoa = jTextFieldMaKhoa.getText().toUpperCase();
+            if(!maKhoa.equals(dsKhoa.get(chon).getMaKhoa())){
+                if(ThuatToan.isRepeatMaKhoa(dsKhoa, maKhoa)){
+                    JOptionPane.showMessageDialog(rootPane, "Mã khoa đã tồn tại trên hệ thống!");
+                    return;
+                }
+            }
+            int sua = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn sửa thông tin không?");
+            if(sua == JOptionPane.YES_OPTION){
+                luuKhoa_Sua(password);
+            }
+            else if(sua == JOptionPane.NO_OPTION){
+                this.dispose();
+            }
         }
         
-        else{
-            if(chucNang.equals("Them")){
-                int them = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn thêm không?");
-                if(them == JOptionPane.YES_OPTION){
-                    new Thread(() -> {
-                        
-                        String maKhoa = jTextFieldMaKhoa.getText().toUpperCase();
-                        if(!ThuatToan.isRepeatMaKhoa(dsKhoa, maKhoa) ){
-                            Database.saveKhoaToList(dsKhoa);
-                            Khoa kh = new Khoa();
-
-                            String tenKhoa = ThuatToan.chuanHoaDiaDanh(jTextFieldTenKhoa.getText());
-                            kh.setMaKhoa(maKhoa);
-                            kh.setTenKhoa(tenKhoa);
-                            String day = ThuatToan.getDate((java.util.Date)jDateChooserNgaySinh.getDate());
-                            kh.setNgayThanhLap(day);
-
-                            dsKhoa.add(kh);
-                            Database.saveTaiKhoanToList(dsTaiKhoan);
-                            TaiKhoan tk = new TaiKhoan();
-                            tk.setLoaiTK("khoa");
-                            tk.setTenTK(maKhoa);
-                            tk.setMatKhau(password);
-                            dsTaiKhoan.add(tk);
-                            Database.addListKhoaToTable(dsKhoa, table, dsTaiKhoan);
-                            Database.saveListKhoaToDB(dsKhoa);
-
-
-                            Database.saveListTaiKhoanToDB(dsTaiKhoan);
-                            this.dispose();
-                        }else{
-                            JOptionPane.showMessageDialog(rootPane, "Mã khoa đã tồn tại trên hệ thống!");
-                        }
-                        
-                    }).start();
-                    this.dispose();
-
-                }
-                else if(them == JOptionPane.NO_OPTION){
-                    this.dispose();
-                }
-                
-            }
-            else{
-                int sua = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn sửa thông tin không?");
-                if(sua == JOptionPane.YES_OPTION){
-                    new Thread(() -> {
-                        String maKhoa = jTextFieldMaKhoa.getText().toUpperCase();
-                        if(!maKhoa.equals(dsKhoa.get(chon).getMaKhoa())){
-                            if(ThuatToan.isRepeatMaKhoa(dsKhoa, maKhoa)){
-                                JOptionPane.showMessageDialog(rootPane, "Mã khoa đã tồn tại trên hệ thống!");
-                                return;
-                            }
-                        }
-                        Database.saveKhoaToList(dsKhoa);
-                        String day = ThuatToan.getDate((java.util.Date)jDateChooserNgaySinh.getDate());
-                        String tenKhoa = ThuatToan.chuanHoaDiaDanh(jTextFieldTenKhoa.getText());
-                        //Thêm vào bảng
-                        table.setValueAt(maKhoa, chon , 0);
-                        table.setValueAt(tenKhoa, chon , 1);
-                        table.setValueAt(day, chon , 2);
-                        table.setValueAt(maKhoa, chon , 3);
-                        table.setValueAt(ThuatToan.anMatKhau(password), chon, 4);
-                        ThuatToan.suaKhoaTrongCoVan(dsCoVan, dsKhoa.get(chon).getMaKhoa(), maKhoa);
-                        ThuatToan.suaKhoaTrongLop(dsLop, dsKhoa.get(chon).getMaKhoa(), maKhoa);
-                        Database.saveTaiKhoanToList(dsTaiKhoan);
-                        for(TaiKhoan tk: dsTaiKhoan){
-                            if(tk.getTenTK().equals(dsKhoa.get(chon).getMaKhoa())){
-                                tk.setTenTK(maKhoa);
-                                tk.setMatKhau(password);
-                            }
-                        }
-
-                        dsKhoa.get(chon).setMaKhoa(maKhoa);
-                        dsKhoa.get(chon).setTenKhoa(tenKhoa);
-                        dsKhoa.get(chon).setNgayThanhLap(day);
-                        Database.saveListLopToDB(dsLop);
-                        Database.saveListCoVanToDB(dsCoVan);
-                        Database.saveListKhoaToDB(dsKhoa);
-                        //Controller.doiMatKhau(TaiKhoan, dsKhoa.get(chon).getMaKhoa(), password);
-                        Database.saveListTaiKhoanToDB(dsTaiKhoan);
-                        
-                    }).start();
-                    this.dispose();
-
-                }
-                else if(sua == JOptionPane.NO_OPTION){
-                    this.dispose();
-                }
-            }
-        }
     }//GEN-LAST:event_jLabelNutLuuMouseClicked
 
+    public void luuKhoa_Sua(String password){
+        new Thread(() -> {
+            String maKhoa = jTextFieldMaKhoa.getText().toUpperCase();
+            Database.saveKhoaToList(dsKhoa);
+            Database.saveTaiKhoanToList(dsTaiKhoan);
+            Database.saveCoVanToList(dsCoVan);
+            Database.saveLopToList(dsLop);
+            String day = ThuatToan.getDate((java.util.Date)jDateChooserNgaySinh.getDate());
+            String tenKhoa = ThuatToan.chuanHoaDiaDanh(jTextFieldTenKhoa.getText());
+            //Thêm vào bảng
+            table.setValueAt(maKhoa, chon , 0);
+            table.setValueAt(tenKhoa, chon , 1);
+            table.setValueAt(day, chon , 2);
+            table.setValueAt(maKhoa, chon , 3);
+            table.setValueAt(ThuatToan.anMatKhau(password), chon, 4);
+            ThuatToan.suaKhoaTrongCoVan(dsCoVan, dsKhoa.get(chon).getMaKhoa(), maKhoa);
+            ThuatToan.suaKhoaTrongLop(dsLop, dsKhoa.get(chon).getMaKhoa(), maKhoa);
+            Database.saveTaiKhoanToList(dsTaiKhoan);
+            for(TaiKhoan tk: dsTaiKhoan){
+                if(tk.getTenTK().equals(dsKhoa.get(chon).getMaKhoa())){
+                    tk.setTenTK(maKhoa);
+                    tk.setMatKhau(password);
+                }
+            }
+
+            dsKhoa.get(chon).setMaKhoa(maKhoa);
+            dsKhoa.get(chon).setTenKhoa(tenKhoa);
+            dsKhoa.get(chon).setNgayThanhLap(day);
+            Database.saveListLopToDB(dsLop);
+            Database.saveListCoVanToDB(dsCoVan);
+            Database.saveListKhoaToDB(dsKhoa);
+            //Controller.doiMatKhau(TaiKhoan, dsKhoa.get(chon).getMaKhoa(), password);
+            Database.saveListTaiKhoanToDB(dsTaiKhoan);
+
+        }).start();
+        this.dispose();
+    }
+    
+    public void luuKhoa_Them(String password){
+        new Thread(() -> {
+            String maKhoa = jTextFieldMaKhoa.getText().toUpperCase();
+            Database.saveKhoaToList(dsKhoa);
+            Database.saveTaiKhoanToList(dsTaiKhoan);
+
+            Khoa kh = new Khoa();
+
+            String tenKhoa = ThuatToan.chuanHoaDiaDanh(jTextFieldTenKhoa.getText());
+            kh.setMaKhoa(maKhoa);
+            kh.setTenKhoa(tenKhoa);
+            String day = ThuatToan.getDate((java.util.Date)jDateChooserNgaySinh.getDate());
+            kh.setNgayThanhLap(day);
+
+            dsKhoa.add(kh);
+            Database.saveTaiKhoanToList(dsTaiKhoan);
+            TaiKhoan tk = new TaiKhoan();
+            tk.setLoaiTK("khoa");
+            tk.setTenTK(maKhoa);
+            tk.setMatKhau(password);
+            dsTaiKhoan.add(tk);
+            Database.addListKhoaToTable(dsKhoa, table, dsTaiKhoan);
+            Database.saveListKhoaToDB(dsKhoa);
+
+
+            Database.saveListTaiKhoanToDB(dsTaiKhoan);
+            this.dispose();
+
+        }).start();
+        this.dispose();
+    }
+    
     private void jLabelNutLuuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutLuuMouseEntered
         // TODO add your handling code here:
         jPanelNutLuu.setBackground(buttonHoverColor);

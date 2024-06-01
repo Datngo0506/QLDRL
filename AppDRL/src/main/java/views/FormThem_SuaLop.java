@@ -52,73 +52,92 @@ public final class FormThem_SuaLop extends javax.swing.JFrame {
         Image logo = icon.getImage();
         this.setIconImage(logo);  
         //choiceKhoa.removeAll();
+        Database.saveCoVanToList(dsCoVan);
+        Database.saveKhoaToList(dsKhoa);
+        Database.saveKhoaHocToList(dsKhoaHoc);
         switch (chucNang) {
             case "Them" -> {
-                ThuatToan.addChoiceKhoa(choiceKhoa, dsKhoa);
-                //choiceKhoa.add("");
-                choiceKhoa.select("");
-                ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
-                jLabelNutTieuDeTieuChi.setText("Thêm lớp");
+                them();
             }
             case "ThemND" -> {
-                ThuatToan.addChoiceKhoa(choiceKhoa, dsKhoa);
-                choiceKhoa.removeAll();
-                choiceKhoa.add(khoa.getTenKhoa());
-                //choiceKhoa.add("");
-                ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
-                ThuatToan.addChoiceCoVanTheoTen(choiceCoVan, dsCoVan, dsKhoa, khoa.getTenKhoa());
-                jLabelNutTieuDeTieuChi.setText("Thêm lớp");
+                themND();
             }
-            case "SuaND" ->                 {
-                    ThuatToan.addChoiceKhoa(choiceKhoa, dsKhoa);
-                    choiceKhoa.select("");
-                    ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
-                    Object  cell = table.getValueAt(chon, 1);
-                    String maLop = cell.toString();
-                    int temp = 0;
-                    for(Lop lop:dsLop){
-                        if(lop.getLop().equals(maLop)){
-                            temp = dsLop.indexOf(lop);
-                            break;
-                        }
-                    }       jLabelNutTieuDeTieuChi.setText("Sửa thông tin lớp");
-                    Lop lop = dsLop.get(temp);
-                    jTextFieldLop.setText(maLop);
-                    choiceKhoa.select(ThuatToan.doiMaKhoaThanhTenKhoa(lop.getMaKhoa(), dsKhoa));
-                    choiceKhoaHoc.select(lop.getMaKhoaHoc());
-                    jTextFieldName.setText(ThuatToan.doiMaCVThanhTen(lop.getMaCoVan(), dsCoVan));
-                    choiceKhoa.removeAll();
-                    choiceKhoa.add(khoa.getTenKhoa());
-                    //choiceKhoa.add("");
-                    ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
-                    ThuatToan.addChoiceCoVanTheoTen(choiceCoVan, dsCoVan, dsKhoa, khoa.getTenKhoa());
-                    choiceCoVan.select(lop.getMaCoVan());
-                }
-            default ->                 {
-                    ThuatToan.addChoiceKhoa(choiceKhoa, dsKhoa);
-                    choiceKhoa.select("");
-                    ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
-                    Object  cell = table.getValueAt(chon, 1);
-                    String maLop = cell.toString();
-                    int temp = 0;
-                    for(Lop lop:dsLop){
-                        if(lop.getLop().equals(maLop)){
-                            temp = dsLop.indexOf(lop);
-                            break;
-                        }
-                    }       jLabelNutTieuDeTieuChi.setText("Sửa thông tin lớp");
-                    Lop lop = dsLop.get(temp);
-                    jTextFieldLop.setText(maLop);
-                    choiceKhoa.select(ThuatToan.doiMaKhoaThanhTenKhoa(lop.getMaKhoa(), dsKhoa));
-                    ThuatToan.addChoiceCoVanTheoTen(choiceCoVan, dsCoVan, dsKhoa, 
-                            ThuatToan.doiMaKhoaThanhTenKhoa(lop.getMaKhoa(), dsKhoa));
+            case "SuaND" -> {
+                suaND();
+            }
+            default -> {
+                sua();
+            }
                     
-                    choiceCoVan.select(lop.getMaCoVan());
-                    choiceKhoaHoc.select(lop.getMaKhoaHoc());
-                    jTextFieldName.setText(ThuatToan.doiMaCVThanhTen(lop.getMaCoVan(), dsCoVan));
-                }
         }
-        
+    }
+    
+    public void them(){
+        ThuatToan.addChoiceKhoa(choiceKhoa, dsKhoa);
+        choiceKhoa.select("");
+        ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
+        jLabelNutTieuDeTieuChi.setText("Thêm lớp");
+    }
+    
+    public void themND(){
+        ThuatToan.addChoiceKhoa(choiceKhoa, dsKhoa);
+        choiceKhoa.removeAll();
+        choiceKhoa.add(khoa.getTenKhoa());
+        //choiceKhoa.add("");
+        ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
+        ThuatToan.addChoiceCoVanTheoTen(choiceCoVan, dsCoVan, dsKhoa, khoa.getTenKhoa());
+        jLabelNutTieuDeTieuChi.setText("Thêm lớp");
+    }
+    
+    public void suaND(){
+        ThuatToan.addChoiceKhoa(choiceKhoa, dsKhoa);
+        choiceKhoa.select("");
+        ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
+        Object  cell = table.getValueAt(chon, 1);
+        String maLop = cell.toString();
+        int temp = 0;
+        for(Lop lop:dsLop){
+            if(lop.getLop().equals(maLop)){
+                temp = dsLop.indexOf(lop);
+                break;
+            }
+        }       jLabelNutTieuDeTieuChi.setText("Sửa thông tin lớp");
+        Lop lop = dsLop.get(temp);
+        jTextFieldLop.setText(maLop);
+        choiceKhoa.select(ThuatToan.doiMaKhoaThanhTenKhoa(lop.getMaKhoa(), dsKhoa));
+        choiceKhoaHoc.select(lop.getMaKhoaHoc());
+        jTextFieldName.setText(ThuatToan.doiMaCVThanhTen(lop.getMaCoVan(), dsCoVan));
+        choiceKhoa.removeAll();
+        choiceKhoa.add(khoa.getTenKhoa());
+        //choiceKhoa.add("");
+        ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
+        ThuatToan.addChoiceCoVanTheoTen(choiceCoVan, dsCoVan, dsKhoa, khoa.getTenKhoa());
+        choiceCoVan.select(lop.getMaCoVan());
+    }
+    
+    public void sua(){
+        ThuatToan.addChoiceKhoa(choiceKhoa, dsKhoa);
+        choiceKhoa.select("");
+        ThuatToan.addChoiceKhoaHoc(choiceKhoaHoc, dsKhoaHoc);
+        Object  cell = table.getValueAt(chon, 1);
+        String maLop = cell.toString();
+        int temp = 0;
+        for(Lop lop:dsLop){
+            if(lop.getLop().equals(maLop)){
+                temp = dsLop.indexOf(lop);
+                break;
+            }
+        }       jLabelNutTieuDeTieuChi.setText("Sửa thông tin lớp");
+        Lop lop = dsLop.get(temp);
+        jTextFieldLop.setText(maLop);
+        choiceKhoa.select(ThuatToan.doiMaKhoaThanhTenKhoa(lop.getMaKhoa(), dsKhoa));
+        ThuatToan.addChoiceCoVanTheoTen(choiceCoVan, dsCoVan, dsKhoa, 
+                ThuatToan.doiMaKhoaThanhTenKhoa(lop.getMaKhoa(), dsKhoa));
+
+        choiceCoVan.select(lop.getMaCoVan());
+        choiceKhoaHoc.select(lop.getMaKhoaHoc());
+        jTextFieldName.setText(ThuatToan.doiMaCVThanhTen(lop.getMaCoVan(), dsCoVan));
+    
     }
     
     public FormThem_SuaLop(ArrayList <Khoa> dsKhoa, Khoa khoa, ArrayList <CoVan> dsCoVan, ArrayList <KhoaHoc> dsKhoaHoc, ArrayList <Lop> dsLop, JTable table, Choice choice, String chucNang) {
@@ -374,6 +393,14 @@ public final class FormThem_SuaLop extends javax.swing.JFrame {
     private void choiceKhoaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceKhoaItemStateChanged
         // TODO add your handling code here:
         ThuatToan.addChoiceCoVanTheoTen(choiceCoVan, dsCoVan, dsKhoa, choiceKhoa.getSelectedItem());
+        CoVan c = new CoVan();
+        for(CoVan cv : dsCoVan){
+            if(cv.getKhoa().equals(ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa.getSelectedItem(), dsKhoa))){
+                c = cv;
+                break;
+            }
+        }
+        jTextFieldName.setText(c.getTenCV());
     }//GEN-LAST:event_choiceKhoaItemStateChanged
 
     private void choiceKhoaHocItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceKhoaHocItemStateChanged
@@ -391,80 +418,105 @@ public final class FormThem_SuaLop extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_choiceKhoaMouseClicked
 
+    public void luuLop_Them(){
+        new Thread(() -> {
+            Database.saveLopToList(dsLop);
+            Lop lop = new Lop();
+            lop.setLop(jTextFieldLop.getText().toUpperCase());
+            lop.setMaKhoa(ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa.getSelectedItem(), dsKhoa));
+            String maCoVan;
+            if(choiceCoVan.getSelectedItem()==null){
+                maCoVan = lop.getMaCoVan();
+            }else{
+                maCoVan = choiceCoVan.getSelectedItem();
+            }
+            lop.setMaCoVan(maCoVan);
+            lop.setMaKhoaHoc(choiceKhoaHoc.getSelectedItem());
+            dsLop.add(lop);
+
+            if(choice.getSelectedItem().equals("Tất cả")){
+                Database.addListLopToTable(dsLop, table, dsKhoa, dsCoVan);
+            } else {
+               Database.addListLopToTable_Khoa(dsLop, table, dsKhoa, dsCoVan, ThuatToan.doiTenKhoaThanhMaKhoa(choice.getSelectedItem(), dsKhoa));
+            }
+            Database.saveListLopToDB(dsLop);
+        }).start();
+        this.dispose();
+    }
+    
+    public void getCell(){
+        
+    }
+    
+    public void luuLop_Sua(){
+        new Thread(() -> {
+            Object  cell = table.getValueAt(chon, 1);
+            String maLop = cell.toString();
+            int temp = 0;
+            Database.saveLopToList(dsLop);
+            Database.saveSinhVienToList(dsSinhVien);
+            for(int i=0; i<dsLop.size(); i++){
+                if(dsLop.get(i).getLop().equals(maLop)){
+                    temp = i;
+                    break;
+                }
+            }
+
+            dsLop.get(temp).setLop(jTextFieldLop.getText().toUpperCase());
+            dsLop.get(temp).setMaKhoa(ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa.getSelectedItem(), dsKhoa));
+            dsLop.get(temp).setMaKhoaHoc(choiceKhoaHoc.getSelectedItem());
+            if(choiceCoVan.getSelectedItem()!=null){
+                dsLop.get(temp).setMaCoVan(choiceCoVan.getSelectedItem());
+            }
+            Database.saveListLopToDB(dsLop);
+            if(choice.getSelectedItem().trim().equals("Tất cả")){
+                Database.addListLopToTable(dsLop, table, dsKhoa, dsCoVan);
+            } else {
+                Database.addListLopToTable_Khoa(dsLop, table, dsKhoa, dsCoVan, ThuatToan.doiTenKhoaThanhMaKhoa(choice.getSelectedItem(), dsKhoa));
+            }
+            ThuatToan.doiLopDsSV(dsSinhVien, maLop, jTextFieldLop.getText().toUpperCase());
+            Database.saveListSinhVienToDB(dsSinhVien);
+            Database.saveListLopToDB(dsLop);
+        }).start();
+        this.dispose();
+    }
+    
     private void jLabelNutLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutLuuMouseClicked
         if(jTextFieldLop.getText().equals("") || 
-            (choiceCoVan.getSelectedItem()==null && !(chucNang.equals("ThemND") || chucNang.equals("Them") ))||
+            choiceCoVan.getSelectedItem()==null ||
             choiceKhoa.getSelectedItem().equals("Tất cả")){
                 JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập đầy đủ thông tin!");
         }
         else{
             if(chucNang.equals("Them") || chucNang.equals("ThemND")){
-                if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn thêm không?") == JOptionPane.YES_OPTION){
-                    if(ThuatToan.isRepeatLop(dsLop, jTextFieldLop.getText().toUpperCase())){
-                        JOptionPane.showMessageDialog(rootPane, "Lớp đã có trên hệ thống!");
-                        return;
-                    }
-                    Lop lop = new Lop();
-                    lop.setLop(jTextFieldLop.getText().toUpperCase());
-                    lop.setMaKhoa(ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa.getSelectedItem(), dsKhoa));
-                    String maCoVan;
-                    if(choiceCoVan.getSelectedItem()==null){
-                        maCoVan = lop.getMaCoVan();
-                    }else{
-                        maCoVan = choiceCoVan.getSelectedItem();
-                    }
-                    lop.setMaCoVan(maCoVan);
-                    lop.setMaKhoaHoc(choiceKhoaHoc.getSelectedItem());
-                    dsLop.add(lop);
-                    
-                    if(choice.getSelectedItem().equals("Tất cả")){
-                        Database.addListLopToTable(dsLop, table, dsKhoa, dsCoVan);
-                    } else {
-                       Database.addListLopToTable_Khoa(dsLop, table, dsKhoa, dsCoVan, ThuatToan.doiTenKhoaThanhMaKhoa(choice.getSelectedItem(), dsKhoa));
-                    }
-                    
-                    
+                if(ThuatToan.isRepeatLop(dsLop, jTextFieldLop.getText().toUpperCase())){
+                    JOptionPane.showMessageDialog(rootPane, "Lớp đã có trên hệ thống!");
+                    return;
+                }
+                int them = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn thêm không?");
+                if( them == JOptionPane.YES_OPTION){
+                    luuLop_Them();
+                }else if(them == JOptionPane.NO_OPTION){
                     this.dispose();
-                    Database.saveListLopToDB(dsLop);
                 }
             }
             
             
-            else{
-                if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn sửa không?") == JOptionPane.YES_OPTION) {
-                
-                    Object  cell = table.getValueAt(chon, 1);
-                    String maLop = cell.toString();
-                    int temp = 0;
-                    Database.saveLopToList(dsLop);
-                    for(int i=0; i<dsLop.size(); i++){
-                        if(dsLop.get(i).getLop().equals(maLop)){
-                            temp = i;
-                            break;
-                        }
+            else{  
+                Object  cell = table.getValueAt(chon, 1);
+                String maLop = cell.toString();
+                Database.saveLopToList(dsLop);
+                if(!maLop.equals(jTextFieldLop.getText().toUpperCase())){
+                    if(ThuatToan.isRepeatLop(dsLop, jTextFieldLop.getText().toUpperCase())){
+                        JOptionPane.showMessageDialog(rootPane, "Lớp đã có trên hệ thống!");
+                        return;
                     }
-                    //System.out.println(temp);
-                    if(!maLop.equals(jTextFieldLop.getText().toUpperCase())){
-                        if(ThuatToan.isRepeatLop(dsLop, jTextFieldLop.getText().toUpperCase())){
-                            JOptionPane.showMessageDialog(rootPane, "Lớp đã có trên hệ thống!");
-                            return;
-                        }
-                    }
-
-                    dsLop.get(temp).setLop(jTextFieldLop.getText().toUpperCase());
-                    dsLop.get(temp).setMaKhoa(ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa.getSelectedItem(), dsKhoa));
-                    dsLop.get(temp).setMaKhoaHoc(choiceKhoaHoc.getSelectedItem());
-                    if(choiceCoVan.getSelectedItem()!=null){
-                        dsLop.get(temp).setMaCoVan(choiceCoVan.getSelectedItem());
-                    }
-                    Database.saveListLopToDB(dsLop);
-                    if(choice.getSelectedItem().trim().equals("Tất cả")){
-                        Database.addListLopToTable(dsLop, table, dsKhoa, dsCoVan);
-                    } else {
-                        Database.addListLopToTable_Khoa(dsLop, table, dsKhoa, dsCoVan, ThuatToan.doiTenKhoaThanhMaKhoa(choice.getSelectedItem(), dsKhoa));
-                    }
-                    ThuatToan.doiLopDsSV(dsSinhVien, maLop, jTextFieldLop.getText().toUpperCase());
-                    Database.saveListLopToDB(dsLop);
+                }
+                int them = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn sửa không?");
+                if( them == JOptionPane.YES_OPTION) {
+                    luuLop_Sua();
+                }
+                else if(them == JOptionPane.NO_OPTION){
                     this.dispose();
                 }
             }
@@ -512,10 +564,8 @@ public final class FormThem_SuaLop extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FormThem_SuaLop().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new FormThem_SuaLop().setVisible(true);
         });
     }
 

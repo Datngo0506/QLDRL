@@ -121,7 +121,8 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
                 Database.addListSinhVienToTable_1Khoa(dsSinhVien, khoa.getMaKhoa(), dsLop, jTableSV, dsChucVu, dsTaiKhoan, khoa.getTenKhoa());
                 choiceKhoa_SV.removeAll();
                 choiceKhoa_SV.add(khoa.getTenKhoa());
-
+                choiceLop_SV.removeAll();
+                choiceLop_SV.add("Tất cả");
                 ThuatToan.addChoiceLop_1Khoa(dsLop, khoa.getMaKhoa(), choiceLop_SV);
             }).start();
         }
@@ -2515,14 +2516,14 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
             if(choiceKhoa_SV.getSelectedItem().equals("Tất cả")){
                 Database.addListSinhVienToTable(dsSinhVien, jTableSV, dsChucVu, dsTaiKhoan);
                 //choiceLop_SV.removeAll();
+                //ThuatToan.addChoiceLop(choiceHK_DRL, dsLop, choiceKhoa_SV.getSelectedItem(), dsKhoa);
 
             }
             else{
-
+                
                 Database.addListSinhVienToTable_Khoa(dsSinhVien, dsKhoa, dsLop, jTableSV, dsChucVu, dsTaiKhoan, choiceKhoa_SV.getSelectedItem());
             }
-
-
+            //choiceLop_SV.add("Tất cả");
             ThuatToan.addChoiceLopTatCa(choiceLop_SV, dsLop, choiceKhoa_SV.getSelectedItem(), dsKhoa);
             choiceLop_SV.select("Tất cả");
         }).start();
@@ -2685,19 +2686,40 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
     private void choiceLop_DRLItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceLop_DRLItemStateChanged
         // TODO add your handling code here:
         new Thread(() -> {
-            Database.saveHocKyToList(dsHocKy);
             String khoaHoc = ThuatToan.getKhoaHocFromSV(dsLop, choiceLop_DRL.getSelectedItem());
-            ThuatToan.addChoiceHocKy(dsHocKy, khoaHoc, ThuatToan.getSoNamHoc(dsKhoaHoc, khoaHoc), choiceHK_DRL);
-            choiceHK_DRL.select("Chọn học kỳ");
-            Database.deleteTable(jTableDRL);
+            String hk = ThuatToan.getHKXet(dsHocKy).trim();
+            float nam = ThuatToan.getSoNamHoc(dsKhoaHoc, khoaHoc);
+            boolean flag = ThuatToan.kTraHKTrongKhoaHoc(khoaHoc, hk);
+            //System.out.println(flag);
+            if(flag == false){
+                //System.out.println(ThuatToan.doiMaHKSangHK(hk));
+                ThuatToan.addChoiceHocKy(dsHocKy, khoaHoc, ThuatToan.getSoNamHoc(dsKhoaHoc, khoaHoc), choiceHK_DRL);
+                jPanelNutDuyet.setVisible(false);
+                jLabelNutDuyet.setVisible(false);
+                jPanelNutChamLai.setVisible(false);
+                jLabelNutChamLai.setVisible(false);
+                
+            }else{
+                ThuatToan.addChoiceHocKy(dsHocKy, khoaHoc, nam, choiceHK_DRL);
+                choiceHK_DRL.select(ThuatToan.doiMaHKSangHK(hk));
+                jPanelNutDuyet.setVisible(true);
+                jLabelNutDuyet.setVisible(true);
+                jPanelNutChamLai.setVisible(true);
+                jLabelNutChamLai.setVisible(true);
+            }
+            Database.saveHocKyToList(dsHocKy);
+            Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, choiceLop_DRL.getSelectedItem(), 
+                                        ThuatToan.doiHKSangMaHK(choiceHK_DRL.getSelectedItem()));
         }).start();
     }//GEN-LAST:event_choiceLop_DRLItemStateChanged
 
     private void choiceHK_DRLItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceHK_DRLItemStateChanged
         // TODO add your handling code here:
+        
         new Thread(() -> {
             Database.saveSinhVienToList(dsSinhVien);
             Database.saveDRLToList(dsDRL);
+            
             if(!choiceHK_DRL.getSelectedItem().equals("Chọn học kỳ")){
                 Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, choiceLop_DRL.getSelectedItem(), 
                                         ThuatToan.doiHKSangMaHK(choiceHK_DRL.getSelectedItem()));
@@ -2714,6 +2736,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
                     jLabelNutChamLai.setVisible(false);
                 }
             }
+            
         }).start();
     }//GEN-LAST:event_choiceHK_DRLItemStateChanged
 

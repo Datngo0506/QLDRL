@@ -148,6 +148,7 @@ public final class FormQuanLy extends javax.swing.JFrame {
                 Database.saveKhoaToList(dsKhoa);
                 Database.saveLopToList(dsLop);
                 Database.saveSinhVienToList(dsSinhVien);
+                choiceLop_SV.removeAll();
                 Database.addListSinhVienToTable(dsSinhVien, jTableSV, dsChucVu, dsTaiKhoan);
                 ThuatToan.addChoiceKhoa(choiceKhoa_SV, dsKhoa);
             }).start();
@@ -3955,12 +3956,31 @@ public final class FormQuanLy extends javax.swing.JFrame {
 
     private void choiceLop_DRLItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceLop_DRLItemStateChanged
         // TODO add your handling code here:
-        new Thread(() -> {
-            Database.saveHocKyToList(dsHocKy);
+       new Thread(() -> {
             String khoaHoc = ThuatToan.getKhoaHocFromSV(dsLop, choiceLop_DRL.getSelectedItem());
-            ThuatToan.addChoiceHocKy(dsHocKy, khoaHoc, ThuatToan.getSoNamHoc(dsKhoaHoc, khoaHoc), choiceHK_DRL);
-            choiceHK_DRL.select("Chọn học kỳ");
-            Database.deleteTable(jTableDRL);
+            String hk = ThuatToan.getHKXet(dsHocKy).trim();
+            float nam = ThuatToan.getSoNamHoc(dsKhoaHoc, khoaHoc);
+            boolean flag = ThuatToan.kTraHKTrongKhoaHoc(khoaHoc, hk);
+            //System.out.println(flag);
+            if(flag == false){
+                //System.out.println(ThuatToan.doiMaHKSangHK(hk));
+                ThuatToan.addChoiceHocKy(dsHocKy, khoaHoc, ThuatToan.getSoNamHoc(dsKhoaHoc, khoaHoc), choiceHK_DRL);
+                jPanelNutDuyet.setVisible(false);
+                jLabelNutDuyet.setVisible(false);
+                jPanelNutChamLai.setVisible(false);
+                jLabelNutChamLai.setVisible(false);
+                
+            }else{
+                ThuatToan.addChoiceHocKy(dsHocKy, khoaHoc, nam, choiceHK_DRL);
+                choiceHK_DRL.select(ThuatToan.doiMaHKSangHK(hk));
+                jPanelNutDuyet.setVisible(true);
+                jLabelNutDuyet.setVisible(true);
+                jPanelNutChamLai.setVisible(true);
+                jLabelNutChamLai.setVisible(true);
+            }
+            Database.saveHocKyToList(dsHocKy);
+            Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, choiceLop_DRL.getSelectedItem(), 
+                                        ThuatToan.doiHKSangMaHK(choiceHK_DRL.getSelectedItem()));
         }).start();
     }//GEN-LAST:event_choiceLop_DRLItemStateChanged
 
@@ -3969,22 +3989,22 @@ public final class FormQuanLy extends javax.swing.JFrame {
         new Thread(() -> {
             Database.saveSinhVienToList(dsSinhVien);
             Database.saveDRLToList(dsDRL);
-            if(!choiceHK_DRL.getSelectedItem().equals("Chọn học kỳ")){
-                Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, choiceLop_DRL.getSelectedItem(), 
-                                        ThuatToan.doiHKSangMaHK(choiceHK_DRL.getSelectedItem()));
-                if(ThuatToan.doiHKSangMaHK(choiceHK_DRL.getSelectedItem()).equals(ThuatToan.getHKXet(dsHocKy))){
-                    jPanelNutDuyet.setVisible(true);
-                    jLabelNutDuyet.setVisible(true);
-                    jPanelNutChamLai.setVisible(true);
-                    jLabelNutChamLai.setVisible(true);
-                }
-                else{
-                    jPanelNutDuyet.setVisible(false);
-                    jLabelNutDuyet.setVisible(false);
-                    jPanelNutChamLai.setVisible(false);
-                    jLabelNutChamLai.setVisible(false);
-                }
+            Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, choiceLop_DRL.getSelectedItem(), 
+                                    ThuatToan.doiHKSangMaHK(choiceHK_DRL.getSelectedItem()));
+            if(ThuatToan.doiHKSangMaHK(choiceHK_DRL.getSelectedItem().trim()).equals(
+                    ThuatToan.getHKXet(dsHocKy))){
+                jPanelNutDuyet.setVisible(true);
+                jLabelNutDuyet.setVisible(true);
+                jPanelNutChamLai.setVisible(true);
+                jLabelNutChamLai.setVisible(true);
             }
+            else{
+                jPanelNutDuyet.setVisible(false);
+                jLabelNutDuyet.setVisible(false);
+                jPanelNutChamLai.setVisible(false);
+                jLabelNutChamLai.setVisible(false);
+            }
+            
         }).start();
         
     }//GEN-LAST:event_choiceHK_DRLItemStateChanged

@@ -259,9 +259,10 @@ public final class FormDangNhap extends javax.swing.JFrame {
         jLabelQuenMatKhau = new javax.swing.JLabel();
         jLabelTenDN = new javax.swing.JLabel();
         jPasswordField = new RoundedPasswordField(15, 10, 10);
-        jLabelSubmit = new javax.swing.JLabel();
         jLabelMatKhau = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jPanel1 = RoundedPanel.createRoundedPanel();
+        jLabelSubmit = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng nhập");
@@ -321,13 +322,22 @@ public final class FormDangNhap extends javax.swing.JFrame {
         jPasswordField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jPanelMain.add(jPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 370, 40));
 
+        jLabelMatKhau.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabelMatKhau.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelMatKhau.setText("Mật khẩu");
+        jPanelMain.add(jLabelMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 370, -1));
+
+        jButton1.setText("jButton1");
+        jPanelMain.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 0, 10));
+
+        jPanel1.setBackground(new java.awt.Color(221, 51, 51));
+
         jLabelSubmit.setBackground(new java.awt.Color(221, 25, 25));
         jLabelSubmit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelSubmit.setForeground(new java.awt.Color(255, 255, 255));
         jLabelSubmit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelSubmit.setText("Đăng nhập");
         jLabelSubmit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabelSubmit.setOpaque(true);
         jLabelSubmit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelSubmitMouseClicked(evt);
@@ -344,27 +354,33 @@ public final class FormDangNhap extends javax.swing.JFrame {
                 jLabelSubmitKeyTyped(evt);
             }
         });
-        jPanelMain.add(jLabelSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 370, 40));
 
-        jLabelMatKhau.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabelMatKhau.setForeground(new java.awt.Color(102, 102, 102));
-        jLabelMatKhau.setText("Mật khẩu");
-        jPanelMain.add(jLabelMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 370, -1));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabelSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabelSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
-        jButton1.setText("jButton1");
-        jPanelMain.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 0, 10));
+        jPanelMain.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 370, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -503,12 +519,12 @@ public final class FormDangNhap extends javax.swing.JFrame {
 
     private void jLabelSubmitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSubmitMouseEntered
         // TODO add your handling code here:
-        jLabelSubmit.setBackground(colorHover);
+        jPanel1.setBackground(colorHover);
     }//GEN-LAST:event_jLabelSubmitMouseEntered
 
     private void jLabelSubmitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSubmitMouseExited
         // TODO add your handling code here:
-        jLabelSubmit.setBackground(color);
+        jPanel1.setBackground(color);
     }//GEN-LAST:event_jLabelSubmitMouseExited
 
     private void jLabelQuenMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelQuenMatKhauMouseClicked
@@ -584,6 +600,7 @@ public final class FormDangNhap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSubmit;
     private javax.swing.JLabel jLabelTenDN;
     private javax.swing.JLabel jLabelTitle;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextFieldTenDN;

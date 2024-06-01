@@ -435,11 +435,24 @@ public class ThuatToan {
         }
         return "";
     }
+
     
     //Thêm danh sách lớp vào choice
     public static void addChoiceLop(Choice ch, ArrayList<Lop>dsLop, String tenKhoa, ArrayList<Khoa> dsKhoa){
         String maKhoa = doiTenKhoaThanhMaKhoa(tenKhoa, dsKhoa);
         ch.removeAll();
+        if(dsLop !=null){
+            for(Lop lop: dsLop){
+                if(lop.getMaKhoa().equals(maKhoa)){
+                    ch.add(lop.getLop());
+                }
+            }
+        }
+        
+    }
+    
+    public static void addChoiceLop2(Choice ch, ArrayList<Lop>dsLop, String tenKhoa, ArrayList<Khoa> dsKhoa){
+        String maKhoa = doiTenKhoaThanhMaKhoa(tenKhoa, dsKhoa);
         if(dsLop !=null){
             for(Lop lop: dsLop){
                 if(lop.getMaKhoa().equals(maKhoa)){
@@ -554,7 +567,6 @@ public class ThuatToan {
     public static void addChoiceHocKy(ArrayList<HocKy>dsHK, String khoaHoc, double soNam, Choice choice){
         String[] parts = khoaHoc.split("-");
         choice.removeAll();
-        choice.add("Chọn học kỳ");
         int namBatDau = Integer.parseInt(parts[0]);
         int namKetThuc = Integer.parseInt(parts[1]);
         
@@ -619,22 +631,22 @@ public class ThuatToan {
         return 0;
     }
     
-    public static String doiMaHKSangHK(String maHK){
+    public static String doiMaHKSangHK(String maHK){ //2023-2024-1
         String parts[] = maHK.split("-");
         String hk;
         if(parts[2].equals("1")){
             hk = "I";
         }else hk = "II";
-        return parts[0] + "-" + parts[1] + "-" + hk;
+        return " " +hk + " " + parts[0] + "-" + parts[1]; //I 2023-2024
     }
     
-    public static String doiHKSangMaHK(String maHK){
-        String parts[] = maHK.split("-");
+    public static String doiHKSangMaHK(String maHK){ //I 2023-2024
+        String[] parts = maHK.trim().split(" ");
         String hk;
-        if(parts[2].equals("I")){
+        if(parts[0].equals("I")){
             hk = "1";
         }else hk = "2";
-        return parts[0] + "-" + parts[1] + "-" + hk;
+        return parts[1] + "-" + hk;
     }
     
     public static String getLopFromDRL(String msv, ArrayList<SinhVien> dsSV){

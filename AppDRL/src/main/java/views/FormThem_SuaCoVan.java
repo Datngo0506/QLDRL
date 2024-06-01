@@ -49,58 +49,16 @@ public final class FormThem_SuaCoVan extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logo_ptit.png")); // Thay "logo.png" bằng đường dẫn của hình ảnh của bạn
         Image logo = icon.getImage();
         this.setIconImage(logo);  
+        Database.saveKhoaToList(dsKhoa);
         if(chucNang.equals("Sua") || chucNang.equals("SuaND")){
-            Object cellValue = table.getValueAt(chon, 1);
-            //System.out.println(cellValue);
-            int hub = 0;
-            for(int i=0; i<dsCoVan.size(); i++){
-                if(dsCoVan.get(i).getMaCV().equals(cellValue.toString())){
-                    hub = i;
-                    //xoa = i;
-                }
-            }
-            jLabelNutTieuDeTieuChi.setText("Cập nhật thông tin cố vấn");
-            CoVan cv = dsCoVan.get(hub);
-            jTextFieldMaCoVan.setText(cv.getMaCV());
-            //jTextFieldMaCoVan.setText(cv.getMaCV());
-            jTextFieldTenCoVan.setText(cv.getTenCV());
-            jTextFieldSdt.setText(cv.getSdt());
-            jTextFieldQueQuan.setText(cv.getQueQuan());
-            jTextFieldDiaChi.setText(cv.getDiaChi());
-            //cho
-            jTextFieldEmail.setText(cv.getEmail().toLowerCase());
-            ThuatToan.addChoiceKhoa(choiceKhoa_CoVan, dsKhoa);
-
-
-            choiceKhoa_CoVan.remove("Tất cả");
-            choiceKhoa_CoVan.select(ThuatToan.doiMaKhoaThanhTenKhoa(cv.getKhoa(), dsKhoa));
-            choiceGioiTinh_Sua.add("Nam");
-            choiceGioiTinh_Sua.add("Nữ");
-            choiceGioiTinh_Sua.select(ThuatToan.doiBoolToGioiTinh(cv.getGioiTinh()));
-            String dateString = cv.getNgaySinh();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = sdf.parse(dateString);
-            jDateChooserNgaySinh.setDate(date);
-            jPasswordFieldPass.setText(ThuatToan.getMatKhau(dsTaiKhoan, cellValue.toString()));
-            jDateChooserNgaySinh.setDateFormatString("yyyy-MM-dd");
-            if(chucNang.equals("SuaND")){
-                choiceKhoa_CoVan.removeAll();
-                choiceKhoa_CoVan.add(khoaMau.getTenKhoa());
-            }
+            sua();
         }else{
-            jLabelNutTieuDeTieuChi.setText("Thêm cố vấn");
-            choiceGioiTinh_Sua.add("Nam");
-            choiceGioiTinh_Sua.add("Nữ");
-            ThuatToan.addChoiceKhoa(choiceKhoa_CoVan, dsKhoa);
-            choiceKhoa_CoVan.remove("Tất cả");
-            jDateChooserNgaySinh.setDateFormatString("yyyy-MM-dd");
-            if(chucNang.equals("ThemND")){
-                choiceKhoa_CoVan.removeAll();
-                choiceKhoa_CoVan.add(khoaMau.getTenKhoa());
-            }
+            them();
         }
         
     }
+    
+    
     public FormThem_SuaCoVan() {
         //this.khoa = dsKhoa.get(chon);
         initComponents();
@@ -155,6 +113,59 @@ public final class FormThem_SuaCoVan extends javax.swing.JFrame {
         this.dsTaiKhoan = dsTaiKhoan;
         this.dsLop = dsLop;
         edit();
+    }
+    
+    public void sua() throws ParseException{
+        Object cellValue = table.getValueAt(chon, 1);
+        //System.out.println(cellValue);
+        int hub = 0;
+        for(int i=0; i<dsCoVan.size(); i++){
+            if(dsCoVan.get(i).getMaCV().equals(cellValue.toString())){
+                hub = i;
+                //xoa = i;
+            }
+        }
+        jLabelNutTieuDeTieuChi.setText("Cập nhật thông tin cố vấn");
+        CoVan cv = dsCoVan.get(hub);
+        jTextFieldMaCoVan.setText(cv.getMaCV());
+        //jTextFieldMaCoVan.setText(cv.getMaCV());
+        jTextFieldTenCoVan.setText(cv.getTenCV());
+        jTextFieldSdt.setText(cv.getSdt());
+        jTextFieldQueQuan.setText(cv.getQueQuan());
+        jTextFieldDiaChi.setText(cv.getDiaChi());
+        //cho
+        jTextFieldEmail.setText(cv.getEmail().toLowerCase());
+        ThuatToan.addChoiceKhoa(choiceKhoa_CoVan, dsKhoa);
+
+
+        choiceKhoa_CoVan.remove("Tất cả");
+        choiceKhoa_CoVan.select(ThuatToan.doiMaKhoaThanhTenKhoa(cv.getKhoa(), dsKhoa));
+        choiceGioiTinh_Sua.add("Nam");
+        choiceGioiTinh_Sua.add("Nữ");
+        choiceGioiTinh_Sua.select(ThuatToan.doiBoolToGioiTinh(cv.getGioiTinh()));
+        String dateString = cv.getNgaySinh();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = sdf.parse(dateString);
+        jDateChooserNgaySinh.setDate(date);
+        jPasswordFieldPass.setText(ThuatToan.getMatKhau(dsTaiKhoan, cellValue.toString()));
+        jDateChooserNgaySinh.setDateFormatString("yyyy-MM-dd");
+        if(chucNang.equals("SuaND")){
+            choiceKhoa_CoVan.removeAll();
+            choiceKhoa_CoVan.add(khoaMau.getTenKhoa());
+        }
+    }
+    
+    public void them(){
+        jLabelNutTieuDeTieuChi.setText("Thêm cố vấn");
+        choiceGioiTinh_Sua.add("Nam");
+        choiceGioiTinh_Sua.add("Nữ");
+        ThuatToan.addChoiceKhoa(choiceKhoa_CoVan, dsKhoa);
+        choiceKhoa_CoVan.remove("Tất cả");
+        jDateChooserNgaySinh.setDateFormatString("yyyy-MM-dd");
+        if(chucNang.equals("ThemND")){
+            choiceKhoa_CoVan.removeAll();
+            choiceKhoa_CoVan.add(khoaMau.getTenKhoa());
+        }
     }
 
     /**
@@ -530,144 +541,146 @@ public final class FormThem_SuaCoVan extends javax.swing.JFrame {
             jTextFieldDiaChi.getText().equals("") || 
             password.equals("")){
                 JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập đầy đủ thông tin!");
+                return;
         }
-        
-        else if(jTextFieldMaCoVan.getText().trim().length() != 6){
+        if(jTextFieldMaCoVan.getText().trim().length() != 6){
             JOptionPane.showMessageDialog(rootPane, "Mã cố vấn phải có 6 ký tự!");
-            
+            return;
         }
-        else if(ThuatToan.containsDigit(jTextFieldTenCoVan.getText())){
+        if(ThuatToan.containsDigit(jTextFieldTenCoVan.getText())){
             JOptionPane.showMessageDialog(rootPane, "Tên không được có chữ số!");
+            return;
         }
-        else if(!ThuatToan.isEmail(jTextFieldEmail.getText().trim())){
+        if(!ThuatToan.isEmail(jTextFieldEmail.getText().trim())){
             JOptionPane.showMessageDialog(rootPane, "Email không đúng định dạng");
+            return;
         }
-        else if(!ThuatToan.isPhoneNumber(jTextFieldSdt.getText().trim())){
+        if(!ThuatToan.isPhoneNumber(jTextFieldSdt.getText().trim())){
             JOptionPane.showMessageDialog(rootPane, "Số điện thoại phải đầu 0 và có đủ 10 chữ số!");
+            return;
         }
-        else {
-            // Hiển thị hộp thoại xác nhận trước khi sửa
-            //int xoa = 0;
-            if(chucNang.equals("Sua")|| chucNang.equals("SuaND")){
-                int sua = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn sửa thông tin không?");
-                if(sua == JOptionPane.YES_OPTION){
-                    
-                    new Thread(() -> {
-                         Database.saveKhoaToList(dsKhoa);
-                        Database.saveCoVanToList(dsCoVan);
-                        Object cellValue = table.getValueAt(chon, 1);
-                        int hub = 0;
-                        for(int i=0; i<dsCoVan.size(); i++){
-                            if(dsCoVan.get(i).getMaCV().equals(cellValue.toString())){
-                                hub = i;
-                                //xoa = i;
-                            }
-                        }
-
-                        String maCV = jTextFieldMaCoVan.getText().toUpperCase();
-                        if(!maCV.equals(dsCoVan.get(hub).getMaCV())){
-                            if(ThuatToan.isRepeatMaCoVan(dsCoVan, maCV)){
-                                JOptionPane.showMessageDialog(rootPane, "Mã cố vấn đã tồn tại trên hệ thống!");
-                                return;
-                            }
-                        }
-                        Database.saveTaiKhoanToList(dsTaiKhoan);
-                        for(TaiKhoan tk: dsTaiKhoan){
-                            if(tk.getTenTK().equals(cellValue)){
-                                tk.setTenTK(maCV);
-                                tk.setMatKhau(password);
-                            }
-                        }
-                        dsCoVan.get(hub).setMaCV(jTextFieldMaCoVan.getText().toUpperCase());
-                        dsCoVan.get(hub).setTenCV(ThuatToan.chuanHoaDiaDanh(jTextFieldTenCoVan.getText()));
-                        dsCoVan.get(hub).setKhoa(ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa));
-                        dsCoVan.get(hub).setGioiTinh(ThuatToan.doiGioiTinhToBool(choiceGioiTinh_Sua.getSelectedItem()));
-                        String day = ThuatToan.getDate((java.util.Date)jDateChooserNgaySinh.getDate());
-                        dsCoVan.get(hub).setNgaySinh(day);
-                        dsCoVan.get(hub).setEmail(jTextFieldEmail.getText().toLowerCase());
-                        dsCoVan.get(hub).setSdt(jTextFieldSdt.getText());
-                        dsCoVan.get(hub).setQueQuan(ThuatToan.chuanHoaDiaDanh(jTextFieldQueQuan.getText()));
-                        dsCoVan.get(hub).setDiaChi(ThuatToan.chuanHoaDiaDanh(jTextFieldDiaChi.getText()));
-                        if(ch.getSelectedItem().equals("Tất cả")){
-                            Database.addListCoVanToTable(dsCoVan, table, dsKhoa, dsTaiKhoan);
-                        }
-                        else{
-                            Database.addListCoVanToTable_MaKhoa(dsCoVan, table, dsKhoa, ThuatToan.doiTenKhoaThanhMaKhoa(ch.getSelectedItem(), dsKhoa), dsTaiKhoan);
-                        }
-                        ThuatToan.suaCoVanTrongLop(dsLop, cellValue.toString(), maCV);
-                        Database.saveListCoVanToDB(dsCoVan);
-                        Database.saveListTaiKhoanToDB(dsTaiKhoan);
-                        Database.saveListLopToDB(dsLop);
-                        
-                    }).start();
-                    this.dispose();
-
-                } else if(sua == JOptionPane.NO_OPTION){
-                    // Đóng cửa sổ nếu không muốn sửa nữa
-                    this.dispose();
+        if(chucNang.equals("Sua")|| chucNang.equals("SuaND")){
+            String maCVMoi = jTextFieldMaCoVan.getText().toUpperCase();
+            Object cellValue = table.getValueAt(chon, 1);
+            String maCVCu = cellValue.toString();
+            if(!maCVMoi.equals(maCVCu)){
+                if(ThuatToan.isRepeatMaCoVan(dsCoVan, maCVMoi)){
+                    JOptionPane.showMessageDialog(rootPane, "Mã cố vấn đã tồn tại trên hệ thống!");
+                    return;
                 }
             }
+            int sua = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn sửa thông tin không?");
+            if(sua == JOptionPane.YES_OPTION){
+                suaCoVan(password);
+            } else if(sua == JOptionPane.NO_OPTION){
+                this.dispose();
+            }
+        }
             else{
+                String maKhoa = jTextFieldMaCoVan.getText().toUpperCase();
+                if(ThuatToan.isRepeatMaCoVan(dsCoVan, maKhoa)){
+                    JOptionPane.showMessageDialog(rootPane, "Mã cố vấn đã tồn tại trên hệ thống!");
+                    return;
+                }
                 // Hiển thị hộp thoại xác nhận trước khi thêm
                 int them = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn thêm cố vấn không?");
                 if(them == JOptionPane.YES_OPTION){
-                    new Thread(() -> {
-                         Database.saveKhoaToList(dsKhoa);
-                        Database.saveCoVanToList(dsCoVan);
-                        String maKhoa = jTextFieldMaCoVan.getText().toUpperCase();
-                        if(!ThuatToan.isRepeatMaCoVan(dsCoVan, maKhoa)){
-                            // Tạo mới đối tượng CoVan từ thông tin nhập liệu
-                            CoVan newCoVan = new CoVan();
-                            newCoVan.setMaCV(jTextFieldMaCoVan.getText().toUpperCase());
-                            newCoVan.setTenCV(ThuatToan.chuanHoaDiaDanh(jTextFieldTenCoVan.getText()));
-                            newCoVan.setKhoa(ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem().trim(), dsKhoa));
-                            newCoVan.setGioiTinh(ThuatToan.doiGioiTinhToBool(choiceGioiTinh_Sua.getSelectedItem()));
-                            //Date date = jDateChooserNgaySinh.getDate();
-                            String day = ThuatToan.getDate((java.util.Date)jDateChooserNgaySinh.getDate());
-
-                            newCoVan.setNgaySinh(day);
-                            newCoVan.setSdt(jTextFieldSdt.getText());
-                            newCoVan.setQueQuan(ThuatToan.chuanHoaDiaDanh(jTextFieldQueQuan.getText()));
-                            newCoVan.setDiaChi(ThuatToan.chuanHoaDiaDanh(jTextFieldDiaChi.getText()));
-                            newCoVan.setEmail(jTextFieldEmail.getText().toLowerCase());
-
-                            // Thêm cố vấn mới vào danh sách dsCoVan
-                            dsCoVan.add(newCoVan);
-
-                            
-
-                            Database.saveListCoVanToDB(dsCoVan);
-                            Database.saveTaiKhoanToList(dsTaiKhoan);
-                            TaiKhoan tk = new TaiKhoan();
-                            tk.setTenTK(newCoVan.getMaCV());
-                            tk.setMatKhau(password);
-                            tk.setLoaiTK("covan");
-                            tk.setTrangThai(true);
-                            dsTaiKhoan.add(tk);
-                            Database.saveListTaiKhoanToDB(dsTaiKhoan);
-                            // Cập nhật lại bảng để hiển thị cố vấn mới
-                            if(ch.getSelectedItem().equals("Tất cả")){
-                                Database.addListCoVanToTable(dsCoVan, table, dsKhoa, dsTaiKhoan);
-                            } else {
-                                Database.addListCoVanToTable_MaKhoa(dsCoVan, table, dsKhoa, ThuatToan.doiTenKhoaThanhMaKhoa(ch.getSelectedItem(), dsKhoa), dsTaiKhoan);
-                            }
-                        }
-                        else{
-
-                            JOptionPane.showMessageDialog(rootPane, "Mã cố vấn đã tồn tại trên hệ thống!");
-
-                        }
-                    }).start();
-
-                    this.dispose(); // Đóng cửa sổ sau khi thêm thành công
+                    themCoVan(password);
                 } else if(them == JOptionPane.NO_OPTION){
                     // Đóng cửa sổ nếu không muốn thêm nữa
                     this.dispose();
                 }
             }
-        }
+        
     }//GEN-LAST:event_jLabelNutLuuMouseClicked
 
+    public void themCoVan(String password){
+        new Thread(() -> {
+            Database.saveCoVanToList(dsCoVan);
+            Database.saveTaiKhoanToList(dsTaiKhoan);
+            String maKhoa = jTextFieldMaCoVan.getText().toUpperCase();
+            // Tạo mới đối tượng CoVan từ thông tin nhập liệu
+            CoVan newCoVan = new CoVan();
+            newCoVan.setMaCV(jTextFieldMaCoVan.getText().toUpperCase());
+            newCoVan.setTenCV(ThuatToan.chuanHoaDiaDanh(jTextFieldTenCoVan.getText()));
+            newCoVan.setKhoa(ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem().trim(), dsKhoa));
+            newCoVan.setGioiTinh(ThuatToan.doiGioiTinhToBool(choiceGioiTinh_Sua.getSelectedItem()));
+            //Date date = jDateChooserNgaySinh.getDate();
+            String day = ThuatToan.getDate((java.util.Date)jDateChooserNgaySinh.getDate());
+
+            newCoVan.setNgaySinh(day);
+            newCoVan.setSdt(jTextFieldSdt.getText());
+            newCoVan.setQueQuan(ThuatToan.chuanHoaDiaDanh(jTextFieldQueQuan.getText()));
+            newCoVan.setDiaChi(ThuatToan.chuanHoaDiaDanh(jTextFieldDiaChi.getText()));
+            newCoVan.setEmail(jTextFieldEmail.getText().toLowerCase());
+
+            // Thêm cố vấn mới vào danh sách dsCoVan
+            dsCoVan.add(newCoVan);
+            Database.saveListCoVanToDB(dsCoVan);
+            TaiKhoan tk = new TaiKhoan();
+            tk.setTenTK(newCoVan.getMaCV());
+            tk.setMatKhau(password);
+            tk.setLoaiTK("covan");
+            tk.setTrangThai(true);
+            dsTaiKhoan.add(tk);
+            Database.saveListTaiKhoanToDB(dsTaiKhoan);
+            // Cập nhật lại bảng để hiển thị cố vấn mới
+            if(ch.getSelectedItem().equals("Tất cả")){
+                Database.addListCoVanToTable(dsCoVan, table, dsKhoa, dsTaiKhoan);
+            } else {
+                Database.addListCoVanToTable_MaKhoa(dsCoVan, table, dsKhoa, ThuatToan.doiTenKhoaThanhMaKhoa(ch.getSelectedItem(), dsKhoa), dsTaiKhoan);
+            }
+            
+        }).start();
+        this.dispose();
+    }
+    
+    public void suaCoVan(String password){
+        new Thread(() -> {
+            Database.saveLopToList(dsLop);
+            Database.saveCoVanToList(dsCoVan);
+            Database.saveTaiKhoanToList(dsTaiKhoan);
+            Object cellValue = table.getValueAt(chon, 1);
+            int hub = 0;
+            for(int i=0; i<dsCoVan.size(); i++){
+                if(dsCoVan.get(i).getMaCV().equals(cellValue.toString())){
+                    hub = i;
+                    //xoa = i;
+                }
+            }
+            String maCV = jTextFieldMaCoVan.getText().toUpperCase();
+            Database.saveTaiKhoanToList(dsTaiKhoan);
+            for(TaiKhoan tk: dsTaiKhoan){
+                if(tk.getTenTK().equals(cellValue)){
+                    tk.setTenTK(maCV);
+                    tk.setMatKhau(password);
+                }
+            }
+            dsCoVan.get(hub).setMaCV(jTextFieldMaCoVan.getText().toUpperCase());
+            dsCoVan.get(hub).setTenCV(ThuatToan.chuanHoaDiaDanh(jTextFieldTenCoVan.getText()));
+            dsCoVan.get(hub).setKhoa(ThuatToan.doiTenKhoaThanhMaKhoa(choiceKhoa_CoVan.getSelectedItem(), dsKhoa));
+            dsCoVan.get(hub).setGioiTinh(ThuatToan.doiGioiTinhToBool(choiceGioiTinh_Sua.getSelectedItem()));
+            String day = ThuatToan.getDate((java.util.Date)jDateChooserNgaySinh.getDate());
+            dsCoVan.get(hub).setNgaySinh(day);
+            dsCoVan.get(hub).setEmail(jTextFieldEmail.getText().toLowerCase());
+            dsCoVan.get(hub).setSdt(jTextFieldSdt.getText());
+            dsCoVan.get(hub).setQueQuan(ThuatToan.chuanHoaDiaDanh(jTextFieldQueQuan.getText()));
+            dsCoVan.get(hub).setDiaChi(ThuatToan.chuanHoaDiaDanh(jTextFieldDiaChi.getText()));
+            if(ch.getSelectedItem().equals("Tất cả")){
+                Database.addListCoVanToTable(dsCoVan, table, dsKhoa, dsTaiKhoan);
+            }
+            else{
+                Database.addListCoVanToTable_MaKhoa(dsCoVan, table, dsKhoa, ThuatToan.doiTenKhoaThanhMaKhoa(ch.getSelectedItem(), dsKhoa), dsTaiKhoan);
+            }
+            ThuatToan.suaCoVanTrongLop(dsLop, cellValue.toString(), maCV);
+            Database.saveListCoVanToDB(dsCoVan);
+            Database.saveListTaiKhoanToDB(dsTaiKhoan);
+            Database.saveListLopToDB(dsLop);
+
+       }).start();
+       this.dispose();
+    }
+    
     private void jLabelNutLuuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutLuuMouseEntered
         // TODO add your handling code here:
         jPanelNutLuu.setBackground(buttonHoverColor);

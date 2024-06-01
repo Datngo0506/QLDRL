@@ -2138,9 +2138,19 @@ public final class FormBanCanSu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Không trong thời gian xét duyệt!");
             return;
         }
+        String duyet = jTableDRL.getValueAt(chon, 6).toString();
+        if(duyet.equals("Đã duyệt")){
+            JOptionPane.showMessageDialog(rootPane, "Bảng điểm này đã duyệt!");
+            return;
+        }
         String diemSV = jTableDRL.getValueAt(chon, 3).toString();
         if(diemSV.equals("0")){
-            JOptionPane.showMessageDialog(rootPane, "Sinh viên này chưa hoàn tất cột đánh giá điểm của mình!");
+            JOptionPane.showMessageDialog(rootPane, "Sinh viên này chưa tự đánh giá!");
+            return;
+        }
+        String diemCS = jTableDRL.getValueAt(chon, 4).toString();
+        if(!diemCS.equals("0")){
+            JOptionPane.showMessageDialog(rootPane, "Đã đánh giá điểm sinh viên này!");
             return;
         }
         String msv = jTableDRL.getValueAt(chon, 1).toString();

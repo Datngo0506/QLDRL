@@ -1512,6 +1512,45 @@ public class Database {
     }
     
     
+    public static void addListDRLToTable_Khoa(ArrayList<DRL> dsDRL, ArrayList<SinhVien> dsSV, JTable table, 
+            String tenKhoa,  ArrayList<Lop> dsLop, ArrayList<Khoa>dsKhoa) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        ThuatToan.sapXepTheoDRL(dsDRL);
+        // Xóa tất cả các dòng hiện có trong bảng
+        model.setRowCount(0);
+
+        // Đảo ngược danh sách để thêm từ cuối danh sách
+        int k = 0;
+
+        // Duyệt qua danh sách ThongBao từ cuối đến đầu và thêm vào bảng
+        for (DRL drl : dsDRL) {
+            String lop = "";
+            for(SinhVien sv: dsSV){
+                if(sv.getMaSV().equals(drl.getMSSV())){
+                    lop = sv.getLop();
+                }
+            }
+            String maKhoa = "";
+            for(Lop l: dsLop){
+                if(l.getLop().equals(lop)){
+                    maKhoa = l.getMaKhoa();
+                }
+            }
+            if( ThuatToan.doiMaKhoaThanhTenKhoa(maKhoa, dsKhoa).equals(tenKhoa)){
+                //System.out.println(ThuatToan.getLopFromDRL(drl.getMSSV(), dsSV) + " " + lop + " " + hk + " "+drl.getMaHK());
+                String duyet;
+                if(drl.isTrangThai()){
+                    duyet = "Đã duyệt";
+                }else duyet = "Chưa duyệt";
+                Object[] row = {Integer.toString(k+1), drl.getMSSV(), ThuatToan.getTenFromMSV(drl.getMSSV(), dsSV),
+                Integer.toString(drl.getDiem1()), Integer.toString(drl.getDiem2()), Integer.toString(drl.getDiem3()), duyet};
+                k++;
+                model.addRow(row);
+            }
+            
+        }
+    }
+    
     
     public static void addListDRLToTable(ArrayList<DRL> dsDRL, ArrayList<SinhVien> dsSV, JTable table, String lop, String hk) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
