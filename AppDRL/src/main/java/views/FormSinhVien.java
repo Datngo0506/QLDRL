@@ -233,8 +233,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
                     if(chon == JOptionPane.YES_OPTION) {
                 // Thực hiện hành động khi người dùng chọn "Yes"
                 // Ví dụ: thoát chương trình
-                    main.dispose();
-                    next.setVisible(true);
+                    System.exit(0);
             }
                 
             }
@@ -246,8 +245,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
                     if(chon == JOptionPane.YES_OPTION) {
                 // Thực hiện hành động khi người dùng chọn "Yes"
                 // Ví dụ: thoát chương trình
-                    main.dispose();
-                    next.setVisible(true);
+                    System.exit(0);
                 
                 }
             }
@@ -260,8 +258,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
                     if(chon == JOptionPane.YES_OPTION) {
                 // Thực hiện hành động khi người dùng chọn "Yes"
                 // Ví dụ: thoát chương trình
-                    main.dispose();
-                    next.setVisible(true);
+                    System.exit(0);
                 }
             }
         });

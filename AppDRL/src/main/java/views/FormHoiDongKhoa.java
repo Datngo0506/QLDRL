@@ -143,9 +143,21 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
                         break;
                     }
                 }
+                String[] parts;
+                String hocKyDau = "";
+                if (lopDau.getMaKhoaHoc() != null) {
+                    parts = lopDau.getMaKhoaHoc().split("-");
+                    if (parts.length >= 1) {
+                        hocKyDau = parts[0] + "-" + (Integer.parseInt(parts[0]) + 1) + "-1";
+                    } else {
+                        // Handle the case when the split doesn't produce enough parts
+                        // Or handle any other appropriate logic here
+                    }
+                } else {
+                    // Handle the case when lopDau.getMaKhoaHoc() is null
+                    // Or handle any other appropriate logic here
+                }
 
-                String parts[] = (lopDau.getMaKhoaHoc()).split("-");
-                String hocKyDau = parts[0] + "-" + (Integer.parseInt(parts[0]) + 1) + "-1";
 
                 Database.addListDRLToTable(dsDRL, dsSinhVien, jTableDRL, lopDau.getLop(), hocKyDau);
                 jPanelNutDuyet.setVisible(false);
@@ -270,8 +282,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
                     if(chon == JOptionPane.YES_OPTION) {
                 // Thực hiện hành động khi người dùng chọn "Yes"
                 // Ví dụ: thoát chương trình
-                    main.dispose();
-                    next.setVisible(true);
+                    System.exit(0);
             }
                 
             }
@@ -283,8 +294,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
                     if(chon == JOptionPane.YES_OPTION) {
                 // Thực hiện hành động khi người dùng chọn "Yes"
                 // Ví dụ: thoát chương trình
-                    main.dispose();
-                    next.setVisible(true);
+                    System.exit(0);
                 
                 }
             }
@@ -297,8 +307,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
                     if(chon == JOptionPane.YES_OPTION) {
                 // Thực hiện hành động khi người dùng chọn "Yes"
                 // Ví dụ: thoát chương trình
-                    main.dispose();
-                    next.setVisible(true);
+                    System.exit(0);
                 }
             }
         });
