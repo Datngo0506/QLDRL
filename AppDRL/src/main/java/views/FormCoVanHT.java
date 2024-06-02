@@ -1925,6 +1925,7 @@ public final class FormCoVanHT extends javax.swing.JFrame {
 
     private void jLabelNutChamLaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutChamLaiMouseClicked
         // TODO add your handling code here:
+        Database.saveThongBaoToList(dsThongBao);
         int chon = jTableDRL.getSelectedRow();
         if(chon == -1){
             JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn sinh viên cần đánh giá!");

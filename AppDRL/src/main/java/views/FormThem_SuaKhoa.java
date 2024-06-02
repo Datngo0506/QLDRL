@@ -422,7 +422,7 @@ public final class FormThem_SuaKhoa extends javax.swing.JFrame {
             table.setValueAt(tenKhoa, chon , 1);
             table.setValueAt(day, chon , 2);
             table.setValueAt(maKhoa, chon , 3);
-            table.setValueAt(ThuatToan.anMatKhau(password), chon, 4);
+            
             ThuatToan.suaKhoaTrongCoVan(dsCoVan, dsKhoa.get(chon).getMaKhoa(), maKhoa);
             ThuatToan.suaKhoaTrongLop(dsLop, dsKhoa.get(chon).getMaKhoa(), maKhoa);
             Database.saveTaiKhoanToList(dsTaiKhoan);

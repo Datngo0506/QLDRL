@@ -31,7 +31,6 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPasswordField;
-import javax.swing.JRootPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
@@ -387,6 +386,7 @@ public final class FormDangNhap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void click(){
+        getData();
         // TODO add your handling code here:
         String username = jTextFieldTenDN.getText().trim();
         char[] passwordChars = jPasswordField.getPassword();

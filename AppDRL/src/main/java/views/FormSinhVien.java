@@ -1824,6 +1824,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
 
     private void jLabelNutXoaLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNutXoaLopMouseClicked
 
+        Database.saveThongBaoToList(dsThongBao);
         int chon = jTableDRLCaNhan.getSelectedRow();
         if(chon==-1){
             JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn học kỳ cần đánh giá!");
