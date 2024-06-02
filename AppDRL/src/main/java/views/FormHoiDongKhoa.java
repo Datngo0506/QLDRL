@@ -1203,7 +1203,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
         jPanelTrangChuMain.add(jPanelThanhTieuDeTrangChu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 770, 40));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabelChonKhoa_Lop4.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
         jLabelChonKhoa_Lop4.setText("Học kỳ đang xét:");
@@ -1320,7 +1320,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
         jPanelTrangChuMain.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 760, 70));
 
         jPanelTableLop_Xet.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelTableLop_Xet.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
+        jPanelTableLop_Xet.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabelTableTitleLop1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabelTableTitleLop1.setForeground(new java.awt.Color(127, 127, 127));
@@ -1541,7 +1541,8 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
         jPanelCoVanMain.add(jPanelThanhTieuDeCoVan, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 764, 40));
 
         jPanelTableCoVan.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelTableCoVan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
+        jPanelTableCoVan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        jPanelTableCoVan.setForeground(new java.awt.Color(102, 102, 102));
 
         jLabelTableTitleCoVan.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabelTableTitleCoVan.setForeground(new java.awt.Color(127, 127, 127));
@@ -1762,7 +1763,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
         jPanelLopMain.add(jPanelThanhTieuDeLop, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 764, 40));
 
         jPanelTableLop.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelTableLop.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
+        jPanelTableLop.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabelTableTitleLop.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabelTableTitleLop.setForeground(new java.awt.Color(127, 127, 127));
@@ -1951,7 +1952,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
         jPanelDuyetDiem.add(jPanelThanhTieuDeTrangChu, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 764, 40));
 
         jPanelTabeDRL.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelTabeDRL.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
+        jPanelTabeDRL.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jScrollPaneDRL.setBorder(null);
         jScrollPaneDRL.setVerticalScrollBar(new ScrollBar());
@@ -2206,7 +2207,7 @@ public final class FormHoiDongKhoa extends javax.swing.JFrame {
         jPanelSinhVienMain.add(jPanelTitleSV, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 764, 40));
 
         jPanelBorderSV.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelBorderSV.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
+        jPanelBorderSV.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabelTitleSV.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabelTitleSV.setForeground(new java.awt.Color(127, 127, 127));

@@ -276,16 +276,16 @@ public final class FormDangNhap extends javax.swing.JFrame {
         jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logo_ptit.png"))); // NOI18N
         jPanelMain.add(jLabelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 21, 390, 119));
 
-        jLabelTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelTitle.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
         jLabelTitle.setForeground(new java.awt.Color(51, 51, 51));
         jLabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTitle.setText("Đăng nhập");
+        jLabelTitle.setText("Đăng nhập phần mềm");
         jPanelMain.add(jLabelTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 390, -1));
 
-        jLabelPhanMem.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        jLabelPhanMem.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
         jLabelPhanMem.setForeground(new java.awt.Color(51, 51, 51));
         jLabelPhanMem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelPhanMem.setText("PTITHCM's Student Training Point");
+        jLabelPhanMem.setText("Quản lý điểm rèn luyện PTITHCM");
         jPanelMain.add(jLabelPhanMem, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 390, 34));
 
         jTextFieldTenDN.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -312,8 +312,8 @@ public final class FormDangNhap extends javax.swing.JFrame {
         });
         jPanelMain.add(jLabelQuenMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 346, 100, 30));
 
-        jLabelTenDN.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabelTenDN.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelTenDN.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
+        jLabelTenDN.setForeground(new java.awt.Color(51, 51, 51));
         jLabelTenDN.setText("Tên đăng nhập");
         jPanelMain.add(jLabelTenDN, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 370, -1));
 
@@ -322,8 +322,8 @@ public final class FormDangNhap extends javax.swing.JFrame {
         jPasswordField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jPanelMain.add(jPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 370, 40));
 
-        jLabelMatKhau.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabelMatKhau.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelMatKhau.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
+        jLabelMatKhau.setForeground(new java.awt.Color(51, 51, 51));
         jLabelMatKhau.setText("Mật khẩu");
         jPanelMain.add(jLabelMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 370, -1));
 
@@ -333,7 +333,7 @@ public final class FormDangNhap extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(221, 51, 51));
 
         jLabelSubmit.setBackground(new java.awt.Color(221, 25, 25));
-        jLabelSubmit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelSubmit.setFont(new java.awt.Font("Segoe UI Variable", 1, 16)); // NOI18N
         jLabelSubmit.setForeground(new java.awt.Color(255, 255, 255));
         jLabelSubmit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelSubmit.setText("Đăng nhập");

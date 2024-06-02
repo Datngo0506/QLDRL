@@ -212,7 +212,7 @@ public final class FormChamDiem extends javax.swing.JFrame {
         jPanelTieuChiMain2.add(jPanelThanhTieuDeTieuChi2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 764, 40));
 
         jPanelBorderTieuChi.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelBorderTieuChi.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
+        jPanelBorderTieuChi.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabelTitleTieuChi.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabelTitleTieuChi.setForeground(new java.awt.Color(127, 127, 127));

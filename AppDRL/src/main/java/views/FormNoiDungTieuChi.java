@@ -112,7 +112,7 @@ public final class FormNoiDungTieuChi extends javax.swing.JFrame {
         jPanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelBorderTieuChi.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelBorderTieuChi.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
+        jPanelBorderTieuChi.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jScrollPaneTieuChi.setBorder(null);
 

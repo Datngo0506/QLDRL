@@ -301,7 +301,7 @@ public final class FormThem_SuaLop extends javax.swing.JFrame {
         jPanelMain.add(jPanelThanhTieuDeTieuChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 410, 40));
 
         jPanelMainInput.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelMainInput.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        jPanelMainInput.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         jPanelMainInput.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         FormDangNhap.setBorderTextField(jTextFieldLop);
@@ -310,7 +310,7 @@ public final class FormThem_SuaLop extends javax.swing.JFrame {
         jTextFieldLop.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jPanelMainInput.add(jTextFieldLop, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 350, 41));
 
-        jLabelLop.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
+        jLabelLop.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
         jLabelLop.setText("Khoa");
         jLabelLop.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jPanelMainInput.add(jLabelLop, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 58, -1, 32));
@@ -330,7 +330,7 @@ public final class FormThem_SuaLop extends javax.swing.JFrame {
         });
         jPanelMainInput.add(choiceKhoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 58, 190, 32));
 
-        jLabelLop2.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
+        jLabelLop2.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
         jLabelLop2.setText("Khóa học");
         jLabelLop2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jPanelMainInput.add(jLabelLop2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, -1, 32));
@@ -345,7 +345,7 @@ public final class FormThem_SuaLop extends javax.swing.JFrame {
         });
         jPanelMainInput.add(choiceKhoaHoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(301, 58, 90, 32));
 
-        jLabelLop3.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
+        jLabelLop3.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
         jLabelLop3.setText("Cố vấn");
         jLabelLop3.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jPanelMainInput.add(jLabelLop3, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 100, 40, 40));
@@ -369,8 +369,8 @@ public final class FormThem_SuaLop extends javax.swing.JFrame {
         jTextFieldName.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         jPanelMainInput.add(jTextFieldName, new org.netbeans.lib.awtextra.AbsoluteConstraints(171, 100, 220, 30));
 
-        jLabelLop1.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        jLabelLop1.setText("Lớp");
+        jLabelLop1.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
+        jLabelLop1.setText("Lớp:");
         jLabelLop1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jPanelMainInput.add(jLabelLop1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 46));
 

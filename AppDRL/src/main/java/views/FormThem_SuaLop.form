@@ -186,7 +186,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder>
-                  <Color PropertyName="color" blue="0" green="0" red="ff" type="rgb"/>
+                  <Color PropertyName="color" blue="66" green="66" red="66" type="rgb"/>
                 </LineBorder>
               </Border>
             </Property>
@@ -226,7 +226,7 @@
             <Component class="javax.swing.JLabel" name="jLabelLop">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI Variable" size="12" style="0"/>
+                  <Font name="Segoe UI Variable" size="12" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Khoa"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -264,7 +264,7 @@
             <Component class="javax.swing.JLabel" name="jLabelLop2">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI Variable" size="12" style="0"/>
+                  <Font name="Segoe UI Variable" size="12" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Kh&#xf3;a h&#x1ecd;c"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -301,7 +301,7 @@
             <Component class="javax.swing.JLabel" name="jLabelLop3">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI Variable" size="12" style="0"/>
+                  <Font name="Segoe UI Variable" size="12" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="C&#x1ed1; v&#x1ea5;n"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -367,9 +367,9 @@
             <Component class="javax.swing.JLabel" name="jLabelLop1">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI Variable" size="12" style="0"/>
+                  <Font name="Segoe UI Variable" size="12" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="L&#x1edb;p"/>
+                <Property name="text" type="java.lang.String" value="L&#x1edb;p:"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Text Cursor"/>
                 </Property>

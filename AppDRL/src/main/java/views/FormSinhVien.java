@@ -1105,7 +1105,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
         jPanelTrangChuMain.add(jPanelThanhTieuDeTrangChu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 770, 40));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabelChonKhoa_Lop4.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
         jLabelChonKhoa_Lop4.setText("Học kỳ đang xét:");
@@ -1222,7 +1222,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
         jPanelTrangChuMain.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 760, 70));
 
         jPanelTableLop_Xet.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelTableLop_Xet.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
+        jPanelTableLop_Xet.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         jPanelTableLop_Xet.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelTableTitleLop1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
@@ -1364,7 +1364,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
         jPanelDRLCaNhan.add(jPanelThanhTieuDeLop, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 764, 40));
 
         jPanelTabeDRLCaNhan.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelTabeDRLCaNhan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
+        jPanelTabeDRLCaNhan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jScrollPaneDRLCaNhan.setBorder(null);
         jScrollPaneDRLCaNhan.setVerticalScrollBar(new ScrollBar());
@@ -1482,7 +1482,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
         jPanelTTCN.add(jPanelTitleSV, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 764, 40));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabelChonKhoa_Lop10.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
         jLabelChonKhoa_Lop10.setText("Mã số sinh viên:");
@@ -1644,7 +1644,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
         jPanelTTCN.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 755, 210));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         jPanel3.setForeground(new java.awt.Color(221, 51, 51));
         jPanel3.setPreferredSize(new java.awt.Dimension(755, 30));
 
@@ -1672,7 +1672,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
         jPanelTTCN.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 755, 30));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         jPanel4.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabelChonKhoa_Lop13.setBackground(new java.awt.Color(221, 51, 51));
@@ -1697,7 +1697,7 @@ public final class FormSinhVien extends javax.swing.JFrame {
         jPanelTTCN.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 755, 30));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabelChonKhoa_Lop31.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
         jLabelChonKhoa_Lop31.setText("Tên đăng nhập:");

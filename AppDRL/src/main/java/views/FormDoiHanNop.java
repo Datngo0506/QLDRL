@@ -189,7 +189,7 @@ public final class FormDoiHanNop extends javax.swing.JFrame {
         );
 
         jPanelMain.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelMain.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        jPanelMain.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabelNgayBD.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
         jLabelNgayBD.setText("Ngày bắt đầu xét:");

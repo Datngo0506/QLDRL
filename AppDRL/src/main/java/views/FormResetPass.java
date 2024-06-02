@@ -65,7 +65,7 @@ public class FormResetPass extends javax.swing.JFrame {
         setTitle("Đổi mật khẩu");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
         jLabel4.setText("Nhập mật khẩu mới:");
@@ -175,10 +175,9 @@ public class FormResetPass extends javax.swing.JFrame {
         jPanel2.add(jPanel3);
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51)));
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Variable", 1, 16)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(221, 51, 51));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("ĐỔI MẬT KHẨU");
 

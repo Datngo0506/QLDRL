@@ -171,7 +171,13 @@ public final class FormThem_SuaSinhVien extends javax.swing.JFrame {
         choiceKhoa_CoVan.select(ThuatToan.getKhoaFromSinhVien(dsLop, sv.getLop()));
         choiceGioiTinh_Sua.add("Nam");
         choiceGioiTinh_Sua.add("Nữ");
-        choiceGioiTinh_Sua.select(ThuatToan.doiBoolToGioiTinh(sv.isGioiTinh()?"Nam":"Nữ"));
+        //System.out.println(sv.isGioiTinh());
+        String gt = "Nam";
+        if(sv.isGioiTinh() == false){
+            gt = "Nữ";
+        }
+        System.out.println(gt);
+        choiceGioiTinh_Sua.select(gt);
         ThuatToan.addChoiceLop(choiceLop, dsLop,ThuatToan.doiMaKhoaThanhTenKhoa(ThuatToan.getKhoaFromSinhVien(dsLop, sv.getLop()), dsKhoa) , dsKhoa);
         choiceLop.select(sv.getLop());
         String dateString = sv.getNgaySinh();
@@ -255,27 +261,27 @@ public final class FormThem_SuaSinhVien extends javax.swing.JFrame {
         jTextFieldSdt = new RoundedTextField(15, 10, 10);
         jPasswordFieldPass = new RoundedPasswordField(15, 10, 10);
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         choiceGioiTinh_Sua = new java.awt.Choice();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jTextFieldTenCoVan = new RoundedTextField(15, 10, 10);
-        jLabel10 = new javax.swing.JLabel();
         jTextFieldDiaChi = new RoundedTextField(15, 10, 10);
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         jTextFieldQueQuan = new RoundedTextField(15, 10, 10);
         choiceKhoa_CoVan = new java.awt.Choice();
         jTextFieldMaCoVan = new RoundedTextField(15, 10, 10);
-        jLabel11 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jTextFieldEmail = new RoundedTextField(15, 10, 10);
         jDateChooserNgaySinh = new com.toedter.calendar.JDateChooser();
-        jLabel8 = new javax.swing.JLabel();
         choiceLop = new java.awt.Choice();
-        jLabel9 = new javax.swing.JLabel();
         choiceChucVu = new java.awt.Choice();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
         jPanelThanhTieuDeTieuChi = new javax.swing.JPanel();
         jPanelNutTieuDeTieuChi = RoundedPanel.createRoundedPanel();
         jLabelNutTieuDeTieuChi = new javax.swing.JLabel();
@@ -301,7 +307,7 @@ public final class FormThem_SuaSinhVien extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelMain.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelMain.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createLineBorder(new java.awt.Color(221, 51, 51))));
+        jPanelMain.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         jPanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         FormDangNhap.setBorderTextField(jTextFieldSdt);
@@ -312,20 +318,13 @@ public final class FormThem_SuaSinhVien extends javax.swing.JFrame {
         jPasswordFieldPass.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
         jPanelMain.add(jPasswordFieldPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 500, 44));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        jLabel3.setText("Mã số sinh viên");
+        jLabel3.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel3.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText(" Họ và tên:");
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanelMain.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        jLabel4.setText("Ngày sinh");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanelMain.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 218, 60, -1));
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        jLabel6.setText("Mật khẩu");
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanelMain.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 60, -1));
+        jLabel3.setOpaque(true);
+        jPanelMain.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 320, 16));
 
         choiceGioiTinh_Sua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         choiceGioiTinh_Sua.setFont(new java.awt.Font("Segoe UI Variable", 0, 13)); // NOI18N
@@ -335,40 +334,15 @@ public final class FormThem_SuaSinhVien extends javax.swing.JFrame {
                 choiceGioiTinh_SuaItemStateChanged(evt);
             }
         });
-        jPanelMain.add(choiceGioiTinh_Sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 238, 83, 40));
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        jLabel7.setText("Giới tính");
-        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanelMain.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 218, 62, -1));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        jLabel5.setText("Khoa");
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanelMain.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 148, 35, -1));
+        jPanelMain.add(choiceGioiTinh_Sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 238, 90, 40));
 
         FormDangNhap.setBorderTextField(jTextFieldTenCoVan);
         jTextFieldTenCoVan.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
         jPanelMain.add(jTextFieldTenCoVan, new org.netbeans.lib.awtextra.AbsoluteConstraints(188, 30, 321, 41));
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        jLabel10.setText("Số điện thoại");
-        jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanelMain.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, -1, -1));
-
         FormDangNhap.setBorderTextField(jTextFieldDiaChi);
         jTextFieldDiaChi.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
         jPanelMain.add(jTextFieldDiaChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 502, 41));
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        jLabel12.setText("Quê quán");
-        jLabel12.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanelMain.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 60, -1));
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        jLabel13.setText("Địa chỉ");
-        jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanelMain.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 50, -1));
 
         FormDangNhap.setBorderTextField(jTextFieldQueQuan);
         jTextFieldQueQuan.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
@@ -382,21 +356,11 @@ public final class FormThem_SuaSinhVien extends javax.swing.JFrame {
                 choiceKhoa_CoVanItemStateChanged(evt);
             }
         });
-        jPanelMain.add(choiceKhoa_CoVan, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 166, 294, 42));
+        jPanelMain.add(choiceKhoa_CoVan, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 166, 290, 42));
 
         FormDangNhap.setBorderTextField(jTextFieldMaCoVan);
-        jTextFieldMaCoVan.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        jTextFieldMaCoVan.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
         jPanelMain.add(jTextFieldMaCoVan, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 30, 169, 41));
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        jLabel11.setText("Họ và tên");
-        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanelMain.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(188, 10, 61, -1));
-
-        jLabel14.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        jLabel14.setText(" Email");
-        jLabel14.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanelMain.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 76, 56, -1));
 
         FormDangNhap.setBorderTextField(jTextFieldEmail);
         jTextFieldEmail.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
@@ -416,11 +380,6 @@ public final class FormThem_SuaSinhVien extends javax.swing.JFrame {
         });
         jPanelMain.add(jDateChooserNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 248, 175, 20));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        jLabel8.setText("Lớp");
-        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanelMain.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(311, 148, 47, -1));
-
         choiceLop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         choiceLop.setFont(new java.awt.Font("Segoe UI Variable", 0, 13)); // NOI18N
         choiceLop.setPreferredSize(new java.awt.Dimension(28, 50));
@@ -431,11 +390,6 @@ public final class FormThem_SuaSinhVien extends javax.swing.JFrame {
         });
         jPanelMain.add(choiceLop, new org.netbeans.lib.awtextra.AbsoluteConstraints(311, 166, 198, 42));
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
-        jLabel9.setText("Chức vụ");
-        jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanelMain.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(294, 218, 68, -1));
-
         choiceChucVu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         choiceChucVu.setFont(new java.awt.Font("Segoe UI Variable", 0, 13)); // NOI18N
         choiceChucVu.setPreferredSize(new java.awt.Dimension(28, 50));
@@ -445,6 +399,94 @@ public final class FormThem_SuaSinhVien extends javax.swing.JFrame {
             }
         });
         jPanelMain.add(choiceChucVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(295, 238, 214, 40));
+
+        jLabel15.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel15.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText(" Mật khẩu:");
+        jLabel15.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jLabel15.setOpaque(true);
+        jPanelMain.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 500, 16));
+
+        jLabel16.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel16.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText(" Mã số sinh viên:");
+        jLabel16.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jLabel16.setOpaque(true);
+        jPanelMain.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 10, 170, 16));
+
+        jLabel17.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel17.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText(" Email:");
+        jLabel17.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jLabel17.setOpaque(true);
+        jPanelMain.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 80, 310, 16));
+
+        jLabel18.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel18.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText(" Số điện thoại:");
+        jLabel18.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jLabel18.setOpaque(true);
+        jPanelMain.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 180, 16));
+
+        jLabel19.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel19.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText(" Khoa:");
+        jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jLabel19.setOpaque(true);
+        jPanelMain.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 290, 16));
+
+        jLabel20.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel20.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText(" Lớp:");
+        jLabel20.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jLabel20.setOpaque(true);
+        jPanelMain.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 200, 16));
+
+        jLabel21.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel21.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText(" Giới tính:");
+        jLabel21.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jLabel21.setOpaque(true);
+        jPanelMain.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 90, 16));
+
+        jLabel22.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel22.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText(" Ngày sinh:");
+        jLabel22.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jLabel22.setOpaque(true);
+        jPanelMain.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 170, 16));
+
+        jLabel23.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel23.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setText(" Chức vụ:");
+        jLabel23.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jLabel23.setOpaque(true);
+        jPanelMain.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, 220, 16));
+
+        jLabel24.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel24.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText(" Quê quán:");
+        jLabel24.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jLabel24.setOpaque(true);
+        jPanelMain.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 500, 16));
+
+        jLabel25.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel25.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText(" Địa chỉ:");
+        jLabel25.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jLabel25.setOpaque(true);
+        jPanelMain.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 500, 16));
 
         jPanel1.add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 66, 520, 500));
 
@@ -823,18 +865,18 @@ public final class FormThem_SuaSinhVien extends javax.swing.JFrame {
     private java.awt.Choice choiceKhoa_CoVan;
     private java.awt.Choice choiceLop;
     private com.toedter.calendar.JDateChooser jDateChooserNgaySinh;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelNutLuu;
     private javax.swing.JLabel jLabelNutTieuDeTieuChi;
     private javax.swing.JPanel jPanel1;
